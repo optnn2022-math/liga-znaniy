@@ -1,0 +1,11 @@
+{
+  "subject": "biology",
+  "title": "Биология · 5 класс",
+  "lessons": [
+    "lesson-01.html",
+    "lesson-02.html",
+    "lesson-03.html",
+    "lesson-11.html"
+  ],
+  "progressKey": "liga-znaniy-biology-progress-v1"
+}

@@ -1,0 +1,14 @@
+{
+  "source": "Лига знаний MASTER v62 ЕДИНЫЙ ФАЙЛ",
+  "migration": "MODULAR v1 stage 1",
+  "extracted_iframes": {
+    "biologyLesson1Frame": "biology/lesson-01.html",
+    "biologyLesson2Frame": "biology/lesson-02.html",
+    "biologyLesson3Frame": "biology/lesson-03.html",
+    "biologyLesson11Frame": "biology/lesson-11.html",
+    "russianLesson1Frame": "russian/lesson-01.html",
+    "chineseLesson1Frame": "chinese/lesson-01.html",
+    "chineseLesson2Frame": "chinese/lesson-02.html"
+  },
+  "rule": "Content/logic unchanged; srcdoc moved to external HTML."
+}

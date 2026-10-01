@@ -1,0 +1,5 @@
+
+.russian-lesson-screen{padding:0!important;background:#092b5b;overflow:hidden}
+.russian-lesson-frame{display:block;width:100%;height:100vh;min-height:760px;border:0;background:#092b5b}
+@media(max-width:650px){.russian-lesson-frame{min-height:680px}}
+.russian-open-row{border-color:#ffd15a!important;background:linear-gradient(135deg,#164d8a,#7a3e1e)!important}.russian-open-row .goals{color:#ffe080;font-weight:900}

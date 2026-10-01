@@ -1,0 +1,18 @@
+{
+  "version": "MODULAR_v6",
+  "base": "MODULAR_v5",
+  "changes": [
+    "removed legacyModulePlaceholders from math/history",
+    "added math/app.js and history/app.js",
+    "made direct shared DOM access tolerant when a subject element is absent",
+    "preserved progress.js and localStorage keys"
+  ],
+  "editing_rule": {
+    "math": "math/",
+    "history": "history/",
+    "russian": "russian/",
+    "chinese": "chinese/",
+    "biology": "biology/",
+    "shared": "shared/ only for cross-subject behavior"
+  }
+}

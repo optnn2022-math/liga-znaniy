@@ -1,0 +1,7 @@
+
+.egor-hero-row{display:flex;align-items:flex-end;gap:26px;margin:14px 0 24px}
+.egor-speech{position:relative;flex:1;min-width:0;padding:20px 22px;background:linear-gradient(135deg,rgba(255,250,230,.98),rgba(255,231,169,.96));border:2px solid rgba(214,151,44,.48);border-radius:22px;box-shadow:0 12px 28px rgba(91,55,16,.12)}
+.egor-speech:after{content:"";position:absolute;right:-18px;bottom:54px;border-width:13px 0 13px 18px;border-style:solid;border-color:transparent transparent transparent rgba(255,231,169,.96)}
+.egor-name{font-size:clamp(20px,2.4vw,28px);font-weight:900;color:#8b3d1e;margin-bottom:9px}.egor-text{font-size:clamp(16px,1.7vw,19px);line-height:1.5;color:#49331e}.egor-tip{margin-top:13px;padding:10px 13px;border-radius:13px;background:rgba(255,255,255,.7);font-weight:800;color:#6b4b21}
+@media(max-width:650px){.egor-hero-row{gap:12px}.egor-hero-row img{width:min(31vw,170px)!important;max-height:230px!important}.egor-speech{padding:16px}.egor-tip{font-size:14px}}
+@media(max-width:480px){.egor-hero-row{flex-direction:column;align-items:center}.egor-speech:after{display:none}.egor-hero-row img{width:min(55vw,200px)!important}}

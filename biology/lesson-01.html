@@ -1,0 +1,285 @@
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Биология · Тема 1</title><style>
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#164a69,#07172d 45%,#04101f);color:#f7fbff;font-family:Arial,sans-serif}.app{max-width:1120px;margin:auto;padding:18px}header{display:flex;gap:14px;align-items:center;position:sticky;top:0;background:#07172dee;padding:12px 0;z-index:5}header b{flex:1;font-size:20px}button{border:0;border-radius:15px;padding:13px 18px;font-weight:800;cursor:pointer;background:linear-gradient(135deg,#62e68e,#48c8f4);color:#062038}.ghost{background:#173a5b;color:white}.progress{height:8px;background:#17304e;border-radius:20px;overflow:hidden}#bar{height:100%;background:linear-gradient(90deg,#62e68e,#48c8f4);width:10%;transition:.3s}section{display:none}section.on{display:block}.card{margin-top:18px;background:linear-gradient(145deg,#102c4d,#091d36);border:1px solid #28506f;border-radius:28px;padding:26px;box-shadow:0 22px 60px #0007}.hero{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}h1{font-size:clamp(38px,6vw,66px);line-height:.95;margin:10px 0}h2{font-size:32px}.tag{color:#baf477;font-weight:900;text-transform:uppercase}.coach{background:#11344e;border-left:5px solid #62e68e;border-radius:16px;padding:16px;margin:16px 0}img{max-width:100%;border-radius:20px}.nav{display:flex;justify-content:space-between;margin-top:20px;gap:12px}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:15px 0}.choice{background:#173b5a;color:white;border:1px solid #2d5878}.good{outline:3px solid #62e68e}.bad{outline:3px solid #ff7777}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.mini{background:#12314d;border-radius:18px;padding:10px;text-align:center;font-weight:bold}.mini img{height:145px;width:100%;object-fit:contain}.watch{background:white;color:#17304c;border-radius:18px;padding:17px;line-height:1.6}iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:20px;margin-top:14px;background:black}.zones{display:grid;grid-template-columns:1fr 1fr;gap:12px}.zone{min-height:130px;border:2px dashed #527d9c;border-radius:18px;padding:14px}.token{display:inline-block;background:#1d4a6c;border-radius:99px;padding:9px 12px;margin:5px;cursor:pointer}.result{background:#102f49;padding:14px;border-radius:15px;margin-top:12px;min-height:46px}.stars{color:#ffd968;font-weight:900}@media(max-width:760px){.hero,.zones{grid-template-columns:1fr}.grid,.choices{grid-template-columns:1fr 1fr}.card{padding:17px}}
+
+.mascot-wrap{display:flex;align-items:flex-end;gap:18px;margin:16px 0}.mascot{width:170px;max-height:220px;object-fit:contain;filter:drop-shadow(0 16px 16px #0007)}.speech{flex:1;background:linear-gradient(145deg,#143e5a,#102f49);border:1px solid #347093;border-radius:22px;padding:17px 20px;position:relative}.speech:before{content:"";position:absolute;left:-14px;bottom:35px;border-width:12px 14px 12px 0;border-style:solid;border-color:transparent #347093 transparent transparent}.testbtn{display:block;width:min(420px,100%);margin:18px auto 4px;font-size:18px}.modal{position:fixed;inset:0;background:#03101deF;z-index:99;display:none;align-items:center;justify-content:center;padding:16px}.modal.open{display:flex}.testcard{width:min(900px,100%);max-height:94vh;overflow:auto;background:linear-gradient(145deg,#102c4d,#071a31);border:1px solid #2b5879;border-radius:28px;padding:24px;box-shadow:0 30px 80px #000}.testhead{display:flex;align-items:center;gap:12px}.testhead h2{flex:1;margin:0}.close{background:#173a5b;color:white}.qprogress{font-weight:900;color:#baf477;margin:12px 0}.qtext{font-size:25px;font-weight:900;margin:15px 0}.answergrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.answer{background:#173b5a;color:#fff;border:1px solid #315e7e;text-align:left}.answer.correct{outline:3px solid #62e68e;background:#174b40}.answer.wrong{outline:3px solid #ff7777;background:#57323d}.feedback{min-height:64px;background:#102f49;border-radius:16px;padding:14px;margin-top:14px}.testnav{display:flex;justify-content:flex-end;margin-top:14px}.hidden{display:none!important}@media(max-width:760px){.mascot{width:115px}.mascot-wrap{gap:8px}.answergrid{grid-template-columns:1fr}.qtext{font-size:21px}}
+
+/* v3 — League of Knowledge visual system */
+body{background:
+ radial-gradient(circle at 50% -20%,#2584d7 0,#0d4f91 27%,#082d59 55%,#041b37 100%);
+ min-height:100vh}
+.app{max-width:1180px}
+header{background:linear-gradient(180deg,#082d59fa,#082d59e8);border:1px solid #2d79b8;
+ border-radius:22px;padding:13px 18px;margin-top:8px;box-shadow:0 10px 30px #001a3470}
+header b:before{content:"⚽ Лига знаний · ";color:#fff}
+.progress{margin-top:12px;height:10px;background:#082445;border:1px solid #2c6696}
+.card{background:linear-gradient(145deg,#0f4d86,#0a3768 55%,#092b52);border:2px solid #3788c7;
+ box-shadow:0 24px 60px #00152f80,inset 0 1px 0 #ffffff18}
+.tag{display:inline-block;background:#083462;border:1px solid #3c8cc5;border-radius:999px;padding:8px 13px;color:#c9ff72}
+button{box-shadow:0 8px 18px #001b3370;transition:.18s transform,.18s filter}button:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.coach,.speech,.result,.feedback{background:linear-gradient(145deg,#0c3d6b,#092f56);border-color:#52a3da}
+.mini{background:linear-gradient(145deg,#0d4374,#092f57);border:1px solid #3c82b5}
+.choice,.answer,.token{background:linear-gradient(145deg,#14578a,#0c3c69);border:1px solid #4b91c0}
+.stars{background:#082d55;border:1px solid #4d8fb9;border-radius:999px;padding:8px 13px}
+
+/* page 2 balance: illustration no longer dominates */
+section:nth-of-type(2) .card{display:grid;grid-template-columns:1.05fr .95fr;column-gap:26px;align-items:start}
+section:nth-of-type(2) .tag,section:nth-of-type(2) h2,section:nth-of-type(2) p,
+section:nth-of-type(2) .choices,section:nth-of-type(2) .result,section:nth-of-type(2) .nav{grid-column:1}
+section:nth-of-type(2) img{grid-column:2;grid-row:1/8;width:100%;height:420px;object-fit:cover;object-position:center;border:2px solid #4d91bd}
+section:nth-of-type(2) h2{font-size:38px;margin:14px 0 5px}
+section:nth-of-type(2) p{font-size:20px;line-height:1.45}
+section:nth-of-type(2) .choices{grid-template-columns:1fr 1fr}
+section:nth-of-type(2) .choice{font-size:17px;padding:15px}
+
+/* football mini-test effects */
+.ballfx{position:fixed;z-index:130;font-size:52px;pointer-events:none;filter:drop-shadow(0 8px 6px #0008);
+ animation:kickBall .75s cubic-bezier(.2,.75,.2,1) forwards}
+@keyframes kickBall{0%{transform:translate(-50%,-50%) scale(.45) rotate(0);opacity:.2}
+45%{opacity:1;transform:translate(-50%,-90%) scale(1.18) rotate(240deg)}
+100%{transform:translate(-50%,-50%) scale(.72) rotate(620deg);opacity:0}}
+.goalflash{position:fixed;inset:0;z-index:120;pointer-events:none;background:radial-gradient(circle,#baff6a55,transparent 45%);animation:goalFlash .55s forwards}
+@keyframes goalFlash{0%{opacity:0}35%{opacity:1}100%{opacity:0}}
+.scorepop{position:fixed;z-index:135;left:50%;top:25%;transform:translate(-50%,-50%);font-weight:1000;
+ font-size:clamp(34px,7vw,72px);color:#d7ff75;text-shadow:0 5px 0 #064b30,0 10px 28px #000;
+ pointer-events:none;animation:scorePop .8s forwards}
+@keyframes scorePop{0%{opacity:0;transform:translate(-50%,-50%) scale(.2)}35%{opacity:1;transform:translate(-50%,-50%) scale(1.15)}100%{opacity:0;transform:translate(-50%,-80%) scale(.9)}}
+.shake{animation:shake .32s}@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+.testcard{border:2px solid #3d8bc2;background:linear-gradient(145deg,#0d4c84,#082e59);position:relative;overflow:hidden}
+.testcard:after{content:"";position:absolute;inset:auto -80px -120px auto;width:330px;height:220px;border:3px solid #ffffff12;border-radius:50%;transform:rotate(-15deg);pointer-events:none}
+@media(max-width:760px){section:nth-of-type(2) .card{display:block}section:nth-of-type(2) img{height:240px;margin:10px 0}section:nth-of-type(2) h2{font-size:30px}}
+
+/* MASTER v36 visual system — exact palette, radii, borders and controls */
+:root{font-family:system-ui,-apple-system,'Segoe UI',sans-serif;color:#fff;background:#092b5b;font-size:16px}
+body{margin:0;min-height:100vh;background:linear-gradient(180deg,#05245599,#082852c9),url('../shared/lesson-assets/67a145f6bf3e5227d442.webp') center/cover fixed}
+.app{max-width:none;margin:0;padding:20px clamp(16px,4vw,64px) 35px}
+header{max-width:1500px;margin:0 auto;background:transparent;border:0;border-radius:0;padding:0;box-shadow:none}
+header b{font-size:clamp(1.2rem,2vw,1.8rem);font-weight:900;text-shadow:0 2px 10px #082344}
+header b:before{content:"⚽ Лига знаний · ";color:#fff}
+.stars{background:#0b3676e8;padding:11px 17px;border:1px solid #8dcfff;border-radius:15px;font-weight:800;color:#fff}
+.progress{max-width:1340px;margin:14px auto 0;height:8px;background:#153f7a;border:0}
+#bar{background:linear-gradient(90deg,#ff991d,#ffb02a)}
+.card{max-width:1340px;margin:26px auto 0;background:#092d62ed;border:1px solid #8cbdeb;border-radius:22px;box-shadow:0 18px 40px #06204c78;padding:clamp(18px,2.6vw,30px)}
+.tag{background:transparent;border:0;padding:0;color:#77e8f3;font-weight:800;text-transform:none;letter-spacing:0}
+h1,.title{text-shadow:0 4px 16px #061e48}
+h2{font-size:clamp(1.7rem,3vw,2.6rem)}
+button{cursor:pointer;box-shadow:none;transition:transform .2s,box-shadow .2s}
+button:not(.choice):not(.answer):not(.token){border:0;background:linear-gradient(130deg,#ffb02a,#ff691e);color:#fff;border-radius:13px;padding:13px 24px;min-height:51px;font-weight:900;box-shadow:0 7px 17px #ff6d3b5e}
+button:not(.choice):not(.answer):not(.token):hover{filter:brightness(1.1);transform:translateY(-2px)}
+button.ghost,.close{border:1px solid #a9d4ff!important;border-radius:12px!important;background:#103c7acb!important;color:#fff!important;padding:10px 16px!important;min-height:45px!important;font-weight:750!important;box-shadow:none!important}
+.coach,.speech{background:#0f4479;border:1px solid #79bce0;border-radius:15px;padding:13px 17px;line-height:1.45}
+.choice,.answer{min-height:55px;border-radius:12px;border:2px solid #86add3;background:#113e79;color:#fff;font-weight:750;text-align:left;padding:10px 15px;box-shadow:none}
+.choice:hover,.answer:hover{border-color:#ffb13b;background:#1b5596}
+.choice.good,.answer.correct{border-color:#4ce4a4;background:#116755;outline:0}
+.choice.bad,.answer.wrong{border-color:#ff9870;background:#713c55;outline:0}
+.result,.feedback{background:#145469;border-left:5px solid #60ecc4;border-radius:7px;padding:13px 17px;line-height:1.45}
+.mini{background:#123e78;border:1px solid #5592cb;border-radius:11px}
+.watch{background:#0f4479;color:#fff;border:1px solid #79bce0;border-radius:15px}
+.testcard{background:#092d62;border:1px solid #8cbdeb;border-radius:22px;box-shadow:0 18px 40px #06204c78}
+.modal{background:#03152ddd}
+.mascot{filter:drop-shadow(0 12px 22px #051947)}
+/* second screen: compact square visual + larger learning text, like v36 lesson layout */
+section:nth-of-type(2) .card{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,.42fr);gap:22px;align-items:start}
+section:nth-of-type(2) .tag,section:nth-of-type(2) h2,section:nth-of-type(2) p,section:nth-of-type(2) .choices,section:nth-of-type(2) .result,section:nth-of-type(2) .nav{grid-column:1}
+section:nth-of-type(2) img{grid-column:2;grid-row:1/8;width:min(100%,430px);height:auto;aspect-ratio:1/1;object-fit:cover;justify-self:end;border-radius:16px;border:1px solid #8cbdeb}
+section:nth-of-type(2) h2{font-size:clamp(2rem,4vw,3.2rem);margin:12px 0 6px}
+section:nth-of-type(2) p{font-size:1.15rem;line-height:1.55;color:#d4e7f4}
+section:nth-of-type(2) .choices{grid-template-columns:1fr 1fr}
+/* MASTER v36 goal effect */
+.goal-pop-v36{position:fixed;z-index:150;left:50%;top:18%;transform:translateX(-50%);font-size:clamp(2rem,6vw,5rem);font-weight:1000;color:#fff;text-shadow:0 0 14px #ffa623,0 0 35px #ff7613;pointer-events:none;animation:goalv36 .9s both}
+@keyframes goalv36{0%{opacity:0;transform:translate(-50%,45px) scale(.7)}45%{opacity:1;transform:translate(-50%,0) scale(1.12)}100%{opacity:0;transform:translate(-50%,-45px) scale(1)}}
+@media(max-width:820px){section:nth-of-type(2) .card{grid-template-columns:1fr}section:nth-of-type(2) img{grid-column:1;grid-row:auto;width:min(100%,360px);justify-self:center}}
+
+/* v36 drag-and-drop — only Main Task */
+#tokens{min-height:70px;padding:10px;margin:12px 0;background:#08295799;border:1px solid #5b92c3;border-radius:14px}
+#tokens:before{content:"Перетащи карточки в нужную область";display:block;color:#b9d9f3;font-weight:750;margin:0 0 8px}
+.token{display:inline-flex;align-items:center;justify-content:center;user-select:none;touch-action:none;cursor:grab;min-height:44px;padding:10px 14px;margin:6px;border:2px solid #86add3;border-radius:12px;background:#113e79;color:#fff;font-weight:800;transition:.18s transform,.18s box-shadow,.18s opacity}
+.token:active{cursor:grabbing}.token.dragging{opacity:.45;transform:scale(.96)}
+.zone{min-height:165px;border:2px dashed #78aee0;border-radius:16px;padding:14px;background:#0c376b99;transition:.18s border-color,.18s background,.18s transform}
+.zone.dragover{border-color:#ffb02a;background:#164c82;transform:scale(1.01)}
+.zone.correct-drop{animation:dropok .45s}.zone.wrong-drop{animation:dropbad .4s}
+@keyframes dropok{50%{box-shadow:0 0 0 5px #4ce4a455,0 0 25px #4ce4a466}}
+@keyframes dropbad{25%,75%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
+</style></head><body><div id="v8DirectNav" style="position:fixed;z-index:99999;left:10px;top:10px;display:flex;gap:6px"><button onclick="location.href='index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">← Темы</button><button onclick="location.href='../index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">Предметы</button></div><div class="app"><header><button class="ghost" onclick="go(0)">🌱</button><b>Биология · 5 класс · Егор</b><span class="stars">⭐ <i id="stars">0</i></span></header><div class="progress"><div id="bar"></div></div>
+
+<section class="on"><div class="card hero"><div><div class="tag">Тема 1 · Биологическая миссия</div><h1>Что изучает биология?</h1><div class="mascot-wrap"><img class="mascot" src="../shared/lesson-assets/b37e18afece2a4338695.webp" alt="Футболист-наставник"><div class="speech"><b>Егор, начинаем новый учебный матч!</b><br>Сегодня наша задача — разобраться, что изучает биология. Посмотри на картину: что здесь живое, а что — нет? И как это доказать?</div></div><button onclick="next()">Начать исследование →</button></div><img src="../shared/lesson-assets/b00b2c6d4d18c9309460.webp"></div></section>
+
+<section><div class="card"><div class="tag">Исследование</div><h2>Что здесь живое?</h2><img src="../shared/lesson-assets/b00b2c6d4d18c9309460.webp"><p>Выбери все объекты живой природы.</p><div class="choices" id="living"></div><div class="result" id="lr">Подумай, какие объекты являются организмами.</div><div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Продолжить →</button></div></div></section>
+
+<section><div class="card hero"><div><div class="tag">Открытие</div><h2>Биология — наука о жизни</h2><p><b>bios</b> — жизнь &nbsp;+&nbsp; <b>logos</b> — учение, знание.</p><div class="coach">Егор, биология изучает живые организмы: как они устроены, живут, растут, размножаются и взаимодействуют с окружающим миром.</div></div><img src="../shared/lesson-assets/764a04c5df32df88c260.webp"><div class="nav" style="grid-column:1/-1"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Дальше →</button></div></div></section>
+
+<section><div class="card"><div class="tag">Мир живых организмов</div><h2>Кого изучают биологи?</h2><div class="grid"><div class="mini"><img src="../shared/lesson-assets/7f98a288bd803703fa46.webp">Растения</div><div class="mini"><img src="../shared/lesson-assets/a3c3a1fccbd6255673f6.webp">Животные</div><div class="mini"><img src="../shared/lesson-assets/dcaedea996f6aac456e2.webp">Грибы</div><div class="mini"><img src="../shared/lesson-assets/cd35352690ae916e5892.webp">Микроорганизмы</div></div><div class="coach">Можно исследовать строение организма, питание, рост, размножение, развитие и связь со средой.</div><div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Дальше →</button></div></div></section>
+
+<section><div class="card hero"><div><div class="tag">Наблюдаем процесс</div><h2>Организмы растут и развиваются</h2><div class="coach">Егор, посмотри: семя → проросток → взрослое растение. Рост и развитие — тоже предмет изучения биологии.</div></div><img src="../shared/lesson-assets/9c6540134312fe4c744b.webp"><div class="nav" style="grid-column:1/-1"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">К видео →</button></div></div></section>
+
+<section><div class="card"><div class="tag">Видео</div><h2>Биология — наука о живой природе</h2><div class="watch"><b>Егор, во время просмотра найди ответы:</b><br>1. Что изучает биология?<br>2. Какие живые организмы упоминаются?<br>3. Что биологи могут изучать у живых организмов?</div><iframe src="https://rutube.ru/play/embed/331742c850ec750f4c75d7d772e062ae" allow="autoplay; fullscreen" allowfullscreen></iframe><div class="mascot-wrap"><img class="mascot" src="../shared/lesson-assets/b37e18afece2a4338695.webp" alt=""><div class="speech"><b>Егор, видео закончилось?</b><br>Проверим, что удалось поймать с первого просмотра. Тебя ждут 7 коротких вопросов.</div></div>
+<button class="testbtn" onclick="openMiniTest()">🧠 Мини-тест по видео · 7 вопросов</button>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Продолжить урок →</button></div></div></section>
+
+<section><div class="card"><div class="tag">Проверяем просмотр</div><h2>Что изучает биология?</h2><div class="choices" id="videoq"></div><div class="result" id="vr">Выбери один ответ.</div><div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Главная задача →</button></div></div></section>
+
+<section><div class="card"><div class="tag">Главная задача</div><h2>Живая или неживая природа?</h2><img src="../shared/lesson-assets/d3ec055ed18e2fc13317.webp" style="display:block;margin:auto;max-height:320px"><div id="tokens"></div><div class="zones"><div class="zone"><b>🌱 ЖИВАЯ ПРИРОДА</b><div id="z1"></div></div><div class="zone"><b>🪨 НЕЖИВАЯ ПРИРОДА</b><div id="z2"></div></div></div><div class="result" id="sr">Нажимай на объекты — они отправятся в нужную группу.</div><div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Мини-тест →</button></div></div></section>
+
+<section><div class="card"><div class="tag">Мини-тест · 5 вопросов</div><h2>Финиш первой миссии</h2><div id="quiz"></div><h2 class="stars" id="score"></h2><div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button id="finishBiologyLesson1" type="button" onclick="saveBiologyResult(1,pts,5); location.href='index.html'; return false;">Закончить урок ✓</button></div></div></section>
+
+<section><div class="card hero"><div><div class="tag">Миссия выполнена</div><h1 style="font-size:48px">Отличная работа, Егор!</h1><p>Теперь ты знаешь, что изучает биология, и умеешь находить объекты живой природы.</p><div class="mascot-wrap"><img class="mascot" src="../shared/lesson-assets/b37e18afece2a4338695.webp" alt=""><div class="speech"><b>Сыграно отлично, Егор!</b><br>Но осталась загадка: почему дерево мы называем живым, а камень — неживым? Какие свойства обязательно должны быть у живого организма?</div></div><h2 class="stars">⭐ За тему: <span id="final">0</span></h2><button onclick="alert('Следующая тема: «Признаки живых организмов»')">Следующая тема →</button></div><img src="../shared/lesson-assets/d3ec055ed18e2fc13317.webp"></div></section>
+
+
+<div class="modal" id="miniModal"><div class="testcard">
+ <div class="testhead"><img class="mascot" src="../shared/lesson-assets/b37e18afece2a4338695.webp" alt=""><h2>Мини-тест · Что изучает биология?</h2><button class="close" onclick="closeMiniTest()">✕</button></div>
+ <div class="qprogress" id="mtProgress">Вопрос 1 из 7</div>
+ <div class="qtext" id="mtQuestion"></div><div class="answergrid" id="mtAnswers"></div>
+ <div class="feedback" id="mtFeedback">Выбери один ответ. Учитывается первый выбор.</div>
+ <div class="testnav"><button id="mtNext" class="hidden" onclick="nextMT()">Следующий вопрос →</button></div>
+</div></div>
+</div><script>
+function saveBiologyResult(topic,goals,max){try{var K='liga-znaniy-biology-progress-v2',d=JSON.parse(localStorage.getItem(K)||'{}');d['topic'+topic]={goals:Number(goals)||0,max:Number(max)||0,completed:true,date:new Date().toISOString()};localStorage.setItem(K,JSON.stringify(d));}catch(e){}}
+
+function stopPageMedia(root){
+ root.querySelectorAll('video,audio').forEach(media=>media.pause());
+ root.querySelectorAll('iframe').forEach(frame=>{
+   try{if(frame.contentDocument)stopPageMedia(frame.contentDocument)}catch(e){}
+   const src=frame.getAttribute('src');
+   if(src && src!=='about:blank'){frame.dataset.pausedVideoSrc=src;frame.setAttribute('src','about:blank')}
+ });
+}
+function resumePageMedia(root){
+ root.querySelectorAll('iframe[data-paused-video-src]').forEach(frame=>{
+   frame.setAttribute('src',frame.dataset.pausedVideoSrc);
+   delete frame.dataset.pausedVideoSrc;
+ });
+}
+let p=0,S=0;const sec=[...document.querySelectorAll('section')];function show(){sec.forEach((x,i)=>{if(i!==p && x.classList.contains('on'))stopPageMedia(x);x.classList.toggle('on',i===p)});resumePageMedia(sec[p]);bar.style.width=((p+1)/sec.length*100)+'%';scrollTo(0,0)}function next(){if(p<sec.length-1)p++;show()}function prev(){if(p)p--;show()}function go(n){p=n;show()}function star(n=1){S+=n;stars.textContent=S}
+[['🌳 Дерево',1],['🦊 Лиса',1],['🍄 Гриб',1],['🌼 Цветок',1],['🪨 Камень',0],['💧 Вода',0],['☀️ Солнце',0],['☁️ Облако',0]].forEach(x=>{let b=document.createElement('button');b.className='choice';b.textContent=x[0];b.onclick=()=>{b.classList.add(x[1]?'good':'bad');lr.textContent=x[1]?'Да! Это живой организм.':'Это объект неживой природы.';b.onclick=null;if(x[1])star()};living.appendChild(b)})
+let vd=0;[['Только растения',0],['Только животных',0],['Живые организмы и проявления жизни',1],['Планеты и звёзды',0]].forEach(x=>{let b=document.createElement('button');b.className='choice';b.textContent=x[0];b.onclick=()=>{if(vd)return;vd=1;b.classList.add(x[1]?'good':'bad');vr.textContent=x[1]?'Верно!':'Не совсем. Биология изучает живые организмы и проявления жизни.';if(x[1])star(2)};videoq.appendChild(b)})
+let nsort=0;
+const sortItems=[['🪨 Камень',0],['🌳 Дерево',1],['💧 Вода',0],['🍄 Гриб',1],['☀️ Солнце',0],['🐌 Улитка',1],['☁️ Облако',0],['🐦 Птица',1]];
+let dragged=null, startParent=null, pointerGhost=null;
+
+function completeSort(){
+ if(nsort===sortItems.length){
+   sr.textContent='Готово! Все объекты распределены правильно. Теперь главный вопрос: по каким признакам мы отличаем живое от неживого?';
+   star(2);
+ }
+}
+function acceptToken(t,zone){
+ const expected=t.dataset.kind;
+ const liveBox=zone.id==='z1' || !!zone.querySelector?.('#z1');
+ const target=liveBox?'live':'non';
+ const destination=liveBox ? (zone.id==='z1'?zone:zone.querySelector('#z1')) : (zone.id==='z2'?zone:zone.querySelector('#z2'));
+ if(expected===target){
+   destination.appendChild(t); t.dataset.done='1'; t.draggable=false; t.style.cursor='default';
+   zone.classList.add('correct-drop'); setTimeout(()=>zone.classList.remove('correct-drop'),450);
+   nsort++; sr.textContent='⚽ Точно! Продолжай распределение.'; completeSort();
+ }else{
+   zone.classList.add('wrong-drop'); setTimeout(()=>zone.classList.remove('wrong-drop'),400);
+   sr.textContent='Попробуй ещё раз: этот объект относится к другой группе.';
+ }
+}
+sortItems.forEach((x,idx)=>{
+ let t=document.createElement('span'); t.className='token'; t.textContent=x[0];
+ t.dataset.kind=x[1]?'live':'non'; t.dataset.idx=idx; t.id='sortToken'+idx; t.draggable=true;
+ t.addEventListener('dragstart',e=>{dragged=t;startParent=t.parentNode;t.classList.add('dragging');e.dataTransfer.setData('text/plain',t.id);e.dataTransfer.effectAllowed='move'});
+ t.addEventListener('dragend',()=>{t.classList.remove('dragging');dragged=null});
+ // Pointer handling works for both a desktop mouse and touch screens.
+ t.draggable=false;
+ t.style.touchAction='none';
+ let activePointer=null,ghost=null,originX=0,originY=0,moved=false;
+ t.addEventListener('pointerdown',e=>{
+   if(t.dataset.done==='1' || (e.pointerType==='mouse' && e.button!==0))return;
+   activePointer=e.pointerId; originX=e.clientX; originY=e.clientY; moved=false;
+   t.setPointerCapture(e.pointerId);
+ });
+ t.addEventListener('pointermove',e=>{
+   if(activePointer!==e.pointerId)return;
+   if(!moved && Math.hypot(e.clientX-originX,e.clientY-originY)<5)return;
+   if(!moved){
+     moved=true; ghost=t.cloneNode(true); ghost.removeAttribute('id');
+     ghost.style.cssText='position:fixed;z-index:9999;pointer-events:none;opacity:.85;margin:0;transform:translate(-50%,-50%);';
+     document.body.appendChild(ghost); t.classList.add('dragging');
+   }
+   ghost.style.left=e.clientX+'px';ghost.style.top=e.clientY+'px';
+   document.querySelectorAll('.zone').forEach(z=>z.classList.remove('dragover'));
+   const target=document.elementFromPoint(e.clientX,e.clientY);
+   const zone=target && target.closest('.zone');
+   if(zone)zone.classList.add('dragover');
+   e.preventDefault();
+ });
+ function endPointer(e){
+   if(activePointer!==e.pointerId)return;
+   activePointer=null;
+   if(ghost){ghost.remove();ghost=null}
+   t.classList.remove('dragging');
+   document.querySelectorAll('.zone').forEach(z=>z.classList.remove('dragover'));
+   if(!moved || e.type==='pointercancel')return;
+   const target=document.elementFromPoint(e.clientX,e.clientY);
+   const zone=target && target.closest('.zone');
+   if(zone)acceptToken(t,zone);
+ }
+ t.addEventListener('pointerup',endPointer);
+ t.addEventListener('pointercancel',endPointer);
+ tokens.appendChild(t);
+});
+[z1,z2].forEach(zone=>{
+ zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('dragover');e.dataTransfer.dropEffect='move'});
+ zone.addEventListener('dragleave',()=>zone.classList.remove('dragover'));
+ zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('dragover');let id=e.dataTransfer.getData('text/plain');let token=(id&&document.getElementById(id))||dragged;if(token)acceptToken(token,zone)});
+});
+
+let selectedSortToken=null;
+document.addEventListener('click',e=>{
+ const tok=e.target.closest && e.target.closest('.token');
+ if(tok && tok.dataset.done!=='1'){
+   if(selectedSortToken)selectedSortToken.style.boxShadow='';
+   selectedSortToken=tok; tok.style.boxShadow='0 0 0 3px #ffb02a';
+   sr.textContent='Карточка выбрана. Перетащи её или нажми на нужную область.';
+   return;
+ }
+ const zone=e.target.closest && e.target.closest('.zone');
+ if(zone && selectedSortToken){
+   selectedSortToken.style.boxShadow='';
+   acceptToken(selectedSortToken,zone);
+   selectedSortToken=null;
+ }
+});
+const Q=[['Биология — это…',['наука о живой природе','наука только о растениях','наука о звёздах'],0],['Что живое?',['камень','гриб','облако'],1],['Что неживое?',['лиса','дерево','вода'],2],['Что может изучать биолог?',['рост растения','движение планет','горную породу'],0],['Верная последовательность',['растение → семя → проросток','семя → проросток → растение','камень → проросток → растение'],1]];let pts=0,done=new Set();Q.forEach((q,i)=>{let d=document.createElement('div');d.innerHTML='<h3>'+(i+1)+'. '+q[0]+'</h3>';let r=document.createElement('div');r.className='choices';q[1].forEach((a,j)=>{let b=document.createElement('button');b.className='choice';b.textContent=a;b.onclick=()=>{if(done.has(i))return;done.add(i);b.classList.add(j===q[2]?'good':'bad');if(j===q[2]){pts++;star()}score.textContent='Результат: '+pts+' / '+done.size};r.appendChild(b)});d.appendChild(r);quiz.appendChild(d)});function finish(){
+ try{
+  const key='liga-znaniy-biology-progress-v1';
+  const p=JSON.parse(localStorage.getItem(key)||'{}');
+  const best=Math.max(Number(p.topic1Goals||0),Number(typeof S==='undefined'?0:S));
+  p.topic1Goals=best; p.topic1Completed=true; p.topic1Stars=Math.max(Number(p.topic1Stars||0),best*10);
+  p.lastActivity={date:new Date().toISOString(),text:'Биология → Тема 1 → ⚽ '+best+'/7'};
+  localStorage.setItem(key,JSON.stringify(p));
+ }catch(e){}
+ location.assign('./index.html');
+}show()
+
+const miniQuestions=[
+ {q:"Что изучает биология?",a:["Живую природу и живые организмы","Только растения","Только тело человека","Только неживую природу"],c:0,f:"Биология — наука о живой природе и живых организмах."},
+ {q:"Как переводится греческое слово «bios»?",a:["Знание","Жизнь","Растение","Природа"],c:1,f:"«Bios» означает «жизнь»; отсюда начинается смысл слова «биология»."},
+ {q:"Какой объект относится к живой природе?",a:["Камень","Облако","Гриб","Вода"],c:2,f:"Гриб — живой организм. Камень, вода и облако относятся к неживой природе."},
+ {q:"Какие организмы изучает биология?",a:["Только животных","Растения, животных, грибы и микроорганизмы","Только растения и грибы","Только микроорганизмы"],c:1,f:"Биология изучает разнообразные живые организмы, а не одну отдельную группу."},
+ {q:"Что биолог может исследовать у растения?",a:["Его рост и развитие","Движение планет","Состав горной породы","Образование облаков"],c:0,f:"Рост и развитие растения — биологические процессы."},
+ {q:"Какая последовательность показывает развитие растения?",a:["Проросток → семя → растение","Семя → растение → проросток","Семя → проросток → растение","Растение → камень → семя"],c:2,f:"Сначала семя прорастает, появляется проросток, затем развивается растение."},
+ {q:"Почему дерево изучает биология, а камень — нет?",a:["Дерево больше камня","Дерево — живой организм","Камень всегда холодный","Дерево зелёного цвета"],c:1,f:"Главное различие не в размере или цвете: дерево является живым организмом."}
+];
+let mtIndex=0,mtScore=0,mtLocked=false;
+function openMiniTest(){mtIndex=0;mtScore=0;miniModal.classList.add('open');renderMT()}
+function closeMiniTest(){miniModal.classList.remove('open')}
+function renderMT(){let x=miniQuestions[mtIndex];mtLocked=false;mtProgress.textContent='Вопрос '+(mtIndex+1)+' из 7';mtQuestion.textContent=x.q;mtAnswers.innerHTML='';mtFeedback.textContent='Выбери один ответ. Учитывается первый выбор.';mtNext.classList.add('hidden');x.a.forEach((a,i)=>{let b=document.createElement('button');b.className='answer';b.textContent=a;b.onclick=()=>answerMT(i,b);mtAnswers.appendChild(b)})}
+function footballFX(ok){
+ if(ok){
+   let el=document.createElement('div');
+   el.className='goal-pop-v36';
+   el.textContent='⚽ ГОЛ!';
+   document.body.appendChild(el);
+   setTimeout(()=>el.remove(),900);
+ }else{
+   let card=document.querySelector('.testcard');
+   card.classList.add('shake');
+   setTimeout(()=>card.classList.remove('shake'),350);
+ }
+}
+function answerMT(i,b){if(mtLocked)return;mtLocked=true;let x=miniQuestions[mtIndex];let ok=i===x.c;if(ok){b.classList.add('correct');mtScore++;mtFeedback.textContent='⚽ Точно в цель, Егор! '+x.f}else{b.classList.add('wrong');[...mtAnswers.children][x.c].classList.add('correct');mtFeedback.textContent='Мяч прошёл рядом со штангой! '+x.f}footballFX(ok);mtNext.textContent=mtIndex===6?'Показать результат':'Следующий вопрос →';mtNext.classList.remove('hidden')}
+function nextMT(){if(mtIndex<6){mtIndex++;renderMT()}else{mtProgress.textContent='Матч завершён';mtQuestion.textContent='Егор, результат: '+mtScore+' из 7';mtAnswers.innerHTML='';mtFeedback.textContent=mtScore===7?'🏆 Идеальный результат! Все 7 ответов верные.':mtScore>=5?'⭐ Отличная работа! Основная идея темы понятна.':'💪 Хорошее начало. Можно ещё раз посмотреть видео и попробовать снова.';mtNext.textContent='Закрыть тест';mtNext.onclick=()=>{closeMiniTest(); if(mtScore>=5)star(2)}}}
+</script><script>document.addEventListener('click',function(e){var b=e.target.closest('#finishBiologyLesson1');if(b){e.preventDefault();location.href='index.html';}},true);</script><script src="../shared/js/global-stars-v818.js"></script></body></html>

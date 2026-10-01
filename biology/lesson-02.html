@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Биология · Тема 2 · Признаки живых организмов</title>
+<style>
+*{box-sizing:border-box} body{margin:0;min-height:100vh;background:linear-gradient(180deg,#05245599,#082852c9),url('../shared/assets-v7/67a145f6bf3e5227d442.webp') center/cover fixed;font-family:Inter,Arial,sans-serif;color:#fff}
+
+.top{height:74px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:#071d3d;border-bottom:1px solid #3274b5;position:sticky;top:0;z-index:20}
+.brand{font-size:21px;font-weight:900} .score{background:#0c3267;border:1px solid #72b5f2;border-radius:15px;padding:10px 15px;font-weight:900}
+.page{max-width:1180px;margin:auto;padding:28px 22px 50px} .card{background:#092d62ed;border:1px solid #8cbdeb;border-radius:22px;padding:28px;box-shadow:0 20px 55px #0005;margin-bottom:22px}
+.card:has(.lesson-art){overflow:hidden}.lesson-art{border:1px solid #8cbdeb;box-shadow:0 12px 30px #0004}
+.tag{display:inline-block;background:#123f79;border:1px solid #7dc7ff;border-radius:999px;padding:7px 12px;font-weight:800;color:#bfe5ff}
+h1{font-size:clamp(34px,5vw,62px);line-height:1;margin:14px 0} h2{font-size:30px;margin:5px 0 15px} p,li{font-size:19px;line-height:1.55}
+.coach{background:linear-gradient(135deg,#0e477e,#11629a);border-left:5px solid #ff9a22;border-radius:16px;padding:18px 20px;margin:18px 0;font-size:18px}
+.visual{width:100%;max-height:620px;object-fit:contain;border-radius:18px;background:#fff;margin-top:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px} .mini{background:#0b376e;border:1px solid #5ea8e9;border-radius:17px;padding:18px;min-height:135px}
+.mini b{font-size:20px;color:#ffd46c} button{border:0;border-radius:15px;padding:14px 20px;font-size:17px;font-weight:900;cursor:pointer;color:white;background:linear-gradient(135deg,#ffb02a,#ff691e);box-shadow:0 8px 20px #0003;transition:.18s transform,.18s filter}
+button:hover:not(:disabled){transform:translateY(-2px);filter:brightness(1.07)}
+button.ghost{background:#103b72;border:1px solid #6ca8df} .nav{display:flex;justify-content:space-between;gap:12px;margin-top:22px}
+.screen{display:none} .screen.active{display:block} iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:18px;background:#000}
+.watch{display:grid;gap:9px;margin:15px 0} .watch div{background:#0c3a72;border-radius:12px;padding:12px 15px;font-size:18px}
+.sequence{display:flex;gap:10px;flex-wrap:wrap} .token{flex:1;min-width:170px;background:#0d3b72;border:2px solid #5ba6e8;border-radius:16px;padding:16px;text-align:center;font-weight:800;cursor:grab}
+.zone{min-height:82px;border:2px dashed #74b9f2;border-radius:16px;padding:12px;margin-top:12px;background:#061f48}
+.quizbox{background:#0b376e;border-radius:18px;padding:20px} .answers{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:15px}
+.answer{background:#123f79;border:1px solid #6aa9e3;text-align:left}.answer:hover:not(:disabled){border-color:#ffb13b;background:#1b5596}.answer:disabled{opacity:.68;cursor:default}.answer.good,.answer.correct{border-color:#4ce4a4;background:#116755;opacity:1}.answer.bad,.answer.wrong{border-color:#ff9870;background:#713c55;opacity:1;animation:shake .28s}
+.feedback{font-size:18px;font-weight:800;margin-top:14px;min-height:28px} .goal{position:fixed;inset:0;display:none;place-items:center;pointer-events:none;z-index:50;background:#001b4466}
+.goal.show{display:grid;animation:fade .9s} .goal span{font-size:clamp(60px,12vw,150px);font-weight:1000;text-shadow:0 8px 30px #000;animation:pop .9s}
+@keyframes pop{0%{transform:scale(.1) rotate(-10deg);opacity:0}35%{transform:scale(1.2);opacity:1}100%{transform:scale(1)}} @keyframes fade{100%{opacity:0}}
+@keyframes shake{25%{transform:translateX(-7px)}50%{transform:translateX(7px)}75%{transform:translateX(-4px)}}
+.result{font-size:34px;font-weight:1000;color:#ffd36a;text-align:center}
+
+.testbtn{width:100%;margin-top:12px;font-size:19px}
+.testbtn{width:100%;margin-top:12px;font-size:19px}.quizbox{margin-top:18px;background:#082852e8;border:1px solid #8cbdeb;border-radius:18px;padding:22px}.qprogress{color:#9fd5ff;font-weight:900;margin:4px 0 10px}.qtext{font-size:25px;font-weight:900;line-height:1.25;margin-bottom:16px}.answergrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.testnav{display:flex;justify-content:flex-end;margin-top:14px}.hidden{display:none!important}
+.goal-pop-v38{position:fixed;z-index:150;left:50%;top:18%;transform:translateX(-50%);font-size:clamp(2.5rem,8vw,6rem);font-weight:1000;color:#fff;text-shadow:0 0 14px #ffa623,0 0 35px #ff7613;pointer-events:none;animation:goalv38 .9s both}
+@keyframes goalv38{0%{opacity:0;transform:translate(-50%,45px) scale(.7)}45%{opacity:1;transform:translate(-50%,0) scale(1.12)}100%{opacity:0;transform:translate(-50%,-45px) scale(1)}}
+@media(max-width:760px){.grid,.answers,.answergrid{grid-template-columns:1fr}.top{padding:0 14px}.page{padding:16px 12px}}
+
+/* v53: compact layout for Biology Topic 2 only */
+@media (min-width:761px){
+  .top{height:58px;padding:0 20px}.brand{font-size:18px}.score{padding:7px 11px}
+  .page{max-width:1120px;padding:14px 18px 24px}.card{padding:18px 20px;margin-bottom:14px;border-radius:18px}
+  h1{font-size:clamp(28px,3.4vw,44px);margin:8px 0}h2{font-size:25px;margin:3px 0 10px}p,li{font-size:17px;line-height:1.4}
+  .coach{padding:12px 15px;margin:11px 0;font-size:16px}.visual{max-height:44vh;margin-top:8px;border-radius:14px}
+  .grid{gap:10px}.mini{padding:12px;min-height:96px}.mini b{font-size:18px}
+  button{padding:10px 16px;font-size:15px}.nav{margin-top:12px}.watch{gap:6px;margin:9px 0}.watch div{padding:8px 11px;font-size:16px}
+  .sequence{gap:7px}.token{min-width:145px;padding:11px}.zone{min-height:62px;padding:8px;margin-top:8px}
+  .quizbox{padding:14px;margin-top:10px}.answers,.answergrid{gap:8px;margin-top:9px}.feedback{font-size:16px;margin-top:8px;min-height:22px}
+  .qtext{font-size:21px;margin-bottom:10px}.qprogress{margin:2px 0 6px}.testnav{margin-top:9px}.testbtn{margin-top:8px;font-size:16px}
+}
+@media (min-width:761px) and (max-height:800px){
+  .page{padding-top:10px}.card{padding:14px 17px;margin-bottom:10px}h1{font-size:34px}h2{font-size:22px}p,li{font-size:16px;line-height:1.32}
+  .coach{padding:9px 12px;margin:8px 0}.visual{max-height:36vh}.mini{min-height:82px;padding:9px}.nav{margin-top:8px}
+  .quizbox{padding:11px}.qtext{font-size:19px}.answer{padding:9px 13px}.token{padding:9px}.zone{min-height:54px}
+}
+
+/* v54: tidy Biology Topic 2 artwork layout */
+@media (min-width:761px){
+  .screen .card::after{content:'';display:block;clear:both}
+  .screen .visual{
+    width:42%;max-width:440px;max-height:46vh;float:right;
+    margin:4px 0 12px 22px;background:transparent!important;
+    border:0!important;box-shadow:none!important;border-radius:12px;
+    object-fit:contain;
+  }
+  .screen .visual.lesson-art{background:transparent!important;border:0!important;box-shadow:none!important}
+  .screen .coach,.screen p,.screen ul,.screen ol{overflow:visible}
+  .screen .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .screen .nav{clear:both}
+}
+@media (min-width:761px) and (max-height:800px){
+  .screen .visual{width:38%;max-width:390px;max-height:39vh;margin-left:18px}
+}
+@media (max-width:760px){
+  .screen .visual,.screen .visual.lesson-art{float:none;width:100%;max-width:100%;margin:10px 0;background:transparent!important;border:0!important;box-shadow:none!important}
+}
+</style></head><body><div id="v8DirectNav" style="position:fixed;z-index:99999;left:10px;top:10px;display:flex;gap:6px"><button onclick="location.href='index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">← Темы</button><button onclick="location.href='../index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">Предметы</button></div>
+<header class="top"><div class="brand">🌿 Биология · 5 класс</div><div class="score">Тема 2 · ⚽ <span id="hud">0</span>/8</div></header>
+<div class="goal" id="goal"><span>⚽ ГОЛ!</span></div><main class="page">
+
+<section class="screen active">
+<div class="card"><span class="tag">Новая загадка</span><h1>Признаки живых организмов</h1>
+<div class="coach"><b>Тренер:</b> Егор, в прошлой теме мы научились находить объекты живой природы. Но теперь задача сложнее: <b>как доказать, что организм действительно живой?</b></div>
+<p>Сегодня будем не заучивать список, а искать доказательства.</p><img class="visual lesson-art" src="../shared/assets-v7/e720c1d2aa9b12c56cc7.webp" alt="Новая загадка — признаки живого"></div>
+<div class="nav"><span></span><button onclick="next()">Начать исследование →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Исследование 1</span><h2>Что умеют живые организмы?</h2>
+<div class="grid">
+<div class="mini"><b>🍽 Питание</b><p>Получают вещества и энергию.</p></div><div class="mini"><b>🌬 Дыхание</b><p>Получают энергию в процессе жизнедеятельности.</p></div>
+<div class="mini"><b>🌱 Рост и развитие</b><p>Растут и изменяются в течение жизни.</p></div><div class="mini"><b>🐣 Размножение</b><p>Дают начало новым организмам своего вида.</p></div>
+<div class="mini"><b>🔄 Обмен веществ</b><p>В организме постоянно происходят превращения веществ.</p></div><div class="mini"><b>☀️ Реакция на среду</b><p>Реагируют на изменения окружающих условий.</p></div>
+</div><img class="visual lesson-art" src="../shared/assets-v7/f0c494009582c0c39b3f.webp" alt="Что умеет живое — основные признаки"><div class="coach">Егор, важен не один отдельный пример, а <b>совокупность признаков живого организма</b>.</div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Рост и развитие →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Исследование 2</span><h2>Питание и дыхание</h2>
+<img class="visual lesson-art" src="../shared/assets-v7/daf39acb1a1d4f951a1c.webp" alt="Питание и дыхание живых организмов">
+<div class="coach"><b>Тренер:</b> Егор, питание и дыхание — важные процессы жизнедеятельности. Рассмотри схему и найди, что получает организм и что происходит при дыхании.</div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Рост и развитие →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Исследование 3</span><h2>Рост и развитие</h2><p>Живой организм не просто становится больше — в течение жизни он развивается и изменяется.</p><img class="visual lesson-art" src="../shared/assets-v7/cec6a1cd80c14cc5669a.webp" alt="Стадии роста растения">
+<div class="coach"><b>Задание:</b> Егор, расставь стадии развития растения по порядку.</div>
+<div class="sequence" id="tokens"><div class="token" draggable="true" data-n="3">🌻 Взрослое растение</div><div class="token" draggable="true" data-n="1">🌰 Семя</div><div class="token" draggable="true" data-n="2">🌱 Проросток</div><div class="token" draggable="true" data-n="2.5">🌿 Молодое растение</div></div>
+<div class="coach"><b>Задание:</b> расположи стадии по порядку. На компьютере можно перетащить карточки мышкой или нажимать на них по очереди. На телефоне просто нажимай на карточки в правильном порядке.</div><div class="zone" id="seq">Перетащи сюда карточки в правильном порядке</div><div class="feedback" id="seqfb"></div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Размножение →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Исследование 4</span><h2>Размножение</h2><p>Живые организмы способны давать начало новым организмам своего вида.</p><img class="visual lesson-art" src="../shared/assets-v7/74675a74be4f8eac55d6.webp" alt="Размножение растений">
+<div class="coach">Посмотри на цикл: взрослое растение образует цветки и семена, а из семени при подходящих условиях развивается новое растение.</div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Реакция на среду →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Исследование 5</span><h2>Растение тоже реагирует</h2><img class="visual" src="../shared/assets-v7/517fe73124a3d6e8e2bb.webp">
+<div class="coach">Егор, растение не бегает и не ходит, но это не значит, что оно «ничего не чувствует». Изменение направления роста к источнику света — пример реакции на условия среды.</div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Смотреть видео →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Видео · 6:56</span><h2>Чем живое отличается от неживого?</h2>
+<div class="coach"><b>Егор, перед просмотром обрати внимание на три вопроса:</b></div>
+<div class="watch"><div>1. Какие признаки живого названы?</div><div>2. Почему растение считается живым, хотя оно не ходит и не бегает?</div><div>3. Какие признаки помогают отличить живой организм от неживого объекта?</div></div>
+<iframe src="https://rutube.ru/play/embed/aeacff4b0873ed3a71aaf3cc53958dd3" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Проверим понимание →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">После видео</span><h2>Быстрая проверка</h2>
+<div class="coach">Егор, выбери утверждение, которое лучше всего объясняет, почему растение — живой организм.</div>
+<div class="answers"><button class="answer" onclick="quick(this,false)">Оно зелёного цвета</button><button class="answer" onclick="quick(this,true)">Оно растёт, питается, дышит, развивается и реагирует на среду</button><button class="answer" onclick="quick(this,false)">Оно находится в почве</button><button class="answer" onclick="quick(this,false)">Оно освещается Солнцем</button></div><div class="feedback" id="qfb"></div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Главная миссия →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Главная миссия</span><h2>Какой признак проявляется?</h2>
+<p>Нажми на ситуацию, а затем на подходящий признак.</p>
+<div id="situations" class="sequence"></div><div id="traits" class="sequence" style="margin-top:14px"></div><div class="feedback" id="matchfb"></div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button onclick="next()">Мини-тест →</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Финальный матч</span><h2>Мини-тест · 7 вопросов</h2>
+<div class="coach"><b>Тренер:</b> Егор, проверим, насколько уверенно ты теперь узнаёшь признаки живых организмов. Учитывается только первый выбранный ответ.</div>
+<div id="inlineTestStart"><button class="testbtn" onclick="openMiniTest()">🧠 Начать мини-тест · 7 вопросов</button></div>
+<div id="inlineTest" class="quizbox hidden">
+<div class="qprogress" id="mtProgress">Вопрос 1 из 7</div>
+<div class="qtext" id="mtQuestion"></div>
+<div class="answergrid" id="mtAnswers"></div>
+<div class="feedback" id="mtFeedback">Выбери один ответ. Учитывается первый выбор.</div>
+<div class="testnav"><button id="mtNext" class="hidden">Следующий вопрос →</button></div>
+</div></div>
+<div class="nav"><button class="ghost" onclick="prev()">← Назад</button><button id="finishBtn" style="display:none" onclick="finish()">Завершить тему ✓</button></div></section>
+
+<section class="screen"><div class="card"><span class="tag">Миссия выполнена</span><h1>Отличная работа, Егор!</h1><div class="result" id="final"></div>
+<p>Теперь ты умеешь не просто назвать живой объект, а объяснить, <b>по каким признакам мы относим его к живым организмам</b>.</p>
+<div class="coach">Следующая тема: <b>«Ботаника — наука о растениях»</b>.</div></div>
+<div class="nav"><button class="ghost" onclick="go(0)">Пройти ещё раз</button><button onclick="location.href='index.html'">К темам биологии →</button></div></section>
+</main>
+<script>
+function saveBiologyResult(topic,goals,max){try{var K='liga-znaniy-biology-progress-v2',d=JSON.parse(localStorage.getItem(K)||'{}');d['topic'+topic]={goals:Number(goals)||0,max:Number(max)||0,completed:true,date:new Date().toISOString()};localStorage.setItem(K,JSON.stringify(d));}catch(e){}}
+
+function stopPageMedia(root){
+ root.querySelectorAll('video,audio').forEach(media=>media.pause());
+ root.querySelectorAll('iframe').forEach(frame=>{
+   try{if(frame.contentDocument)stopPageMedia(frame.contentDocument)}catch(e){}
+   const src=frame.getAttribute('src');
+   if(src && src!=='about:blank'){frame.dataset.pausedVideoSrc=src;frame.setAttribute('src','about:blank')}
+ });
+}
+function resumePageMedia(root){
+ root.querySelectorAll('iframe[data-paused-video-src]').forEach(frame=>{
+   frame.setAttribute('src',frame.dataset.pausedVideoSrc);
+   delete frame.dataset.pausedVideoSrc;
+ });
+}
+const screens=[...document.querySelectorAll('.screen')];let p=0;function show(){screens.forEach((s,i)=>{if(i!==p && s.classList.contains('active'))stopPageMedia(s);s.classList.toggle('active',i===p)});resumePageMedia(screens[p]);scrollTo(0,0);}function next(){p=Math.min(p+1,screens.length-1);show()}function prev(){p=Math.max(p-1,0);show()}function go(n){p=n;show()}
+let preTestGoal=0;function quick(b,ok){document.querySelectorAll('.screen.active .answer').forEach(x=>x.disabled=true);b.classList.add(ok?'good':'bad');document.getElementById('qfb').textContent=ok?'Верно! Один цвет или положение не доказывают жизнь — важна совокупность жизненных процессов.':'Посмотри шире: нужен признак, связанный именно с жизнедеятельностью организма.';if(ok){preTestGoal=1;document.getElementById('hud').textContent=preTestGoal;goal()}}
+function goal(){let g=document.getElementById('goal');g.classList.remove('show');void g.offsetWidth;g.classList.add('show');setTimeout(()=>g.classList.remove('show'),900)}
+let drag=null,order=[];let z=document.getElementById('seq');
+function addStage(t){if(!t||t.dataset.placed==='1')return;t.dataset.placed='1';z.appendChild(t);order.push(Number(t.dataset.n));t.draggable=false;t.style.touchAction='manipulation';let fb=document.getElementById('seqfb');if(order.length===4){let ok=order.join(',')==='1,2,2.5,3';fb.textContent=ok?'⚽ Отлично! От семени — к взрослому растению.':'Порядок пока нарушен. Сравни стадии с иллюстрацией выше.';if(ok)goal()}}
+document.querySelectorAll('.token[draggable]').forEach(t=>{t.style.touchAction='manipulation';t.addEventListener('dragstart',()=>drag=t);t.addEventListener('click',()=>addStage(t))});
+z.addEventListener('dragover',e=>e.preventDefault());z.addEventListener('drop',e=>{e.preventDefault();if(!drag)return;addStage(drag);drag=null})
+const pairs=[['Котёнок стал взрослой кошкой','Рост и развитие'],['Птица вывела птенцов','Размножение'],['Подсолнух повернулся к свету','Реакция на среду'],['Животное получает вещества с пищей','Питание']];
+let selected=null;const ss=document.getElementById('situations'),tt=document.getElementById('traits');pairs.forEach((x,i)=>{let b=document.createElement('button');b.className='token';b.textContent=x[0];b.onclick=()=>{selected=i;[...ss.children].forEach(y=>y.style.outline='');b.style.outline='4px solid #ffd35c'};ss.appendChild(b)});[...pairs.map(x=>x[1])].sort(()=>.5-Math.random()).forEach(name=>{let b=document.createElement('button');b.className='token';b.textContent=name;b.onclick=()=>{if(selected===null)return;let ok=pairs[selected][1]===name;document.getElementById('matchfb').textContent=ok?'⚽ Верно: '+pairs[selected][0]+' → '+name:'Попробуй ещё: какой жизненный процесс здесь проявляется?';if(ok){goal();ss.children[selected].disabled=true;b.disabled=true;selected=null}};tt.appendChild(b)})
+const Q=[
+['Какой признак показывает, что организм становится больше и изменяется в течение жизни?',['Питание','Рост и развитие','Размножение','Реакция на свет'],1,'Рост и развитие связаны с увеличением организма и его изменениями в течение жизни.'],
+['Что означает размножение?',['Получение пищи','Изменение положения','Появление новых организмов своего вида','Увеличение температуры тела'],2,'Размножение обеспечивает появление новых организмов своего вида.'],
+['Подсолнух поворачивается к свету. Какой признак живого проявляется?',['Реакция на изменения среды','Размножение','Питание','Рост неживого тела'],0,'Изменение направления роста к свету показывает реакцию растения на условия среды.'],
+['Почему растение можно считать живым, хотя оно не ходит?',['Потому что оно зелёное','Потому что оно находится в земле','Потому что живому обязательно нужно перемещаться','Потому что оно растёт, развивается, питается, дышит и реагирует на среду'],3,'Активное перемещение с места на место не является обязательным признаком живого организма.'],
+['Какой пример относится к питанию живого организма?',['Кролик ест траву','Камень нагревается на солнце','Облако движется по небу','Лёд тает'],0,'Получение пищи животным — пример питания живого организма.'],
+['Какой ряд правильно показывает развитие растения?',['Проросток → семя → взрослое растение','Семя → проросток → молодое растение → взрослое растение','Взрослое растение → семя → проросток → цветок','Семя → взрослое растение → проросток'],1,'Развитие начинается с семени, затем появляется проросток, молодое и взрослое растение.'],
+['Что лучше всего помогает отличить живой организм от неживого тела?',['Только цвет','Только размер','Совокупность признаков жизнедеятельности','Только способность менять положение'],2,'Живой организм определяют по совокупности характерных жизненных процессов.']
+];
+let mtIndex=0,mtScore=0,mtLocked=false;
+function openMiniTest(){mtIndex=0;mtScore=0;mtLocked=false;inlineTestStart.classList.add('hidden');inlineTest.classList.remove('hidden');renderMT()}
+function closeMiniTest(){inlineTest.classList.add('hidden');inlineTestStart.classList.remove('hidden')}
+function renderMT(){
+ let x=Q[mtIndex];mtLocked=false;
+ mtProgress.textContent='Вопрос '+(mtIndex+1)+' из 7';
+ mtQuestion.textContent=x[0];mtAnswers.innerHTML='';
+ mtFeedback.textContent='Выбери один ответ. Учитывается первый выбор.';
+ mtNext.classList.add('hidden');
+ x[1].forEach((a,i)=>{let b=document.createElement('button');b.className='answer';b.textContent=a;b.onclick=()=>answerMT(i,b);mtAnswers.appendChild(b)});
+}
+function footballFX(ok){
+ if(ok){let el=document.createElement('div');el.className='goal-pop-v38';el.textContent='⚽ ГОЛ!';document.body.appendChild(el);setTimeout(()=>el.remove(),900)}
+ else{let card=document.getElementById('inlineTest');if(card){card.classList.add('bad');setTimeout(()=>card.classList.remove('bad'),350)}}
+}
+function answerMT(i,b){
+ if(mtLocked)return;mtLocked=true;let x=Q[mtIndex],ok=i===x[2];
+ [...mtAnswers.children].forEach(y=>y.disabled=true);
+ if(ok){b.classList.add('correct');mtScore++;mtFeedback.textContent='⚽ Точно в цель, Егор! '+x[3]}
+ else{b.classList.add('wrong');[...mtAnswers.children][x[2]].classList.add('correct');mtFeedback.textContent='Мяч прошёл рядом со штангой! '+x[3]}
+ footballFX(ok);document.getElementById('hud').textContent=preTestGoal+mtScore;
+ mtNext.textContent=mtIndex===6?'Показать результат':'Следующий вопрос →';mtNext.classList.remove('hidden');
+ mtNext.onclick=nextMT;
+}
+function nextMT(){
+ if(mtIndex<6){mtIndex++;renderMT();return}
+ mtProgress.textContent='Матч завершён';mtQuestion.textContent='Егор, результат: ⚽ '+(preTestGoal+mtScore)+' / 8';mtAnswers.innerHTML='';
+ mtFeedback.textContent=mtScore===7?'🏆 Идеальный результат! Все 7 ответов верные.':mtScore>=5?'⭐ Отличная работа! Основные признаки живого понятны.':'💪 Хорошее начало. Можно повторить материал и попробовать ещё раз.';
+ mtNext.textContent='Завершить мини-тест';mtNext.classList.remove('hidden');mtNext.onclick=()=>{inlineTest.classList.add('hidden');inlineTestStart.classList.remove('hidden');inlineTestStart.innerHTML='<div class="result">Результат: ⚽ '+(preTestGoal+mtScore)+' / 8</div>';finishBtn.style.display='block'};
+}
+function finish(){const totalGoals=preTestGoal+mtScore;saveBiologyResult(2,totalGoals,8);location.href='index.html';return false}
+</script><script src="../shared/js/global-stars-v818.js"></script></body></html>

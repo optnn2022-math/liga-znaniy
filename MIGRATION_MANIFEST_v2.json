@@ -1,0 +1,14 @@
+{
+  "source": "MASTER v62 -> MODULAR v1",
+  "version": "MODULAR v2",
+  "strategy": "safe subject isolation before JS refactor",
+  "modules": {
+    "math": "math/index.html",
+    "history": "history/index.html",
+    "biology": "biology/*.html",
+    "russian": "russian/lesson-01.html",
+    "chinese": "chinese/*.html"
+  },
+  "progress": "Existing localStorage logic preserved unchanged in subject engines",
+  "warning": "math/history modules intentionally retain shared legacy engine in v2 for functional safety; deduplication is next stage."
+}

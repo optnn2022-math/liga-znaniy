@@ -1,0 +1,11 @@
+{
+  "base": "MASTER v62 via MODULAR v3",
+  "version": "MODULAR v4",
+  "math_page_bytes": 39583,
+  "history_page_bytes": 46774,
+  "legacy_placeholders": {
+    "math": 66,
+    "history": 82
+  },
+  "note": "Math/history detailed HTML physically separated. Legacy shared engine retained with hidden compatibility placeholders; v62 unchanged."
+}

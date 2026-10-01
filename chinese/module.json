@@ -1,0 +1,9 @@
+{
+  "subject": "chinese",
+  "title": "Китайский язык · с нуля",
+  "lessons": [
+    "lesson-01.html",
+    "lesson-02.html"
+  ],
+  "progressKey": "liga-znaniy-chinese-progress-v1"
+}

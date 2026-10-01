@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "subject": "math",
+  "topics": [
+    {
+      "id": "math-01",
+      "number": 1,
+      "title": "Натуральные числа и нуль",
+      "path": "lessons/01/",
+      "available": true,
+      "module": true
+    },
+    {
+      "id": "math-02",
+      "number": 2,
+      "title": "Многозначные числа и разряды",
+      "available": true,
+      "module": false
+    },
+    {
+      "id": "math-03",
+      "number": 3,
+      "title": "Натуральные числа на числовом луче",
+      "available": true,
+      "module": false
+    },
+    {
+      "id": "math-06",
+      "number": 6,
+      "title": "Делители и кратные",
+      "path": "lessons/06/",
+      "available": true,
+      "module": true
+    }
+  ]
+}

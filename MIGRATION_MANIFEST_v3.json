@@ -1,0 +1,22 @@
+{
+  "version": "MODULAR_v3",
+  "source": "MODULAR_v2 / MASTER_v62",
+  "changes": [
+    "Удалены тяжелые дубли math/index.html и history/index.html",
+    "Добавлен запуск предмета через ?subject=math/history",
+    "Сохранены исходные localStorage-ключи и общий движок без переписывания",
+    "Исходные lesson-файлы biology/russian/chinese не изменялись",
+    "Вынесено CSS-блоков: 7",
+    "Вынесено JS-блоков: 8",
+    "Порядок подключения CSS/JS сохранен",
+    "Вынесено Base64-ссылок изображений: 18",
+    "Уникальных файлов изображений: 14"
+  ],
+  "sizes": {
+    "index.html": "34555619",
+    "math/index.html": "579",
+    "history/index.html": "576",
+    "index_after_shared_extraction": "29192079",
+    "index_after_assets_extraction": "99583"
+  }
+}

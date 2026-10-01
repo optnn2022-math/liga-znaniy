@@ -1,0 +1,1 @@
+(()=>{window.LigaModule={id:'history',version:'v6.1'};document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-back-home]').forEach(b=>b.addEventListener('click',()=>location.href='../index.html'));});})();

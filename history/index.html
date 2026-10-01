@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html lang="ru"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>Лига знаний — MASTER v62 · единый файл</title><meta content="Видеоуроки, задания и тест по математике для 5 класса" name="description"/><link href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230a326c'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-size='40'%3E%E2%9A%BD%3C/text%3E%3C/svg%3E" rel="icon" type="image/svg+xml"/><link href="../shared/css/style-01.css" rel="stylesheet"/><link href="../shared/css/style-02.css" rel="stylesheet"/>
+<link href="../shared/css/style-03.css" rel="stylesheet"/>
+<link href="../shared/css/style-04.css" rel="stylesheet"/><link href="../shared/css/style-05.css" rel="stylesheet"/><link href="../shared/css/style-06.css" rel="stylesheet"/>
+<link href="../shared/css/style-07.css" rel="stylesheet"/>
+</head><body>
+<section class="screen" id="landing"><header class="top"><div class="brand">⚽ Лига знаний</div><div class="subject-tools"><button class="progress-launch" id="openProgress" type="button">📊 Прогресс</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span> очков</div></div></header><h1 class="hero-title">Выбери предмет</h1><p class="subtitle">Один блок — одна тема — новый уровень</p><div class="landing-grid"><div class="subject-col"><button class="subject active" data-subject="math" id="subjectMath"><span>🔢</span><span>Математика<small>План курса · 78 тем</small></span></button><button class="subject" data-subject="russian" id="subjectRussian"><span>✏️</span><span>Русский язык<small>План курса · 157 тем</small></span></button><button class="subject" data-subject="literature"><span>📚</span><span>Литература<small>Скоро</small></span></button><button class="subject" data-subject="biology" id="subjectBiology"><span>🌱</span><span>Биология<small>План курса · 95 тем</small></span></button></div><img alt="Футболист приглашает выбрать предмет" class="player" src="../shared/assets/264a94d03685f9de.webp"/><div class="subject-col"><button class="subject" data-subject="history" id="subjectHistory"><span>🏛️</span><span>История<small>План курса: 34 темы</small></span></button><button class="subject" data-subject="geography"><span>🌍</span><span>География<small>Скоро</small></span></button><button class="subject" data-subject="english"><span>🇬🇧</span><span>Английский<small>Скоро</small></span></button><button class="subject" data-subject="chinese" id="subjectChinese"><span>🏮</span><span>Китайский язык<small>План курса · 56 тем</small></span></button></div></div><div class="bottom-banner"><div><strong id="subjectCommentTitle">Егор, выбирай первый учебный матч!</strong><p id="subjectCommentLead">Тренер будет рядом на каждом шаге.</p><strong id="subjectCommentName">Математика · первые три темы</strong><p id="subjectCommentText">Видео, задачи и тест по темам 1–3</p></div><button class="cta" id="openSubject">Открыть блок →</button></div></section>
+<section class="screen hidden" id="progressScreen">
+<header class="top"><button class="textbtn" id="progressBack" type="button">← Главная</button><div class="brand">📊 Прогресс Егора</div><div class="score">⭐ <span data-points="">0</span></div></header>
+<div class="page progress-page"><main class="panel">
+<div class="progress-hero">
+<div><div class="small">Отчёт для родителя</div><h1 class="page-title">Прогресс Егора</h1><p class="muted">Результаты берутся из уже сохранённых данных ⚽ и ⭐ на этом устройстве.</p></div>
+<div class="progress-ring" id="parentProgressRing"><strong id="parentProgressPercent">0%</strong><span>курса</span></div>
+</div>
+<div class="course-bar"><div id="parentProgressBar"></div></div>
+<div class="progress-stats">
+<div class="stat-card"><span>⭐</span><strong id="parentStars">0</strong><small>накоплено</small></div>
+<div class="stat-card"><span>⚽</span><strong id="parentGoals">0</strong><small>забито голов</small></div>
+<div class="stat-card"><span>✅</span><strong id="parentLessons">0</strong><small>пройдено тем</small></div>
+<div class="stat-card"><span>📝</span><strong id="parentTests">0</strong><small>пройдено тестов</small></div>
+</div>
+<h2 class="progress-heading">По предметам</h2>
+<div class="subject-progress-list">
+<button class="subject-progress-row" data-progress-subject="math"><span>🔢 Математика</span><span id="parentMathSummary">0 тем · ⚽ 0 / 15</span></button>
+<div class="subject-progress-detail hidden" id="parentMathDetail"></div>
+<button class="subject-progress-row" data-progress-subject="history"><span>🏛️ История</span><span id="parentHistorySummary">0 тем · ⚽ 0 / 21</span></button>
+<div class="subject-progress-detail hidden" id="parentHistoryDetail"></div>
+<button class="subject-progress-row" data-progress-subject="russian"><span>✏️ Русский язык</span><span id="parentRussianSummary">0 тем · маршрут 157</span></button>
+<div class="subject-progress-detail hidden" id="parentRussianDetail"></div>
+<button class="subject-progress-row" data-progress-subject="biology"><span>🌿 Биология</span><span id="parentBiologySummary">0 тем · ⚽ 0 / 15</span></button><div class="subject-progress-detail hidden" id="parentBiologyDetail"></div>
+<button class="subject-progress-row" data-progress-subject="chinese"><span>🏮 Китайский язык</span><span id="parentChineseSummary">0 тем · ⚽ 0 / 8</span></button>
+<div class="subject-progress-detail hidden" id="parentChineseDetail"></div>
+<div class="subject-progress-row static"><span>🌍 География</span><span>0 тем · —</span></div>
+</div>
+<div class="parent-grid">
+<section class="parent-box"><h2>🕒 Последняя активность</h2><div class="parent-message" id="parentLastActivity">Пока нет сохранённых прохождений.</div></section>
+<section class="parent-box attention"><h2>🎯 Стоит повторить</h2><div class="parent-message" id="parentAttention">Пока недостаточно данных.</div></section>
+</div>
+<p class="small parent-note">Важно: сайт фиксирует результаты математики, истории, доступных тем биологии и первого урока китайского языка. Для китайского сохраняются восемь учебных голов за верные ответы, завершение занятия и заработанные звёзды; факт просмотра внешнего видео до конца технически не проверяется.</p>
+</main></div></section>
+<section class="screen hidden" id="history"><header class="top"><button class="textbtn" id="historyBack" onclick="location.href='../index.html'">← Предметы</button><div class="brand">История · 5 класс</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header><div class="page topics-layout">
+<main class="panel"><div style="display:flex;align-items:flex-end;gap:18px;justify-content:space-between">
+<div style="flex:1"><h1 class="page-title">Путешествие по Древнему миру</h1><p class="list-head">34 темы · 5 разделов · тематические и итоговый тесты</p><div class="coach"><strong>Тренер Чисел</strong><br/>Егор, маршрут по истории готов! Каждая тема работает как матч: видео → вопросы → мини-тест из 7 заданий → результат в голах.</div></div>
+<img alt="Футболист блока истории" src="../shared/assets/892822e04cc396ea.webp" style="width:min(29vw,240px);height:auto;max-height:300px;object-fit:contain;flex:0 0 auto;filter:drop-shadow(0 14px 18px rgba(110,45,25,.20))"/>
+</div>
+<div class="topic-scroll" id="historyList" style="margin-top:17px"></div><p aria-live="polite" class="small" id="historyStatus" role="status">Темы №1 и №2 доступны. Результат отображается голами так же, как в математике.</p></main><aside class="history-control-sidebar"><div class="history-control-launch panel"><img alt="Футболист исследователь для контрольных работ по истории" src="../shared/assets/f52e65923b25b722.webp"/><h2>Контрольные работы</h2><p>Проверь, как хорошо ты знаешь историю Древнего мира.</p><button class="cta" id="openHistoryControlWorks" type="button">Открыть раздел →</button></div></aside></div></section>
+<section class="screen hidden" id="historyControlWorks">
+<header class="top"><button class="textbtn" id="historyControlWorksBack" type="button">← История</button><div class="brand">🏛️ Контрольные работы · История, 5 класс</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score">⭐ <span data-points="">0</span> очков</div></div></header>
+<div class="page"><main class="panel"><h1 class="page-title">Контрольные работы по истории</h1><p class="list-head">Проверяем знания после изучения разделов курса</p>
+<div class="coach"><strong>Тренер Чисел</strong><br/>Вспомни важные события, найди связи между ними и объясни свой ответ. Здесь появятся контрольные работы по пройденным разделам.</div>
+<div class="history-card"><h2>Контрольная работа № 1 · Первобытный мир</h2><p>Задания готовятся.</p><span class="small">🔒 Пока недоступна</span></div>
+</main></div></section>
+<section class="screen hidden" id="historyBlockQuiz">
+<header class="top"><button class="textbtn" id="historyBlockQuizBack" type="button">← История</button><div class="brand">🏛️ История · Тест по темам 1–3</div><div class="points">⭐ <span data-points="">0</span></div></header>
+<div class="page history-lesson"><main class="panel quiz-panel">
+<div class="small" id="historyBlockQuizStep">Вопрос 1 из 16</div>
+<h1 class="page-title" id="historyBlockQuizQuestion">Тест по первым трём темам</h1>
+<div class="coach">⚽ Егор, проверим, что ты запомнил по первым трём темам. Засчитывается только первый выбранный ответ.</div>
+<div class="answers" id="historyBlockQuizAnswers"></div>
+<div class="feedback hidden" id="historyBlockQuizFeedback"></div>
+<div class="controls"><button class="cta hidden" id="historyBlockQuizNext" type="button">Следующий вопрос →</button></div>
+<div class="small" id="historyBlockQuizScore">⚽ 0 / 16</div>
+<div class="small" id="historyBlockQuizBest">Лучший результат: ⚽ 0 / 16</div>
+</main></div></section>
+<section class="screen hidden" id="historyLesson"><header class="top"><button class="textbtn" id="historyLessonBack">← История</button><div class="brand">🏛️ История · 5 класс</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header><div class="page history-lesson"><main class="panel"><div class="small">Тема 1 · Введение в историю</div><h1 class="page-title">Что изучает история?</h1><div class="coach"><strong>Тренер Чисел</strong><br/>Егор, начинаем с видео. Сначала прочитай три вопроса — именно на них обрати внимание во время просмотра.</div>
+<div class="history-card"><span class="history-badge">1 · Смотрим</span><h2>Видеоурок «Что такое история?»</h2><div class="coach"><strong>На что обратить внимание:</strong><ul class="watch-list"><li>Что изучает история?</li><li>Какие источники помогают узнавать о прошлом?</li><li>Кто такой археолог и чем он занимается?</li></ul></div><div class="video" id="historyVideo"><iframe allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" src="https://rutube.ru/play/embed/7368695a86a957ccd5e5fe2d67b54703/" title="Что такое история? Урок 1. История 5 класс"></iframe></div><a class="video-link" href="https://rutube.ru/video/7368695a86a957ccd5e5fe2d67b54703/" rel="noopener noreferrer" target="_blank">Открыть видео отдельно ↗</a></div>
+<div class="history-card"><span class="history-badge">2 · Обсуждаем</span><h2>Контрольные вопросы по видео</h2><p class="muted">Ответь на вопросы после просмотра. Если ошибёшься, можно попробовать ещё раз.</p>
+<div class="history-mini" data-hq="definition"><p><strong>1. Что изучает история?</strong></p><button class="history-choice" data-correct="0">Только даты войн</button><button class="history-choice" data-correct="1">Прошлое человечества</button><button class="history-choice" data-correct="0">Только жизнь правителей</button><div class="feedback hidden" data-hfeedback=""></div></div>
+<div class="history-mini" data-hq="sources" style="margin-top:18px"><p><strong>2. Что помогает учёным узнавать о прошлом?</strong></p><button class="history-choice" data-correct="1">Письменные и вещественные источники</button><button class="history-choice" data-correct="0">Только современные фотографии</button><button class="history-choice" data-correct="0">Только рассказы писателей</button><div class="feedback hidden" data-hfeedback=""></div></div>
+<div class="history-mini" data-hq="archaeology" style="margin-top:18px"><p><strong>3. Чем занимается археолог?</strong></p><button class="history-choice" data-correct="0">Предсказывает будущие события</button><button class="history-choice" data-correct="1">Изучает прошлое по вещественным находкам</button><button class="history-choice" data-correct="0">Составляет прогноз погоды</button><div class="feedback hidden" data-hfeedback=""></div></div></div>
+<div class="controls" style="margin-top:22px"><button class="cta" id="historyStartQuiz">⚽ Мини-тест →</button></div><p class="small" style="text-align:center">7 вопросов · каждый верный ответ — ГОЛ!</p>
+</main></div></section>
+<section class="screen hidden" id="historyLesson2"><header class="top"><button class="textbtn" id="historyLesson2Back">← История</button><div class="brand">🏛️ История · 5 класс</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header><div class="page history-lesson"><main class="panel">
+<div class="small">Тема 2 · Введение в историю</div><h1 class="page-title">Исторические источники</h1>
+<div class="coach"><strong>Тренер Чисел</strong><br/>Егор, сегодня мы станем исследователями прошлого. Сначала прочитай опорные вопросы — на них обрати внимание во время просмотра.</div>
+<div class="history-card"><span class="history-badge">1 · Смотрим</span><h2>Видеоурок «История и её помощницы»</h2>
+<div class="coach"><strong>На что обратить внимание:</strong><ul class="watch-list">
+<li>Что называют историческим источником?</li>
+<li>Какие бывают исторические источники?</li>
+<li>Почему археологические находки особенно важны для изучения дописьменного прошлого?</li>
+</ul></div>
+<div class="video"><iframe allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" src="https://rutube.ru/play/embed/c2e745b9d478a65e88770e23230c8a92/" title="История 5 класс. История и её помощницы"></iframe></div>
+<a class="video-link" href="https://rutube.ru/video/c2e745b9d478a65e88770e23230c8a92/" rel="noopener noreferrer" target="_blank">Открыть видео отдельно ↗</a>
+<p class="small" style="margin-top:14px"><strong>📘 Учебник Вигасина, Годера, Свенцицкой:</strong> введение «Откуда мы знаем, как жили наши предки», стр. 8. Это вводный текст перед §1, отдельного номера параграфа у него нет.</p></div>
+<div class="history-card"><span class="history-badge">2 · Обсуждаем</span><h2>Контрольные вопросы по видео</h2><p class="muted">Ответь после просмотра. Эти вопросы помогают проверить, что главное ты заметил.</p>
+<div class="history-mini" data-hq2="source-definition"><p><strong>1. Что называют историческим источником?</strong></p>
+<button class="history-choice" data-correct="0">Любую старую вещь независимо от её связи с людьми</button>
+<button class="history-choice" data-correct="1">Памятник прошлого, который помогает узнать об истории человеческого общества</button>
+<button class="history-choice" data-correct="0">Только книгу по истории</button><div class="feedback hidden" data-hfeedback2=""></div></div>
+<div class="history-mini" data-hq2="source-types" style="margin-top:18px"><p><strong>2. Какие источники могут рассказывать о прошлом?</strong></p>
+<button class="history-choice" data-correct="1">Письменные, вещественные и устные</button>
+<button class="history-choice" data-correct="0">Только письменные</button>
+<button class="history-choice" data-correct="0">Только найденные в земле предметы</button><div class="feedback hidden" data-hfeedback2=""></div></div>
+<div class="history-mini" data-hq2="archaeology-value" style="margin-top:18px"><p><strong>3. Почему археологические находки особенно важны для древнейших времён?</strong></p>
+<button class="history-choice" data-correct="0">Потому что все древние люди писали книги</button>
+<button class="history-choice" data-correct="0">Потому что археологи изучают только монеты</button>
+<button class="history-choice" data-correct="1">Потому что многие древнейшие общества ещё не имели письменности</button><div class="feedback hidden" data-hfeedback2=""></div></div></div>
+<div class="controls" style="margin-top:22px"><button class="cta" id="historyStartQuiz2">⚽ Мини-тест →</button></div>
+<p class="small" style="text-align:center">7 вопросов · в счёт идёт только первый выбранный ответ</p>
+</main></div></section>
+<section class="screen hidden" id="historyQuiz2"><header class="top"><button class="textbtn" id="historyQuiz2Back">← К видео</button><div class="brand">🏛️ История · Мини-тест</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header><div class="page"><main class="panel quiz-panel">
+<div class="small" id="historyQuiz2Step">Вопрос 1 / 7</div><h1 class="page-title">Исторические источники</h1>
+<div class="coach"><strong>Тренер рядом</strong><br/>Егор, выбирай внимательно: гол засчитывается только за первый выбранный ответ.</div>
+<h2 id="historyQuiz2Question" style="margin-top:24px"></h2><div class="answers" id="historyQuiz2Answers"></div>
+<div aria-live="polite" class="feedback hidden" id="historyQuiz2Feedback"></div>
+<div class="controls"><button class="cta hidden" id="historyQuiz2Next">Следующий ход →</button></div>
+<p class="small" id="historyQuiz2Score">⚽ 0 / 7</p><p class="small" id="historyQuiz2Best"></p>
+</main></div></section>
+<section class="screen hidden" id="historyLesson3"><header class="top"><button class="textbtn" id="historyLesson3Back">← История</button><div class="brand">🏛️ История · 5 класс</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header>
+<div class="page history-lesson"><main class="panel">
+<div class="small">Тема 3 · Первобытность</div><h1 class="page-title">Древнейшие люди</h1>
+<div class="egor-hero-row"><div class="egor-speech"><div class="egor-name">⚽ Егор, начинаем!</div><div class="egor-text">Сегодня мы отправляемся в далёкое прошлое и узнаем, <strong>как жили древнейшие люди</strong>. Сначала прочитай три вопроса ниже — во время видео постарайся найти на них ответы.</div><div class="egor-tip">🎯 Твоя задача: смотри внимательно — после видео тебя ждут вопросы и мини-тест.</div></div>
+<img alt="Главный герой темы 3" src="../shared/assets/353bc091546a0763.webp" style="width:min(28vw,240px);max-height:310px;object-fit:contain;flex:0 0 auto;align-self:flex-end;filter:drop-shadow(0 14px 18px rgba(70,35,10,.22))"/></div>
+<div class="history-card"><span class="history-badge">1 · Смотрим</span><h2>Видеоурок «Древнейшие люди»</h2>
+<div class="coach"><strong>На что обратить внимание:</strong><ul class="watch-list"><li>Где появились древнейшие люди и как они выглядели?</li><li>Какие простейшие орудия труда они изготавливали?</li><li>Как они добывали пищу и какое значение имел огонь?</li></ul></div>
+<div class="video"><iframe allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="" src="https://rutube.ru/play/embed/f2941dd2d7310bb35f35b57eac6db988/" title="Древнейшие люди. История 5 класс"></iframe></div>
+<a class="video-link" href="https://rutube.ru/video/f2941dd2d7310bb35f35b57eac6db988/" rel="noopener noreferrer" target="_blank">Открыть видео отдельно ↗</a></div>
+<div class="history-card"><span class="history-badge">2 · Обсуждаем</span><h2>Контрольные вопросы по видео</h2><p class="muted">Ответь после просмотра. Если ошибёшься, можно попробовать ещё раз.</p>
+<div class="history-mini" data-hq3="africa"><p><strong>1. Где, по мнению учёных, появились древнейшие люди?</strong></p><button class="history-choice" data-correct="1">В Африке</button><button class="history-choice" data-correct="0">В Америке</button><button class="history-choice" data-correct="0">В Австралии</button><div class="feedback hidden" data-hfeedback3=""></div></div>
+<div class="history-mini" data-hq3="tools" style="margin-top:18px"><p><strong>2. Из чего древнейшие люди делали простейшие орудия?</strong></p><button class="history-choice" data-correct="0">Из пластика</button><button class="history-choice" data-correct="1">Из камня</button><button class="history-choice" data-correct="0">Из стекла</button><div class="feedback hidden" data-hfeedback3=""></div></div>
+<div class="history-mini" data-hq3="fire" style="margin-top:18px"><p><strong>3. Почему овладение огнём было важным?</strong></p><button class="history-choice" data-correct="0">Огонь был нужен только для света</button><button class="history-choice" data-correct="0">Огонь использовали для письма</button><button class="history-choice" data-correct="1">Он давал тепло, защиту и помогал готовить пищу</button><div class="feedback hidden" data-hfeedback3=""></div></div></div>
+<div class="controls" style="margin-top:22px"><button class="cta" id="historyStartQuiz3">⚽ Мини-тест →</button></div><p class="small" style="text-align:center">7 вопросов · в счёт идёт только первый выбранный ответ</p>
+</main></div></section>
+<section class="screen hidden" id="historyQuiz3"><header class="top"><button class="textbtn" id="historyQuiz3Back">← К видео</button><div class="brand">🏛️ История · Мини-тест</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header>
+<div class="page"><main class="panel quiz-panel"><div class="small" id="historyQuiz3Step">Вопрос 1 / 7</div><h1 class="page-title">Древнейшие люди</h1>
+<div class="coach"><strong>Тренер рядом</strong><br/>Егор, выбирай внимательно: гол засчитывается только за первый выбранный ответ.</div>
+<h2 id="historyQuiz3Question" style="margin-top:24px"></h2><div class="answers" id="historyQuiz3Answers"></div>
+<div aria-live="polite" class="feedback hidden" id="historyQuiz3Feedback"></div>
+<div class="controls"><button class="cta hidden" id="historyQuiz3Next">Следующий ход →</button></div>
+<p class="small" id="historyQuiz3Score">⚽ 0 / 7</p><p class="small" id="historyQuiz3Best"></p></main></div></section>
+<section class="screen hidden" id="historyQuiz"><header class="top"><button class="textbtn" id="historyQuizBack">← К видео</button><div class="brand">🏛️ История · Мини-тест</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="history">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header><div class="page"><main class="panel quiz-panel"><div class="small" id="historyQuizStep">Вопрос 1 / 7</div><h1 class="page-title">Что изучает история?</h1><div class="coach"><strong>Тренер рядом</strong><br/>Егор, играем как на математике: выбирай ответ. За верный ответ — ⚽ ГОЛ!</div><h2 id="historyQuizQuestion" style="margin-top:24px"></h2><div class="answers" id="historyQuizAnswers"></div><div aria-live="polite" class="feedback hidden" id="historyQuizFeedback"></div><div class="controls"><button class="cta hidden" id="historyQuizNext">Следующий ход →</button></div><p class="small" id="historyQuizScore">⚽ 0 / 7</p><p class="small" id="historyQuizBest"></p></main></div></section>
+<aside aria-label="Предметный чат" class="chat-drawer hidden" id="chatDrawer"><div class="chat-head"><strong id="chatTitle">Репетитор</strong><button aria-label="Закрыть чат" class="chat-close" id="chatClose">×</button></div><div class="chat-context" id="chatContext"></div><div class="chat-messages" id="chatMessages"></div><div class="chat-compose"><input id="chatInput" maxlength="500" placeholder="Напиши вопрос или заметку…" type="text"/><button class="cta" id="chatSend">Отправить</button></div><div class="chat-note">История диалога хранится отдельно для каждого предмета на этом устройстве. Подключение настоящего ИИ предусмотрено следующим этапом; сейчас сообщения сохраняются как контекст и не получают выдуманных автоматических ответов.</div></aside><div aria-hidden="true" class="goal-pop hidden" id="goalEffect">⚽ ГОЛ!</div>
+<section aria-labelledby="chineseDictionaryTitle" aria-modal="true" class="cn-overlay" id="chineseDictionaryOverlay" role="dialog">
+<header class="cn-overlay-top"><button class="cn-overlay-back" data-cn-close="chineseDictionaryOverlay" type="button">← К темам</button><div class="cn-overlay-title">📖 Словарь курса</div><div class="cn-overlay-tag">звук · пиньинь · перевод</div></header>
+<div class="cn-overlay-content">
+<section class="cn-intro"><div><h2 id="chineseDictionaryTitle">Мои китайские слова</h2><p>Ищи слово по иероглифам, пиньиню или русскому переводу. Нажми на динамик, послушай и повтори вслух.</p><span class="cn-intro-note">Русская запись — только подсказка для старта</span></div><img alt="Футболист показывает четыре карточки китайского слова" class="cn-intro-hero" data-cn-asset="cards" src="../shared/assets/3b7b8a4b411ddf8d.gif"/></section>
+<div class="cn-dictionary-controls">
+<label class="cn-search-wrap"><span aria-hidden="true">⌕</span><span class="cn-sr-only">Найти слово</span><input autocomplete="off" id="chineseWordSearch" placeholder="Найти: 你好, nǐ hǎo или «привет»" type="search"/></label>
+<div aria-label="Фильтр слов" class="cn-filter-row" role="group"><button class="cn-filter-button active" data-cn-filter="all" type="button">Все слова</button><button class="cn-filter-button" data-cn-filter="learned" type="button">Изученные</button><button class="cn-filter-button" data-cn-filter="lesson1" type="button">Урок 1</button><button class="cn-filter-button" data-cn-filter="lesson2" type="button">Урок 2</button><button class="cn-filter-button" data-cn-filter="future" type="button">Дальше</button></div>
+<div aria-live="polite" class="cn-word-count" id="chineseWordCount">Показано слов: 8</div>
+</div>
+<div class="cn-dictionary-grid" id="chineseDictionaryGrid">
+<article class="cn-word-card" data-cn-groups="learned lesson1" data-cn-search="你好 ni hao nǐ hǎo ни хао привет"><div><span class="cn-word-lesson">Урок 1 · изучено</span><div class="cn-hanzi" lang="zh-CN">你好</div><div class="cn-pinyin">nǐ hǎo</div><div class="cn-meaning">Привет!</div><div class="cn-pronunciation">Русская подсказка: «ни хао»</div></div><button aria-label="Послушать 你好" class="cn-speak-button" data-cn-speak="你好" type="button">🔊</button></article>
+<article class="cn-word-card" data-cn-groups="learned lesson2" data-cn-search="你 ni nǐ ни ты"><div><span class="cn-word-lesson">Урок 2 · изучено</span><div class="cn-hanzi" lang="zh-CN">你</div><div class="cn-pinyin">nǐ</div><div class="cn-meaning">Ты</div><div class="cn-pronunciation">Русская подсказка: «ни»</div></div><button aria-label="Послушать 你" class="cn-speak-button" data-cn-speak="你" type="button">🔊</button></article>
+<article class="cn-word-card" data-cn-groups="learned lesson2" data-cn-search="好 hao hǎo хао хороший хорошо"><div><span class="cn-word-lesson">Урок 2 · изучено</span><div class="cn-hanzi" lang="zh-CN">好</div><div class="cn-pinyin">hǎo</div><div class="cn-meaning">Хороший · хорошо</div><div class="cn-pronunciation">Русская подсказка: «хао»</div></div><button aria-label="Послушать 好" class="cn-speak-button" data-cn-speak="好" type="button">🔊</button></article>
+<article class="cn-word-card future" data-cn-groups="future" data-cn-search="您好 nin hao nín hǎo нин хао здравствуйте"><div><span class="cn-word-lesson">Следующие темы</span><div class="cn-hanzi" lang="zh-CN">您好</div><div class="cn-pinyin">nín hǎo</div><div class="cn-meaning">Здравствуйте</div><div class="cn-pronunciation">Русская подсказка: «нин хао»</div></div><button aria-label="Послушать 您好" class="cn-speak-button" data-cn-speak="您好" type="button">🔊</button></article>
+<article class="cn-word-card future" data-cn-groups="future" data-cn-search="我 wo wǒ во я"><div><span class="cn-word-lesson">Следующие темы</span><div class="cn-hanzi" lang="zh-CN">我</div><div class="cn-pinyin">wǒ</div><div class="cn-meaning">Я</div><div class="cn-pronunciation">Русская подсказка: «во»</div></div><button aria-label="Послушать 我" class="cn-speak-button" data-cn-speak="我" type="button">🔊</button></article>
+<article class="cn-word-card future" data-cn-groups="future" data-cn-search="是 shi shì шы быть являться"><div><span class="cn-word-lesson">Следующие темы</span><div class="cn-hanzi" lang="zh-CN">是</div><div class="cn-pinyin">shì</div><div class="cn-meaning">Быть · являться</div><div class="cn-pronunciation">Русская подсказка: «шы»</div></div><button aria-label="Послушать 是" class="cn-speak-button" data-cn-speak="是" type="button">🔊</button></article>
+<article class="cn-word-card future" data-cn-groups="future" data-cn-search="再见 zai jian zàijiàn цзай цзянь до свидания пока"><div><span class="cn-word-lesson">Следующие темы</span><div class="cn-hanzi" lang="zh-CN">再见</div><div class="cn-pinyin">zàijiàn</div><div class="cn-meaning">До свидания!</div><div class="cn-pronunciation">Русская подсказка: «цзай цзянь»</div></div><button aria-label="Послушать 再见" class="cn-speak-button" data-cn-speak="再见" type="button">🔊</button></article>
+<article class="cn-word-card future" data-cn-groups="future" data-cn-search="谢谢 xie xie xièxie се спасибо"><div><span class="cn-word-lesson">Следующие темы</span><div class="cn-hanzi" lang="zh-CN">谢谢</div><div class="cn-pinyin">xièxie</div><div class="cn-meaning">Спасибо!</div><div class="cn-pronunciation">Русская подсказка: «се-се»</div></div><button aria-label="Послушать 谢谢" class="cn-speak-button" data-cn-speak="谢谢" type="button">🔊</button></article>
+</div>
+<div class="cn-empty-state" id="chineseEmptyWords">Такого слова пока нет. Попробуй другой запрос.</div>
+</div>
+</section>
+<section aria-labelledby="chineseReviewTitle" aria-modal="true" class="cn-overlay" id="chineseReviewOverlay" role="dialog">
+<header class="cn-overlay-top"><button class="cn-overlay-back" data-cn-close="chineseReviewOverlay" type="button">← К темам</button><div class="cn-overlay-title">⚽ Повторяем слова</div><div class="cn-overlay-tag">дополнительные игры</div></header>
+<div class="cn-overlay-content">
+<section class="cn-intro review"><div><h2 id="chineseReviewTitle">Тренировочный центр</h2><p>Здесь собраны игры на слова из разных тем. Они помогают повторять материал, но не заменяют уроки и не влияют на 16 учебных голов.</p><span class="cn-intro-note">Можно возвращаться в любое время</span></div><img alt="Главный герой приглашает повторить китайские слова" class="cn-intro-hero" data-cn-asset="main" src="../shared/assets/3b7b8a4b411ddf8d.gif"/></section>
+<div class="cn-activity-grid">
+<article class="cn-activity-card featured"><div class="cn-activity-icon">🏮</div><h3>Первые 30 слов</h3><p>Большая игра Wordwall для общего повторения слов из разных тем курса.</p><div class="cn-activity-meta"><span>Wordwall</span><span>30 слов</span><span>Игра 1</span></div><button class="cn-activity-button cn-launch-game" data-embed="https://wordwall.net/ru/embed/ccd1d0049653414ea3c27240582e11ac?themeId=61&amp;templateId=76&amp;fontStackId=0" data-external="https://wordwall.net/ru/resource/120045046?wwmethod=link" data-status="chineseGame1Status" data-tag="Игра 1" data-title="Первые 30 слов" type="button">Начать тренировку →</button><div class="cn-opened-status" hidden="" id="chineseGame1Status">✓ Тренировка уже открывалась</div></article>
+<article class="cn-activity-card second"><div class="cn-activity-icon">⚽</div><h3>Цвета</h3><p>Игровая тренировка Wordwall для закрепления названий цветов на китайском языке.</p><div class="cn-activity-meta"><span>Wordwall</span><span>Названия цветов</span><span>Цвета</span></div><button class="cn-activity-button cn-launch-game" data-embed="https://wordwall.net/ru/embed/058457cea9ed40578b4082ee92aea41b?themeId=65&amp;templateId=76&amp;fontStackId=0" data-external="https://wordwall.net/ru/embed/058457cea9ed40578b4082ee92aea41b?themeId=65&amp;templateId=76&amp;fontStackId=0" data-status="chineseGame2Status" data-tag="Цвета" data-title="Цвета" type="button">Начать тренировку →</button><div class="cn-opened-status" hidden="" id="chineseGame2Status">✓ Тренировка уже открывалась</div></article>
+<article class="cn-activity-card numbers"><div class="cn-activity-icon">🔟</div><h3>Счёт до 10</h3><p>Игровая тренировка Wordwall: узнаём и повторяем китайские числа от 1 до 10.</p><div class="cn-activity-meta"><span>Wordwall</span><span>Числа 1–10</span><span>Счёт до 10</span></div><button class="cn-activity-button cn-launch-game" data-embed="https://wordwall.net/ru/embed/cc1dadda321a4b4fb41e9e587ee1034b?themeId=65&amp;templateId=76&amp;fontStackId=0" data-external="https://wordwall.net/ru/embed/cc1dadda321a4b4fb41e9e587ee1034b?themeId=65&amp;templateId=76&amp;fontStackId=0" data-status="chineseGame3Status" data-tag="Числа 1–10" data-title="Счёт до 10" type="button">Начать тренировку →</button><div class="cn-opened-status" hidden="" id="chineseGame3Status">✓ Тренировка уже открывалась</div></article>
+<article class="cn-activity-card soon"><div class="cn-activity-icon">🔊</div><h3>Слушаем и выбираем</h3><p>Услышь китайское слово и найди его значение.</p><span class="cn-soon-label">Скоро</span></article>
+<article class="cn-activity-card soon"><div class="cn-activity-icon">🀄</div><h3>Иероглиф ↔ перевод</h3><p>Соедини китайскую запись с правильным русским значением.</p><span class="cn-soon-label">Скоро</span></article>
+</div>
+</div>
+</section>
+<section aria-labelledby="chineseGameTitle" aria-modal="true" class="cn-overlay cn-game-overlay" id="chineseGameOverlay" role="dialog">
+<header class="cn-overlay-top"><button class="cn-overlay-back" id="backToChineseReview" type="button">← К тренировкам</button><div class="cn-overlay-title">Wordwall · общее повторение</div><div class="cn-overlay-tag" id="chineseGameTag">Игра</div></header>
+<div class="cn-game-stage">
+<div class="cn-game-head"><h2 id="chineseGameTitle">🏮 Повторяем слова</h2><a class="cn-external-link" href="#" id="chineseGameExternalTop" rel="noopener noreferrer" target="_blank">Открыть отдельно ↗</a></div>
+<div class="cn-game-frame-wrap"><iframe allow="autoplay; fullscreen" allowfullscreen="" class="cn-game-frame" id="chineseWordwallFrame" loading="lazy" src="about:blank" title="Игра Wordwall для повторения китайских слов"></iframe></div>
+<div class="cn-frame-fallback"><p><strong>Если игра не появилась:</strong> нажми «Открыть отдельно» — Wordwall откроется в новой вкладке.</p><a class="cn-external-link" href="#" id="chineseGameExternalBottom" rel="noopener noreferrer" target="_blank">Открыть отдельно ↗</a></div>
+</div>
+</section>
+<script src="../shared/js/progress.js"></script>
+<script src="../shared/js/script-01.js"></script>
+<script src="../shared/js/script-02.js"></script>
+<script src="../shared/js/script-03.js"></script>
+<script src="../shared/js/script-04.js"></script><script src="../shared/js/script-05.js"></script>
+<script id="chineseToolsScript" src="../shared/js/script-06.js"></script>
+
+
+<script>window.addEventListener('load',function(){setTimeout(function(){var ids=['backSubjects','historyBack'];ids.forEach(function(id){var b=document.getElementById(id);if(b)b.addEventListener('click',function(e){e.stopImmediatePropagation();location.href='../index.html'},true)})},250)});</script><script>window.addEventListener("load",function(){setTimeout(function(){try{renderHistory();show('history');syncGlobalStars();}catch(e){console.error(e)}},100)});</script><script src="app.js"></script><script id="historyModuleBoot">
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('body > section.screen').forEach(function(x){x.classList.add('hidden');x.style.display='';});
+  var t=document.getElementById('history');
+  if(t){t.classList.remove('hidden');}
+  try{renderHistory();syncGlobalStars();}catch(e){console.error('History module init:',e);}
+  var b=document.getElementById('backSubjects');
+  if(b){b.onclick=function(e){e.preventDefault();location.href='../index.html';};}
+});
+</script><script id="historyInteractionFix">
+window.addEventListener('load', function(){
+  setTimeout(function(){
+    try { if (typeof setupHistoryLesson==='function') setupHistoryLesson(); } catch(e){ console.error('history lesson1 setup',e); }
+    try { if (typeof setupHistoryLesson2==='function') setupHistoryLesson2(); } catch(e){ console.error('history lesson2 setup',e); }
+    try { if (typeof setupHistoryLesson3==='function') setupHistoryLesson3(); } catch(e){ console.error('history lesson3 setup',e); }
+    try {
+      var b1=document.getElementById('historyLessonBack'); if(b1)b1.onclick=function(){renderHistory();show('history');};
+      var b2=document.getElementById('historyLesson2Back'); if(b2)b2.onclick=function(){renderHistory();show('history');};
+      var b3=document.getElementById('historyLesson3Back'); if(b3)b3.onclick=function(){renderHistory();show('history');};
+      var q1=document.getElementById('historyQuizBack'); if(q1)q1.onclick=function(){show('historyLesson');};
+      var q2=document.getElementById('historyQuiz2Back'); if(q2)q2.onclick=function(){show('historyLesson2');};
+      var q3=document.getElementById('historyQuiz3Back'); if(q3)q3.onclick=function(){show('historyLesson3');};
+    } catch(e){ console.error('history nav fix',e); }
+  },300);
+});
+</script><script src="../shared/js/global-stars-v818.js"></script></body></html>
