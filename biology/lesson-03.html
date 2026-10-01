@@ -42,7 +42,7 @@
 <section class="screen"><div class="card"><h2>🎬 Смотрим как исследователь</h2><div class="mission"><b>Во время просмотра обрати внимание:</b><br/>Какие методы используют биологи?<br/>Чем наблюдение отличается от эксперимента?<br/>Для чего исследователю нужны измерения?</div><iframe allow="clipboard-write; autoplay" allowfullscreen="" class="video" src="https://rutube.ru/play/embed/5813a7a1a3ec45102369dad04ab9902b"></iframe><div class="q"><b>После видео: что отличает эксперимент от простого наблюдения?</b><button onclick="videoAns(false,this)">Исследователь только записывает то, что происходит</button><button onclick="videoAns(true,this)">Исследователь специально изменяет условие и проверяет результат</button><button onclick="videoAns(false,this)">Эксперимент всегда проводится с микроскопом</button></div><div class="feedback" id="fv"></div></div><div class="nav"><button class="btn ghost" onclick="prev()" type="button">← Вернуться</button><button class="btn" onclick="next()" type="button">Продолжить →</button></div></section>
 <section class="screen"><div class="card"><h2>🏆 Главное задание. Ты — руководитель лаборатории</h2><img class="scene" src="../shared/lesson-assets/00882f3c8b016b4572d8.webp"/><p class="mission"><b>Вопрос:</b> влияет ли количество воды на рост растения? Выбери условия, которые нужны для честного исследования.</p><div class="lab-list" id="lab"></div><p><b>А теперь собери порядок исследования:</b></p><div class="steps" id="steps"></div><button class="btn" onclick="checkLab()">Проверить план исследования</button><div class="feedback" id="flab"></div></div><div class="nav"><button class="btn ghost" onclick="prev()" type="button">← Вернуться</button><button class="btn" onclick="next()" type="button">Продолжить →</button></div></section>
 <section class="screen"><div class="card"><h2>⚽ Мини-тест: думаем как биолог</h2><div id="test"></div><div class="feedback" id="ftest"></div></div><div class="nav"><button class="btn ghost" onclick="prev()" type="button">← Вернуться</button><button class="btn" onclick="next()" type="button">Продолжить →</button></div></section>
-<section class="screen final" id="final"><div class="card"><h2>🏁 Исследование завершено!</h2><p class="lead">Теперь ты умеешь наблюдать, сравнивать, измерять, описывать и ставить эксперимент.</p><p style="font-size:22px">Но что делать, если объект настолько мал, что его невозможно рассмотреть глазами?</p><div class="mission"><b>Следующая тема:</b> «Как человек увидел невидимый мир» 🔍</div></div><div class="nav"><button class="btn ghost" onclick="returnToBiologyQuestions()" type="button">← Вернуться к вопросам</button><button class="btn" onclick="returnToBiologyTopics()" type="button">🌿 Вернуться к списку тем по биологии</button></div></section>
+<section class="screen final" id="final"><div class="card"><h2>🏁 Исследование завершено!</h2><p class="lead">Теперь ты умеешь наблюдать, сравнивать, измерять, описывать и ставить эксперимент.</p><div class="mission" style="font-size:24px;text-align:center;margin:22px 0"><b>Результат урока</b><br>⚽ <span id="finalBiologyScore">0</span> / 26 голов</div><p style="font-size:22px">Но что делать, если объект настолько мал, что его невозможно рассмотреть глазами?</p><div class="mission"><b>Следующая тема:</b> «Как человек увидел невидимый мир» 🔍</div></div><div class="nav"><button class="btn ghost" onclick="returnToBiologyQuestions()" type="button">← Вернуться к вопросам</button><button class="btn" onclick="returnToBiologyTopics()" type="button">🌿 Вернуться к списку тем по биологии</button></div></section>
 </main><script>
 function saveBiologyResult(topic,goals,max){try{var K='liga-znaniy-biology-progress-v2',d=JSON.parse(localStorage.getItem(K)||'{}');d['topic'+topic]={goals:Number(goals)||0,max:Number(max)||0,completed:true,date:new Date().toISOString()};localStorage.setItem(K,JSON.stringify(d));}catch(e){}}
 
@@ -70,17 +70,21 @@ const tests=[
 // v2 screen navigation, matching Topic 11
 let page=0; const screens=[...document.querySelectorAll('.screen')];
 function stopVideos(){document.querySelectorAll('.video').forEach(v=>{if(v.tagName==='IFRAME'){const x=v.src;v.src='about:blank';v.src=x;}})}
-function show(){screens.forEach((x,i)=>x.classList.toggle('active',i===page));window.scrollTo({top:0,behavior:'smooth'});}
+function show(){screens.forEach((x,i)=>x.classList.toggle('active',i===page));if(screens[page]&&screens[page].id==='final'){var fs=document.getElementById('finalBiologyScore');if(fs)fs.textContent=score;saveBiologyResult(3,score,26);}window.scrollTo({top:0,behavior:'smooth'});}
 function next(){if(page<screens.length-1){stopVideos();page++;show();}}
 function prev(){if(page>0){stopVideos();page--;show();}}
 function saveBiologyResult(topic,goals,maxGoals){
   try{
-    const key='liga_biology_results';
+    const key='liga-znaniy-biology-progress-v2';
     const data=JSON.parse(localStorage.getItem(key)||'{}');
-    data[String(topic)]={goals:Number(goals)||0,max:Number(maxGoals)||0,completed:true,updatedAt:Date.now()};
+    const k='topic'+topic;
+    const old=data[k]||{};
+    const best=Math.max(Number(old.goals)||0,Number(goals)||0);
+    data[k]={goals:best,max:Number(maxGoals)||0,completed:true,date:new Date().toISOString()};
     localStorage.setItem(key,JSON.stringify(data));
-    localStorage.setItem('biology_topic_'+topic+'_goals',String(Number(goals)||0));
+    localStorage.setItem('biology_topic_'+topic+'_goals',String(best));
     localStorage.setItem('biology_topic_'+topic+'_completed','1');
+    if(window.LigaGlobalStars&&window.LigaGlobalStars.sync)window.LigaGlobalStars.sync();
   }catch(e){console.warn('Не удалось сохранить прогресс биологии',e);}
 }
 function returnToBiologyQuestions(){
