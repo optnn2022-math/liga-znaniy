@@ -303,7 +303,21 @@
       $('#compareInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#checkInput').click()});
 
       $$('.punct').forEach(btn=>btn.addEventListener('click',()=>{const mark=btn.dataset.punct;$$('.punct').forEach(x=>x.classList.toggle('active',x===btn));const phrase=$('#intonationPhrase');phrase.textContent='Команда забила гол'+mark;phrase.classList.toggle('excited',mark==='!')}));
-      $('#finishBtn').addEventListener('click',()=>{state.completed=true;save();const count=goalTotal();notifyParent();location.href='index.html';});
+      function saveRussianCourseResult(goals){
+        try{
+          const key='liga-znaniy-russian-progress-v1';
+          const data=JSON.parse(localStorage.getItem(key)||'{}');
+          const best=Math.max(Number(data.topic1Goals)||0,Number(goals)||0);
+          data.topic1Goals=best;
+          data.topic1Max=TOTAL;
+          data.topic1Completed=true;
+          data.topic1Date=new Date().toISOString();
+          localStorage.setItem(key,JSON.stringify(data));
+          localStorage.setItem('russian_topic_1_goals',String(best));
+          localStorage.setItem('russian_topic_1_completed','1');
+        }catch(_){}
+      }
+      $('#finishBtn').addEventListener('click',()=>{state.completed=true;save();const count=goalTotal();saveRussianCourseResult(count);notifyParent();location.href='index.html';});
       $('#resetBtn').addEventListener('click',()=>{if(!confirm('Сбросить ответы и голы этого предварительного урока?'))return;storage.remove();location.reload()});
       updateScore();window.lessonGoTo(0);
     })();
