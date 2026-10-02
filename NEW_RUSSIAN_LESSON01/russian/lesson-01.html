@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Русский язык · Урок 1 · Богатство и выразительность русского языка</title>
+  <meta name="description" content="Лига знаний · Русский язык 5 класс · Урок 1 · Богатство и выразительность русского языка">
+  <link rel="stylesheet" href="../shared/css/style-01.css"><link rel="stylesheet" href="../shared/css/style-02.css"><link rel="stylesheet" href="../shared/css/style-03.css"><link rel="stylesheet" href="../shared/css/style-04.css"><link rel="stylesheet" href="../shared/css/style-05.css"><link rel="stylesheet" href="../shared/css/style-06.css"><link rel="stylesheet" href="../shared/css/style-07.css">
+  <style>
+    :root{
+      color-scheme:dark;
+      font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;
+      --navy:#061b42;--blue:#0b3972;--blue2:#16579a;--sky:#82ddff;
+      --red:#c82448;--red2:#ff5770;--gold:#ffc849;--cream:#fff4d4;
+      --white:#fff;--muted:#cfe3f5;--green:#4ee29a;--bad:#ff8895;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;min-height:100vh;color:var(--white);overflow-x:hidden}
+    body:before{content:"А  Я   Б  Ь   Р  У   С  С  К  И  Й";position:fixed;inset:0;pointer-events:none;opacity:.075;color:#b9ddff;font-weight:1000;font-size:clamp(42px,8vw,120px);letter-spacing:.18em;word-spacing:.55em;line-height:2.2;transform:rotate(-8deg) scale(1.15);display:flex;align-items:center;justify-content:center;text-align:center;text-shadow:0 0 30px #58bfff;background:radial-gradient(circle at 50% 45%,#3b8fd51c,transparent 45%)}
+    button,input{font:inherit}
+    button{cursor:pointer}
+    .hidden{display:none!important}
+    .hud{position:sticky;top:0;z-index:50;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:13px clamp(14px,3vw,34px);border-bottom:1px solid #80c8ff66;background:#041633ed;box-shadow:0 12px 32px #0007;backdrop-filter:blur(14px)}
+    .brand{font-weight:950;font-size:clamp(17px,2vw,23px);letter-spacing:.01em}
+    .hud-center{min-width:120px;text-align:center}.stage-label{font-size:13px;color:#bcdaf1;font-weight:800}.progress{height:8px;margin-top:6px;border-radius:99px;background:#ffffff1a;overflow:hidden}.progress>span{display:block;width:16.66%;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),#ff7b35);transition:width .28s ease}
+    .score{display:flex;align-items:center;gap:8px;padding:9px 13px;border:1px solid #91c9ef;border-radius:14px;background:#0c3970;font-size:17px;font-weight:950;white-space:nowrap}
+    .ghost{border:1px solid #79b8e4;border-radius:12px;background:#0e3b70;color:#fff;padding:10px 14px;font-weight:850}
+    .ghost:hover,.ghost:focus-visible{background:#17558f}.ghost:focus-visible,.primary:focus-visible,.choice:focus-visible,.step-btn:focus-visible,.chip:focus-visible,.zone:focus-visible,input:focus-visible{outline:3px solid #ffe178;outline-offset:3px}
+    .layout{position:relative;width:min(1280px,calc(100% - 28px));margin:20px auto 42px;display:grid;grid-template-columns:245px minmax(0,1fr);gap:18px;align-items:start}
+    .match-plan{position:sticky;top:94px;padding:18px;border:1px solid #72afe0;border-radius:22px;background:linear-gradient(155deg,#0c3a70ee,#071d43ee);box-shadow:0 18px 46px #0005}
+    .match-plan h2{font-size:18px;margin:0 0 13px;color:#ffe080}.steps{display:grid;gap:8px}.step-btn{width:100%;display:grid;grid-template-columns:34px 1fr;gap:9px;align-items:center;border:1px solid #ffffff24;border-radius:14px;background:#ffffff08;color:#d9ecfb;padding:10px;text-align:left;font-weight:800}.step-btn span{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;background:#0f4f8b;color:#fff}.step-btn.active{border-color:#ffce56;background:#ffca4520;color:#fff}.step-btn.active span{background:var(--gold);color:#16345e}.plan-note{margin:14px 0 0;font-size:13px;line-height:1.45;color:#bcd8ee}
+    main{min-width:0}.stage{display:none;animation:rise .28s ease}.stage.active{display:block}@keyframes rise{from{opacity:0;transform:translateY(8px)}}
+    .panel{position:relative;overflow:hidden;border:1px solid #74b2e4;border-radius:25px;background:linear-gradient(145deg,#0d3d75ed,#08295aed);box-shadow:0 20px 55px #0006;padding:clamp(20px,3.5vw,38px)}
+    .panel:before{content:"";position:absolute;width:330px;height:330px;right:-180px;top:-190px;border-radius:50%;background:#58c8ff16;pointer-events:none}
+    .kicker{position:relative;color:#8fe8ff;font-size:14px;font-weight:950;letter-spacing:.08em;text-transform:uppercase}
+    h1,h2,h3,p{position:relative}h1{margin:9px 0 14px;font-size:clamp(34px,5.2vw,61px);line-height:1.02;max-width:900px}h2{font-size:clamp(26px,3.5vw,39px);margin:4px 0 14px}h3{font-size:21px;margin:5px 0 9px}.lead{color:#e4f3ff;font-size:clamp(17px,2vw,21px);line-height:1.55}.muted{color:var(--muted);line-height:1.55}.gold{color:#ffe080}.red{color:#ff8ca0}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,1.16fr) minmax(260px,.72fr);gap:22px;align-items:center}.hero-main{width:100%;max-height:610px;object-fit:contain;filter:drop-shadow(0 24px 25px #020c22aa)}
+    .coach{margin:20px 0;padding:17px 19px;border:1px solid #ffd272;border-radius:18px;background:linear-gradient(135deg,#fff7da,#ffe4a9);color:#4d3212;box-shadow:0 10px 26px #0003;line-height:1.55}.coach strong{color:#8a3e1c;font-size:18px}
+    .tags{display:flex;gap:9px;flex-wrap:wrap;margin:18px 0}.tag{padding:8px 11px;border:1px solid #88c7ef;border-radius:999px;background:#0f4a83;color:#eaf7ff;font-size:14px;font-weight:850}
+    .actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:24px}.primary{border:0;border-radius:15px;padding:14px 22px;color:#17345c;background:linear-gradient(135deg,#ffe36f,#ffad2d);font-weight:950;font-size:17px;box-shadow:0 8px 22px #ff9b2c46}.primary:hover{filter:brightness(1.06);transform:translateY(-1px)}
+    .subhead{display:flex;justify-content:space-between;gap:15px;align-items:flex-end;margin-bottom:18px}.subhead p{margin:0;max-width:620px;color:#cfe5f7;line-height:1.5}
+    .video-placeholder{display:grid;grid-template-columns:1.25fr .75fr;border:2px solid #77bbed;border-radius:22px;overflow:hidden;background:linear-gradient(135deg,#05142f,#0f4178)}
+    .video-scene{position:relative;min-width:0;aspect-ratio:16/9;background:#020b18;overflow:hidden}.video-scene iframe{position:absolute;inset:0;display:block;width:100%;height:100%;border:0;background:#020b18}.video-note{padding:25px;display:grid;align-content:center;background:#ffffff0b}.video-note ol{margin:8px 0 0;padding-left:22px;line-height:1.7;color:#d8ecfb}.video-source{display:grid;gap:4px;margin:14px 0 0;padding-top:12px;border-top:1px solid #ffffff20;color:#a9cde7;font-size:13px;line-height:1.4}.video-source a{color:#ffe080;font-weight:850;text-decoration:none}.video-source a:hover{text-decoration:underline}
+    .deck{margin-top:18px;border:1px solid #6daee0;border-radius:20px;background:#071f48;padding:20px}.deck-slide{display:none;min-height:130px}.deck-slide.active{display:grid;grid-template-columns:70px 1fr;gap:18px;align-items:center}.deck-icon{width:66px;height:66px;border-radius:19px;display:grid;place-items:center;font-size:34px;background:linear-gradient(145deg,#318ee3,#b82047);box-shadow:0 9px 18px #0005}.deck-slide p{font-size:18px;line-height:1.55;color:#e7f5ff}.deck-nav{display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid #ffffff1b;padding-top:14px}.deck-count{color:#9ecbec;font-weight:850}
+    .activity{margin:22px 0;padding:20px;border:1px solid #6faee0;border-radius:20px;background:linear-gradient(145deg,#0d447c,#092d5f)}.activity.done{border-color:#62e2a2}.activity h3{color:#fff}.task-label{display:inline-flex;gap:7px;align-items:center;padding:6px 10px;border-radius:999px;background:#ffd35a;color:#18355c;font-size:13px;font-weight:950}.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;margin-top:15px}.choice{border:1px solid #7db9e6;border-radius:15px;background:#123f73;color:#fff;padding:14px;text-align:left;font-weight:800;line-height:1.4}.choice:hover{background:#19568f;transform:translateY(-1px)}.choice.good{background:#176343;border-color:#68e4a5}.choice.bad{background:#7d2941;border-color:#ff8e9b}.choice:disabled{cursor:default;opacity:.9}.feedback{min-height:27px;margin:12px 0 0;color:#ccecff;font-weight:850;line-height:1.45}.feedback.ok{color:#83f1b3}.feedback.no{color:#ffb0b8}
+    .scheme{display:block;width:100%;max-width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;object-position:center;border-radius:22px;border:2px solid #ffcf5a;box-shadow:0 16px 38px #0006;background:#fff}.definitions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:17px}.definition{padding:17px;border:1px solid #79b9e5;border-radius:17px;background:#0b3569}.definition:nth-child(even){border-color:#ec7894;background:#4f1d3d}.definition strong{display:block;margin-bottom:7px;color:#ffe080;font-size:18px}.definition p{margin:0;color:#e3f1fb;line-height:1.48}
+    .lesson-card{display:grid;grid-template-columns:minmax(190px,.48fr) minmax(0,1fr);gap:20px;align-items:center;margin:18px 0;padding:20px;border:1px solid #70b3e5;border-radius:22px;background:linear-gradient(135deg,#0c3970,#0e4b85)}.lesson-card.red-card{border-color:#ef8ba0;background:linear-gradient(135deg,#511c3c,#8c2141)}.lesson-card img{width:100%;height:330px;object-fit:contain;filter:drop-shadow(0 15px 16px #0006)}.lesson-card ul{padding-left:21px;line-height:1.65;color:#e5f4ff}.example{padding:11px 13px;border-radius:12px;background:#ffffff12;color:#fff;font-weight:800;line-height:1.5}.two-col{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+    .drag-bank,.zone{min-height:78px;display:flex;gap:9px;align-content:flex-start;flex-wrap:wrap;padding:12px;border:2px dashed #72b9ea;border-radius:15px;background:#061f46}.drag-bank{margin-top:13px}.zone{margin-top:9px}.zone strong{width:100%;color:#ffe183}.zone.over{border-color:#ffe076;background:#153e68}.chip{border:1px solid #b4dcf6;border-radius:12px;background:#eef8ff;color:#18395f;padding:10px 12px;font-weight:850;box-shadow:0 4px 0 #87aeca;touch-action:none}.chip.selected{outline:4px solid #ffcf57}.drag-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:13px}
+    .input-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.answer-input{flex:1;min-width:210px;border:2px solid #9dcae9;border-radius:13px;background:#fff;color:#17365e;padding:13px 15px;font-size:18px;font-weight:800}.answer-input.good{border-color:#4cd78b;background:#eafff2}.answer-input.bad{border-color:#ff7785;background:#fff0f2}
+    .intonation{display:grid;grid-template-columns:1fr auto;gap:15px;align-items:center;padding:17px;border-radius:17px;background:#071e44;border:1px solid #6aa9d9}.intonation-phrase{font-size:clamp(23px,3vw,34px);font-weight:950}.intonation-phrase.excited{color:#ffe06a;transform:scale(1.015);transform-origin:left}.intonation-controls{display:flex;gap:8px}.punct{width:50px;height:50px;border:1px solid #86c6ed;border-radius:13px;background:#104b84;color:#fff;font-size:27px;font-weight:950}.punct.active{background:#ffc94d;color:#15345e}
+    .result-card{text-align:center;padding:24px;border:2px solid #ffce5a;border-radius:23px;background:radial-gradient(circle at 50% 0,#1a65a6,#092a5a 65%)}.result-ball{font-size:70px;filter:drop-shadow(0 12px 12px #0005)}.result-score{font-size:clamp(38px,7vw,72px);font-weight:1000;color:#ffe06a;margin:4px 0}.result-message{font-size:19px;line-height:1.55;color:#e6f5ff}.cheat{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:19px 0}.cheat div{padding:15px;border-radius:16px;border:1px solid #72b2e2;background:#0a3365}.cheat strong{display:block;color:#ffe080;margin-bottom:6px}.cheat p{margin:0;line-height:1.45;color:#dceefd}
+    .goal-pop{position:fixed;z-index:100;left:50%;top:44%;transform:translate(-50%,-50%) scale(.5);opacity:0;pointer-events:none;padding:22px 34px;border:5px solid #ffb22f;border-radius:26px;background:#fff;color:#123b6a;font-size:clamp(34px,8vw,62px);font-weight:1000;box-shadow:0 20px 70px #0009}.goal-pop.show{animation:goal .9s ease}@keyframes goal{0%{opacity:0;transform:translate(-50%,-50%) scale(.5)}25%{opacity:1;transform:translate(-50%,-50%) scale(1.13)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-68%) scale(1)}}
+    .toast{position:fixed;z-index:90;right:18px;bottom:18px;max-width:360px;padding:13px 16px;border:1px solid #8ac9ef;border-radius:14px;background:#07234def;color:#fff;box-shadow:0 12px 35px #0008;opacity:0;transform:translateY(12px);pointer-events:none;transition:.22s}.toast.show{opacity:1;transform:none}
+    @media(max-width:900px){.layout{grid-template-columns:1fr}.match-plan{position:relative;top:0}.steps{grid-template-columns:repeat(3,1fr)}.step-btn{grid-template-columns:30px 1fr;font-size:13px}.hero-grid{grid-template-columns:1fr minmax(200px,.55fr)}.video-placeholder{grid-template-columns:1fr}.video-note{border-top:1px solid #ffffff25}.lesson-card{grid-template-columns:180px 1fr}.lesson-card img{height:290px}.cheat{grid-template-columns:1fr 1fr}}
+    @media(max-width:650px){.hud{grid-template-columns:auto 1fr}.hud-center{grid-column:1/-1;grid-row:2}.score{justify-self:end}.layout{width:min(100% - 16px,1280px);margin-top:10px}.panel{padding:19px}.steps{grid-template-columns:1fr 1fr}.step-btn{font-size:12px}.hero-grid{grid-template-columns:1fr}.hero-main{max-height:390px;order:-1}.subhead{display:block}.choices,.definitions,.two-col,.drag-grid,.cheat{grid-template-columns:1fr}.lesson-card{grid-template-columns:1fr}.lesson-card img{height:310px}.intonation{grid-template-columns:1fr}.video-placeholder{min-height:0}.video-note{padding:20px}.video-scene{padding:0}.actions>*{width:100%}}
+  
+    body:before{display:none!important}
+  </style>
+  <script>
+    // Независимая навигация запускается до остальных заданий урока.
+    // Поэтому переходы между этапами продолжают работать, даже если
+    // браузер ограничил хранилище, видео или другой дополнительный блок.
+    (function(){
+      const lessonTitles=['Старт','Разминка','Главная схема','Богатство языка','Выразительность','Финальный свисток'];
+      window.lessonGoTo=function(value){
+        const next=Math.max(0,Math.min(5,Number(value)));
+        document.querySelectorAll('.stage').forEach(function(el,index){el.classList.toggle('active',index===next)});
+        document.querySelectorAll('.step-btn').forEach(function(el,index){el.classList.toggle('active',index===next)});
+        const label=document.getElementById('stageLabel');
+        const bar=document.getElementById('progressBar');
+        if(label)label.textContent='Этап '+(next+1)+' из 6 · '+lessonTitles[next];
+        if(bar)bar.style.width=((next+1)/6*100)+'%';
+        try{window.scrollTo({top:0,behavior:'smooth'})}catch(_){document.documentElement.scrollTop=0;document.body.scrollTop=0}
+        document.dispatchEvent(new CustomEvent('lessonstagechange',{detail:{stage:next}}));
+        return next;
+      };
+      document.addEventListener('click',function(event){
+        const button=event.target.closest('[data-next],[data-step]');
+        if(!button)return;
+        event.preventDefault();
+        window.lessonGoTo(button.hasAttribute('data-next')?button.dataset.next:button.dataset.step);
+      });
+    })();
+  </script>
+</head>
+<body>
+<header class="hud">
+    <button class="ghost" id="homeBtn" type="button" onclick="location.href='index.html'">← Темы</button>
+    <div class="hud-center"><div class="stage-label" id="stageLabel">Этап 1 из 6 · Старт</div><div class="progress" aria-label="Прогресс урока"><span id="progressBar"></span></div></div>
+    <div class="score" title="Голы за правильный ответ с первой попытки">⚽ <span id="goalCount">0</span> / 8</div>
+  </header>
+
+  <div class="layout">
+    <aside class="match-plan" aria-label="План урока">
+      <h2>План матча</h2>
+      <nav class="steps" id="stepNav">
+        <button class="step-btn active" type="button" data-step="0"><span>1</span>Встречаемся</button>
+        <button class="step-btn" type="button" data-step="1"><span>2</span>Разминка</button>
+        <button class="step-btn" type="button" data-step="2"><span>3</span>Главная схема</button>
+        <button class="step-btn" type="button" data-step="3"><span>4</span>Богатство языка</button>
+        <button class="step-btn" type="button" data-step="4"><span>5</span>Выразительность</button>
+        <button class="step-btn" type="button" data-step="5"><span>6</span>Финальный свисток</button>
+      </nav>
+      <p class="plan-note">⚽ засчитывается только за верный первый ответ. Ошибку всегда можно исправить и разобраться в правиле.</p>
+    </aside>
+
+    <main>
+      <section class="stage active" data-stage="0">
+        <div class="panel hero-grid">
+          <div>
+            <div class="kicker">Русский язык · 5 класс · Урок 1</div>
+            <h1>Богатство и выразительность русского языка</h1>
+            <p class="lead">Сегодня узнаем, почему одну мысль можно выразить по-разному и как точное слово делает речь яркой, понятной и живой.</p>
+            <div class="tags"><span class="tag">⏱ 35–40 минут</span><span class="tag">🧭 6 этапов</span><span class="tag">⚽ 8 заданий</span></div>
+            <div class="coach"><strong>Тренер Слова</strong><br>Привет, Егор! На футбольном поле важен точный пас, а в речи — точное слово. Сегодня потренируем и богатство языка, и выразительность речи.</div>
+            <div class="actions"><button class="primary" type="button" data-next="1">Начать урок →</button></div>
+          </div>
+          <img class="hero-main" src="../shared/assets-v7/78a638d8f95fe1653448.webp" alt="Футболист русского языка приглашает начать урок">
+        </div>
+      </section>
+
+      <section class="stage" data-stage="1">
+        <div class="panel">
+          <div class="subhead"><div><div class="kicker">Этап 2 · Разминка</div><h2>Сначала уловим главную мысль</h2></div><p>Перед видео или объяснением ребёнок получает три вопроса для осмысленного просмотра.</p></div>
+          <div class="video-placeholder">
+            <div class="video-scene"><iframe
+              id="ruleVideo"
+              src="https://rutube.ru/play/embed/b17582f472c0a8bb9cfec444b4385756/"
+              title="Русский язык 5 класс. Богатство и выразительность русского языка"
+              loading="eager"
+              allow="clipboard-write; autoplay; fullscreen; picture-in-picture"
+              allowfullscreen></iframe></div>
+            <div class="video-note"><strong class="gold">На что обратить внимание</strong><ol><li>Что называют богатством языка?</li><li>Почему важно выбирать точное слово?</li><li>Что делает речь выразительной?</li></ol><p class="video-source"><span>Видеоурок 1 · около 8 минут</span><a href="https://rutube.ru/video/b17582f472c0a8bb9cfec444b4385756/" target="_blank" rel="noopener noreferrer">Открыть видео отдельно ↗</a></p></div>
+          </div>
+
+          <div class="deck" aria-label="Мини-презентация">
+            <div class="deck-slide active"><div class="deck-icon">📚</div><div><h3>Русский язык богат словами</h3><p>В языке есть слова для обозначения предметов, действий, признаков, чувств и самых разных оттенков мысли.</p></div></div>
+            <div class="deck-slide"><div class="deck-icon">↔</div><div><h3>Мы можем сравнивать и противопоставлять</h3><p>Синонимы помогают избежать повторов, а антонимы позволяют показать противоположность.</p></div></div>
+            <div class="deck-slide"><div class="deck-icon">🎯</div><div><h3>Точное слово передаёт мысль</h3><p>Глагол «пробил» рассказывает о действии точнее, чем общее слово «сделал».</p></div></div>
+            <div class="deck-slide"><div class="deck-icon">✨</div><div><h3>Образность оживляет речь</h3><p>Сравнения, переносные значения и интонация помогают читателю увидеть и почувствовать описанное.</p></div></div>
+            <div class="deck-nav"><button class="ghost" id="deckPrev" type="button">← Назад</button><span class="deck-count" id="deckCount">1 / 4</span><button class="ghost" id="deckNext" type="button">Далее →</button></div>
+          </div>
+
+          <div class="activity" data-activity="warm">
+            <span class="task-label">⚽ Задание 1</span><h3>Какое предложение точнее передаёт действие?</h3>
+            <div class="choices">
+              <button class="choice" type="button" data-task="warm" data-correct="false">Игрок сделал что-то с мячом.</button>
+              <button class="choice" type="button" data-task="warm" data-correct="true">Игрок точно пробил в дальний угол ворот.</button>
+            </div><p class="feedback" data-feedback="warm" aria-live="polite"></p>
+          </div>
+          <div class="actions"><button class="ghost" type="button" data-next="0">← Назад</button><button class="primary" type="button" data-next="2">К главной схеме →</button></div>
+        </div>
+      </section>
+
+      <section class="stage" data-stage="2">
+        <div class="panel">
+          <div class="subhead"><div><div class="kicker">Этап 3 · Главная схема</div><h2>Два крыла хорошей речи</h2></div><p>Сначала видим общую картину, затем разбираем каждый приём на примерах.</p></div>
+          <img class="scheme" src="../shared/assets-v7/afc145c5c56bff6d53b2.webp" alt="Схема богатства и выразительности русского языка">
+          <div class="definitions">
+            <article class="definition"><strong>Богатство языка</strong><p>Разнообразие слов, их значений и способов выразить одну мысль.</p></article>
+            <article class="definition"><strong>Выразительность речи</strong><p>Такой выбор слов и интонации, который помогает ярко передать мысль и чувство.</p></article>
+            <article class="definition"><strong>Запомни</strong><p>Богатство даёт нам выбор, а выразительность помогает сделать удачный выбор.</p></article>
+            <article class="definition"><strong>Футбольный пример</strong><p>Не просто «ударил», а «точно пробил»; не просто «полетел», а «молнией влетел».</p></article>
+          </div>
+          <div class="actions"><button class="ghost" type="button" data-next="1">← Назад</button><button class="primary" type="button" data-next="3">Тренировать богатство языка →</button></div>
+        </div>
+      </section>
+
+      <section class="stage" data-stage="3">
+        <div class="panel">
+          <div class="kicker">Этап 4 · Богатство языка</div><h2>Больше слов — точнее мысль</h2>
+
+          <article class="lesson-card"><img src="../shared/assets-v7/0810402134e6d38e9d97.webp" alt="Герой объясняет богатство словарного запаса"><div><h3>1. Большой запас слов</h3><p class="muted">Чем больше слов мы знаем, тем точнее можем назвать действие, признак или чувство.</p><div class="example">говорить · сказать · произнести · прошептать · воскликнуть</div></div></article>
+
+          <div class="two-col">
+            <div class="activity" data-activity="syn"><span class="task-label">⚽ Задание 2</span><h3>Найди синоним к слову «смелый»</h3><div class="choices"><button class="choice" data-task="syn" data-correct="true">храбрый</button><button class="choice" data-task="syn" data-correct="false">робкий</button><button class="choice" data-task="syn" data-correct="false">шумный</button><button class="choice" data-task="syn" data-correct="false">медленный</button></div><p class="feedback" data-feedback="syn"></p></div>
+            <div class="activity" data-activity="ant"><span class="task-label">⚽ Задание 3</span><h3>Найди антоним к слову «громкий»</h3><div class="choices"><button class="choice" data-task="ant" data-correct="false">звонкий</button><button class="choice" data-task="ant" data-correct="true">тихий</button><button class="choice" data-task="ant" data-correct="false">быстрый</button><button class="choice" data-task="ant" data-correct="false">яркий</button></div><p class="feedback" data-feedback="ant"></p></div>
+          </div>
+
+          <article class="lesson-card"><img src="../shared/assets-v7/a0ce4a65bf15280f2871.webp" alt="Герой сравнивает синонимы и антонимы"><div><h3>2. Синонимы и антонимы</h3><p class="muted"><strong class="gold">Синонимы</strong> — слова одной части речи, разные по звучанию, но близкие по значению. <strong class="red">Антонимы</strong> — слова одной части речи с противоположным значением.</p><div class="example">смелый — храбрый &nbsp;·&nbsp; громкий — тихий</div></div></article>
+
+          <article class="lesson-card"><img src="../shared/assets-v7/82a00771a36def2b1dfd.webp" alt="Герой исследует многозначные слова и устойчивые выражения"><div><h3>3. Многозначные слова и устойчивые выражения</h3><p class="muted">У многозначного слова несколько связанных значений. В устойчивом выражении слова вместе получают особый смысл.</p><div class="example">корень дерева · корень слова &nbsp; | &nbsp; золотые руки</div></div></article>
+
+          <div class="activity" data-activity="poly"><span class="task-label">⚽ Задание 4 · Перетаскивание</span><h3>Распредели примеры</h3><p class="muted">Перетащи карточки. На телефоне можно нажать на карточку, затем на нужную область.</p>
+            <div class="drag-bank" id="dragBank">
+              <button class="chip" type="button" draggable="true" data-kind="poly">корень дерева</button><button class="chip" type="button" draggable="true" data-kind="phrase">золотые руки</button><button class="chip" type="button" draggable="true" data-kind="poly">корень слова</button><button class="chip" type="button" draggable="true" data-kind="phrase">водить за нос</button><button class="chip" type="button" draggable="true" data-kind="poly">корень уравнения</button>
+            </div>
+            <div class="drag-grid"><div class="zone" tabindex="0" data-zone="poly"><strong>Значения слова «корень»</strong></div><div class="zone" tabindex="0" data-zone="phrase"><strong>Устойчивые выражения</strong></div></div>
+            <div class="actions"><button class="primary" id="checkDrag" type="button">Проверить</button><button class="ghost" id="resetDrag" type="button">Вернуть карточки</button></div><p class="feedback" data-feedback="poly"></p>
+          </div>
+
+          <div class="activity" data-activity="phrase"><span class="task-label">⚽ Задание 5</span><h3>В каком сочетании есть переносный, устойчивый смысл?</h3><div class="choices"><button class="choice" data-task="phrase" data-correct="false">чистые руки</button><button class="choice" data-task="phrase" data-correct="true">золотые руки</button><button class="choice" data-task="phrase" data-correct="false">тёплые руки</button><button class="choice" data-task="phrase" data-correct="false">две руки</button></div><p class="feedback" data-feedback="phrase"></p></div>
+
+          <div class="actions"><button class="ghost" type="button" data-next="2">← К схеме</button><button class="primary" type="button" data-next="4">К выразительности →</button></div>
+        </div>
+      </section>
+
+      <section class="stage" data-stage="4">
+        <div class="panel">
+          <div class="kicker">Этап 5 · Выразительность речи</div><h2>Слово должно попасть точно в цель</h2>
+          <article class="lesson-card red-card"><img src="../shared/assets-v7/50b013651218e88a793a.webp" alt="Герой показывает точный выбор слова"><div><h3>4. Точный выбор слова</h3><p class="muted">Точное слово яснее называет действие и помогает представить картину.</p><div class="example">ударил → сильно пробил → точно пробил в угол ворот</div></div></article>
+
+          <div class="activity" data-activity="exact"><span class="task-label">⚽ Задание 6</span><h3>Выбери самое точное продолжение</h3><p>Нападающий ______ мяч в дальний угол ворот.</p><div class="choices"><button class="choice" data-task="exact" data-correct="false">сделал</button><button class="choice" data-task="exact" data-correct="false">двинул</button><button class="choice" data-task="exact" data-correct="true">точно пробил</button><button class="choice" data-task="exact" data-correct="false">потрогал</button></div><p class="feedback" data-feedback="exact"></p></div>
+
+          <div class="two-col">
+            <article class="definition"><strong>5. Образное выражение</strong><p>Слова употребляются так, чтобы создать яркую картину: «мяч молнией влетел в ворота».</p></article>
+            <article class="definition"><strong>6. Сравнение и интонация</strong><p>Сравнение связывает два образа, а интонация передаёт отношение и чувство говорящего.</p></article>
+          </div>
+
+          <div class="activity" data-activity="image"><span class="task-label">⚽ Задание 7</span><h3>Какое предложение звучит образно?</h3><div class="choices"><button class="choice" data-task="image" data-correct="false">Мяч оказался в воротах.</button><button class="choice" data-task="image" data-correct="true">Мяч молнией влетел в ворота.</button><button class="choice" data-task="image" data-correct="false">Игрок увидел мяч.</button><button class="choice" data-task="image" data-correct="false">Матч закончился.</button></div><p class="feedback" data-feedback="image"></p></div>
+
+          <div class="activity" data-activity="compare"><span class="task-label">⚽ Задание 8 · Ввод ответа</span><h3>Заверши сравнение одним словом</h3><p>«Нападающий был быстрым, как ______».</p><div class="input-row"><input class="answer-input" id="compareInput" autocomplete="off" placeholder="Введи слово" aria-label="Слово для завершения сравнения"><button class="primary" id="checkInput" type="button">Проверить</button></div><p class="feedback" data-feedback="compare"></p></div>
+
+          <div class="intonation"><div><strong class="gold">Попробуй изменить интонацию</strong><div class="intonation-phrase" id="intonationPhrase">Команда забила гол.</div></div><div class="intonation-controls"><button class="punct active" type="button" data-punct=".">.</button><button class="punct" type="button" data-punct="!">!</button></div></div>
+          <div class="actions"><button class="ghost" type="button" data-next="3">← Назад</button><button class="primary" type="button" data-next="5">Финальный свисток →</button></div>
+        </div>
+      </section>
+
+      <section class="stage" data-stage="5">
+        <div class="panel">
+          <div class="kicker">Этап 6 · Итог</div><h2>Первый матч завершён</h2>
+          <div class="result-card"><div class="result-ball">⚽</div><div class="result-score" id="resultScore">0 / 8</div><p class="result-message" id="resultMessage">Выполни задания урока — здесь появится твой результат.</p></div>
+          <div class="cheat">
+            <div><strong>Богатая речь</strong><p>Разнообразные слова, значения, синонимы, антонимы и устойчивые выражения.</p></div>
+            <div><strong>Точная речь</strong><p>Выбранное слово лучше всего соответствует мысли и ситуации.</p></div>
+            <div><strong>Выразительная речь</strong><p>Образы, сравнения и интонация помогают увидеть и почувствовать сказанное.</p></div>
+          </div>
+          <div class="coach"><strong>Тренер Слова</strong><br><span id="coachFinish">Ты увидел, как богатство языка превращается в выразительную речь. Теперь попробуй замечать точные и образные слова в книгах и разговорах.<br><br><b>Егор, не забудь написать диктант по этой теме. Удачи! 🍀</b></span></div>
+          <div class="actions"><button class="ghost" type="button" data-next="4">← Вернуться к заданиям</button><button class="primary" id="finishBtn" type="button">Завершить урок</button><button class="ghost" id="resetBtn" type="button">Начать заново</button></div>
+          <p class="muted" id="saveNote" aria-live="polite">Предварительная версия сохраняет результат только в этом браузере.</p>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="goal-pop" id="goalPop" aria-hidden="true">⚽ ГОЛ!</div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (()=>{
+      'use strict';
+      const TOTAL=8,KEY='liga_russian_lesson1_preview_v1';
+      const tasks=['warm','syn','ant','poly','phrase','exact','image','compare'];
+      const fresh=()=>({attempted:{},solved:{},goals:{},completed:false,updated:null});
+      let state=fresh();
+      // В srcdoc/локальном iframe localStorage может быть недоступен;
+      // ошибка хранилища не должна отключать интерактивные кнопки урока.
+      const storage={get(){try{return localStorage.getItem(KEY)}catch(_){return null}},set(value){try{localStorage.setItem(KEY,value)}catch(_){}},remove(){try{localStorage.removeItem(KEY)}catch(_) {}}};
+      try{state={...fresh(),...JSON.parse(storage.get()||'{}')}}catch(_){state=fresh()}
+      const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+      let stage=0,deck=0,selectedChip=null;
+      function save(){state.updated=new Date().toISOString();storage.set(JSON.stringify(state))}
+      function goalTotal(){return tasks.filter(id=>state.goals[id]).length}
+      function notifyParent(){if(window.parent!==window){window.parent.postMessage({type:'russian-lesson-progress',goals:goalTotal(),total:TOTAL,completed:!!state.completed},'*')}}
+      function updateScore(){
+        const count=goalTotal();$('#goalCount').textContent=count;$('#resultScore').textContent=count+' / '+TOTAL;
+        const message=count===TOTAL?'Восемь точных попаданий! Отличный результат.':count>=6?'Хороший матч! Основные идеи урока понятны.':count>=3?'Начало положено. Вернись к заданиям и разберись в трудных местах.':'Пройди задания по порядку — каждый первый точный ответ приносит гол.';
+        $('#resultMessage').textContent=message;
+        tasks.forEach(id=>{if(state.solved[id]){const box=$(`[data-activity="${id}"]`);if(box)box.classList.add('done')}});
+        notifyParent();
+      }
+      function popGoal(){const p=$('#goalPop');p.classList.remove('show');void p.offsetWidth;p.classList.add('show')}
+      function toast(text){const t=$('#toast');t.textContent=text;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2400)}
+      function feedback(id,text,kind){const el=$(`[data-feedback="${id}"]`);if(!el)return;el.textContent=text;el.className='feedback '+(kind||'')}
+      function record(id,correct){
+        if(state.solved[id])return false;
+        const first=!state.attempted[id];state.attempted[id]=true;
+        if(correct){state.solved[id]=true;if(first){state.goals[id]=true;popGoal()}save();updateScore();return first}
+        save();return false;
+      }
+      document.addEventListener('lessonstagechange',event=>{stage=event.detail.stage;if(stage===5)updateScore()});
+      $('#homeBtn').addEventListener('click',()=>{
+        if(window.parent!==window){window.parent.postMessage({type:'liga-znaniy:return-to-russian'},'*');return}
+        if(location.hash==='#from=league'&&history.length>1){history.back();return}
+        window.lessonGoTo(0)
+      });
+
+      function renderDeck(){const slides=$$('.deck-slide');slides.forEach((s,i)=>s.classList.toggle('active',i===deck));$('#deckCount').textContent=`${deck+1} / ${slides.length}`;$('#deckPrev').disabled=deck===0;$('#deckNext').disabled=deck===slides.length-1}
+      $('#deckPrev').addEventListener('click',()=>{deck=Math.max(0,deck-1);renderDeck()});$('#deckNext').addEventListener('click',()=>{deck=Math.min($$('.deck-slide').length-1,deck+1);renderDeck()});renderDeck();
+
+      $$('.choice').forEach(btn=>btn.addEventListener('click',()=>{
+        const id=btn.dataset.task;if(state.solved[id]){toast('Это задание уже выполнено.');return}
+        const correct=btn.dataset.correct==='true';const first=!state.attempted[id];record(id,correct);
+        if(correct){btn.classList.add('good');$$(`[data-task="${id}"]`).forEach(x=>x.disabled=true);feedback(id,first?'Верно с первой попытки — гол засчитан!':'Верно. Ошибка исправлена, правило стало понятнее.','ok')}
+        else{btn.classList.add('bad');btn.disabled=true;const hints={warm:'Сравни, где действие названо точнее.',syn:'Синоним должен быть близок по значению.',ant:'Антоним выражает противоположное значение.',phrase:'В устойчивом выражении общий смысл не равен простой сумме слов.',exact:'Выбери глагол, который точнее всего описывает удар.',image:'Ищи предложение, которое создаёт яркий образ.'};feedback(id,(hints[id]||'Попробуй ещё раз.'),'no')}
+      }));
+
+      const bank=$('#dragBank'),zones=$$('.zone');
+      function selectChip(chip){$$('.chip').forEach(c=>c.classList.remove('selected'));selectedChip=chip;chip.classList.add('selected')}
+      $$('.chip').forEach(chip=>{chip.addEventListener('click',()=>selectChip(chip));chip.addEventListener('dragstart',e=>{selectedChip=chip;e.dataTransfer.setData('text/plain','chip')})});
+      zones.forEach(zone=>{zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('over')});zone.addEventListener('dragleave',()=>zone.classList.remove('over'));zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('over');if(selectedChip){zone.append(selectedChip);selectedChip.classList.remove('selected');selectedChip=null}});zone.addEventListener('click',()=>{if(selectedChip){zone.append(selectedChip);selectedChip.classList.remove('selected');selectedChip=null}})});
+      $('#resetDrag').addEventListener('click',()=>{$$('.chip').forEach(c=>{c.classList.remove('selected');bank.append(c)});selectedChip=null;feedback('poly','','')});
+      $('#checkDrag').addEventListener('click',()=>{
+        if(state.solved.poly){toast('Это задание уже выполнено.');return}
+        const chips=$$('.chip'),allPlaced=chips.every(c=>c.parentElement.classList.contains('zone')),correct=allPlaced&&chips.every(c=>c.parentElement.dataset.zone===c.dataset.kind),first=!state.attempted.poly;record('poly',correct);
+        if(correct){feedback('poly',first?'Все карточки на своих местах — гол!':'Теперь всё распределено верно.','ok');chips.forEach(c=>c.disabled=true)}
+        else feedback('poly',allPlaced?'Есть неточное распределение. Сравни значение одного слова и общий смысл выражения.':'Сначала размести все карточки.','no')
+      });
+
+      function normalize(v){return v.toLowerCase().replace(/ё/g,'е').replace(/[.,!?;:«»"']/g,'').trim().replace(/\s+/g,' ')}
+      $('#checkInput').addEventListener('click',()=>{
+        if(state.solved.compare){toast('Это задание уже выполнено.');return}
+        const input=$('#compareInput'),value=normalize(input.value),correct=['ветер','молния'].includes(value),first=!state.attempted.compare;record('compare',correct);input.classList.toggle('good',correct);input.classList.toggle('bad',!correct);
+        if(correct){input.disabled=true;$('#checkInput').disabled=true;feedback('compare',first?'Удачное сравнение — гол!':'Сравнение составлено верно.','ok')}else feedback('compare','Подсказка: вспомни то, что движется очень быстро.','no')
+      });
+      $('#compareInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#checkInput').click()});
+
+      $$('.punct').forEach(btn=>btn.addEventListener('click',()=>{const mark=btn.dataset.punct;$$('.punct').forEach(x=>x.classList.toggle('active',x===btn));const phrase=$('#intonationPhrase');phrase.textContent='Команда забила гол'+mark;phrase.classList.toggle('excited',mark==='!')}));
+      $('#finishBtn').addEventListener('click',()=>{state.completed=true;save();const count=goalTotal();notifyParent();location.href='index.html';});
+      $('#resetBtn').addEventListener('click',()=>{if(!confirm('Сбросить ответы и голы этого предварительного урока?'))return;storage.remove();location.reload()});
+      updateScore();window.lessonGoTo(0);
+    })();
+  </script>
+<script src="../shared/js/global-stars-v818.js"></script></body>
+</html>
