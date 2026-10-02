@@ -84,9 +84,9 @@
     })();
   </script>
 </head>
-<body><div id="v8DirectNav" style="position:fixed;z-index:99999;left:10px;top:10px"><button onclick="location.href='index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">← Темы</button></div>
+<body>
   <header class="hud">
-    <button class="ghost" id="homeBtn" type="button">← К темам</button>
+    <button class="ghost" id="homeBtn" type="button">← Темы</button>
     <div class="hud-center"><div class="stage-label" id="stageLabel">Этап 1 из 6 · Старт</div><div class="progress" aria-label="Прогресс урока"><span id="progressBar"></span></div></div>
     <div class="score" title="Голы за правильный ответ с первой попытки">⚽ <span id="goalCount">0</span> / 8</div>
   </header>
@@ -124,7 +124,7 @@
         <div class="panel">
           <div class="subhead"><div><div class="kicker">Этап 2 · Разминка</div><h2>Сначала уловим главную мысль</h2></div><p>Перед видео или объяснением ребёнок получает три вопроса для осмысленного просмотра.</p></div>
           <div class="video-placeholder">
-            <div class="video-scene"><iframe id="ruleVideo" src="https://rutube.ru/play/embed/6ee4616d623a1320bb9eb1b6a9e38105/" title="Язык. Что мы знаем о русском языке. Видеоурок 1. Русский язык, 5 класс" loading="eager" allow="clipboard-write; autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
+            <div class="video-scene"><iframe id="ruleVideo" src="about:blank" data-src="https://rutube.ru/play/embed/6ee4616d623a1320bb9eb1b6a9e38105/" title="Язык. Что мы знаем о русском языке. Видеоурок 1. Русский язык, 5 класс" loading="eager" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe></div>
             <div class="video-note"><strong class="gold">На что обратить внимание</strong><ol><li>Что называют богатством языка?</li><li>Почему важно выбирать точное слово?</li><li>Что делает речь выразительной?</li></ol><p class="video-source"><span>Видеоурок 1 · около 8 минут</span><a href="https://rutube.ru/video/6ee4616d623a1320bb9eb1b6a9e38105/" target="_blank" rel="noopener noreferrer">Открыть видео отдельно ↗</a></p></div>
           </div>
 
@@ -263,11 +263,18 @@
         if(correct){state.solved[id]=true;if(first){state.goals[id]=true;popGoal()}save();updateScore();return first}
         save();return false;
       }
-      document.addEventListener('lessonstagechange',event=>{stage=event.detail.stage;if(stage===5)updateScore()});
+      document.addEventListener('lessonstagechange',event=>{
+        stage=event.detail.stage;
+        const video=$('#ruleVideo');
+        if(video && stage===1 && video.dataset.src && (video.getAttribute('src')==='about:blank' || !video.getAttribute('src'))){
+          video.setAttribute('src',video.dataset.src);
+        }
+        if(stage===5)updateScore();
+      });
       $('#homeBtn').addEventListener('click',()=>{
         if(window.parent!==window){window.parent.postMessage({type:'liga-znaniy:return-to-russian'},'*');return}
         if(location.hash==='#from=league'&&history.length>1){history.back();return}
-        window.lessonGoTo(0)
+        location.href='index.html'
       });
 
       function renderDeck(){const slides=$$('.deck-slide');slides.forEach((s,i)=>s.classList.toggle('active',i===deck));$('#deckCount').textContent=`${deck+1} / ${slides.length}`;$('#deckPrev').disabled=deck===0;$('#deckNext').disabled=deck===slides.length-1}
