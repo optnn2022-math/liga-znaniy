@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Проверочные работы · Русский язык · 5 класс · Лига знаний</title>
+<link rel="stylesheet" href="../shared/css/style-01.css">
+<link rel="stylesheet" href="../shared/css/style-02.css">
+<link rel="stylesheet" href="../shared/css/style-03.css">
+<link rel="stylesheet" href="../shared/css/style-04.css">
+<link rel="stylesheet" href="../shared/css/style-05.css">
+<link rel="stylesheet" href="../shared/css/style-06.css">
+<link rel="stylesheet" href="../shared/css/style-07.css">
+<style>
+.screen{display:block!important;min-height:100vh}.hidden{display:none!important}
+.works-wrap{max-width:1180px;margin:0 auto;padding:18px}
+.works-panel{background:rgba(8,55,105,.91);border:1px solid rgba(130,210,255,.62);border-radius:22px;padding:22px;box-shadow:0 18px 40px #001b3a55}
+.works-hero{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.works-hero h1{margin:0 0 7px;font-size:clamp(29px,5vw,44px)}
+.works-hero p{margin:0;color:#c7ecfa;line-height:1.45}
+.works-hero img{width:min(27vw,205px);max-height:235px;object-fit:contain;filter:drop-shadow(0 14px 18px #0004)}
+.work-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 17px}
+.work-tab{border:1px solid rgba(130,210,255,.55);border-radius:15px;padding:16px;background:rgba(16,72,125,.86);color:#fff;text-align:left;cursor:pointer}
+.work-tab strong{font-size:19px}.work-tab span{display:block;margin-top:5px;font-size:12px;opacity:.8}
+.work-tab.active{background:linear-gradient(135deg,#b7194e,#7e143b);border-color:#ff8db4}
+.work-section{border:1px solid rgba(130,210,255,.45);border-radius:18px;padding:18px;background:rgba(7,47,92,.65)}
+.work-section h2{margin:0 0 5px}.work-section>p{margin:0 0 15px;color:#c8e7f7}
+.work-row{width:100%;display:grid;grid-template-columns:46px 1fr auto;gap:10px;align-items:center;text-align:left;
+ margin:8px 0;padding:13px;border:1px solid rgba(130,210,255,.48);border-radius:12px;background:#124f84;color:#fff;cursor:pointer}
+.work-row.available{border-color:#f3b448;background:linear-gradient(90deg,#145487,#5b421f)}
+.work-row .num{font-weight:900;color:#bdeaff}.work-row small{display:block;margin-top:3px;opacity:.78}
+.work-row .arrow{font-weight:900}.locked{opacity:.58;cursor:default}
+.dict-list{display:none;margin:8px 0 14px 46px;padding:13px;border-left:3px solid #f1b342}
+.dict-list.open{display:block}.dict-card{display:flex;align-items:center;justify-content:space-between;gap:12px;
+background:linear-gradient(135deg,#aa1649,#751337);border:1px solid #ef7eaa;border-radius:14px;padding:15px;color:#fff}
+.dict-card h3{margin:0 0 5px}.dict-card p{margin:0;opacity:.9}.open-btn{border:0;border-radius:11px;padding:11px 14px;
+background:linear-gradient(135deg,#ffb53f,#ff7c2e);font-weight:900;color:#fff;cursor:pointer;white-space:nowrap}
+.placeholder{padding:28px;text-align:center;color:#c7e7f5}
+@media(max-width:760px){
+ .works-wrap{padding:12px}.works-panel{padding:16px}.works-hero img{width:120px}
+ .work-tabs{grid-template-columns:1fr}.work-row{grid-template-columns:38px 1fr}.work-row .arrow{grid-column:2}
+ .dict-list{margin-left:0}.dict-card{align-items:flex-start;flex-direction:column}.open-btn{width:100%}
+}
+</style>
+</head>
+<body>
+<section class="screen">
+<header class="top">
+<button class="textbtn" type="button" onclick="location.href='index.html'">← Темы русского языка</button>
+<div class="brand">Русский язык · 5 класс</div>
+<div class="subject-tools"><button class="chat-launch" data-chat-subject="russian">💬 Репетитор</button><div class="score">⭐ <span data-points="">0</span></div></div>
+</header>
+
+<div class="works-wrap">
+<main class="works-panel">
+<div class="works-hero">
+<div><div class="list-head">ЛИГА ЗНАНИЙ · ПИСЬМЕННАЯ ПРАКТИКА</div>
+<h1>Проверочные работы</h1>
+<p>Диктанты, изложения и сочинения. Сначала выбери вид работы, затем тему и конкретное задание.</p></div>
+<img src="assets/dictation-trophy.png" alt="Письменные работы">
+</div>
+
+<div class="work-tabs">
+<button class="work-tab active" data-tab="dict"><strong>✍️ Диктанты</strong><span>Темы → конкретные диктанты</span></button>
+<button class="work-tab" data-tab="expo"><strong>📖 Изложения</strong><span>Раздел подготовлен к наполнению</span></button>
+<button class="work-tab" data-tab="essay"><strong>📝 Сочинения</strong><span>Раздел подготовлен к наполнению</span></button>
+</div>
+
+<section class="work-section" id="dict">
+<h2>Диктанты</h2><p>Выбери тему. После этого откроется список диктантов по этой теме.</p>
+<button class="work-row available" id="topic1" type="button">
+<span class="num">01</span><span><strong>Живой русский язык</strong><small>Тема 1 · доступен Диктант №1</small></span><span class="arrow">Открыть →</span>
+</button>
+<div class="dict-list" id="dictList1">
+<div class="dict-card"><div><h3>Диктант №1</h3><p>«Живой русский язык»</p></div>
+<button class="open-btn" type="button" onclick="location.href='dictation-01.html'">Открыть диктант →</button></div>
+</div>
+<div class="work-row locked"><span class="num">02</span><span><strong>Следующая тема</strong><small>будет добавлена далее</small></span><span>🔒</span></div>
+<div class="work-row locked"><span class="num">03</span><span><strong>Следующая тема</strong><small>будет добавлена далее</small></span><span>🔒</span></div>
+</section>
+
+<section class="work-section hidden" id="expo"><h2>Изложения</h2><div class="placeholder">Темы изложений будут добавляться сюда без изменения основной страницы русского языка.</div></section>
+<section class="work-section hidden" id="essay"><h2>Сочинения</h2><div class="placeholder">Темы сочинений будут добавляться сюда без изменения основной страницы русского языка.</div></section>
+</main>
+</div>
+</section>
+<script src="../shared/js/global-stars-v818.js"></script>
+<script>
+document.getElementById('topic1').addEventListener('click',()=>document.getElementById('dictList1').classList.toggle('open'));
+document.querySelectorAll('.work-tab').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.work-tab').forEach(x=>x.classList.remove('active')); b.classList.add('active');
+ ['dict','expo','essay'].forEach(id=>document.getElementById(id).classList.add('hidden'));
+ document.getElementById(b.dataset.tab).classList.remove('hidden');
+}));
+</script>
+</body></html>
