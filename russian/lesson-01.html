@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Русский язык · Урок 1 · Богатство и выразительность русского языка</title>
   <meta name="description" content="Предварительная интерактивная страница первого урока русского языка для платформы Лига знаний">
+  <link rel="stylesheet" href="../shared/css/style-01.css"><link rel="stylesheet" href="../shared/css/style-02.css"><link rel="stylesheet" href="../shared/css/style-03.css"><link rel="stylesheet" href="../shared/css/style-04.css"><link rel="stylesheet" href="../shared/css/style-05.css"><link rel="stylesheet" href="../shared/css/style-06.css"><link rel="stylesheet" href="../shared/css/style-07.css">
   <style>
     :root{
       color-scheme:dark;
@@ -15,10 +16,7 @@
     }
     *{box-sizing:border-box}
     html{scroll-behavior:smooth}
-    body{margin:0;min-height:100vh;color:var(--white);background:
-      radial-gradient(circle at 82% 4%,#b6274b55 0,transparent 25%),
-      radial-gradient(circle at 10% 0,#2279c766 0,transparent 30%),
-      linear-gradient(155deg,#020d25 0,#082b5b 48%,#061a3e 100%);overflow-x:hidden}
+    body{margin:0;min-height:100vh;color:var(--white);overflow-x:hidden}
     body:before{content:"А  Я   Б  Ь   Р  У   С  С  К  И  Й";position:fixed;inset:0;pointer-events:none;opacity:.075;color:#b9ddff;font-weight:1000;font-size:clamp(42px,8vw,120px);letter-spacing:.18em;word-spacing:.55em;line-height:2.2;transform:rotate(-8deg) scale(1.15);display:flex;align-items:center;justify-content:center;text-align:center;text-shadow:0 0 30px #58bfff;background:radial-gradient(circle at 50% 45%,#3b8fd51c,transparent 45%)}
     button,input{font:inherit}
     button{cursor:pointer}
@@ -56,6 +54,8 @@
     .toast{position:fixed;z-index:90;right:18px;bottom:18px;max-width:360px;padding:13px 16px;border:1px solid #8ac9ef;border-radius:14px;background:#07234def;color:#fff;box-shadow:0 12px 35px #0008;opacity:0;transform:translateY(12px);pointer-events:none;transition:.22s}.toast.show{opacity:1;transform:none}
     @media(max-width:900px){.layout{grid-template-columns:1fr}.match-plan{position:relative;top:0}.steps{grid-template-columns:repeat(3,1fr)}.step-btn{grid-template-columns:30px 1fr;font-size:13px}.hero-grid{grid-template-columns:1fr minmax(200px,.55fr)}.video-placeholder{grid-template-columns:1fr}.video-note{border-top:1px solid #ffffff25}.lesson-card{grid-template-columns:180px 1fr}.lesson-card img{height:290px}.cheat{grid-template-columns:1fr 1fr}}
     @media(max-width:650px){.hud{grid-template-columns:auto 1fr}.hud-center{grid-column:1/-1;grid-row:2}.score{justify-self:end}.layout{width:min(100% - 16px,1280px);margin-top:10px}.panel{padding:19px}.steps{grid-template-columns:1fr 1fr}.step-btn{font-size:12px}.hero-grid{grid-template-columns:1fr}.hero-main{max-height:390px;order:-1}.subhead{display:block}.choices,.definitions,.two-col,.drag-grid,.cheat{grid-template-columns:1fr}.lesson-card{grid-template-columns:1fr}.lesson-card img{height:310px}.intonation{grid-template-columns:1fr}.video-placeholder{min-height:0}.video-note{padding:20px}.video-scene{padding:0}.actions>*{width:100%}}
+  
+    body:before{display:none!important}
   </style>
   <script>
     // Независимая навигация запускается до остальных заданий урока.
@@ -84,7 +84,7 @@
     })();
   </script>
 </head>
-<body><div id="v8DirectNav" style="position:fixed;z-index:99999;left:10px;top:10px;display:flex;gap:6px"><button onclick="location.href='index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">← Темы</button><button onclick="location.href='../index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">Предметы</button></div>
+<body><div id="v8DirectNav" style="position:fixed;z-index:99999;left:10px;top:10px"><button onclick="location.href='index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">← Темы</button></div>
   <header class="hud">
     <button class="ghost" id="homeBtn" type="button">← К темам</button>
     <div class="hud-center"><div class="stage-label" id="stageLabel">Этап 1 из 6 · Старт</div><div class="progress" aria-label="Прогресс урока"><span id="progressBar"></span></div></div>
