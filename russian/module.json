@@ -2,7 +2,8 @@
   "subject": "russian",
   "title": "Русский язык · 5 класс",
   "lessons": [
-    "lesson-01.html"
+    "lesson-01.html",
+    "dictation-01.html"
   ],
   "progressKey": "liga-znaniy-russian-progress-v1"
 }

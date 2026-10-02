@@ -227,7 +227,7 @@
           <p class="muted" id="saveNote" aria-live="polite">Предварительная версия сохраняет результат только в этом браузере.</p>
         </div>
       </section>
-    </main>
+    </main><section style="width:min(1280px,calc(100% - 28px));margin:0 auto 42px"><div class="panel" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(150px,230px);gap:18px;align-items:center"><div><div class="kicker">Письменная практика · Урок 1</div><h2>Диктант №1 «Живой русский язык»</h2><p class="lead">Прослушай текст, выбери удобный способ письма, выполни самопроверку или подготовь работу для учителя.</p><div class="actions"><button class="primary" type="button" onclick="location.href='dictation-01.html'">🏆 Открыть диктант →</button></div></div><img src="assets/dictation-trophy.png" alt="Кубок за диктант" style="width:100%;max-height:220px;object-fit:contain;filter:drop-shadow(0 15px 18px #0007)"></div></section>
   </div>
 
   <div class="goal-pop" id="goalPop" aria-hidden="true">⚽ ГОЛ!</div>
@@ -303,21 +303,7 @@
       $('#compareInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#checkInput').click()});
 
       $$('.punct').forEach(btn=>btn.addEventListener('click',()=>{const mark=btn.dataset.punct;$$('.punct').forEach(x=>x.classList.toggle('active',x===btn));const phrase=$('#intonationPhrase');phrase.textContent='Команда забила гол'+mark;phrase.classList.toggle('excited',mark==='!')}));
-      function saveRussianCourseResult(goals){
-        try{
-          const key='liga-znaniy-russian-progress-v1';
-          const data=JSON.parse(localStorage.getItem(key)||'{}');
-          const best=Math.max(Number(data.topic1Goals)||0,Number(goals)||0);
-          data.topic1Goals=best;
-          data.topic1Max=TOTAL;
-          data.topic1Completed=true;
-          data.topic1Date=new Date().toISOString();
-          localStorage.setItem(key,JSON.stringify(data));
-          localStorage.setItem('russian_topic_1_goals',String(best));
-          localStorage.setItem('russian_topic_1_completed','1');
-        }catch(_){}
-      }
-      $('#finishBtn').addEventListener('click',()=>{state.completed=true;save();const count=goalTotal();saveRussianCourseResult(count);notifyParent();location.href='index.html';});
+      $('#finishBtn').addEventListener('click',()=>{state.completed=true;save();const count=goalTotal();notifyParent();location.href='index.html';});
       $('#resetBtn').addEventListener('click',()=>{if(!confirm('Сбросить ответы и голы этого предварительного урока?'))return;storage.remove();location.reload()});
       updateScore();window.lessonGoTo(0);
     })();
