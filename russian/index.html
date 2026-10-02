@@ -1,6 +1,43 @@
 <!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Русский язык · 5 класс · Лига знаний</title><link rel="stylesheet" href="../shared/css/style-01.css"><link rel="stylesheet" href="../shared/css/style-02.css"><link rel="stylesheet" href="../shared/css/style-03.css"><link rel="stylesheet" href="../shared/css/style-04.css"><link rel="stylesheet" href="../shared/css/style-05.css"><link rel="stylesheet" href="../shared/css/style-06.css"><link rel="stylesheet" href="../shared/css/style-07.css"><style>.screen{display:block!important;min-height:100vh}.hidden{display:none!important}a.row{text-decoration:none}button.row{width:100%}
 .russian-course-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,285px);gap:18px;align-items:start;margin-top:17px}
 .russian-course-grid .topic-scroll{margin-top:0!important}.writing-side{position:sticky;top:82px;display:flex;flex-direction:column;gap:12px}.writing-card{border:1px solid rgba(130,210,255,.65);border-radius:20px;padding:16px;background:rgba(12,60,115,.86);box-shadow:0 18px 38px #0003;color:#fff;text-align:center}.writing-card img{display:block;width:100%;height:145px;object-fit:contain;margin:0 auto 8px;filter:drop-shadow(0 12px 15px #0004)}.writing-card h2{margin:6px 0;font-size:23px}.writing-card p{margin:6px 0 13px;line-height:1.4;color:#e8f4ff}.writing-card button{width:100%;border:0;border-radius:13px;padding:12px;background:linear-gradient(135deg,#ffb53f,#ff7c2e);font-weight:900;color:#fff;cursor:pointer}.writing-mini{border:1px solid rgba(130,210,255,.45);border-radius:16px;padding:13px;background:rgba(12,60,115,.72);color:#fff}.writing-mini strong{display:block;font-size:17px;margin-bottom:3px}.writing-mini span{font-size:13px;opacity:.8}.writing-mini.locked{opacity:.72}@media(max-width:850px){.russian-course-grid{grid-template-columns:1fr}.writing-side{position:relative;top:auto;order:2;display:grid;grid-template-columns:1fr}.writing-card img{height:120px}}
+
+/* Approved Russian main-page written works layout */
+.written-work-approved,
+.side-work{
+  align-self:start;
+}
+.written-work-approved .written-card,
+.side-work .written-card{
+  background:linear-gradient(180deg,#b4144c 0%,#7d1239 100%);
+  border:1px solid rgba(255,156,190,.85);
+  border-radius:18px;
+  padding:18px;
+  color:#fff;
+  box-shadow:0 14px 30px rgba(32,0,18,.30);
+}
+.written-work-approved .written-card img,
+.side-work .written-card img{
+  display:block;
+  width:min(150px,75%);
+  margin:10px auto 14px;
+  border-radius:8px;
+}
+.written-work-approved .written-card button,
+.side-work .written-card button{
+  width:100%;
+  border:0;
+  border-radius:11px;
+  padding:12px 10px;
+  background:linear-gradient(135deg,#ffc24a,#ff8b2e);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+.written-work-approved .written-kicker{font-size:11px;font-weight:900;letter-spacing:.04em;color:#ffd4e3}
+.written-work-approved h3{font-size:24px;margin:6px 0}
+.written-work-approved .side-sub{margin-top:-6px;color:#d6effc}
+
 </style></head><body><section class="screen" id="russian">
 <header class="top"><button class="textbtn" id="russianBack" type="button" onclick="location.href='../index.html'">← Предметы</button><div class="brand">Русский язык · 5 класс</div><div class="subject-tools"><button class="chat-launch" data-chat-subject="russian">💬 Репетитор</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span></div></div></header>
 <div class="page topics-layout"><main class="panel">
