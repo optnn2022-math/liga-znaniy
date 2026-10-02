@@ -100,7 +100,7 @@ body{
 
 </head>
 <body><header class="hud">
-    <button class="ghost" id="homeBtn" type="button" onclick="location.href="../../index.html"">← К темам</button>
+    <button class="ghost" id="homeBtn" type="button"../../index.html"" onclick="window.location.href='../../index.html'; return false;">← К темам</button>
     <div class="hud-center"><div class="stage-label" id="stageLabel">Этап 1 из 6 · Старт</div><div class="progress" aria-label="Прогресс урока"><span id="progressBar"></span></div></div>
     <div class="score" title="Голы за правильный ответ с первой попытки">⚽ <span id="goalCount">0</span> / 8</div>
   </header>
@@ -245,7 +245,7 @@ body{
             <div><strong>Выразительная речь</strong><p>Образы, сравнения и интонация помогают увидеть и почувствовать сказанное.</p></div>
           </div>
           <div class="coach"><strong>Тренер Слова</strong><br><span id="coachFinish">Ты увидел, как богатство языка превращается в выразительную речь. Теперь попробуй замечать точные и образные слова в книгах и разговорах.</span></div>
-          <div class="actions"><button class="ghost" type="button" data-next="4">← Вернуться к заданиям</button><button class="primary" id="finishBtn" type="button">Завершить урок</button><button class="ghost" id="resetBtn" type="button">Начать заново</button></div>
+          <div class="actions"><button class="ghost" type="button" data-next="4" onclick="window.location.href='../../index.html'; return false;">← Вернуться к заданиям</button><button class="primary" id="finishBtn" type="button">Завершить урок</button><button class="ghost" id="resetBtn" type="button">Начать заново</button></div>
           <p class="muted" id="saveNote" aria-live="polite">Предварительная версия сохраняет результат только в этом браузере.</p>
         </div>
       </section>
