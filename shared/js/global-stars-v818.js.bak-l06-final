@@ -6,7 +6,6 @@ function totalStars(){
   var total=0;
   var m=safe('liga-znaniy-course-v2')||{}, g=m.goals||{};
   Object.keys(g).forEach(function(k){total+=n(g[k])});
-  total+=n(localStorage.getItem('liga_math_topic6_goals'));
   var ra=safe('liga_russian_lesson1_preview_v1')||{}, rb=safe('liga-znaniy-russian-progress-v1')||{};
   var rga=Object.values(ra.goals||{}).filter(Boolean).length, rgb=n(rb.topic1Goals); total+=Math.max(rga,rgb);
   var v2=safe('liga-znaniy-biology-progress-v2')||{},v1=safe('liga-znaniy-biology-progress-v1')||{},seen={};
