@@ -45,7 +45,7 @@ background:linear-gradient(135deg,#ffb53f,#ff7c2e);font-weight:900;color:#fff;cu
 <body>
 <section class="screen">
 <header class="top">
-<button class="textbtn" type="button" onclick="location.href="index.html"">← Темы русского языка</button>
+<button class="textbtn" type="button" onclick="if(window.parent!==window){window.parent.postMessage({type:'liga-znaniy:return-to-russian'},'*');}else{window.location.href='index.html';}">← Темы русского языка</button>
 <div class="brand">Русский язык · 5 класс</div>
 <div class="subject-tools"><button class="chat-launch" data-chat-subject="russian">💬 Репетитор</button><div class="score">⭐ <span data-points="">0</span></div></div>
 </header>
