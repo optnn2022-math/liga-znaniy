@@ -245,7 +245,7 @@ body{
             <div><strong>Выразительная речь</strong><p>Образы, сравнения и интонация помогают увидеть и почувствовать сказанное.</p></div>
           </div>
           <div class="coach"><strong>Тренер Слова</strong><br><span id="coachFinish">Ты увидел, как богатство языка превращается в выразительную речь. Теперь попробуй замечать точные и образные слова в книгах и разговорах.</span></div>
-          <div class="actions"><button class="ghost" type="button" data-next="4" onclick="window.location.href='../../index.html'; return false;">← Вернуться к заданиям</button><button class="primary" id="finishBtn" type="button">Завершить урок</button><button class="ghost" id="resetBtn" type="button">Начать заново</button></div>
+          <div class="actions"><button class="ghost" type="button" data-next="4">← Назад</button><button class="primary" id="finishBtn" type="button">Завершить урок</button><button class="ghost" id="resetBtn" type="button">Начать заново</button></div>
           <p class="muted" id="saveNote" aria-live="polite">Предварительная версия сохраняет результат только в этом браузере.</p>
         </div>
       </section>
@@ -337,8 +337,24 @@ body{
       $('#compareInput').addEventListener('keydown',e=>{if(e.key==='Enter')$('#checkInput').click()});
 
       $$('.punct').forEach(btn=>btn.addEventListener('click',()=>{const mark=btn.dataset.punct;$$('.punct').forEach(x=>x.classList.toggle('active',x===btn));const phrase=$('#intonationPhrase');phrase.textContent='Команда забила гол'+mark;phrase.classList.toggle('excited',mark==='!')}));
-      $('#finishBtn').addEventListener('click',()=>{state.completed=true;save();const count=goalTotal();notifyParent();location.href='index.html';});
-      $('#resetBtn').addEventListener('click',()=>{if(!confirm('Сбросить ответы и голы этого предварительного урока?'))return;storage.remove();location.reload()});
+      $('#finishBtn').addEventListener('click',()=>{
+  state.completed = true;
+  save();
+  notifyParent();
+
+  if (window.parent !== window) {
+    window.parent.postMessage({
+      type: 'liga-znaniy:return-to-russian'
+    }, '*');
+    return;
+  }
+
+  location.href = '../../index.html';
+});
+      $('#resetBtn').addEventListener('click',()=>{
+  storage.remove();
+  location.reload();
+});
       updateScore();window.lessonGoTo(0);
     })();
   </script>
