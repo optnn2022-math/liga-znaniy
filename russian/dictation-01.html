@@ -16,7 +16,19 @@ body{color:#fff;background:radial-gradient(circle at 82% 4%,#b6274b55 0,transpar
 </style>
 <style>
 html,body{min-height:100%}body{color:#17324d;background:#e9f4fb url('assets/dictation-room-bg.png') center top/cover fixed no-repeat}.wrap{max-width:1450px;padding:18px}.liga-head{background:#ffffffea;border:1px solid #d6b36b;border-radius:18px;padding:12px 16px;box-shadow:0 8px 28px #40210f28}.liga-head b{color:#8e153e}.liga-head div[style]{color:#6d4b31!important}.liga-nav a{color:#6b1835;background:#fff8e9;border-color:#d6b36b}.hero{background:#fffdf6ee;border:1px solid #d6b36b;box-shadow:0 18px 55px #40210f38;color:#17324d}.tag{background:#a91349;color:#fff}.title{color:#17324d}.sub,.small{color:#5f6d79!important}.step{background:#eef4f8;color:#52677a;border-color:#d6e1e8}.step.active{background:linear-gradient(135deg,#a91349,#d52b61);color:#fff}.panel h2,.panel h3{color:#17324d}.choice,.box,.teacherCard,.typedTools,.canvasTools{background:#fffdf8;color:#17324d;border-color:#d8b66f}.choice:hover{background:#fff5df;border-color:#b88728}.btn{background:linear-gradient(135deg,#a91349,#d52b61)}.btn.secondary{background:#f4f7fa;color:#17324d;border:1px solid #b9cad8}.typedShell,.canvasShell{background:#f7fbfe}.canvasShell{overflow:visible;max-height:none}.canvasTools{position:relative;top:auto;z-index:3;margin-bottom:12px;border:1px solid #d8b66f;border-radius:14px;box-shadow:0 5px 14px #40210f18}.notebook{margin-top:0;background:repeating-linear-gradient(#fff 0,#fff 31px,#b9daf2 32px)}.typedTools{position:relative;top:auto}.reward-card{background:#fff3cd;color:#7a4b00;border-color:#d6a738}.side-art{opacity:.16}.dict-visual{background:linear-gradient(90deg,#fff8e7dd,#ffffff88);border-radius:18px;padding:10px}.audioSticky{position:sticky;top:6px;background:#fffdf8!important;color:#17324d!important;border-color:#d8b66f!important}.sentence{color:#17324d}@media(max-width:720px){body{background-position:62% top}.wrap{padding:8px}.liga-head{align-items:flex-start}.canvasTools .pagebar{display:flex;gap:6px}.canvasTools .btn{padding:10px 11px}.notebook{height:430px}}
-</style></head>
+</style>/* LIGA_DICTATION_BG_START */
+<style id="liga-dictation-bg">
+  html, body { min-height: 100%; }
+  body {
+    background-image: url("assets/dictation-bg.png") !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+  }
+</style>
+/* LIGA_DICTATION_BG_END */
+</head>
 <body><div class="wrap"><div class="liga-head"><div><b style="font-size:22px">⚽ ЛИГА ЗНАНИЙ</b><div style="color:#cfe3f5;font-weight:800">Русский язык · 5 класс</div></div><div class="liga-nav"><a href="lesson-01.html">← В урок 1</a><a href="index.html">Темы русского языка</a><a href="../index.html">Предметы</a></div></div><main class="hero"><img class="side-art" src="assets/dictation-quill-books.png" alt="Книги и перо">
 <div class="dict-visual"><div><span class="tag">Русский язык • 5 класс • Урок 1</span><h1 class="title">Диктант №1</h1><div class="sub">«Живой русский язык» · тренируем грамотное письмо</div><div class="reward-card"><img src="assets/dictation-trophy.png" alt="Кубок"><span>Кубок грамотности: заверши диктант и получи 1 бонусный гол к результату урока 1.</span></div></div><img src="assets/russian-footballer.webp" alt="Футболист — герой русского языка"></div>
 <div class="steps"><span class="step active" id="s1">1. Способ</span><span class="step" id="s2">2. Диктант и работа</span><span class="step" id="s4">3. Проверка</span></div>
@@ -75,3 +87,4 @@ function downloadReportImage(){if(method==='type')storeTypedPage();if(method==='
 function returnHome(){show(1);let old=document.getElementById('doneState');if(old)old.remove();let d=document.createElement('div');d.id='doneState';d.className='box';d.innerHTML='<span class="doneBadge">✓ Диктант написан</span><p><b>Диктант №1 «Живой русский язык»</b> завершён. Результат сохранён на этом устройстве.</p><button class="btn secondary" onclick="choose(method||localStorage.getItem(\'dictation_lesson1_method\')||\'type\')">Открыть работу</button>';document.getElementById('p1').prepend(d)}
 window.addEventListener('load',()=>{if(localStorage.getItem('dictation_lesson1_status')==='done'){method=localStorage.getItem('dictation_lesson1_method')||'';let d=document.createElement('div');d.id='doneState';d.className='box';d.innerHTML='<span class="doneBadge">✓ Диктант написан</span><p><b>Диктант №1 «Живой русский язык»</b> уже завершён на этом устройстве.</p>';document.getElementById('p1').prepend(d)}});
 </script></body></html>
+
