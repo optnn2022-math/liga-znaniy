@@ -19,9 +19,7 @@
       radial-gradient(circle at 82% 4%,#b6274b55 0,transparent 25%),
       radial-gradient(circle at 10% 0,#2279c766 0,transparent 30%),
       linear-gradient(155deg,#020d25 0,#082b5b 48%,#061a3e 100%);overflow-x:hidden}
-    body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.08;background:
-      linear-gradient(90deg,transparent 49.7%,#fff 49.7%,#fff 50.3%,transparent 50.3%),
-      radial-gradient(ellipse at 50% 115%,transparent 0 17%,#fff 17.2% 17.7%,transparent 18%);background-size:100% 100%}
+    body:before{content:"А  Я   Б  Ь   Р  У   С  С  К  И  Й";position:fixed;inset:0;pointer-events:none;opacity:.075;color:#b9ddff;font-weight:1000;font-size:clamp(42px,8vw,120px);letter-spacing:.18em;word-spacing:.55em;line-height:2.2;transform:rotate(-8deg) scale(1.15);display:flex;align-items:center;justify-content:center;text-align:center;text-shadow:0 0 30px #58bfff;background:radial-gradient(circle at 50% 45%,#3b8fd51c,transparent 45%)}
     button,input{font:inherit}
     button{cursor:pointer}
     .hidden{display:none!important}
@@ -222,8 +220,8 @@
             <div><strong>Точная речь</strong><p>Выбранное слово лучше всего соответствует мысли и ситуации.</p></div>
             <div><strong>Выразительная речь</strong><p>Образы, сравнения и интонация помогают увидеть и почувствовать сказанное.</p></div>
           </div>
-          <div class="coach"><strong>Тренер Слова</strong><br><span id="coachFinish">Ты увидел, как богатство языка превращается в выразительную речь. Теперь попробуй замечать точные и образные слова в книгах и разговорах.</span></div>
-          <div class="actions"><button class="ghost" type="button" data-next="4">← Вернуться к заданиям</button><button class="primary" id="finishBtn" type="button">Завершить урок</button><button class="ghost" id="resetBtn" type="button">Начать заново</button></div>
+          <div class="coach"><strong>Тренер Слова</strong><br><span id="coachFinish">Ты увидел, как богатство языка превращается в выразительную речь. Теперь попробуй замечать точные и образные слова в книгах и разговорах.<br><br><b>Егор, не забудь написать диктант по этой теме. Удачи! 🍀</b></span></div>
+          <div class="actions"><button class="ghost" type="button" data-next="4">← Вернуться к заданиям</button><button class="primary" id="dictationBtn" type="button" onclick="location.href='dictation-01.html'">✍️ Перейти к диктанту</button><button class="primary" id="finishBtn" type="button">Завершить урок</button><button class="ghost" id="resetBtn" type="button">Начать заново</button></div>
           <p class="muted" id="saveNote" aria-live="polite">Предварительная версия сохраняет результат только в этом браузере.</p>
         </div>
       </section>
