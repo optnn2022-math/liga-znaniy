@@ -337,6 +337,41 @@
 
 </style>
 
+
+<style id="lesson02-main-site-background">
+
+/* =========================================================
+   ОСНОВНОЙ ФОН ЛИГИ ЗНАНИЙ
+   Для всех обычных страниц урока 2.
+   Словарная лаборатория сохраняет собственное оформление.
+   ========================================================= */
+
+/* Обычные этапы урока */
+body:not(:has(.dictionary-lab)):not(:has(.dictionary-laboratory)):not(:has(.lab-stage)) {
+    background:
+        linear-gradient(rgba(3, 35, 72, 0.28), rgba(3, 35, 72, 0.42)),
+        url("../assets/images/background_or_ui_01_61776296.png")
+        center center / cover fixed no-repeat !important;
+
+    min-height: 100vh !important;
+}
+
+/* Основные контейнеры не должны закрывать фон сплошной заливкой */
+body:not(:has(.dictionary-lab)):not(:has(.dictionary-laboratory)):not(:has(.lab-stage)) .lesson-page,
+body:not(:has(.dictionary-lab)):not(:has(.dictionary-laboratory)):not(:has(.lab-stage)) .lesson-main,
+body:not(:has(.dictionary-lab)):not(:has(.dictionary-laboratory)):not(:has(.lab-stage)) .lesson-content {
+    background-color: transparent !important;
+}
+
+/* ЛАБОРАТОРИЮ НЕ МЕНЯЕМ */
+body:has(.dictionary-lab),
+body:has(.dictionary-laboratory),
+body:has(.lab-stage) {
+    /* сохраняется её существующий фон */
+}
+
+</style>
+
 </head>
 <body>
 <header class="hud"><div class="brand" style="display:flex;align-items:center;gap:10px">
