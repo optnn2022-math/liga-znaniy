@@ -1575,10 +1575,17 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateLigaBackground() {
         const active = document.querySelector('.stage.active');
         const n = active ? Number(active.dataset.stage) : 0;
-        document.documentElement.classList.toggle(
-            'liga-field-bg',
-            n === 1 || n === 2
+        if (n === 1 || n === 2) {
+        document.body.style.setProperty(
+          'background-image',
+          'url("../../shared/site-background.png")',
+          'important'
         );
+        document.body.style.setProperty('background-size', 'cover', 'important');
+        document.body.style.setProperty('background-position', 'center center', 'important');
+        document.body.style.setProperty('background-repeat', 'no-repeat', 'important');
+        document.body.style.setProperty('background-attachment', 'fixed', 'important');
+      }
     }
 
     updateLigaBackground();
