@@ -1,0 +1,1170 @@
+
+:root{--navy:#061b42;--blue:#0b3972;--blue2:#16579a;--gold:#ffc849;--white:#fff;--muted:#cfe3f5;--green:#4ee29a;--red:#ff7187}
+*{box-sizing:border-box} html{scroll-behavior:smooth}
+body{margin:0;color:#fff;font-family:Inter,system-ui,"Segoe UI",Arial,sans-serif;background:radial-gradient(circle at 90% 0,#a51e4650,transparent 27%),linear-gradient(150deg,#020d25,#082b5b 55%,#061a3e);min-height:100vh}
+button,input{font:inherit} button{cursor:pointer}.hidden{display:none!important}
+.hud{position:sticky;top:0;z-index:20;display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:12px 22px;background:#041633ee;border-bottom:1px solid #7dc7ff55;backdrop-filter:blur(12px)}
+.brand{font-weight:950}.progress{height:8px;background:#ffffff1b;border-radius:99px;overflow:hidden;margin-top:6px}.progress span{display:block;height:100%;width:12.5%;background:linear-gradient(90deg,var(--gold),#ff7b35);transition:.3s}
+.score{padding:9px 13px;border:1px solid #8bc9f2;border-radius:14px;background:#0c3970;font-weight:950}
+.layout{width:min(1280px,calc(100% - 26px));margin:20px auto 40px;display:grid;grid-template-columns:235px minmax(0,1fr);gap:18px}
+.side{position:sticky;top:82px;padding:16px;border:1px solid #72afe0;border-radius:22px;background:#082b59ee}
+.side h3{margin:0 0 12px;color:#ffe080}.step{width:100%;margin:5px 0;padding:10px;border:1px solid #ffffff22;border-radius:12px;background:#ffffff08;color:#dcefff;text-align:left;font-weight:800}.step.active{border-color:#ffd45d;background:#ffd45d22}
+.stage{display:none}.stage.active{display:block;animation:up .25s ease}@keyframes up{from{opacity:0;transform:translateY(8px)}}
+.panel{padding:clamp(20px,3vw,36px);border:1px solid #74b2e4;border-radius:25px;background:linear-gradient(145deg,#0d3d75ed,#08295aed);box-shadow:0 20px 55px #0006}
+.kicker{color:#8fe8ff;font-weight:950;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+h1{font-size:clamp(34px,5vw,58px);line-height:1.02;margin:8px 0 14px}h2{font-size:clamp(27px,3.4vw,40px);margin:6px 0 14px}h3{margin:7px 0 10px}.lead{font-size:19px;line-height:1.55;color:#e5f4ff}.muted{color:var(--muted);line-height:1.55}
+.hero{display:grid;grid-template-columns:1fr .85fr;gap:22px;align-items:center}.hero img,.wideimg{width:100%;border-radius:20px;display:block;object-fit:contain;background:#fff}
+.coachbox{padding:16px 18px;border-radius:17px;background:#fff2c9;color:#503613;line-height:1.5;border:1px solid #ffd272}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.primary,.ghost{border-radius:14px;padding:12px 18px;font-weight:950}.primary{border:0;background:linear-gradient(135deg,#ffe36f,#ffad2d);color:#17345c}.ghost{border:1px solid #78b9e8;background:#0e3b70;color:#fff}
+.activity{margin:18px 0;padding:18px;border:1px solid #6faee0;border-radius:20px;background:#0b386d}.activity.done{border-color:#61e4a2}
+.task{display:inline-block;padding:6px 10px;border-radius:99px;background:#ffd35a;color:#17345c;font-size:13px;font-weight:950}
+.choices{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:13px}.choice{padding:13px;border:1px solid #7db9e6;border-radius:14px;background:#123f73;color:#fff;text-align:left;font-weight:800}.choice.good{background:#176343;border-color:#68e4a5}.choice.bad{background:#7d2941;border-color:#ff8e9b}
+.feedback{min-height:25px;font-weight:850;color:#bfe4ff}.feedback.ok{color:#83f1b3}.feedback.no{color:#ffb0b8}
+.video{display:grid;grid-template-columns:1.25fr .75fr;gap:0;border:1px solid #75b9e8;border-radius:20px;overflow:hidden}.video-screen{min-height:310px;background:linear-gradient(135deg,#020b18,#123d70);display:grid;place-items:center;text-align:center;padding:25px}.video-screen .play{font-size:64px}.video-note{padding:22px;background:#ffffff0a}.video-note li{margin:10px 0;line-height:1.45}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.piccard{border:1px solid #79b9e5;border-radius:17px;overflow:hidden;background:#0b3569}.piccard img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block}.piccard p{padding:10px;margin:0;font-weight:800}
+.scheme{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.bubble{padding:15px 10px;border:1px solid #83c5ef;border-radius:18px;background:#0f4a83;text-align:center;font-weight:900}.bubble b{display:block;font-size:28px;margin-bottom:5px}
+.dragbank,.zone{display:flex;gap:8px;flex-wrap:wrap;min-height:70px;padding:11px;border:2px dashed #75b9e8;border-radius:14px;background:#061f46}.zones{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}.chip{padding:9px 11px;border-radius:11px;border:1px solid #c7e7fb;background:#eef8ff;color:#17385d;font-weight:850}.zone strong{width:100%;color:#ffe080}
+.chain{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.chain .chip{font-size:15px}.selected{outline:4px solid #ffd35a}
+.dicts{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.dict{padding:12px;border:1px solid #7abbe8;border-radius:17px;background:#fff;min-height:145px;display:grid;place-items:center}.dict img{max-width:100%;max-height:110px;object-fit:contain}
+.situation{padding:13px;border-radius:14px;background:#ffffff10;margin:12px 0;font-weight:800}
+.timeline{width:100%;border-radius:20px;background:#fff}
+.final{padding:22px;border:1px solid #ffd35a;border-radius:20px;background:#ffffff0c;text-align:center}.bigscore{font-size:46px;font-weight:950;color:#ffe080}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.side{position:static}.hero,.video{grid-template-columns:1fr}.cards{grid-template-columns:1fr 1fr}.scheme{grid-template-columns:1fr 1fr}.dicts{grid-template-columns:1fr}.choices{grid-template-columns:1fr}}
+
+.topicsBtn{border:1px solid #ffd45d;background:#ffd45d;color:#17345c;border-radius:11px;padding:8px 11px;font-weight:950;white-space:nowrap}
+.dictSortGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:15px}
+.dictDrop{min-height:150px;border:2px dashed #7abbe8;border-radius:18px;background:#082b59;padding:12px}
+.dictDrop strong{display:block;color:#ffe080;margin-bottom:9px}
+.sitBank{display:grid;gap:9px;margin-top:14px;padding:12px;border:2px dashed #75b9e8;border-radius:16px;background:#061f46}
+.sitChip{width:100%;padding:11px 12px;border-radius:12px;border:1px solid #b8def7;background:#eef8ff;color:#17385d;text-align:left;font-weight:800;line-height:1.35}
+.sitChip.selected{outline:4px solid #ffd35a}
+@media(max-width:700px){.hud{grid-template-columns:1fr auto}.hud>div:nth-child(2){grid-column:1/-1;grid-row:2}.brand span{display:none}.dictSortGrid{grid-template-columns:1fr}.topicsBtn{font-size:12px;padding:7px 9px}}
+
+*{box-sizing:border-box}.dictionary-lab-embedded{margin:0;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at 75% 15%,#154d7d,#071b3d 55%,#03132e);min-height:100vh}.dictionary-lab-embedded .hud{height:72px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px;padding:9px 18px;background:#061a3b;position:sticky;top:0;z-index:20}.topics{background:#ffd64f;color:#153253;border:0;border-radius:13px;padding:11px 17px;font-weight:900}.mid{text-align:center;font-weight:800}.bar{height:8px;background:#244a72;border-radius:20px;margin-top:7px;overflow:hidden}.bar i{display:block;width:62.5%;height:100%;background:linear-gradient(90deg,#ffe45d,#ff7336)}.score{border:2px solid #4ca9e6;border-radius:16px;padding:10px 17px;font-weight:900;background:#073c70}.wrap{width:min(1180px,96vw);margin:18px auto 45px}.hero{position:relative;min-height:280px}.title{width:min(780px,73%);display:block;margin-left:3%}.books{position:absolute;right:0;top:0;width:320px;max-height:255px;object-fit:contain}h1{text-align:center;font-size:32px;margin:4px 0 7px}.note{position:relative;width:min(850px,80%);margin:auto}.note img{width:100%;display:block}.note p{position:absolute;inset:0;display:grid;place-items:center;text-align:center;color:#34200d;font-weight:750;font-size:17px;padding:12px 8%;margin:0}.board{background:#eaf6ff;color:#153253;border-radius:22px;padding:18px}.boardhead{display:flex;justify-content:space-between;gap:12px;align-items:center}.bank{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.card{border:1px solid #d7b26d;border-radius:15px;padding:12px 10px;background:#fffaf0;color:#17345c;font-weight:800;min-height:65px}.card.selected{outline:4px solid #ffcf43}.zones{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px}.zone{position:relative;aspect-ratio:1.8/1}.zone>img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;pointer-events:none}.drop{position:absolute;left:11%;right:7%;top:44%;bottom:9%;display:flex;align-content:flex-start;gap:6px;flex-wrap:wrap;padding:8px;overflow:auto;border-radius:18px}.drop .card{font-size:11px;min-height:auto;padding:7px;flex:1 1 45%}.actions{display:flex;justify-content:center;gap:12px;margin-top:22px}.check,.reset{padding:12px 18px;border-radius:13px;font-weight:900}.check{border:0;background:#ffd64f;color:#17345c}.reset{border:1px solid #7ac3ed;background:#0a4075;color:#fff}#feedback{text-align:center;font-weight:900;min-height:28px}@media(max-width:800px){.dictionary-lab-embedded .hud{gap:7px;padding:7px}.wrap{width:98vw}.hero{min-height:200px}.title{width:82%;margin-left:0}.books{width:35%;top:35px}h1{font-size:23px}.note{width:94%}.note p{font-size:12px}.bank{grid-template-columns:1fr 1fr}.zones{grid-template-columns:1fr}.zone{aspect-ratio:1.7/1}}
+
+
+.dictionary-lab-embedded{
+  background:
+    linear-gradient(rgba(3,22,52,.54), rgba(3,22,52,.60)),
+    url("assets/images/background_or_ui_01_61776296.png") center top / cover fixed no-repeat !important;
+}
+.wrap {
+  background:linear-gradient(180deg,rgba(3,30,66,.34),rgba(3,30,66,.18));
+  border-radius:24px;
+  padding:12px;
+}
+.board {
+  backdrop-filter: blur(2px);
+}
+.zones {
+  padding:8px 4px 18px;
+}
+@media(max-width:800px){
+  .dictionary-lab-embedded{
+    background:
+      linear-gradient(rgba(3,22,52,.50), rgba(3,22,52,.58)),
+      url("assets/images/background_or_ui_02_61776296.png") center top / cover fixed no-repeat !important;
+  }
+  .wrap{padding:5px}
+}
+
+
+.hero{position:relative; isolation:isolate;}
+.hero .title{position:relative!important;z-index:8!important;}
+.hero .books{z-index:2!important;right:-10px!important;top:42px!important;width:285px!important;opacity:.98;}
+.hero h1{position:relative;z-index:9!important;}
+.hero .note{position:relative;z-index:9!important;}
+.lesson-boy{
+ position:absolute;z-index:7;left:-52px;bottom:-430px;width:245px;
+ max-height:420px;object-fit:contain;object-position:bottom;
+ filter:drop-shadow(0 10px 12px rgba(0,0,0,.35));pointer-events:none;
+}
+@media(max-width:800px){
+ .hero .books{width:30%!important;right:0!important;top:54px!important;}
+ .hero .title{width:86%!important;margin-left:1%!important;}
+ .lesson-boy{left:-18px;bottom:-390px;width:175px;max-height:330px;}
+}
+
+
+/* Мальчик становится самостоятельным передним слоем слева */
+.hero{overflow:visible!important}
+.lesson-boy{
+  z-index:30!important;
+  left:-42px!important;
+  bottom:-455px!important;
+  width:265px!important;
+  max-height:455px!important;
+}
+
+/* Блок заданий освобождаем слева под персонажа */
+.board{
+  position:relative;
+  z-index:12;
+  width:calc(100% - 185px);
+  margin-left:185px;
+  padding:18px 18px 18px 28px!important;
+}
+.boardhead{padding-left:0}
+
+/* Словари также не перекрывают мальчика в верхней части */
+.zones{
+  position:relative;
+  z-index:11;
+  width:calc(100% - 105px);
+  margin-left:105px;
+}
+
+/* На узком экране мальчик остаётся виден, а задания начинаются правее него */
+@media(max-width:800px){
+  .lesson-boy{
+    left:-10px!important;
+    bottom:-365px!important;
+    width:155px!important;
+    max-height:305px!important;
+  }
+  .board{
+    width:calc(100% - 112px)!important;
+    margin-left:112px!important;
+    padding:10px!important;
+  }
+  .boardhead{
+    display:block!important;
+    font-size:12px;
+  }
+  .boardhead h2{font-size:16px;margin:0 0 5px}
+  .bank{grid-template-columns:1fr!important}
+  .card{font-size:12px!important;padding:9px 7px!important;min-height:52px!important}
+  .zones{
+    width:100%!important;
+    margin-left:0!important;
+    margin-top:22px!important;
+  }
+}
+
+.dictionary-lab-stage{padding:0!important}
+.dictionary-lab-embedded{min-height:100vh;padding:12px 10px 28px;border-radius:22px;background:transparent}
+.dictionary-lab-embedded .wrap{width:min(1180px,96vw);margin:0 auto}
+.lesson-stage-nav{margin:20px auto 0!important}
+
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+.lab5-stage {
+  padding:0!important;
+  background:
+    linear-gradient(rgba(3,24,52,.18),rgba(3,24,52,.28)),
+    url("assets/images/background_or_ui_03_61776296.png") center top/cover no-repeat!important;
+}
+.lab5-shell{width:100%;max-width:1180px;margin:0 auto;padding:12px 18px 34px;min-height:100vh}
+.lab5-top{display:grid;grid-template-columns:1fr 300px;grid-template-areas:"title books" "sub books" "note books";align-items:center;column-gap:10px}
+.lab5-titlebox{grid-area:title;display:flex;justify-content:center;position:relative;z-index:3}
+.lab5-titlebox img{width:min(720px,100%);height:auto;display:block;background:transparent}
+.lab5-books{grid-area:books;align-self:center;position:relative;z-index:1}
+.lab5-books img{width:100%;height:auto;display:block;background:transparent}
+.lab5-top h2{grid-area:sub;text-align:center;margin:0 0 5px;font-size:29px;text-shadow:0 3px 7px #000}
+.lab5-note{grid-area:note;position:relative;width:94%;justify-self:center}
+.lab5-note img{display:block;width:100%;height:104px;background:transparent}
+.lab5-note p{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;margin:0;padding:12px 7%;color:#35210d;font-weight:800;font-size:16px}
+
+.lab5-work{display:grid;grid-template-columns:205px minmax(0,1fr);grid-template-areas:"boy cards" "boy zones";gap:16px 14px;align-items:start;margin-top:10px}
+.lab5-boy{grid-area:boy;align-self:start;position:sticky;top:90px;z-index:5;margin-left:-36px}
+.lab5-boy img{display:block;width:255px;max-width:none;height:auto;background:transparent}
+.lab5-cards{grid-area:cards;background:#eaf6ff;color:#14375f;border-radius:20px;padding:15px;box-shadow:0 10px 28px #001a3c55}
+.lab5-cards-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px}
+.lab5-cards-head strong{font-size:22px} .lab5-cards-head span{font-size:13px;font-weight:800}
+.lab5-bank{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+.lab-card{border:1px solid #d5b46f;background:#fffaf0;color:#17385f;border-radius:14px;padding:11px 9px;min-height:70px;font-weight:850;line-height:1.25;text-align:center}
+.lab-card.selected{outline:4px solid #ffd34f}
+
+.lab5-zones{grid-area:zones;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.lab5-zone{position:relative;aspect-ratio:1.62/1;min-width:0}
+.lab5-zone>img{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;display:block;background:transparent;pointer-events:none}
+.lab5-drop{position:absolute;left:11%;right:7%;top:45%;bottom:9%;z-index:2;display:flex;flex-wrap:wrap;align-content:flex-start;gap:5px;padding:5px;overflow:auto;border-radius:15px}
+.lab5-drop .lab-card{flex:1 1 46%;min-height:0;padding:5px;font-size:10px}
+
+.lab5-controls,.lab5-nav{display:flex;justify-content:center;gap:12px;margin-top:16px}
+.lab5-feedback{min-height:25px;text-align:center;font-weight:900;margin:8px 0 0}
+
+@media(max-width:760px){
+ .lab5-shell{padding:8px 8px 26px}
+ .lab5-top{grid-template-columns:minmax(0,1fr) 31%;column-gap:4px}
+ .lab5-titlebox img{width:100%}
+ .lab5-top h2{font-size:20px}
+ .lab5-note{width:100%}
+ .lab5-note img{height:92px}
+ .lab5-note p{font-size:11px;line-height:1.15;padding:9px 8%}
+ .lab5-work{grid-template-columns:125px minmax(0,1fr);gap:10px 7px}
+ .lab5-boy{margin-left:-28px;position:relative;top:0}
+ .lab5-boy img{width:165px}
+ .lab5-cards{padding:9px;border-radius:15px}
+ .lab5-cards-head{display:block;margin-bottom:7px}
+ .lab5-cards-head strong{font-size:16px;display:block}
+ .lab5-cards-head span{font-size:10px}
+ .lab5-bank{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+ .lab-card{font-size:9px;padding:6px 3px;min-height:60px;border-radius:9px}
+ .lab5-zones{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+ .lab5-zone{aspect-ratio:1.55/1}
+ .lab5-drop{left:11%;right:7%;top:45%;bottom:8%;padding:2px;gap:2px}
+ .lab5-drop .lab-card{font-size:7px;padding:2px}
+ .lab5-controls button,.lab5-nav button{font-size:11px;padding:9px 10px}
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* 1. Левая панель заканчивается сразу после списка пунктов */
+.dictionary-lab-stage ~ *{} /* isolation marker */
+body:has(.lab5-stage.active) .sidebar,
+body:has(.lab5-stage.active) .lesson-plan,
+body:has(.lab5-stage.active) aside.plan{
+  height:max-content!important;
+  min-height:0!important;
+  align-self:start!important;
+}
+/* В текущем файле левая колонка является первым дочерним блоком основного layout */
+.lab5-stage.active ~ *{}
+@media(max-width:900px){
+  .app:has(.lab5-stage.active) > aside,
+  main:has(.lab5-stage.active) > aside,
+  .layout:has(.lab5-stage.active) > aside{
+    height:max-content!important;min-height:0!important;
+  }
+}
+
+/* 2. Карточки-ситуации делаем компактнее */
+.lab5-cards{
+  padding:11px!important;
+}
+.lab5-cards-head{margin-bottom:8px!important}
+.lab5-bank{gap:6px!important}
+.lab-card{
+  min-height:54px!important;
+  padding:7px 6px!important;
+  font-size:12px!important;
+  line-height:1.15!important;
+}
+
+/* 3. Области словарей существенно увеличиваем */
+.lab5-zones{
+  gap:12px!important;
+}
+.lab5-zone{
+  aspect-ratio:1.48/1!important;
+  min-height:340px!important;
+}
+.lab5-drop{
+  left:9%!important;
+  right:6%!important;
+  top:40%!important;
+  bottom:7%!important;
+  padding:7px!important;
+}
+.lab5-drop .lab-card{
+  font-size:10px!important;
+  padding:5px!important;
+}
+
+/* Мобильная версия — главное изменение видно именно здесь */
+@media(max-width:760px){
+  .lab5-work{
+    grid-template-columns:112px minmax(0,1fr)!important;
+    grid-template-areas:"boy cards" "zones zones"!important;
+    column-gap:5px!important;
+    row-gap:9px!important;
+  }
+  .lab5-boy img{width:150px!important}
+  .lab5-cards{padding:7px!important}
+  .lab5-cards-head strong{font-size:14px!important}
+  .lab5-cards-head span{font-size:9px!important}
+  .lab5-bank{gap:4px!important}
+  .lab-card{
+    min-height:46px!important;
+    padding:4px 2px!important;
+    font-size:8px!important;
+    line-height:1.08!important;
+  }
+  .lab5-zones{
+    width:100%!important;
+    gap:7px!important;
+  }
+  .lab5-zone{
+    min-height:0!important;
+    aspect-ratio:1.45/1!important;
+  }
+  .lab5-drop{
+    left:9%!important;right:6%!important;top:40%!important;bottom:7%!important;
+  }
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* ЭКРАН 5 — отдельная композиция, не наследующая деление предыдущих страниц */
+.layout:has(.lab5-stage.active){
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+  min-height:100vh!important;
+  background:transparent!important;
+}
+.layout:has(.lab5-stage.active) > main{
+  width:100%!important;
+  max-width:none!important;
+  margin:0!important;
+  padding:0!important;
+}
+
+/* План урока — плавающая панель ПОВЕРХ общего библиотечного фона */
+.layout:has(.lab5-stage.active) > .side{
+  position:absolute!important;
+  left:18px!important;
+  top:18px!important;
+  z-index:100!important;
+  width:205px!important;
+  height:auto!important;
+  min-height:0!important;
+  align-self:auto!important;
+  padding:13px!important;
+  background:rgba(5,42,86,.90)!important;
+  backdrop-filter:blur(5px);
+  box-shadow:0 10px 28px rgba(0,0,0,.30);
+}
+
+/* Один непрерывный фон на ВСЮ страницу лаборатории */
+.lab5-stage{
+  width:100%!important;
+  min-height:100vh!important;
+  margin:0!important;
+  padding:0!important;
+  background-position:center top!important;
+  background-size:cover!important;
+  background-repeat:no-repeat!important;
+  background-attachment:scroll!important;
+}
+.lab5-shell{
+  width:100%!important;
+  max-width:1180px!important;
+  margin:0 auto!important;
+  padding:18px 24px 38px!important;
+  background:transparent!important;
+}
+
+/* Верхняя композиция */
+.lab5-top{
+  width:calc(100% - 220px)!important;
+  margin-left:220px!important;
+  grid-template-columns:minmax(0,1fr) 275px!important;
+  column-gap:6px!important;
+}
+.lab5-titlebox img{width:min(700px,100%)!important}
+.lab5-books img{width:100%!important}
+.lab5-top h2{font-size:28px!important}
+.lab5-note{width:94%!important}
+
+/* Рабочая часть больше НЕ является отдельной правой колонкой */
+.lab5-work{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  margin-top:8px!important;
+}
+
+/* Мальчик — декоративный элемент поверх фона слева */
+.lab5-boy{
+  position:absolute!important;
+  left:-18px!important;
+  top:70px!important;
+  width:230px!important;
+  margin:0!important;
+  z-index:20!important;
+}
+.lab5-boy img{
+  width:230px!important;
+  height:auto!important;
+}
+
+/* Карточки компактнее и выше */
+.lab5-cards{
+  width:calc(100% - 235px)!important;
+  margin:0 0 16px 235px!important;
+  padding:10px 13px!important;
+}
+.lab5-cards-head{margin-bottom:7px!important}
+.lab5-cards-head strong{font-size:20px!important}
+.lab5-bank{gap:6px!important}
+.lab-card{
+  min-height:50px!important;
+  padding:6px 6px!important;
+  font-size:11px!important;
+  line-height:1.12!important;
+}
+
+/* Словари занимают всю ширину страницы */
+.lab5-zones{
+  width:100%!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+.lab5-zone{
+  width:100%!important;
+  min-height:0!important;
+  aspect-ratio:1.52/1!important;
+}
+.lab5-zone>img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+}
+.lab5-drop{
+  left:9%!important;
+  right:6%!important;
+  top:40%!important;
+  bottom:7%!important;
+  padding:8px!important;
+}
+
+/* Кнопки идут под общей композицией */
+.lab5-controls{margin-top:15px!important}
+.lab5-nav{margin-top:12px!important}
+
+/* Телефон: сохраняем принцип "один фон + плавающий план", без центральной полосы */
+@media(max-width:760px){
+  .layout:has(.lab5-stage.active) > .side{
+    left:7px!important;
+    top:12px!important;
+    width:135px!important;
+    padding:8px!important;
+    border-radius:14px!important;
+  }
+  .layout:has(.lab5-stage.active) > .side h3{font-size:13px!important;margin-bottom:6px!important}
+  .layout:has(.lab5-stage.active) > .side .step{
+    font-size:9px!important;
+    padding:7px 6px!important;
+    margin:3px 0!important;
+    border-radius:8px!important;
+  }
+  .lab5-shell{
+    width:100%!important;
+    max-width:none!important;
+    padding:10px 7px 28px!important;
+  }
+  .lab5-top{
+    width:calc(100% - 140px)!important;
+    margin-left:140px!important;
+    grid-template-columns:minmax(0,1fr) 30%!important;
+  }
+  .lab5-titlebox img{width:100%!important}
+  .lab5-top h2{font-size:17px!important;line-height:1.08!important}
+  .lab5-note{width:100%!important}
+  .lab5-note img{height:72px!important}
+  .lab5-note p{font-size:8px!important;padding:6px 8%!important}
+  .lab5-boy{
+    left:2px!important;
+    top:20px!important;
+    width:135px!important;
+  }
+  .lab5-boy img{width:135px!important}
+  .lab5-cards{
+    width:calc(100% - 140px)!important;
+    margin-left:140px!important;
+    padding:7px!important;
+  }
+  .lab5-cards-head strong{font-size:13px!important}
+  .lab5-cards-head span{font-size:8px!important}
+  .lab5-bank{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:4px!important}
+  .lab-card{
+    min-height:40px!important;
+    padding:4px 2px!important;
+    font-size:7px!important;
+  }
+  .lab5-zones{
+    width:100%!important;
+    margin-top:10px!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:5px!important;
+  }
+  .lab5-zone{aspect-ratio:1.48/1!important}
+  .lab5-drop{left:9%!important;right:6%!important;top:40%!important;bottom:7%!important;padding:3px!important}
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* 1) Верхние элементы немного крупнее */
+.lab5-titlebox img{
+  width:min(820px,100%)!important;
+  transform:scale(1.10)!important;
+  transform-origin:center center!important;
+}
+.lab5-note{
+  width:100%!important;
+  transform:scale(1.07)!important;
+  transform-origin:center center!important;
+  margin-top:8px!important;
+}
+.lab5-note img{height:116px!important}
+.lab5-note p{font-size:17px!important}
+
+/* 2) Рабочую часть опускаем, чтобы мальчик был полностью виден */
+.lab5-work{
+  margin-top:52px!important;
+}
+.lab5-boy{
+  top:5px!important;
+  left:-10px!important;
+  z-index:45!important;
+}
+.lab5-boy img{
+  width:245px!important;
+}
+
+/* 3) Фиксируем размеры словарей: добавленные карточки не меняют геометрию */
+.lab5-zones{
+  align-items:start!important;
+}
+.lab5-zone{
+  position:relative!important;
+  aspect-ratio:1.52/1!important;
+  height:auto!important;
+  overflow:hidden!important;
+}
+.lab5-zone>img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+}
+.lab5-drop{
+  position:absolute!important;
+  left:9%!important;
+  right:6%!important;
+  top:40%!important;
+  bottom:7%!important;
+  width:auto!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  overflow:auto!important;
+  align-content:flex-start!important;
+}
+/* Карточки внутри зоны уменьшаются/укладываются, но сама рамка не растёт */
+.lab5-drop .lab-card{
+  flex:1 1 30%!important;
+  min-width:0!important;
+  min-height:30px!important;
+  height:auto!important;
+  margin:0!important;
+  font-size:9px!important;
+  line-height:1.05!important;
+  padding:4px!important;
+}
+
+@media(max-width:760px){
+  .lab5-titlebox img{
+    width:100%!important;
+    transform:scale(1.12)!important;
+  }
+  .lab5-note{
+    transform:scale(1.08)!important;
+    margin-top:5px!important;
+  }
+  .lab5-note img{height:80px!important}
+  .lab5-note p{font-size:9px!important}
+  .lab5-work{
+    margin-top:42px!important;
+  }
+  .lab5-boy{
+    left:0!important;
+    top:2px!important;
+    width:145px!important;
+  }
+  .lab5-boy img{width:145px!important}
+  .lab5-zone{
+    aspect-ratio:1.48/1!important;
+    overflow:hidden!important;
+  }
+  .lab5-drop{
+    overflow:auto!important;
+  }
+  .lab5-drop .lab-card{
+    flex:1 1 30%!important;
+    min-height:22px!important;
+    font-size:6.5px!important;
+    padding:2px!important;
+  }
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* Исправление по фактическому мобильному скриншоту.
+   Не меняем верх страницы и общий фон. */
+
+/* Мальчик должен быть виден отдельным слоем, а не уходить под левую панель/словари */
+.lab5-boy{
+  position:absolute!important;
+  left:6px!important;
+  top:72px!important;
+  width:220px!important;
+  height:330px!important;
+  overflow:visible!important;
+  z-index:120!important;
+  pointer-events:none!important;
+}
+.lab5-boy img{
+  display:block!important;
+  width:220px!important;
+  height:auto!important;
+  max-width:none!important;
+  position:relative!important;
+  z-index:121!important;
+}
+
+/* Блок исходных утверждений НЕ сжимаем по высоте */
+.lab5-cards{
+  min-height:0!important;
+  height:auto!important;
+  overflow:visible!important;
+}
+.lab5-bank{
+  height:auto!important;
+  min-height:0!important;
+  overflow:visible!important;
+}
+.lab5-bank .lab-card{
+  height:auto!important;
+  min-height:58px!important;
+  overflow:hidden!important;
+}
+
+/* Рамки словарей остаются абсолютно фиксированного размера */
+.lab5-zone{
+  position:relative!important;
+  height:auto!important;
+  min-height:0!important;
+  aspect-ratio:1.48 / 1!important;
+  overflow:hidden!important;
+  contain:layout paint!important;
+}
+.lab5-zone>img{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+  z-index:1!important;
+}
+
+/* Внутри каждой рамки создаём отдельную сетку.
+   Карточки больше не могут вылезать за светлую область. */
+.lab5-drop{
+  position:absolute!important;
+  left:10%!important;
+  right:7%!important;
+  top:47%!important;
+  bottom:9%!important;
+  z-index:5!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  grid-auto-rows:minmax(0,1fr)!important;
+  gap:4px!important;
+  padding:3px!important;
+  overflow:hidden!important;
+  align-content:stretch!important;
+}
+.lab5-drop .lab-card{
+  width:100%!important;
+  min-width:0!important;
+  max-width:100%!important;
+  height:100%!important;
+  min-height:0!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:3px 4px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  font-size:8px!important;
+  line-height:1.05!important;
+  border-radius:8px!important;
+  white-space:normal!important;
+  overflow-wrap:anywhere!important;
+}
+
+/* На телефоне: сохраняем нормальную высоту исходных карточек,
+   мальчика выводим между панелью и рабочим блоком. */
+@media(max-width:760px){
+  .lab5-work{
+    margin-top:58px!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  .lab5-boy{
+    left:5px!important;
+    top:-18px!important;
+    width:155px!important;
+    height:245px!important;
+  }
+  .lab5-boy img{
+    width:155px!important;
+  }
+
+  /* исходная область утверждений не уменьшается */
+  .lab5-cards{
+    width:calc(100% - 150px)!important;
+    margin-left:150px!important;
+    padding:8px!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  .lab5-bank{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    gap:5px!important;
+    height:auto!important;
+  }
+  .lab5-bank .lab-card{
+    min-height:58px!important;
+    height:auto!important;
+    padding:5px 3px!important;
+    font-size:8px!important;
+    line-height:1.1!important;
+  }
+
+  /* даём место мальчику до начала словарей */
+  .lab5-zones{
+    margin-top:28px!important;
+    position:relative!important;
+    z-index:30!important;
+  }
+
+  .lab5-zone{
+    aspect-ratio:1.42 / 1!important;
+    overflow:hidden!important;
+  }
+  .lab5-drop{
+    left:10%!important;
+    right:7%!important;
+    top:48%!important;
+    bottom:9%!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:2px!important;
+    padding:2px!important;
+    overflow:hidden!important;
+  }
+  .lab5-drop .lab-card{
+    font-size:5.8px!important;
+    line-height:1!important;
+    padding:2px!important;
+    border-radius:5px!important;
+  }
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* ФИКСИРУЕМ геометрию экрана: перенос карточек больше ничего не сдвигает */
+.lab5-work{position:relative!important}
+
+/* Банк утверждений получает постоянную высоту */
+.lab5-cards{
+  height:340px!important;
+  min-height:340px!important;
+  max-height:340px!important;
+  overflow:hidden!important;
+}
+.lab5-bank{
+  height:270px!important;
+  min-height:270px!important;
+  max-height:270px!important;
+  align-content:start!important;
+  overflow:hidden!important;
+}
+.lab5-bank .lab-card{
+  height:62px!important;
+  min-height:62px!important;
+  max-height:62px!important;
+}
+
+/* Блок словарей имеет постоянное положение и размеры */
+.lab5-zones{
+  height:760px!important;
+  min-height:760px!important;
+  max-height:760px!important;
+  grid-template-rows:374px 374px!important;
+  align-content:start!important;
+  overflow:visible!important;
+}
+.lab5-zone{
+  width:100%!important;
+  height:374px!important;
+  min-height:374px!important;
+  max-height:374px!important;
+  aspect-ratio:auto!important;
+  overflow:hidden!important;
+}
+
+/* Внутренняя область принимает ЛЮБОЕ нужное количество карточек.
+   Рамка не меняется; меняется только размер карточек. */
+.lab5-drop{
+  display:grid!important;
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  grid-auto-rows:1fr!important;
+  align-content:stretch!important;
+  overflow:hidden!important;
+}
+.lab5-drop .lab-card{
+  width:100%!important;
+  height:100%!important;
+  min-width:0!important;
+  min-height:0!important;
+  max-width:100%!important;
+  max-height:100%!important;
+  margin:0!important;
+  padding:2px!important;
+  font-size:7px!important;
+  line-height:1!important;
+  overflow:hidden!important;
+  box-sizing:border-box!important;
+}
+
+/* Чем больше ответов попало в словарь, тем компактнее они становятся */
+.lab5-drop:has(.lab-card:nth-child(4)){
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+.lab5-drop:has(.lab-card:nth-child(5)){
+  grid-template-columns:repeat(3,minmax(0,1fr))!important;
+}
+.lab5-drop:has(.lab-card:nth-child(7)) .lab-card{
+  font-size:5.5px!important;
+  padding:1px!important;
+}
+
+/* МОБИЛЬНЫЙ ЭКРАН — фиксированные пиксельные размеры, чтобы ничего не прыгало */
+@media(max-width:760px){
+  .lab5-cards{
+    height:310px!important;
+    min-height:310px!important;
+    max-height:310px!important;
+    overflow:hidden!important;
+  }
+  .lab5-bank{
+    height:250px!important;
+    min-height:250px!important;
+    max-height:250px!important;
+    overflow:hidden!important;
+  }
+  .lab5-bank .lab-card{
+    height:58px!important;
+    min-height:58px!important;
+    max-height:58px!important;
+    font-size:8px!important;
+  }
+
+  .lab5-zones{
+    height:530px!important;
+    min-height:530px!important;
+    max-height:530px!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:260px 260px!important;
+    gap:10px 6px!important;
+    margin-top:28px!important;
+  }
+  .lab5-zone{
+    height:260px!important;
+    min-height:260px!important;
+    max-height:260px!important;
+    aspect-ratio:auto!important;
+    overflow:hidden!important;
+  }
+  .lab5-drop{
+    left:10%!important;
+    right:7%!important;
+    top:48%!important;
+    bottom:9%!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-auto-rows:1fr!important;
+    overflow:hidden!important;
+  }
+  .lab5-drop:has(.lab-card:nth-child(5)){
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+  }
+  .lab5-drop .lab-card{
+    min-height:0!important;
+    height:100%!important;
+    font-size:5.5px!important;
+    line-height:.95!important;
+    padding:1px!important;
+  }
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* Только согласованные изменения */
+
+/* 1. Мальчика увеличиваем и опускаем, не заводя под панель */
+.lab5-boy{
+  left:18px!important;
+  top:38px!important;
+  width:270px!important;
+  height:360px!important;
+}
+.lab5-boy img{
+  width:270px!important;
+  max-width:none!important;
+}
+
+/* 2. Перенесённые утверждения компактнее и располагаются по центру зоны */
+.lab5-drop{
+  display:flex!important;
+  flex-wrap:wrap!important;
+  justify-content:center!important;
+  align-content:center!important;
+  align-items:center!important;
+  gap:5px!important;
+  padding:7px!important;
+  overflow:hidden!important;
+}
+.lab5-drop .lab-card{
+  flex:0 1 29%!important;
+  width:auto!important;
+  height:auto!important;
+  min-width:0!important;
+  min-height:28px!important;
+  max-height:42px!important;
+  padding:4px 5px!important;
+  margin:0!important;
+  font-size:8.5px!important;
+  line-height:1.08!important;
+  overflow:hidden!important;
+}
+
+/* при большом количестве карточек они уменьшаются, зона остаётся неизменной */
+.lab5-drop:has(.lab-card:nth-child(5)) .lab-card{
+  flex-basis:28%!important;
+  min-height:24px!important;
+  max-height:35px!important;
+  font-size:7.5px!important;
+}
+.lab5-drop:has(.lab-card:nth-child(7)) .lab-card{
+  flex-basis:22%!important;
+  min-height:21px!important;
+  max-height:31px!important;
+  font-size:6.7px!important;
+}
+
+/* Мобильная версия */
+@media(max-width:760px){
+  .lab5-boy{
+    left:16px!important;
+    top:24px!important;
+    width:185px!important;
+    height:275px!important;
+  }
+  .lab5-boy img{
+    width:185px!important;
+  }
+
+  .lab5-drop{
+    justify-content:center!important;
+    align-content:center!important;
+    align-items:center!important;
+    gap:3px!important;
+    padding:4px!important;
+  }
+  .lab5-drop .lab-card{
+    flex:0 1 29%!important;
+    width:auto!important;
+    height:auto!important;
+    min-height:22px!important;
+    max-height:32px!important;
+    padding:3px!important;
+    font-size:7px!important;
+    line-height:1.03!important;
+  }
+  .lab5-drop:has(.lab-card:nth-child(5)) .lab-card{
+    flex-basis:28%!important;
+    min-height:19px!important;
+    max-height:27px!important;
+    font-size:6.2px!important;
+  }
+  .lab5-drop:has(.lab-card:nth-child(7)) .lab-card{
+    flex-basis:22%!important;
+    min-height:17px!important;
+    max-height:24px!important;
+    font-size:5.6px!important;
+  }
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* Только две согласованные правки */
+
+/* Мальчика опускаем ниже, чтобы он не перекрывал пункты панели */
+.lab5-boy{
+  top:105px!important;
+}
+
+/* Карточки уже внутри словарей немного увеличиваем */
+.lab5-drop .lab-card{
+  flex-basis:31%!important;
+  min-height:32px!important;
+  max-height:46px!important;
+  padding:5px 6px!important;
+  font-size:9.3px!important;
+  line-height:1.1!important;
+}
+.lab5-drop:has(.lab-card:nth-child(5)) .lab-card{
+  flex-basis:30%!important;
+  min-height:27px!important;
+  max-height:39px!important;
+  font-size:8.2px!important;
+}
+.lab5-drop:has(.lab-card:nth-child(7)) .lab-card{
+  flex-basis:23%!important;
+  min-height:23px!important;
+  max-height:34px!important;
+  font-size:7.2px!important;
+}
+
+@media(max-width:760px){
+  .lab5-boy{
+    top:82px!important;
+  }
+  .lab5-drop .lab-card{
+    flex-basis:31%!important;
+    min-height:25px!important;
+    max-height:36px!important;
+    padding:3px 4px!important;
+    font-size:7.8px!important;
+    line-height:1.05!important;
+  }
+  .lab5-drop:has(.lab-card:nth-child(5)) .lab-card{
+    flex-basis:30%!important;
+    min-height:22px!important;
+    max-height:31px!important;
+    font-size:6.8px!important;
+  }
+  .lab5-drop:has(.lab-card:nth-child(7)) .lab-card{
+    flex-basis:23%!important;
+    min-height:19px!important;
+    max-height:27px!important;
+    font-size:6px!important;
+  }
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* v9: только согласованные визуальные правки */
+
+/* 1. Мальчика немного левее */
+.lab5-boy{
+  left:-8px!important;
+}
+
+/* 2. Заголовок лаборатории слегка увеличиваем */
+.lab5-title-img{
+  width:112%!important;
+  max-width:none!important;
+  transform:translateX(-5%)!important;
+}
+
+/* 3. Нижнюю пергаментную дощечку с пояснением увеличиваем примерно до ширины книг */
+.lab5-note-img,
+.lab5-desc-img,
+.lab5-board-img{
+  width:112%!important;
+  max-width:none!important;
+  transform:translateX(-5%)!important;
+}
+
+/* Если текст дощечки расположен HTML-слоем — сохраняем его по центру увеличенной дощечки */
+.lab5-note,
+.lab5-description,
+.lab5-board{
+  width:112%!important;
+  max-width:none!important;
+  margin-left:-6%!important;
+}
+
+/* 4. Убираем нижнюю метку "ПРОБНАЯ СБОРКА · УРОК 2" */
+body *[class*="trial"],
+body *[class*="demo-badge"],
+body *[class*="build-badge"],
+body *[id*="trial"],
+body *[id*="demo-badge"],
+body *[id*="build-badge"]{
+  display:none!important;
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* Единственная правка v10:
+   вторую пергаментную дощечку с текстом сдвигаем вниз и вправо, ближе к книгам. */
+.lab5-note-img,
+.lab5-desc-img,
+.lab5-board-img{
+  transform:translate(1.5%, 12px)!important;
+}
+.lab5-note,
+.lab5-description,
+.lab5-board{
+  transform:translate(1.5%, 12px)!important;
+}
+@media(max-width:760px){
+  .lab5-note-img,
+  .lab5-desc-img,
+  .lab5-board-img,
+  .lab5-note,
+  .lab5-description,
+  .lab5-board{
+    transform:translate(2.5%, 10px)!important;
+  }
+}
+
+
+/* ---- следующий блок из исходного HTML ---- */
+
+
+/* Единственная правка v11:
+   вторую пергаментную дощечку с текстом ещё ниже и правее, ближе к книгам. */
+.lab5-note-img,
+.lab5-desc-img,
+.lab5-board-img{
+  transform:translate(6%, 30px)!important;
+}
+.lab5-note,
+.lab5-description,
+.lab5-board{
+  transform:translate(6%, 30px)!important;
+}
+@media(max-width:760px){
+  .lab5-note-img,
+  .lab5-desc-img,
+  .lab5-board-img,
+  .lab5-note,
+  .lab5-description,
+  .lab5-board{
+    transform:translate(7%, 26px)!important;
+  }
+}
