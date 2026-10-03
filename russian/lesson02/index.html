@@ -1557,4 +1557,38 @@ lab5CenterTransferredCards();
 })();
 </script>
 
+
+<style id="LIGA_BG_STAGE_1_2">
+html.liga-field-bg,
+html.liga-field-bg body {
+    min-height: 100%;
+    background-image: url('../../shared/site-background.png') !important;
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: fixed !important;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    function updateLigaBackground() {
+        const active = document.querySelector('.stage.active');
+        const n = active ? Number(active.dataset.stage) : 0;
+        document.documentElement.classList.toggle(
+            'liga-field-bg',
+            n === 1 || n === 2
+        );
+    }
+
+    updateLigaBackground();
+
+    new MutationObserver(updateLigaBackground).observe(document.body, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class']
+    });
+});
+</script>
+
 </body></html>
