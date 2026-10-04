@@ -2539,4 +2539,101 @@ function ligaMathFastTopicsBoot(){
 }
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ligaMathFastTopicsBoot,{once:true});}else{ligaMathFastTopicsBoot();}
 </script>
-<script src="../shared/js/global-stars-v818.js"></script></body></html>
+<script src="../shared/js/global-stars-v818.js"></script>
+<script>
+/* PRIME-COMPOSITE LESSON ROUTE */
+document.addEventListener("click", function (e) {
+  const el = e.target.closest("button, a, [role='button'], .topic, .topic-card");
+  if (!el) return;
+
+  const text = (el.textContent || "").replace(/\s+/g, " ").trim();
+
+  if (text.includes("Простые и составные числа")) {
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = "./prime-composite/index.html";
+  }
+}, true);
+</script>
+
+
+<script>
+/* PRIME-COMPOSITE FORCE UNLOCK V1 */
+(function () {
+  const TARGET = "Простые и составные числа";
+  const URL = "./prime-composite/index.html";
+
+  function activatePrimeComposite() {
+    const all = document.querySelectorAll(
+      "button, a, [role='button'], .topic, .topic-card, li, div"
+    );
+
+    let target = null;
+
+    for (const el of all) {
+      const text = (el.textContent || "")
+        .replace(/\s+/g, " ")
+        .trim();
+
+      if (text.includes(TARGET)) {
+        const r = el.getBoundingClientRect();
+
+        if (r.width > 150 && r.height > 25 && r.height < 150) {
+          target = el;
+          break;
+        }
+      }
+    }
+
+    if (!target) return;
+
+    target.classList.remove(
+      "locked",
+      "disabled",
+      "is-locked",
+      "topic-locked"
+    );
+
+    target.removeAttribute("disabled");
+    target.removeAttribute("aria-disabled");
+
+    target.style.pointerEvents = "auto";
+    target.style.cursor = "pointer";
+    target.style.opacity = "1";
+
+    /* Убираем только значок замка внутри темы №7 */
+    [...target.querySelectorAll("*")].forEach(el => {
+      const t = (el.textContent || "").trim();
+      if (t === "🔒" || t === "🔐") {
+        el.style.display = "none";
+      }
+    });
+
+    if (!target.dataset.primeCompositeReady) {
+      target.dataset.primeCompositeReady = "1";
+
+      target.addEventListener("click", function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        window.location.href = URL;
+      }, true);
+    }
+
+    console.log("Тема №7 активирована:", TARGET);
+  }
+
+  if (document.readyState === "loading") {
+    document
+
+    document.addEventListener("DOMContentLoaded", () => {
+      setTimeout(activatePrimeComposite, 300);
+      setTimeout(activatePrimeComposite, 1000);
+    });
+  } else {
+    setTimeout(activatePrimeComposite, 300);
+    setTimeout(activatePrimeComposite, 1000);
+  }
+})();
+</script>
+
+</body></html>
