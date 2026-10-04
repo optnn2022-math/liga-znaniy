@@ -2636,4 +2636,40 @@ document.addEventListener("click", function (e) {
 })();
 </script>
 
+
+<script>
+/* TOPIC7-ONLY-V1 */
+(function () {
+  const TOPIC7 = "Простые и составные числа";
+  const LESSON7 = "./prime-composite/index.html";
+
+  document.addEventListener("click", function (e) {
+
+    /* Определяем строку, по которой реально нажали */
+    const row = e.target.closest(
+      ".topic-card, .topic-item, .lesson-item, [data-topic], li"
+    );
+
+    if (!row) return;
+
+    const text = (row.textContent || "")
+      .replace(/\s+/g, " ")
+      .trim();
+
+    /* КРИТИЧНО:
+       реагируем ТОЛЬКО на тему №7 */
+    if (!text.includes(TOPIC7)) return;
+
+    e.preventDefault();
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+
+    window.location.href = LESSON7;
+
+  }, true);
+
+  console.log("Topic 7 only route active");
+})();
+</script>
+
 </body></html>
