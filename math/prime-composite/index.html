@@ -1625,30 +1625,4 @@ document.addEventListener("click", function(e) {
 }, true);
 </script>
 
-
-<script>
-/* FIX-FINISH-TOPIC7-V2 */
-document.addEventListener("click", function(e) {
-    const el = e.target.closest("button, a, [role='button']");
-    if (!el) return;
-
-    const text = (el.textContent || "")
-        .replace(/\s+/g, " ")
-        .trim()
-        .toLowerCase();
-
-    if (
-        text.includes("завершить занятие") ||
-        text.includes("завершить урок")
-    ) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-
-        window.location.href =
-          "https://optnn2022-math.github.io/liga-znaniy/math/";
-    }
-}, true);
-</script>
-
 </body></html>
