@@ -2250,7 +2250,7 @@ function renderTopics(){
     const title=document.createElement('span');title.className='name';title.textContent=entry.title;
     const status=document.createElement('span');status.className='goals';
     if(number===6){
-      const savedGoals=Math.max(0,Number(localStorage.getItem('liga_math_topic6_goals')||0));
+      const savedGoals=Math.max(0,Number(localStorage.getItem('liga_math_prime_goals')||0));
       status.textContent='⚽ '+savedGoals+' / 13';
     }else{
       status.textContent=liveIndex===undefined?'🔒':('⚽ '+mathTopicGoalCount(liveIndex)+' / '+mathTopicGoalTotal(liveIndex));
