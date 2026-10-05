@@ -2241,7 +2241,7 @@ function renderTopics(){
     const number=index+1;
     if(entry.heading){const heading=document.createElement('div');heading.className='list-head math-block-heading';heading.textContent=entry.heading;list.append(heading)}
     const liveIndex=mathLiveLessons[number];
-    const modularLesson=(number===1||number===6);
+    const modularLesson=(number===1||number===6||number===7);
     const available=(liveIndex!==undefined||modularLesson);
     const row=document.createElement(available?'button':'div');
     row.className='row '+(available?'ready':'locked math-locked');
