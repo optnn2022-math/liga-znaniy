@@ -726,7 +726,10 @@ h3.composite-title-v24::after {
 </div>
 <h3 class="section-subtitle">Проверь понимание</h3>
     <div id="coprimeWarmup"></div>
-    <button class="continue-btn" id="toPractice" disabled>Перейти к практике →</button>
+    <div style="display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:16px">
+<button class="continue-btn" id="backFromCoprime" type="button">← Назад</button>
+<button class="continue-btn" id="toPractice" disabled>Перейти к практике →</button>
+</div>
   </div>
 </section>
 
@@ -871,7 +874,19 @@ if(document.querySelectorAll('.mini-new-q[data-done="1"]').length===mini.length)
 
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
- const cop=document.getElementById('coprimeScreen');
+ const backFromCoprime=document.getElementById('backFromCoprime');
+if(backFromCoprime){
+  backFromCoprime.onclick=()=>{
+    document.querySelectorAll('.lesson-screen').forEach(x=>x.classList.remove('screen-active','page-active-v9'));
+    const first=document.querySelector('.lesson-screen:not(#coprimeScreen):not(#practiceStage)');
+    if(first){
+      first.classList.add('screen-active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+  };
+}
+
+const cop=document.getElementById('coprimeScreen');
  const pra=document.getElementById('practiceStage');
  const mini=document.getElementById('miniTestStage');
  [cop,pra,mini].forEach(x=>x&&x.classList.remove('screen-active'));
