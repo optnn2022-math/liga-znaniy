@@ -723,6 +723,9 @@ h3.composite-title-v24::after {
     <div class="pair-col" id="pairRight"></div>
   </div>
   <div class="pair-status" id="pairStatus">Собери 4 пары</div>
+<div style="text-align:center;margin-top:12px">
+  <button type="button" class="continue-btn" id="resetPairs">↻ Сбросить</button>
+</div>
 </div>
 <h3 class="section-subtitle">Проверь понимание</h3>
     <div id="coprimeWarmup"></div>
@@ -878,8 +881,10 @@ document.addEventListener('DOMContentLoaded',()=>{
 if(backFromCoprime){
   backFromCoprime.onclick=()=>{
     document.querySelectorAll('.lesson-screen').forEach(x=>x.classList.remove('screen-active','page-active-v9'));
-    const first=document.querySelector('.lesson-screen:not(#coprimeScreen):not(#practiceStage)');
+    const startBtn=document.getElementById('startPractice');
+    const first=startBtn ? startBtn.closest('.lesson-screen') : null;
     if(first){
+      first.style.display='';
       first.classList.add('screen-active');
       window.scrollTo({top:0,behavior:'smooth'});
     }
@@ -967,6 +972,14 @@ document.addEventListener('DOMContentLoaded',()=>{
   };return b;
  }
  left.forEach(n=>L.appendChild(make(n,'L')));right.forEach(n=>R.appendChild(make(n,'R')));
+const resetPairs=document.getElementById('resetPairs');
+if(resetPairs) resetPairs.onclick=()=>{
+  selected=null;
+  done=0;
+  L.querySelectorAll('.pair-num').forEach(b=>b.classList.remove('selected','matched','wrong'));
+  R.querySelectorAll('.pair-num').forEach(b=>b.classList.remove('selected','matched','wrong'));
+  S.textContent='Собери 4 пары';
+};
 });
 </script>
 
