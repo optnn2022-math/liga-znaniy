@@ -1334,7 +1334,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  const p4=document.getElementById('miniTestStage');
  if(!p2||!p3||!p4) return;
 
- const allLessonScreens=[...document.querySelectorAll('.lesson-screen')];
+ const allLessonScreens=[...document.querySelectorAll('.lesson-screen')]; const backP2=document.createElement('button'); backP2.type='button'; backP2.className='continue-btn'; backP2.textContent='← Назад'; backP2.onclick=(e)=>{e.preventDefault();e.stopImmediatePropagation();show(p1);}; if(p2){const shell=p2.querySelector('.screen-shell')||p2; shell.insertBefore(backP2,shell.firstChild);}
  function show(target){
    allLessonScreens.forEach(el=>{
      if(el!==target) el.classList.remove('v17-visible','page-active-v9','active');
