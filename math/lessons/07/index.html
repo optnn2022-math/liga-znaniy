@@ -881,8 +881,7 @@ document.addEventListener('DOMContentLoaded',()=>{
 if(backFromCoprime){
   backFromCoprime.onclick=()=>{
     document.querySelectorAll('.lesson-screen').forEach(x=>x.classList.remove('screen-active','page-active-v9'));
-    const startBtn=[...document.querySelectorAll('button')].find(b=>(b.getAttribute('onclick')||'').includes('startPractice()'));
-    const first=startBtn ? startBtn.closest('.lesson-screen') : null;
+      const first=document.getElementById('coprimeScreen').previousElementSibling;
     if(first){
       first.style.display='';
       first.classList.add('screen-active');
