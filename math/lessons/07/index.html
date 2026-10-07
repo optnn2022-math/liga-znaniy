@@ -658,7 +658,7 @@ h3.composite-title-v24::after {
 </style>
 </head><body>
 <main class="screen"><div class="top"><div class="brand">⚽ Лига знаний</div><div class="score">⚽ Голы: <span id="score">0</span></div></div>
-<section class="page"><button class="textbtn" onclick="returnToTopics()">← К темам</button><h1 class="page-title">Простые и составные числа</h1><p class="muted">Математика · 5 класс · игровая тренировка</p><div class="lesson-stage"><div class="panel lesson-content">
+<section class="page" id="lessonPage1"><button class="textbtn" onclick="returnToTopics()">← К темам</button><h1 class="page-title">Простые и составные числа</h1><p class="muted">Математика · 5 класс · игровая тренировка</p><div class="lesson-stage"><div class="panel lesson-content">
 <div class="coach intro-coach"><strong>Егор, сегодня числа выходят на поле!</strong><br>Разберёмся, какие числа простые, какие составные и почему число 1 играет по особым правилам.</div>
 
 <h2>🎬 Посмотри видео</h2><ol class="watch-list"><li>Сколько делителей у простого числа?</li><li>Чем составное число отличается от простого?</li><li>Почему число 1 — особенное?</li></ol><div class="video"><iframe src="https://rutube.ru/play/embed/a63a53ea5c406440e58789b54371040b" allow="clipboard-write; autoplay" allowfullscreen></iframe></div>
@@ -1329,12 +1329,13 @@ document.addEventListener('DOMContentLoaded',()=>{
 </style>
 <script>
 document.addEventListener('DOMContentLoaded',()=>{
+  const p1=document.getElementById('lessonPage1');
  const p2=document.getElementById('pageCoprimeV9');
  const p3=document.getElementById('practiceStage');
  const p4=document.getElementById('miniTestStage');
  if(!p2||!p3||!p4) return;
 
- const allLessonScreens=[...document.querySelectorAll('.lesson-screen')]; const backP2=document.createElement('button'); backP2.type='button'; backP2.className='continue-btn'; backP2.textContent='← Назад'; backP2.onclick=(e)=>{e.preventDefault();e.stopImmediatePropagation();show(p1);}; if(p2){const shell=p2.querySelector('.screen-shell')||p2; shell.insertBefore(backP2,shell.firstChild);}
+ const allLessonScreens=[...document.querySelectorAll('.lesson-screen')]; const backP2=document.createElement('button'); backP2.type='button'; backP2.className='continue-btn'; backP2.textContent='← Назад'; backP2.onclick=(e)=>{e.preventDefault();e.stopImmediatePropagation();p2.classList.remove('v17-visible','page-active-v9','active');p2.style.display='none';p1.style.display='block';p1.classList.add('active');window.scrollTo({top:0,behavior:'smooth'});}; if(p2){const shell=p2.querySelector('.screen-shell')||p2; shell.insertBefore(backP2,shell.firstChild);}
  function show(target){
    allLessonScreens.forEach(el=>{
      if(el!==target) el.classList.remove('v17-visible','page-active-v9','active');
