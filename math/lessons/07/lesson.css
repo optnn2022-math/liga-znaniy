@@ -743,3 +743,16 @@ body[data-step="2"] #coprimeScreen,body[data-step="3"] #practiceStage,body[data-
 }
 #coprimeWarmup .wfb.warm-feedback-correct{color:#80ffc0!important;font-weight:800!important;opacity:1!important}
 #coprimeWarmup .wfb.warm-feedback-wrong{color:#ff9ca4!important;font-weight:800!important;opacity:1!important}
+
+/* Definitive lesson 07 stage visibility: overrides obsolete v19 and screen-active rules. */
+body[data-step] main #lessonPage1,
+body[data-step] main #coprimeScreen,
+body[data-step] main #practiceStage,
+body[data-step] main #miniTestStage{display:none!important}
+body[data-step="1"] main #lessonPage1,
+body[data-step="2"] main #coprimeScreen,
+body[data-step="3"] main #practiceStage,
+body[data-step="4"] main #miniTestStage{display:block!important;visibility:visible!important;opacity:1!important}
+body[data-step="4"] main #miniTestStage{width:min(96%,960px)!important;min-height:0!important;margin:12px auto!important}
+body[data-step="4"] #miniTestStage .screen-shell{display:block!important;width:100%!important;max-width:760px!important;margin:0 auto!important}
+body[data-step="4"] #miniTestNew{display:block!important}
