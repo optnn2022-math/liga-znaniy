@@ -195,29 +195,34 @@ document.addEventListener('DOMContentLoaded',()=>{
  ['Запиши простое число, которое больше 30, но меньше 35.','31','31 делится только на 1 и 31; 32, 33 и 34 — составные.']
  ];
  const normalize=v=>String(v).trim().replace(/\s+/g,'');
+ let savedAnswers=Array(questions.length).fill('');
  window.drawMiniList=function(){
+   if(mt.querySelector('.lesson07-final-list'))return;
    mt.innerHTML='<div class="lesson07-final-list">'+questions.map((q,i)=>`<article class="lesson07-final-item"><label for="lesson07-final-${i}"><strong>${i+1}. ${q[0]}</strong></label><input id="lesson07-final-${i}" class="lesson07-final-input" data-i="${i}" inputmode="numeric" autocomplete="off" placeholder="Введи ответ"><div class="lesson07-final-feedback" aria-live="polite"></div></article>`).join('')+'<div class="lesson07-final-actions"><button type="button" class="continue-btn lesson07-final-check">✓ Проверить ответы</button><button type="button" class="continue-btn lesson07-final-finish">🏁 Завершить урок</button></div><p class="lesson07-final-summary" aria-live="polite"></p></div>';
    const inputs=[...mt.querySelectorAll('.lesson07-final-input')],check=mt.querySelector('.lesson07-final-check'),finish=mt.querySelector('.lesson07-final-finish'),summary=mt.querySelector('.lesson07-final-summary');
    let checked=false;
+   inputs.forEach((input,i)=>{input.value=savedAnswers[i];});
    const validate=()=>{
      let correct=0, newlyAwarded=0;
+     const results=inputs.map((input,i)=>normalize(input.value)===questions[i][1]);
      inputs.forEach((input,i)=>{
-       const ok=normalize(input.value)===questions[i][1];
-       if(ok){correct++;if(awardOnce('lesson07-final-correct-'+i))newlyAwarded++;}
+       const ok=results[i];
+       if(ok)correct++;
        const feedback=input.parentElement.querySelector('.lesson07-final-feedback');
        feedback.className='lesson07-final-feedback '+(ok?'is-correct':'is-wrong');
        feedback.textContent=ok?'✓ Верно':'Неверно. Правильный ответ: '+questions[i][1]+'. '+questions[i][2];
        input.classList.toggle('is-correct',ok);input.classList.toggle('is-wrong',!ok);
      });
      checked=true;
+     results.forEach((ok,i)=>{if(ok&&awardOnce('lesson07-final-correct-'+i))newlyAwarded++;});
      summary.textContent='Верных ответов: '+correct+' из '+questions.length+'. '+(newlyAwarded?'Начислено голов: '+newlyAwarded+'. ':'')+(correct===questions.length?'Отлично, все ответы правильные!':'Исправь ошибки и проверь ответы снова.');
      return correct;
    };
    check.onclick=validate;
-   inputs.forEach(input=>input.addEventListener('input',()=>{checked=false;summary.textContent='Ответы изменены. Нажми «Проверить ответы» ещё раз.';}));
+   inputs.forEach((input,i)=>input.addEventListener('input',()=>{savedAnswers[i]=input.value;checked=false;input.classList.remove('is-correct','is-wrong');const fb=input.parentElement.querySelector('.lesson07-final-feedback');fb.textContent='';fb.className='lesson07-final-feedback';summary.textContent='Ответы изменены. Нажми «Проверить ответы» ещё раз.';}));
    finish.onclick=()=>{
      if(!checked){summary.textContent='Сначала нажми «Проверить ответы».';check.focus();return;}
-     localStorage.setItem('liga_math_prime_complete','1');
+     localStorage.setItem('liga_math_lesson07_test_checked','1');
      finishLesson();
    };
  };
