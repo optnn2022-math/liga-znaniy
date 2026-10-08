@@ -132,55 +132,6 @@ if(resetPairs) resetPairs.onclick=()=>{
 
 
 document.addEventListener('DOMContentLoaded',()=>{
- const host=document.getElementById('practicePages');
- if(!host)return;
- host.innerHTML='<article class="v25-q" data-q="0" data-correct="1">\n<div class="v25-count">Задание 1 из 10</div>\n<h3>Какое из чисел является простым?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">21</button><button class="v25-answer" data-i="1">29</button><button class="v25-answer" data-i="2">39</button><button class="v25-answer" data-i="3">51</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="1" data-correct="3">\n<div class="v25-count">Задание 2 из 10</div>\n<h3>Какое из чисел является составным?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">31</button><button class="v25-answer" data-i="1">37</button><button class="v25-answer" data-i="2">41</button><button class="v25-answer" data-i="3">49</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="2" data-correct="2">\n<div class="v25-count">Задание 3 из 10</div>\n<h3>Какое утверждение о числе 1 верно?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">Простое</button><button class="v25-answer" data-i="1">Составное</button><button class="v25-answer" data-i="2">Ни простое, ни составное</button><button class="v25-answer" data-i="3">Единственное чётное простое</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="3" data-correct="1">\n<div class="v25-count">Задание 4 из 10</div>\n<h3>Какое число — единственное чётное простое?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">1</button><button class="v25-answer" data-i="1">2</button><button class="v25-answer" data-i="2">4</button><button class="v25-answer" data-i="3">6</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="4" data-correct="0">\n<div class="v25-count">Задание 5 из 10</div>\n<h3>Какая пара чисел взаимно простая?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">8 и 15</button><button class="v25-answer" data-i="1">12 и 18</button><button class="v25-answer" data-i="2">14 и 21</button><button class="v25-answer" data-i="3">16 и 24</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="5" data-correct="3">\n<div class="v25-count">Задание 6 из 10</div>\n<h3>Какая пара НЕ является взаимно простой?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">9 и 20</button><button class="v25-answer" data-i="1">14 и 25</button><button class="v25-answer" data-i="2">16 и 27</button><button class="v25-answer" data-i="3">15 и 35</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="6" data-correct="1">\n<div class="v25-count">Задание 7 из 10</div>\n<h3>Какое разложение доказывает, что 77 — составное?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">77 = 1 · 77</button><button class="v25-answer" data-i="1">77 = 7 · 11</button><button class="v25-answer" data-i="2">77 = 70 + 7</button><button class="v25-answer" data-i="3">77 = 80 − 3</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="7" data-correct="2">\n<div class="v25-count">Задание 8 из 10</div>\n<h3>Какое из чисел является простым?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">51</button><button class="v25-answer" data-i="1">57</button><button class="v25-answer" data-i="2">61</button><button class="v25-answer" data-i="3">69</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="8" data-correct="0">\n<div class="v25-count">Задание 9 из 10</div>\n<h3>Какая пара взаимно простая, хотя оба числа составные?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">8 и 15</button><button class="v25-answer" data-i="1">6 и 9</button><button class="v25-answer" data-i="2">10 и 15</button><button class="v25-answer" data-i="3">12 и 18</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article><article class="v25-q" data-q="9" data-correct="3">\n<div class="v25-count">Задание 10 из 10</div>\n<h3>Какое число является составным?</h3><div class="v25-answers"><button class="v25-answer" data-i="0">53</button><button class="v25-answer" data-i="1">59</button><button class="v25-answer" data-i="2">67</button><button class="v25-answer" data-i="3">91</button></div>\n<div class="v25-feedback" aria-live="polite"></div>\n</article>';
- const qs=[...host.querySelectorAll('.v25-q')];
- let idx=0;
- // Keep a lesson-wide total for the final page; never reset an existing score.
- let goals=score;
- window.lessonGoals=goals;
- function sync(){
-   document.querySelectorAll('#practiceScore,[id*="Score"],.score span').forEach(el=>{
-     if(el && /goal|score/i.test(el.id||el.parentElement?.className||'')) el.textContent=goals;
-   });
-   localStorage.setItem('primeLessonGoals',String(goals));
- }
- function fx(){ /* The shared GOAL effect is displayed by awardOnce. */ }
- function show(n){qs.forEach((q,i)=>q.classList.toggle('v25-active',i===n));window.scrollTo({top:0,behavior:'smooth'})}
- qs.forEach((q,qi)=>{
-   const correct=Number(q.dataset.correct), fb=q.querySelector('.v25-feedback');
-   q.querySelectorAll('.v25-answer').forEach(b=>b.addEventListener('click',()=>{
-     const chosen=Number(b.dataset.i);
-     if(q.dataset.solved==='1')return;
-     if(chosen===correct){
-       q.dataset.solved='1'; b.classList.add('v25-right');
-       q.querySelectorAll('.v25-answer').forEach(x=>x.disabled=true);
-       const earnedNow=awardOnce('practice-'+qi); if(!earnedNow)showBigGoal(); goals=score; window.lessonGoals=score; sync();
-       fb.textContent=(earnedNow?'⚽ Верно! +1 гол. ':'⚽ Верно! Гол уже засчитан. ')+['У 29 только два делителя: 1 и 29.', '49 = 7 · 7, поэтому число составное.', 'Число 1 не является ни простым, ни составным.', 'Это число 2.', 'НОД(8,15)=1.', '15 и 35 имеют общий делитель 5.', '77 имеет делители 7 и 11.', '61 не делится ни на одно простое число, не превосходящее √61.', '8 и 15 — составные, но их общий делитель только 1.', '91 = 7 · 13.'][qi];
-       let next=document.createElement('button'); next.className='v25-next v25-show';
-       next.textContent=qi===qs.length-1?'Перейти к мини-тесту →':'Следующее задание →';
-       q.appendChild(next);
-       next.onclick=()=>{
-         if(qi<qs.length-1){idx=qi+1;show(idx)}
-         else {
-           const b4=document.getElementById('toMiniTestV17')||document.getElementById('toMiniTestV16');
-           if(b4) b4.click();
-           else showLessonStep(4)
-         }
-       };
-     } else {
-       b.classList.add('v25-wrong'); fb.textContent='Пока нет. Попробуй ещё раз — гол не снимается.';
-       setTimeout(()=>b.classList.remove('v25-wrong'),600);
-     }
-   }));
- });
- sync(); show(0);
-});
-
-
-
-document.addEventListener('DOMContentLoaded',()=>{
  const mt=document.getElementById('miniTestNew');if(!mt)return;
  const questions=[
  ['Запиши простое число между 20 и 25.','23','Между 20 и 25 только число 23 имеет ровно два натуральных делителя: 1 и 23.'],
@@ -240,13 +191,13 @@ function stopHiddenLessonVideos(){
    frame.setAttribute('src',src);
  });
 }
-function showLessonStep(n){document.body.classList.remove('v19-page2','v19-page3','v19-page4');document.body.dataset.step=String(n);for(const [step,id] of [[1,'lessonPage1'],[2,'coprimeScreen'],[3,'practiceStage'],[4,'miniTestStage']]){const section=document.getElementById(id);if(section)section.style.setProperty('display',step===n?'block':'none','important');}stopHiddenLessonVideos();if(n===3){const qs=[...document.querySelectorAll('#practicePages .v25-q')];if(qs.length&&!qs.some(q=>q.classList.contains('v25-active')))qs[0].classList.add('v25-active');}window.scrollTo(0,0);if(n===4&&typeof window.drawMiniList==='function')window.drawMiniList()}
-document.addEventListener('DOMContentLoaded',()=>{const next=document.querySelector('#lessonPage1 .lesson-next button');if(next)next.onclick=e=>{e.preventDefault();showLessonStep(2)};const go=document.getElementById('toPractice');if(go){go.disabled=warmDone!==warm.length;go.onclick=()=>{if(!go.disabled)showLessonStep(4)}};document.getElementById('coprimeScreen')?.querySelector('.screen-shell')?.insertAdjacentHTML('beforeend','');document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){e.preventDefault();e.stopImmediatePropagation();showLessonStep(4)}} ,true);});
+function showLessonStep(n){document.body.classList.remove('v19-page2','v19-page3','v19-page4');document.body.dataset.step=String(n);for(const [step,id] of [[1,'lessonPage1'],[2,'coprimeScreen'],[4,'miniTestStage']]){const section=document.getElementById(id);if(section)section.style.setProperty('display',step===n?'block':'none','important');}stopHiddenLessonVideos();window.scrollTo(0,0);if(n===4&&typeof window.drawMiniList==='function')window.drawMiniList()}
+document.addEventListener('DOMContentLoaded',()=>{const next=document.querySelector('#lessonPage1 .lesson-next button');if(next)next.onclick=e=>{e.preventDefault();showLessonStep(2)};const go=document.getElementById('toPractice');if(go){go.disabled=warmDone!==warm.length;go.onclick=()=>{if(!go.disabled)showLessonStep(4)}};document.getElementById('coprimeScreen')?.querySelector('.screen-shell')?.insertAdjacentHTML('beforeend','');});
 
 /* Unified stage navigation. Hero markup and styles are intentionally unchanged. */
 document.addEventListener('DOMContentLoaded',()=>{
   syncScore();
-  for(const [n,id] of [[2,'coprimeScreen'],[3,'practiceStage'],[4,'miniTestStage']]){
+  for(const [n,id] of [[2,'coprimeScreen'],[4,'miniTestStage']]){
     const section=document.getElementById(id);if(!section)continue;
     const nav=document.createElement('nav');nav.className='lesson-stage-navigation';
     const back=document.createElement('button');back.type='button';back.className='continue-btn';back.textContent='← Назад';back.onclick=()=>showLessonStep(n===4?2:n-1);
