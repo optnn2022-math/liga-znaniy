@@ -714,3 +714,19 @@ body[data-step="2"] #coprimeScreen,body[data-step="3"] #practiceStage,body[data-
 #coprimeScreen .screen-shell.page2-workspace-scaled{width:80%!important;max-width:760px!important;margin:0 auto!important;transform:none!important;zoom:1!important;box-sizing:border-box!important}
 .lesson-stage-navigation{display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;margin-bottom:14px}
 @media(max-width:600px){#coprimeScreen .screen-shell.page2-workspace-scaled{width:84%!important;margin-left:0!important;margin-right:auto!important;padding:12px!important}#coprimeScreen .concept-grid{grid-template-columns:1fr!important}#coprimeScreen .concept-card.warning{grid-column:auto!important}#coprimeScreen .pair-board{min-width:0!important}#coprimeScreen .pair-col{min-width:0!important}}
+
+/* Page 2 mobile positioning requested 2026-10-08: left-aligned workspace, 200% hero. */
+@media (max-width: 700px) {
+  #coprimeScreen { width:100%!important; margin-left:0!important; margin-right:0!important; padding-left:0!important; }
+  #coprimeScreen .screen-shell.page2-workspace-scaled {
+    width:78%!important; max-width:none!important; margin-left:0!important; margin-right:0!important;
+  }
+  #coprimeScreen > img.page2-hero-clean {
+    width:clamp(130px,26vw,290px)!important;
+    height:auto!important;
+    max-width:none!important;
+    right:0!important; top:8px!important;
+    transform:none!important; transform-origin:top right!important;
+    z-index:2;
+  }
+}
