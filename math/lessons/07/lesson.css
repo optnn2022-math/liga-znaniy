@@ -793,3 +793,19 @@ body[data-step="3"] #practiceStage .v25-answer.v25-wrong {
 }
 /* One visible goal animation, matching lesson 06; never the transparent ball overlay. */
 body .goal-pop{position:fixed!important;z-index:2147483647!important;left:50%!important;top:18%!important;display:block!important;visibility:visible!important;font-size:clamp(2rem,6vw,5rem)!important;font-weight:1000!important;color:#fff!important;opacity:1;text-shadow:0 0 14px #ffa623,0 0 35px #ff7613!important;pointer-events:none!important;animation:goal .9s both!important}
+
+/* Mobile page 2: hero occupies its own row and never overlays controls or lesson content. */
+@media(max-width:700px){
+ body[data-step="2"] #coprimeScreen{display:flex!important;flex-direction:column!important;align-items:stretch!important}
+ body[data-step="2"] #coprimeScreen > img.page2-hero-clean{
+  position:relative!important;display:block!important;align-self:flex-end!important;
+  top:auto!important;right:auto!important;left:auto!important;bottom:auto!important;
+  width:clamp(130px,32vw,185px)!important;height:auto!important;
+  max-width:42%!important;margin:0 8px 8px 0!important;
+  transform:none!important;pointer-events:none!important;z-index:1!important;
+ }
+ body[data-step="2"] #coprimeScreen > .screen-shell{
+  position:relative!important;z-index:2!important;width:100%!important;
+  box-sizing:border-box!important;margin-top:0!important;
+ }
+}
