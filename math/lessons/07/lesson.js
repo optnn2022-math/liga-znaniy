@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  ['Найди НОД чисел 14 и 25.','1','Делители 14: 1, 2, 7, 14; делители 25: 1, 5, 25. Общий только 1.'],
  ['Запиши простое число, которое больше 30, но меньше 35.','31','31 делится только на 1 и 31; 32, 33 и 34 — составные.']
  ];
- const normalize=v=>String(v).trim().replace(/\\s+/g,'');
+ const normalize=v=>String(v).trim().replace(/\s+/g,'');
  window.drawMiniList=function(){
    mt.innerHTML='<div class="lesson07-final-list">'+questions.map((q,i)=>`<article class="lesson07-final-item"><label for="lesson07-final-${i}"><strong>${i+1}. ${q[0]}</strong></label><input id="lesson07-final-${i}" class="lesson07-final-input" data-i="${i}" inputmode="numeric" autocomplete="off" placeholder="Введи ответ"><div class="lesson07-final-feedback" aria-live="polite"></div></article>`).join('')+'<div class="lesson07-final-actions"><button type="button" class="continue-btn lesson07-final-check">✓ Проверить ответы</button><button type="button" class="continue-btn lesson07-final-finish">🏁 Завершить урок</button></div><p class="lesson07-final-summary" aria-live="polite"></p></div>';
    const inputs=[...mt.querySelectorAll('.lesson07-final-input')],check=mt.querySelector('.lesson07-final-check'),finish=mt.querySelector('.lesson07-final-finish'),summary=mt.querySelector('.lesson07-final-summary');
