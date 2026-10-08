@@ -181,29 +181,55 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 document.addEventListener('DOMContentLoaded',()=>{
- const mt=document.getElementById('miniTestNew'); if(!mt)return;
+ const mt=document.getElementById('miniTestNew');if(!mt)return;
  const questions=[
- ['Запиши простое число между 20 и 25.','23'],['Запиши наименьшее составное натуральное число.','4'],['Сколько делителей имеет любое простое число?','2'],['Запиши единственное чётное простое число.','2'],['Число 1: сколько у него натуральных делителей?','1'],['Запиши наименьшее двузначное простое число.','11'],['Запиши наименьшее двузначное составное число.','10'],['Найди НОД чисел 8 и 15.','1'],['Найди НОД чисел 14 и 25.','1'],['Запиши число: оно больше 30, меньше 35 и является простым.','31']];
- const norm=v=>String(v).trim().replace(/\s+/g,' ').toLowerCase();
- let checked=false,correct=0;
- window.drawMiniList=function draw(){
-   mt.innerHTML='<div class="v30-list">'+questions.map((q,i)=>`<article class="v30-item"><div class="v30-num">Вопрос ${i+1} из 10</div><div class="v30-q">${q[0]}</div><input class="v30-input" data-i="${i}" inputmode="numeric" autocomplete="off" placeholder="Введи ответ"><div class="v30-fb" id="v30fb${i}"></div></article>`).join('')+`<div class="v30-actions"><button class="v30-check">✓ Проверить ответы</button><button class="v30-finish" disabled>🏁 Завершить урок</button></div></div>`;
-   const check=mt.querySelector('.v30-check'), finish=mt.querySelector('.v30-finish');
-   check.onclick=()=>{
-     const inputs=[...mt.querySelectorAll('.v30-input')];
-     if(inputs.some(x=>!x.value.trim())){ const first=inputs.find(x=>!x.value.trim()); first.focus(); first.scrollIntoView({behavior:'smooth',block:'center'}); return; }
-     correct=0; inputs.forEach((inp,i)=>{const ok=norm(inp.value)===norm(questions[i][1]); if(ok)correct++; const fb=document.getElementById('v30fb'+i); fb.textContent=ok?'✓ Верно':'✗ Проверь ответ'; fb.style.color=ok?'#8ff0b2':'#ffd0c7'; inp.style.borderColor=ok?'#65d99a':'#ff8f7f';});
-     checked=true; finish.disabled=false; check.textContent=`Проверено: ${correct} из 10`;
+ ['Запиши простое число между 20 и 25.','23','Между 20 и 25 только число 23 имеет ровно два натуральных делителя: 1 и 23.'],
+ ['Запиши наименьшее составное натуральное число.','4','Числа 1, 2 и 3 не составные; у числа 4 три делителя: 1, 2 и 4.'],
+ ['Сколько натуральных делителей у любого простого числа?','2','У простого числа ровно два натуральных делителя: 1 и само число.'],
+ ['Запиши единственное чётное простое число.','2','Число 2 делится только на 1 и 2; любое другое чётное число делится ещё и на 2.'],
+ ['Сколько натуральных делителей у числа 1?','1','У числа 1 только один натуральный делитель — само число 1.'],
+ ['Запиши наименьшее двузначное простое число.','11','Число 10 составное, а 11 делится только на 1 и 11.'],
+ ['Запиши наименьшее двузначное составное число.','10','10 = 2 · 5, поэтому у него есть делители 1, 2, 5 и 10.'],
+ ['Найди НОД чисел 8 и 15.','1','Делители 8: 1, 2, 4, 8; делители 15: 1, 3, 5, 15. Общий только 1.'],
+ ['Найди НОД чисел 14 и 25.','1','Делители 14: 1, 2, 7, 14; делители 25: 1, 5, 25. Общий только 1.'],
+ ['Запиши простое число, которое больше 30, но меньше 35.','31','31 делится только на 1 и 31; 32, 33 и 34 — составные.']
+ ];
+ const normalize=v=>String(v).trim().replace(/\\s+/g,'');
+ window.drawMiniList=function(){
+   mt.innerHTML='<div class="lesson07-final-list">'+questions.map((q,i)=>`<article class="lesson07-final-item"><label for="lesson07-final-${i}"><strong>${i+1}. ${q[0]}</strong></label><input id="lesson07-final-${i}" class="lesson07-final-input" data-i="${i}" inputmode="numeric" autocomplete="off" placeholder="Введи ответ"><div class="lesson07-final-feedback" aria-live="polite"></div></article>`).join('')+'<div class="lesson07-final-actions"><button type="button" class="continue-btn lesson07-final-check">✓ Проверить ответы</button><button type="button" class="continue-btn lesson07-final-finish">🏁 Завершить урок</button></div><p class="lesson07-final-summary" aria-live="polite"></p></div>';
+   const inputs=[...mt.querySelectorAll('.lesson07-final-input')],check=mt.querySelector('.lesson07-final-check'),finish=mt.querySelector('.lesson07-final-finish'),summary=mt.querySelector('.lesson07-final-summary');
+   let checked=false;
+   const validate=()=>{
+     let correct=0;
+     inputs.forEach((input,i)=>{
+       const ok=normalize(input.value)===questions[i][1];if(ok)correct++;
+       const feedback=input.parentElement.querySelector('.lesson07-final-feedback');
+       feedback.className='lesson07-final-feedback '+(ok?'is-correct':'is-wrong');
+       feedback.textContent=ok?'✓ Верно':'Неверно. Правильный ответ: '+questions[i][1]+'. '+questions[i][2];
+       input.classList.toggle('is-correct',ok);input.classList.toggle('is-wrong',!ok);
+     });
+     checked=true;
+     if(correct===questions.length){
+       let gained=0;
+       for(let i=0;i<5;i++){if(awardOnce('lesson07-final-bonus-'+i))gained++;}
+       summary.textContent='Все 10 ответов верны! '+(gained?'Начислено 5 голов!':'5 голов уже были начислены ранее.');
+     }else{
+       summary.textContent='Верно '+correct+' из '+questions.length+'. Для получения 5 голов исправь все ошибки и проверь ответы снова.';
+     }
+     return correct;
    };
-   finish.onclick=()=>{ if(!checked)return; questions.forEach((q,i)=>{const inp=mt.querySelector('.v30-input[data-i="'+i+'"]');if(inp&&norm(inp.value)===norm(q[1]))awardOnce('mini-'+i)});const total=score;window.lessonGoals=total;localStorage.setItem('liga_math_prime_goals',String(total));localStorage.setItem('liga_math_prime_complete','1'); mt.innerHTML=`<div class="v26-card v26-result"><h3>🏆 Урок завершён!</h3><p>Мини-тест: <b>${correct} из 10</b></p><div class="big-goals">⚽ ${total} голов</div><p class="v28-total">Ты заработал за урок</p><button class="v26-finish" id="v30done">Завершить урок</button></div>`; const b=document.getElementById('v30done'); if(b)b.onclick=()=>{if(typeof finishLesson==='function')finishLesson();else history.back();}; window.scrollTo({top:0,behavior:'smooth'}); };
- }
- document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){setTimeout(()=>window.drawMiniList(),10);}},true);
- // Mini-test is rendered when entering the final stage.
+   check.onclick=validate;
+   inputs.forEach(input=>input.addEventListener('input',()=>{checked=false;summary.textContent='Ответы изменены. Нажми «Проверить ответы» ещё раз.';}));
+   finish.onclick=()=>{
+     if(!checked){summary.textContent='Сначала нажми «Проверить ответы».';check.focus();return;}
+     localStorage.setItem('liga_math_prime_complete','1');
+     finishLesson();
+   };
+ };
 });
 
-
 function showLessonStep(n){document.body.classList.remove('v19-page2','v19-page3','v19-page4');document.body.dataset.step=String(n);document.querySelectorAll('video').forEach(v=>v.pause());if(n===3){const qs=[...document.querySelectorAll('#practicePages .v25-q')];if(qs.length&&!qs.some(q=>q.classList.contains('v25-active')))qs[0].classList.add('v25-active');}window.scrollTo(0,0);if(n===4&&typeof window.drawMiniList==='function')window.drawMiniList()}
-document.addEventListener('DOMContentLoaded',()=>{const next=document.querySelector('#lessonPage1 .lesson-next button');if(next)next.onclick=e=>{e.preventDefault();showLessonStep(2)};const go=document.getElementById('toPractice');if(go){go.disabled=warmDone!==warm.length;go.onclick=()=>{if(!go.disabled)showLessonStep(3)}};document.getElementById('coprimeScreen')?.querySelector('.screen-shell')?.insertAdjacentHTML('beforeend','');document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){e.preventDefault();e.stopImmediatePropagation();showLessonStep(4)}} ,true);});
+document.addEventListener('DOMContentLoaded',()=>{const next=document.querySelector('#lessonPage1 .lesson-next button');if(next)next.onclick=e=>{e.preventDefault();showLessonStep(2)};const go=document.getElementById('toPractice');if(go){go.disabled=warmDone!==warm.length;go.onclick=()=>{if(!go.disabled)showLessonStep(4)}};document.getElementById('coprimeScreen')?.querySelector('.screen-shell')?.insertAdjacentHTML('beforeend','');document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){e.preventDefault();e.stopImmediatePropagation();showLessonStep(4)}} ,true);});
 
 /* Unified stage navigation. Hero markup and styles are intentionally unchanged. */
 document.addEventListener('DOMContentLoaded',()=>{
@@ -211,7 +237,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   for(const [n,id] of [[2,'coprimeScreen'],[3,'practiceStage'],[4,'miniTestStage']]){
     const section=document.getElementById(id);if(!section)continue;
     const nav=document.createElement('nav');nav.className='lesson-stage-navigation';
-    const back=document.createElement('button');back.type='button';back.className='continue-btn';back.textContent='← Назад';back.onclick=()=>showLessonStep(n-1);
+    const back=document.createElement('button');back.type='button';back.className='continue-btn';back.textContent='← Назад';back.onclick=()=>showLessonStep(n===4?2:n-1);
     const topics=document.createElement('button');topics.type='button';topics.className='continue-btn';topics.textContent='К списку уроков';topics.onclick=returnToTopics;
     nav.append(back,topics);section.querySelector('.screen-shell')?.prepend(nav);
   }
