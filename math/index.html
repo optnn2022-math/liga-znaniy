@@ -2243,9 +2243,10 @@ function renderTopics(){
     const liveIndex=mathLiveLessons[number];
     const modularLesson=(number===1||number===6||number===7);
     const available=(liveIndex!==undefined||modularLesson);
-    const row=document.createElement(available?'button':'div');
+    const row=document.createElement(number===7?'a':(available?'button':'div'));
     row.className='row '+(available?'ready':'locked math-locked');
-    if(available)row.type='button';
+    if(number===7){row.href='lessons/07/index.html';row.style.textDecoration='none';row.style.color='inherit';}
+    else if(available)row.type='button';
     const num=document.createElement('span');num.className='num';num.textContent=String(number).padStart(2,'0');
     const title=document.createElement('span');title.className='name';title.textContent=entry.title;
     const status=document.createElement('span');status.className='goals';
@@ -2261,7 +2262,7 @@ function renderTopics(){
     if(available)row.onclick=()=>{
       if(number===1){window.location.href='lessons/01/';return;}
       if(number===6){window.location.href='lessons/06/';return;}
-          if(number===7){window.location.href='lessons/07/';return;}
+          if(number===7){return;}
       openLesson(liveIndex)
     };
     list.append(row);
