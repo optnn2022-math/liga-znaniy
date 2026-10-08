@@ -70,9 +70,22 @@ warm.forEach((q,i)=>{
  let d=document.createElement('div');d.className='warm-q';d.innerHTML=`<b>${i+1}. ${q[0]}</b><div class="warm-options"></div><div class="wfb"></div>`;
  q[1].forEach((x,j)=>{let b=document.createElement('button');b.textContent=x;b.onclick=()=>{
    if(d.dataset.done)return;
-   if(j===q[2]){d.dataset.done=1;warmDone++;d.querySelector('.wfb').textContent='Верно!';goalFxNew();if(typeof addGoal==='function')addGoal('warm-'+i);
-    if(warmDone===warm.length)document.getElementById('toPractice').disabled=false;
-   } else d.querySelector('.wfb').textContent='Проверь общие делители ещё раз.';
+   const options=[...d.querySelectorAll('.warm-options button')];
+   options.forEach(option=>option.classList.remove('warm-answer-correct','warm-answer-wrong'));
+   if(j===q[2]){
+     d.dataset.done='1';warmDone++;
+     b.classList.add('warm-answer-correct');
+     b.setAttribute('aria-label',x+' — верно');
+     d.querySelector('.wfb').textContent='✓ Верно!';
+     d.querySelector('.wfb').className='wfb warm-feedback-correct';
+     options.forEach(option=>option.disabled=true);
+     goalFxNew();if(typeof addGoal==='function')addGoal('warm-'+i);
+     if(warmDone===warm.length)document.getElementById('toPractice').disabled=false;
+   } else {
+     b.classList.add('warm-answer-wrong');
+     d.querySelector('.wfb').textContent='✗ Неверно. Проверь общие делители ещё раз.';
+     d.querySelector('.wfb').className='wfb warm-feedback-wrong';
+   }
  };d.querySelector('.warm-options').appendChild(b)});
  cw.appendChild(d);
 });
