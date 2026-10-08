@@ -54,11 +54,7 @@ function finishLesson(){location.href=mathTopicsUrl()}
 
 
 
-function goalFxNew(){
- let f=document.getElementById('goalFxNew');
- if(!f){f=document.createElement('div');f.id='goalFxNew';f.className='goal-flash';f.textContent='⚽';document.body.appendChild(f)}
- f.classList.remove('fly');void f.offsetWidth;f.classList.add('fly');
-}
+function goalFxNew(){ /* Only awardOnce displays the approved GOAL animation. */ }
 const warm=[
  ["Какая пара взаимно простая?",["8 и 15","8 и 12","14 и 21","18 и 24"],0],
  ["Какая пара НЕ взаимно простая?",["9 и 16","10 и 21","14 и 25","12 и 18"],3],
