@@ -651,9 +651,7 @@ body.v19-page3 main > *:not(#practiceStage){display:none!important}
 body.v19-page4 main > *:not(#miniTestStage){display:none!important}
 body.v19-page2 #pageCoprimeV9,body.v19-page3 #practiceStage,body.v19-page4 #miniTestStage{
  display:block!important;min-height:calc(100vh - 24px)!important;margin:12px auto!important}
-body:not(.v19-page2):not(.v19-page3):not(.v19-page4) #pageCoprimeV9,
-body:not(.v19-page2):not(.v19-page3):not(.v19-page4) #practiceStage,
-body:not(.v19-page2):not(.v19-page3):not(.v19-page4) #miniTestStage{display:none!important}
+/* Legacy v19 blanket hide removed: current lesson uses body[data-step] navigation. */
 
 
 /* v25 — PAGE 3 ONLY. Pages 1–2 intentionally untouched. */
