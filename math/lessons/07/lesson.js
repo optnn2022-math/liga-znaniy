@@ -146,10 +146,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    });
    localStorage.setItem('primeLessonGoals',String(goals));
  }
- function fx(){
-   const f=document.getElementById('v25GoalFX'); f.classList.remove('go'); void f.offsetWidth; f.classList.add('go');
-   setTimeout(()=>f.classList.remove('go'),950);
- }
+ function fx(){ /* The shared GOAL effect is displayed by awardOnce. */ }
  function show(n){qs.forEach((q,i)=>q.classList.toggle('v25-active',i===n));window.scrollTo({top:0,behavior:'smooth'})}
  qs.forEach((q,qi)=>{
    const correct=Number(q.dataset.correct), fb=q.querySelector('.v25-feedback');
@@ -159,8 +156,8 @@ document.addEventListener('DOMContentLoaded',()=>{
      if(chosen===correct){
        q.dataset.solved='1'; b.classList.add('v25-right');
        q.querySelectorAll('.v25-answer').forEach(x=>x.disabled=true);
-       awardOnce('practice-'+qi); goals=score; window.lessonGoals=score; sync(); fx();
-       fb.textContent='⚽ Верно! +1 гол. '+['У 29 только два делителя: 1 и 29.', '49 = 7 · 7, поэтому число составное.', 'Число 1 не является ни простым, ни составным.', 'Это число 2.', 'НОД(8,15)=1.', '15 и 35 имеют общий делитель 5.', '77 имеет делители 7 и 11.', '61 не делится ни на одно простое число, не превосходящее √61.', '8 и 15 — составные, но их общий делитель только 1.', '91 = 7 · 13.'][qi];
+       const earnedNow=awardOnce('practice-'+qi); if(!earnedNow)showBigGoal(); goals=score; window.lessonGoals=score; sync();
+       fb.textContent=(earnedNow?'⚽ Верно! +1 гол. ':'⚽ Верно! Гол уже засчитан. ')+['У 29 только два делителя: 1 и 29.', '49 = 7 · 7, поэтому число составное.', 'Число 1 не является ни простым, ни составным.', 'Это число 2.', 'НОД(8,15)=1.', '15 и 35 имеют общий делитель 5.', '77 имеет делители 7 и 11.', '61 не делится ни на одно простое число, не превосходящее √61.', '8 и 15 — составные, но их общий делитель только 1.', '91 = 7 · 13.'][qi];
        let next=document.createElement('button'); next.className='v25-next v25-show';
        next.textContent=qi===qs.length-1?'Перейти к мини-тесту →':'Следующее задание →';
        q.appendChild(next);
