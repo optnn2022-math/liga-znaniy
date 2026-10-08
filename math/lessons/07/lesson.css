@@ -821,3 +821,25 @@ body .goal-pop{position:fixed!important;z-index:2147483647!important;left:50%!im
  #coprimeScreen .page2-hero-contained{width:clamp(135px,35vw,190px)!important;max-width:45%!important}
  #coprimeScreen .screen-shell>h2{padding-right:0!important}
 }
+
+/* Verified goal visual: independent of legacy .goal-pop fade-out. */
+body .goal-pop.lesson07-goal-visible{
+ position:fixed!important;left:50%!important;top:22%!important;z-index:2147483647!important;
+ display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
+ width:max-content!important;max-width:94vw!important;padding:12px 22px!important;
+ background:rgba(7,35,78,.9)!important;border:3px solid #ffd347!important;border-radius:24px!important;
+ color:#fff!important;visibility:visible!important;opacity:1!important;
+ font-size:clamp(52px,13vw,108px)!important;font-weight:1000!important;line-height:1.1!important;
+ text-shadow:0 3px 0 #ad5300,0 0 20px #ff9b13!important;
+ transform:translateX(-50%)!important;animation:lesson07-goal-visible-in 1.8s ease-out both!important;
+ box-shadow:0 0 35px rgba(255,190,25,.8)!important;pointer-events:none!important;
+}
+body .goal-pop.lesson07-goal-visible .lesson07-goal-word{display:block!important;color:#fff!important;opacity:1!important;white-space:nowrap!important}
+body .goal-pop.lesson07-goal-visible .lesson07-goal-ball{display:block!important;font-size:.65em!important;opacity:1!important;filter:none!important}
+@keyframes lesson07-goal-visible-in{
+ 0%{opacity:0;transform:translate(-50%,30px) scale(.75)}
+ 20%{opacity:1;transform:translate(-50%,0) scale(1.1)}
+ 35%{opacity:1;transform:translate(-50%,0) scale(1)}
+ 85%{opacity:1;transform:translate(-50%,0) scale(1)}
+ 100%{opacity:0;transform:translate(-50%,-20px) scale(1)}
+}
