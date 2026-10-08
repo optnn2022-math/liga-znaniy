@@ -843,3 +843,16 @@ body .goal-pop.lesson07-goal-visible .lesson07-goal-ball{display:block!important
  85%{opacity:1;transform:translate(-50%,0) scale(1)}
  100%{opacity:0;transform:translate(-50%,-20px) scale(1)}
 }
+
+/* Page 2: hero outside blue workspace, to the right of video, no overlap. */
+#coprimeScreen .page2-layout{display:grid!important;grid-template-columns:minmax(0,1fr) clamp(175px,26vw,310px)!important;align-items:start!important;gap:10px!important;width:100%!important}
+#coprimeScreen .page2-layout>.screen-shell.page2-workspace-scaled{grid-column:1!important;grid-row:1!important;width:100%!important;min-width:0!important;max-width:none!important;margin:0!important}
+#coprimeScreen .page2-hero-aside{grid-column:2!important;grid-row:1!important;display:block!important;position:sticky!important;top:15px!important;align-self:start!important;width:100%!important;z-index:1!important;pointer-events:none!important}
+#coprimeScreen .page2-hero-aside>.page2-hero-contained{display:block!important;position:static!important;width:100%!important;max-width:none!important;height:auto!important;transform:none!important;margin:0!important}
+@media(max-width:700px){
+ body[data-step="2"] #coprimeScreen{display:block!important;width:100%!important;margin:12px auto!important}
+ #coprimeScreen .page2-layout{grid-template-columns:minmax(0,1fr) clamp(115px,34vw,175px)!important;gap:4px!important}
+ #coprimeScreen .page2-layout>.screen-shell.page2-workspace-scaled{width:100%!important;min-width:0!important;padding:10px!important}
+ #coprimeScreen .page2-hero-aside{position:sticky!important;top:8px!important}
+ #coprimeScreen .page2-hero-aside>.page2-hero-contained{width:100%!important;max-width:none!important}
+}
