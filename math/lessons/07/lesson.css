@@ -868,3 +868,16 @@ body[data-step="2"] #coprimeScreen .page2-hero-aside img.page2-hero-contained{po
  body[data-step="2"] #coprimeScreen .page2-hero-aside img.page2-hero-contained{width:112%!important;margin-left:-7%!important}
  body[data-step="2"] #coprimeScreen .page2-layout>.screen-shell{padding:10px!important}
 }
+
+/* Lesson 07 final third screen: numeric-answer mini-test only. */
+#miniTestStage .lesson07-final-list{display:grid;gap:14px;width:100%}
+#miniTestStage .lesson07-final-item{padding:16px;border:1px solid #87baf0;border-radius:16px;background:#eaf5ff;color:#16365c}
+#miniTestStage .lesson07-final-item label{display:block;margin-bottom:10px;line-height:1.45}
+#miniTestStage .lesson07-final-input{display:block;box-sizing:border-box;width:100%;max-width:320px;min-height:46px;padding:10px 13px;border:2px solid #83b4df;border-radius:12px;background:white;color:#122e4b;font-size:18px}
+#miniTestStage .lesson07-final-input.is-correct{border-color:#07964c;background:#e9fff1}
+#miniTestStage .lesson07-final-input.is-wrong{border-color:#ce3848;background:#fff2f2}
+#miniTestStage .lesson07-final-feedback{margin-top:9px;font-weight:750;line-height:1.5}
+#miniTestStage .lesson07-final-feedback.is-correct{color:#087c3f}
+#miniTestStage .lesson07-final-feedback.is-wrong{color:#b22637}
+#miniTestStage .lesson07-final-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+#miniTestStage .lesson07-final-summary{font-size:17px;font-weight:750;color:#164b78;text-align:center;line-height:1.5}
