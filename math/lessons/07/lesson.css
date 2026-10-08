@@ -809,3 +809,15 @@ body .goal-pop{position:fixed!important;z-index:2147483647!important;left:50%!im
   box-sizing:border-box!important;margin-top:0!important;
  }
 }
+
+/* Structural page 2 fix: hero is IN the shell, in normal document flow. */
+#coprimeScreen .screen-shell.page2-workspace-scaled{width:100%!important;max-width:960px!important;margin:0 auto!important;transform:none!important;zoom:1!important;box-sizing:border-box!important}
+#coprimeScreen .page2-hero-row{display:flex!important;justify-content:flex-end!important;align-items:center!important;width:100%!important;min-height:0!important;margin:0 0 8px!important;position:static!important}
+#coprimeScreen .page2-hero-contained{position:static!important;display:block!important;width:clamp(135px,22vw,235px)!important;max-width:42%!important;height:auto!important;transform:none!important;pointer-events:none!important;float:none!important;margin:0!important;z-index:auto!important}
+@media(max-width:700px){
+ body[data-step="2"] #coprimeScreen{display:block!important;width:96%!important;margin:12px auto!important}
+ #coprimeScreen .screen-shell.page2-workspace-scaled{width:100%!important;max-width:100%!important;margin:0!important;padding:12px!important}
+ #coprimeScreen .page2-hero-row{justify-content:flex-end!important;margin:0 0 8px!important}
+ #coprimeScreen .page2-hero-contained{width:clamp(135px,35vw,190px)!important;max-width:45%!important}
+ #coprimeScreen .screen-shell>h2{padding-right:0!important}
+}
