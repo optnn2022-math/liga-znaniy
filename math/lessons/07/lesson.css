@@ -777,3 +777,19 @@ body[data-step="3"] #practiceStage .v25-q.v25-active .v25-answer.v25-wrong{backg
  transform:none!important;pointer-events:none!important;z-index:2!important;
 }
 @media(max-width:700px){#coprimeScreen > img.page2-hero-clean{width:clamp(180px,36vw,260px)!important;right:0!important}}
+
+/* Lesson 06 style: high-contrast answer states for lesson 07. */
+#coprimeWarmup .warm-options button.warm-answer-correct,
+#coprimeWarmup .warm-options button.warm-answer-correct:disabled,
+body[data-step="3"] #practiceStage .v25-answer.v25-right,
+body[data-step="3"] #practiceStage .v25-answer.v25-right:disabled {
+ background:#07964c!important;border:3px solid #78ffc0!important;color:#fff!important;
+ opacity:1!important;box-shadow:0 0 0 3px rgba(57,255,146,.24),0 0 24px rgba(38,255,124,.48)!important;
+}
+#coprimeWarmup .warm-options button.warm-answer-wrong,
+body[data-step="3"] #practiceStage .v25-answer.v25-wrong {
+ background:#cf263c!important;border:3px solid #ff9a9a!important;color:#fff!important;
+ opacity:1!important;box-shadow:0 0 0 3px rgba(255,73,88,.2),0 0 20px rgba(255,44,72,.35)!important;
+}
+.lesson07-big-goal{position:fixed;z-index:99999;top:34%;left:50%;width:max-content;max-width:90vw;transform:translateX(-50%);pointer-events:none;text-align:center;font-size:clamp(64px,16vw,148px);line-height:1.15;font-weight:1000;color:#fff;text-shadow:0 5px 0 #e87900,0 0 24px #ffb700,0 0 60px #ff6400;animation:lesson07-goal-burst 1.6s ease-out both}
+@keyframes lesson07-goal-burst{0%{opacity:0;transform:translate(-50%,60px) scale(.35)}22%{opacity:1;transform:translate(-50%,0) scale(1.2)}42%{transform:translate(-50%,0) scale(1)}75%{opacity:1;transform:translate(-50%,0) scale(1)}100%{opacity:0;transform:translate(-50%,-55px) scale(1.1)}}
