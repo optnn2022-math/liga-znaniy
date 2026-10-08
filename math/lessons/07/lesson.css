@@ -791,3 +791,5 @@ body[data-step="3"] #practiceStage .v25-answer.v25-wrong {
  background:#cf263c!important;border:3px solid #ff9a9a!important;color:#fff!important;
  opacity:1!important;box-shadow:0 0 0 3px rgba(255,73,88,.2),0 0 20px rgba(255,44,72,.35)!important;
 }
+/* One visible goal animation, matching lesson 06; never the transparent ball overlay. */
+body .goal-pop{position:fixed!important;z-index:2147483647!important;left:50%!important;top:18%!important;display:block!important;visibility:visible!important;font-size:clamp(2rem,6vw,5rem)!important;font-weight:1000!important;color:#fff!important;opacity:1;text-shadow:0 0 14px #ffa623,0 0 35px #ff7613!important;pointer-events:none!important;animation:goal .9s both!important}
