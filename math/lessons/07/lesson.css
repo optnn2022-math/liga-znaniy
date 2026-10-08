@@ -708,14 +708,20 @@ body[data-step="2"] #coprimeScreen,body[data-step="3"] #practiceStage,body[data-
 #practiceStage .v25-q{display:none}#practiceStage .v25-q.v25-active{display:block}
 @media(max-width:600px){#coprimeScreen{width:96%!important}#coprimeScreen .screen-shell{padding:9px!important}#coprimeScreen .concept-grid{grid-template-columns:1fr 1fr}#coprimeScreen .concept-card{font-size:14px;line-height:1.35}#coprimeScreen .concept-card.warning{grid-column:1/-1}#coprimeScreen h2{font-size:22px!important}#coprimeScreen h3{font-size:17px!important}#coprimeScreen .pair-num{font-size:16px;min-height:39px}#coprimeScreen .coprime-video-v18 video{max-width:100%}}
 
-/* Lesson 07 page 2: scale ONLY the workspace, not the sibling hero. */
+/* Lesson 07: page 2 workspace only. The sibling football hero is NOT styled here.
+   Transform scales the panel AND every child, unlike setting only width. */
 #coprimeScreen .screen-shell.page2-workspace-scaled {
-  zoom: .8 !important;
+  zoom: 1 !important;
   width: 100% !important;
   max-width: none !important;
-  box-sizing: border-box !important;
-  margin: 0 !important;
+  transform: scale(.8) !important;
+  transform-origin: top left !important;
+  margin: 0 0 -20% 0 !important;
 }
-#coprimeScreen > .page2-hero-clean {
-  zoom: 1 !important;
+@media (min-width: 701px) {
+  #coprimeScreen .screen-shell.page2-workspace-scaled {
+    transform-origin: top center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
