@@ -756,3 +756,15 @@ body[data-step="4"] main #miniTestStage{display:block!important;visibility:visib
 body[data-step="4"] main #miniTestStage{width:min(96%,960px)!important;min-height:0!important;margin:12px auto!important}
 body[data-step="4"] #miniTestStage .screen-shell{display:block!important;width:100%!important;max-width:760px!important;margin:0 auto!important}
 body[data-step="4"] #miniTestNew{display:block!important}
+
+/* 2026-10-08: Restore visible interactive choices on practice page 3. */
+body[data-step="3"] #practiceStage,
+body[data-step="3"] #practiceStage .screen-shell,
+body[data-step="3"] #practicePages{display:block!important;visibility:visible!important;opacity:1!important}
+body[data-step="3"] #practiceStage .v25-q{display:none!important}
+body[data-step="3"] #practiceStage .v25-q.v25-active{display:block!important;visibility:visible!important;opacity:1!important}
+body[data-step="3"] #practiceStage .v25-q.v25-active .v25-answers{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px!important;visibility:visible!important;opacity:1!important}
+body[data-step="3"] #practiceStage .v25-q.v25-active .v25-answer{display:block!important;position:relative!important;visibility:visible!important;opacity:1!important;min-height:48px!important;color:#fff!important;background:rgba(255,255,255,.12)!important;border:1px solid #83c7f7!important;white-space:normal!important;pointer-events:auto!important}
+body[data-step="3"] #practiceStage .v25-q.v25-active .v25-answer.v25-right{background:#17864b!important;border-color:#70f3a6!important}
+body[data-step="3"] #practiceStage .v25-q.v25-active .v25-answer.v25-wrong{background:#ad3544!important;border-color:#ff9c9c!important}
+@media(max-width:560px){body[data-step="3"] #practiceStage .v25-q.v25-active .v25-answers{grid-template-columns:1fr!important}}
