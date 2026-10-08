@@ -228,7 +228,19 @@ document.addEventListener('DOMContentLoaded',()=>{
  };
 });
 
-function showLessonStep(n){document.body.classList.remove('v19-page2','v19-page3','v19-page4');document.body.dataset.step=String(n);for(const [step,id] of [[1,'lessonPage1'],[2,'coprimeScreen'],[3,'practiceStage'],[4,'miniTestStage']]){const section=document.getElementById(id);if(section)section.style.setProperty('display',step===n?'block':'none','important');}document.querySelectorAll('video').forEach(v=>v.pause());if(n===3){const qs=[...document.querySelectorAll('#practicePages .v25-q')];if(qs.length&&!qs.some(q=>q.classList.contains('v25-active')))qs[0].classList.add('v25-active');}window.scrollTo(0,0);if(n===4&&typeof window.drawMiniList==='function')window.drawMiniList()}
+/* Pause native players and unload embedded players only when their page becomes hidden. */
+function stopHiddenLessonVideos(){
+ document.querySelectorAll('video').forEach(v=>{if(!v.closest('section')||v.closest('section').style.display==='none')v.pause();});
+ document.querySelectorAll('iframe').forEach(frame=>{
+   const section=frame.closest('section');
+   if(!section||section.style.display!=='none')return;
+   const src=frame.getAttribute('src');
+   if(!src)return;
+   frame.setAttribute('src','about:blank');
+   frame.setAttribute('src',src);
+ });
+}
+function showLessonStep(n){document.body.classList.remove('v19-page2','v19-page3','v19-page4');document.body.dataset.step=String(n);for(const [step,id] of [[1,'lessonPage1'],[2,'coprimeScreen'],[3,'practiceStage'],[4,'miniTestStage']]){const section=document.getElementById(id);if(section)section.style.setProperty('display',step===n?'block':'none','important');}stopHiddenLessonVideos();if(n===3){const qs=[...document.querySelectorAll('#practicePages .v25-q')];if(qs.length&&!qs.some(q=>q.classList.contains('v25-active')))qs[0].classList.add('v25-active');}window.scrollTo(0,0);if(n===4&&typeof window.drawMiniList==='function')window.drawMiniList()}
 document.addEventListener('DOMContentLoaded',()=>{const next=document.querySelector('#lessonPage1 .lesson-next button');if(next)next.onclick=e=>{e.preventDefault();showLessonStep(2)};const go=document.getElementById('toPractice');if(go){go.disabled=warmDone!==warm.length;go.onclick=()=>{if(!go.disabled)showLessonStep(4)}};document.getElementById('coprimeScreen')?.querySelector('.screen-shell')?.insertAdjacentHTML('beforeend','');document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){e.preventDefault();e.stopImmediatePropagation();showLessonStep(4)}} ,true);});
 
 /* Unified stage navigation. Hero markup and styles are intentionally unchanged. */
