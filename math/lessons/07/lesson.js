@@ -200,22 +200,17 @@ document.addEventListener('DOMContentLoaded',()=>{
    const inputs=[...mt.querySelectorAll('.lesson07-final-input')],check=mt.querySelector('.lesson07-final-check'),finish=mt.querySelector('.lesson07-final-finish'),summary=mt.querySelector('.lesson07-final-summary');
    let checked=false;
    const validate=()=>{
-     let correct=0;
+     let correct=0, newlyAwarded=0;
      inputs.forEach((input,i)=>{
-       const ok=normalize(input.value)===questions[i][1];if(ok)correct++;
+       const ok=normalize(input.value)===questions[i][1];
+       if(ok){correct++;if(awardOnce('lesson07-final-correct-'+i))newlyAwarded++;}
        const feedback=input.parentElement.querySelector('.lesson07-final-feedback');
        feedback.className='lesson07-final-feedback '+(ok?'is-correct':'is-wrong');
        feedback.textContent=ok?'✓ Верно':'Неверно. Правильный ответ: '+questions[i][1]+'. '+questions[i][2];
        input.classList.toggle('is-correct',ok);input.classList.toggle('is-wrong',!ok);
      });
      checked=true;
-     if(correct===questions.length){
-       let gained=0;
-       for(let i=0;i<5;i++){if(awardOnce('lesson07-final-bonus-'+i))gained++;}
-       summary.textContent='Все 10 ответов верны! '+(gained?'Начислено 5 голов!':'5 голов уже были начислены ранее.');
-     }else{
-       summary.textContent='Верно '+correct+' из '+questions.length+'. Для получения 5 голов исправь все ошибки и проверь ответы снова.';
-     }
+     summary.textContent='Верных ответов: '+correct+' из '+questions.length+'. '+(newlyAwarded?'Начислено голов: '+newlyAwarded+'. ':'')+(correct===questions.length?'Отлично, все ответы правильные!':'Исправь ошибки и проверь ответы снова.');
      return correct;
    };
    check.onclick=validate;
