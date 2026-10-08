@@ -2241,11 +2241,11 @@ function renderTopics(){
     const number=index+1;
     if(entry.heading){const heading=document.createElement('div');heading.className='list-head math-block-heading';heading.textContent=entry.heading;list.append(heading)}
     const liveIndex=mathLiveLessons[number];
-    const modularLesson=(number===1||number===6||number===7);
+    const modularLesson=(number===1||number===6||number===7||number===8);
     const available=(liveIndex!==undefined||modularLesson);
-    const row=document.createElement(number===7?'a':(available?'button':'div'));
+    const row=document.createElement((number===7||number===8)?'a':(available?'button':'div'));
     row.className='row '+(available?'ready':'locked math-locked');
-    if(number===7){row.href='lessons/07/index.html';row.style.textDecoration='none';row.style.color='inherit';}
+    if(number===7||number===8){row.href=number===7?'lessons/07/index.html':'lessons/08/index.html';row.style.textDecoration='none';row.style.color='inherit';}
     else if(available)row.type='button';
     const num=document.createElement('span');num.className='num';num.textContent=String(number).padStart(2,'0');
     const title=document.createElement('span');title.className='name';title.textContent=entry.title;
@@ -2255,14 +2255,14 @@ function renderTopics(){
     }else if(number===6){
       const savedGoals=Math.max(0,Number(localStorage.getItem('liga_math_prime_goals')||0));
       status.textContent='⚽ '+savedGoals+' / 13';
-    }else if(number===7){const savedGoals=Math.min(31,Math.max(0,Number(localStorage.getItem('primeLessonGoals')||0)));status.textContent='⚽ '+savedGoals+' / 31';}else{
+    }else if(number===7){const savedGoals=Math.min(31,Math.max(0,Number(localStorage.getItem('primeLessonGoals')||0)));status.textContent='⚽ '+savedGoals+' / 31';}else if(number===8){let earnedGoals=0;try{const saved=JSON.parse(localStorage.getItem('liga_math_topic8_earned_v1')||'[]');if(Array.isArray(saved))earnedGoals=new Set(saved.filter(k=>typeof k==='string')).size}catch{}status.textContent='⚽ '+Math.min(20,earnedGoals)+' / 20';}else{
       status.textContent=liveIndex===undefined?'🔒':('⚽ '+mathTopicGoalCount(liveIndex)+' / '+mathTopicGoalTotal(liveIndex));
     }
     row.append(num,title,status);
     if(available)row.onclick=()=>{
       if(number===1){window.location.href='lessons/01/';return;}
       if(number===6){window.location.href='lessons/06/';return;}
-          if(number===7){return;}
+          if(number===7||number===8){return;}
       openLesson(liveIndex)
     };
     list.append(row);
