@@ -1,4 +1,10 @@
-let score=0;const scoreEl=document.getElementById('score'),quizScoreEl=document.getElementById('quizScore');function syncScore(){scoreEl.textContent=score;if(quizScoreEl)quizScoreEl.textContent=score;const p=document.getElementById('practiceScore');if(p)p.textContent=score}function addGoal(){score++;syncScore();let p=document.createElement('div');p.className='goal-pop';p.textContent='ГОЛ! ⚽';document.body.appendChild(p);setTimeout(()=>p.remove(),900)}function mathTopicsUrl(){return '../../'}function returnToTopics(){window.location.href='../../';}
+const LESSON_GOAL_KEY='primeLessonGoals';
+let score=Number(localStorage.getItem(LESSON_GOAL_KEY)||0);
+if(!Number.isFinite(score)||score<0)score=0;
+const earnedKeys=new Set(JSON.parse(localStorage.getItem('primeLessonEarnedKeys')||'[]'));
+function persistGoals(){localStorage.setItem(LESSON_GOAL_KEY,String(score));localStorage.setItem('primeLessonEarnedKeys',JSON.stringify([...earnedKeys]));}
+function awardOnce(key){if(earnedKeys.has(key))return false;earnedKeys.add(key);score++;persistGoals();syncScore();return true;}
+const scoreEl=document.getElementById('score'),quizScoreEl=document.getElementById('quizScore');function syncScore(){scoreEl.textContent=score;if(quizScoreEl)quizScoreEl.textContent=score;const p=document.getElementById('practiceScore');if(p)p.textContent=score}function addGoal(key){if(key){if(!awardOnce(key))return;}else{score++;persistGoals();syncScore();}let p=document.createElement('div');p.className='goal-pop';p.textContent='ГОЛ! ⚽';document.body.appendChild(p);setTimeout(()=>p.remove(),900)}function mathTopicsUrl(){return '../../'}function returnToTopics(){window.location.href='../../';}
 const nums=[2,5,9,11,15,17,21,23,27,31,35,41], prime=new Set([2,5,11,17,23,31,41]);const balls=document.getElementById('balls');nums.forEach(n=>{let d=document.createElement('div');d.className='number-ball';d.draggable=true;d.dataset.n=n;d.innerHTML='<img src="assets/png_11_69948aa57063.png"><b>'+n+'</b>';d.addEventListener('dragstart',e=>e.dataTransfer.setData('text/plain',n));balls.appendChild(d)});document.querySelectorAll('.goal-zone').forEach(g=>{g.addEventListener('dragover',e=>e.preventDefault());g.addEventListener('drop',e=>{e.preventDefault();let n=+e.dataTransfer.getData('text/plain'),el=[...document.querySelectorAll('.number-ball')].find(x=>+x.dataset.n===n);if(!el||el.classList.contains('done'))return;let ok=(g.dataset.kind==='prime')===prime.has(n);let f=document.getElementById('sortFb');if(ok){el.classList.add('done');f.textContent='ГОЛ! '+n+' отправлен верно.';addGoal()}else f.textContent='Мимо! Проверь делители числа '+n+'.'})});
 document.getElementById('oneBtn').onclick=()=>{document.getElementById('oneFb').innerHTML='<b>Ловушка!</b> Число 1 — ни простое, ни составное: у него только один натуральный делитель.'};let trapDone=false;function trap(btn,ok,msg){document.getElementById('trapFb').textContent=msg;btn.classList.add(ok?'correct':'wrong');if(ok&&!trapDone){addGoal();trapDone=true}}
 /* Mobile: drag a ball with a finger, or tap a ball then tap a goal. */
@@ -64,7 +70,7 @@ warm.forEach((q,i)=>{
  let d=document.createElement('div');d.className='warm-q';d.innerHTML=`<b>${i+1}. ${q[0]}</b><div class="warm-options"></div><div class="wfb"></div>`;
  q[1].forEach((x,j)=>{let b=document.createElement('button');b.textContent=x;b.onclick=()=>{
    if(d.dataset.done)return;
-   if(j===q[2]){d.dataset.done=1;warmDone++;d.querySelector('.wfb').textContent='Верно!';goalFxNew();if(typeof addGoal==='function')addGoal();
+   if(j===q[2]){d.dataset.done=1;warmDone++;d.querySelector('.wfb').textContent='Верно!';goalFxNew();if(typeof addGoal==='function')addGoal('warm-'+i);
     if(warmDone===warm.length)document.getElementById('toPractice').disabled=false;
    } else d.querySelector('.wfb').textContent='Проверь общие делители ещё раз.';
  };d.querySelector('.warm-options').appendChild(b)});
@@ -92,7 +98,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    if(gcd(a,c)===1){
     selected.classList.remove('selected');selected.classList.add('matched');b.classList.add('matched');
     done++;S.textContent='ГОЛ! Пара '+a+' и '+c+' — взаимно простая.';
-    if(typeof goalFxNew==='function')goalFxNew(); if(typeof addGoal==='function')addGoal();
+    if(typeof goalFxNew==='function')goalFxNew(); if(typeof addGoal==='function')addGoal('pair-'+[a,c].sort((x,y)=>x-y).join('-'));
     selected=null;
     if(done===4) setTimeout(()=>S.textContent='Отлично! Все 4 пары собраны ⚽',650);
    }else{
@@ -122,7 +128,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  const qs=[...host.querySelectorAll('.v25-q')];
  let idx=0;
  // Keep a lesson-wide total for the final page; never reset an existing score.
- let goals=Number(window.lessonGoals ?? score ?? 0);
+ let goals=score;
  window.lessonGoals=goals;
  function sync(){
    document.querySelectorAll('#practiceScore,[id*="Score"],.score span').forEach(el=>{
@@ -143,7 +149,7 @@ document.addEventListener('DOMContentLoaded',()=>{
      if(chosen===correct){
        q.dataset.solved='1'; b.classList.add('v25-right');
        q.querySelectorAll('.v25-answer').forEach(x=>x.disabled=true);
-       goals++; score=goals; window.lessonGoals=goals; syncScore(); sync(); fx();
+       awardOnce('practice-'+qi); goals=score; window.lessonGoals=score; sync(); fx();
        fb.textContent='⚽ Верно! +1 гол. '+['У 29 только два делителя: 1 и 29.', '49 = 7 · 7, поэтому число составное.', 'Число 1 не является ни простым, ни составным.', 'Это число 2.', 'НОД(8,15)=1.', '15 и 35 имеют общий делитель 5.', '77 имеет делители 7 и 11.', '61 не делится ни на одно простое число, не превосходящее √61.', '8 и 15 — составные, но их общий делитель только 1.', '91 = 7 · 13.'][qi];
        let next=document.createElement('button'); next.className='v25-next v25-show';
        next.textContent=qi===qs.length-1?'Перейти к мини-тесту →':'Следующее задание →';
@@ -172,7 +178,7 @@ document.addEventListener('DOMContentLoaded',()=>{
  const questions=[
  ['Запиши простое число между 20 и 25.','23'],['Запиши наименьшее составное натуральное число.','4'],['Сколько делителей имеет любое простое число?','2'],['Запиши единственное чётное простое число.','2'],['Число 1: сколько у него натуральных делителей?','1'],['Запиши наименьшее двузначное простое число.','11'],['Запиши наименьшее двузначное составное число.','10'],['Найди НОД чисел 8 и 15.','1'],['Найди НОД чисел 14 и 25.','1'],['Запиши число: оно больше 30, меньше 35 и является простым.','31']];
  const norm=v=>String(v).trim().replace(/\s+/g,' ').toLowerCase();
- let checked=false,correct=0,startGoals=Number(localStorage.getItem('primeLessonGoals')||window.lessonGoals||0);
+ let checked=false,correct=0;
  window.drawMiniList=function draw(){
    mt.innerHTML='<div class="v30-list">'+questions.map((q,i)=>`<article class="v30-item"><div class="v30-num">Вопрос ${i+1} из 10</div><div class="v30-q">${q[0]}</div><input class="v30-input" data-i="${i}" inputmode="numeric" autocomplete="off" placeholder="Введи ответ"><div class="v30-fb" id="v30fb${i}"></div></article>`).join('')+`<div class="v30-actions"><button class="v30-check">✓ Проверить ответы</button><button class="v30-finish" disabled>🏁 Завершить урок</button></div></div>`;
    const check=mt.querySelector('.v30-check'), finish=mt.querySelector('.v30-finish');
@@ -182,7 +188,7 @@ document.addEventListener('DOMContentLoaded',()=>{
      correct=0; inputs.forEach((inp,i)=>{const ok=norm(inp.value)===norm(questions[i][1]); if(ok)correct++; const fb=document.getElementById('v30fb'+i); fb.textContent=ok?'✓ Верно':'✗ Проверь ответ'; fb.style.color=ok?'#8ff0b2':'#ffd0c7'; inp.style.borderColor=ok?'#65d99a':'#ff8f7f';});
      checked=true; finish.disabled=false; check.textContent=`Проверено: ${correct} из 10`;
    };
-   finish.onclick=()=>{ if(!checked)return; const total=startGoals+correct; window.lessonGoals=total; localStorage.setItem('primeLessonGoals',String(total));localStorage.setItem('liga_math_prime_goals',String(total));localStorage.setItem('liga_math_prime_complete','1'); mt.innerHTML=`<div class="v26-card v26-result"><h3>🏆 Урок завершён!</h3><p>Мини-тест: <b>${correct} из 10</b></p><div class="big-goals">⚽ ${total} голов</div><p class="v28-total">Ты заработал за урок</p><button class="v26-finish" id="v30done">Завершить урок</button></div>`; const b=document.getElementById('v30done'); if(b)b.onclick=()=>{if(typeof finishLesson==='function')finishLesson();else history.back();}; window.scrollTo({top:0,behavior:'smooth'}); };
+   finish.onclick=()=>{ if(!checked)return; questions.forEach((q,i)=>{const inp=mt.querySelector('.v30-input[data-i="'+i+'"]');if(inp&&norm(inp.value)===norm(q[1]))awardOnce('mini-'+i)});const total=score;window.lessonGoals=total;localStorage.setItem('liga_math_prime_goals',String(total));localStorage.setItem('liga_math_prime_complete','1'); mt.innerHTML=`<div class="v26-card v26-result"><h3>🏆 Урок завершён!</h3><p>Мини-тест: <b>${correct} из 10</b></p><div class="big-goals">⚽ ${total} голов</div><p class="v28-total">Ты заработал за урок</p><button class="v26-finish" id="v30done">Завершить урок</button></div>`; const b=document.getElementById('v30done'); if(b)b.onclick=()=>{if(typeof finishLesson==='function')finishLesson();else history.back();}; window.scrollTo({top:0,behavior:'smooth'}); };
  }
  document.addEventListener('click',e=>{const b=e.target.closest('button');if(b&&b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){setTimeout(()=>window.drawMiniList(),10);}},true);
  // Mini-test is rendered when entering the final stage.
@@ -190,4 +196,16 @@ document.addEventListener('DOMContentLoaded',()=>{
 
 
 function showLessonStep(n){document.body.dataset.step=String(n);document.querySelectorAll('video').forEach(v=>{if(n!==2)v.pause()});window.scrollTo(0,0);if(n===4&&typeof window.drawMiniList==='function')window.drawMiniList()}
-document.addEventListener('DOMContentLoaded',()=>{const next=document.querySelector('#lessonPage1 .lesson-next button');if(next)next.onclick=e=>{e.preventDefault();showLessonStep(2)};const go=document.getElementById('toPractice');if(go){go.disabled=true;go.onclick=()=>{if(!go.disabled)showLessonStep(3)}};document.getElementById('coprimeScreen')?.querySelector('.screen-shell')?.insertAdjacentHTML('beforeend','');document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){e.preventDefault();e.stopImmediatePropagation();showLessonStep(4)}} ,true);});
+document.addEventListener('DOMContentLoaded',()=>{const next=document.querySelector('#lessonPage1 .lesson-next button');if(next)next.onclick=e=>{e.preventDefault();showLessonStep(2)};const go=document.getElementById('toPractice');if(go){go.disabled=warmDone!==warm.length;go.onclick=()=>{if(!go.disabled)showLessonStep(3)}};document.getElementById('coprimeScreen')?.querySelector('.screen-shell')?.insertAdjacentHTML('beforeend','');document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.closest('#practiceStage')&&/Перейти к мини-тесту/i.test(b.textContent||'')){e.preventDefault();e.stopImmediatePropagation();showLessonStep(4)}} ,true);});
+
+/* Unified stage navigation. Hero markup and styles are intentionally unchanged. */
+document.addEventListener('DOMContentLoaded',()=>{
+  syncScore();
+  for(const [n,id] of [[2,'coprimeScreen'],[3,'practiceStage'],[4,'miniTestStage']]){
+    const section=document.getElementById(id);if(!section)continue;
+    const nav=document.createElement('nav');nav.className='lesson-stage-navigation';
+    const back=document.createElement('button');back.type='button';back.className='continue-btn';back.textContent='← Назад';back.onclick=()=>showLessonStep(n-1);
+    const topics=document.createElement('button');topics.type='button';topics.className='continue-btn';topics.textContent='К списку уроков';topics.onclick=returnToTopics;
+    nav.append(back,topics);section.querySelector('.screen-shell')?.prepend(nav);
+  }
+});
