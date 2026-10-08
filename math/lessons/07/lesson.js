@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded',()=>{
      });
      checked=true;
      results.forEach((ok,i)=>{if(ok&&awardOnce('lesson07-final-correct-'+i))newlyAwarded++;});
-     summary.textContent='Верных ответов: '+correct+' из '+questions.length+'. '+(newlyAwarded?'Начислено голов: '+newlyAwarded+'. ':'')+(correct===questions.length?'Отлично, все ответы правильные!':'Исправь ошибки и проверь ответы снова.');
+     summary.textContent='Верных ответов: '+correct+' из '+questions.length+'. '+(newlyAwarded?'Начислено голов: '+newlyAwarded+'. ':'')+(correct===questions.length?'Отлично, все ответы правильные!':'Неверные ответы отмечены и объяснены.');
      return correct;
    };
    check.onclick=validate;
