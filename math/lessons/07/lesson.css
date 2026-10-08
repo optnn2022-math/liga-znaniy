@@ -730,3 +730,16 @@ body[data-step="2"] #coprimeScreen,body[data-step="3"] #practiceStage,body[data-
     z-index:2;
   }
 }
+
+/* Warm-up answer feedback: explicit states override legacy button rules. */
+#coprimeWarmup .warm-options button.warm-answer-correct,
+#coprimeWarmup .warm-options button.warm-answer-correct:disabled {
+ background:#168348!important;border:2px solid #60f4a1!important;color:#fff!important;
+ opacity:1!important;box-shadow:0 0 0 2px rgba(60,230,130,.18)!important;
+}
+#coprimeWarmup .warm-options button.warm-answer-wrong {
+ background:#ad303c!important;border:2px solid #ff8792!important;color:#fff!important;
+ opacity:1!important;
+}
+#coprimeWarmup .wfb.warm-feedback-correct{color:#80ffc0!important;font-weight:800!important;opacity:1!important}
+#coprimeWarmup .wfb.warm-feedback-wrong{color:#ff9ca4!important;font-weight:800!important;opacity:1!important}
