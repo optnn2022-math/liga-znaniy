@@ -78,7 +78,7 @@ function remember(label){
 }
 function legacyMath(){
   const d=read('liga-znaniy-course-v2')||{}, g=d.goals||{};
-  const names=['Натуральные числа','Многозначные числа и разряды','Натуральные числа на числовом луче','Порядок и сравнение чисел','Прочие темы 1–5'];
+  const names=['Натуральные числа','Сравнение чисел','Признаки делимости','Многозначные числа и разряды','Натуральные числа на числовом луче'];
   const legacy=Array.from({length:5},(_,i)=>cap(g[i],100));
   const rays=Object.values(d.rayFirstGoals||{}).filter(Boolean).length;
   legacy[4]+=Math.min(4,rays);
@@ -91,7 +91,7 @@ function legacyMath(){
   const seven=cap(raw('primeLessonGoals'),31);
   const eight=cap(unique(read('liga_math_topic8_earned_v1')),20);
   const nine=cap(unique(read('liga_math_topic9_earned_v1')),17);
-  const rows=legacy.map((x,i)=>({label:'Тема '+(i+1),goals:x,done:completed.has(names[i])}));
+  const rows=legacy.map((x,i)=>({label:'Тема '+[1,4,5,2,3][i]+' · '+names[i],goals:x,done:completed.has(names[i])}));
   const newRows=[
     {label:'Урок 6',goals:six,done:raw('liga_math_prime_complete')==='1'},
     {label:'Урок 7',goals:seven,done:raw('liga_math_lesson07_test_checked')==='1'},
@@ -99,9 +99,9 @@ function legacyMath(){
     {label:'Урок 9 · НОД и НОК',goals:nine,done:raw('liga_math_topic9_goals')!==null}
   ];
   // Completed legacy topic labels are taken from actual saved submissions, not merely nonzero scores.
-  const legacyDone=Math.min(5,completed.size);
+  const legacyDone=names.filter(x=>completed.has(x)).length;
   const newDone=newRows.filter(r=>r.done).length;
-  const tests=completed.size+Number(explicit||best>0)+
+  const tests=legacyDone+Number(explicit||best>0)+
     Number(raw('liga_math_lesson07_test_checked')==='1')+
     Number(raw('liga_math_topic8_goals')!==null)+Number(raw('liga_math_topic9_goals')!==null);
   return {goals:legacy.reduce((a,b)=>a+b,0)+six+seven+eight+nine,
