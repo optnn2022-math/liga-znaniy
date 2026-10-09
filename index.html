@@ -202,14 +202,13 @@ document.getElementById('openProgress').onclick=()=>{render();landing.classList.
 document.getElementById('progressBack').onclick=()=>{progress.classList.add('hidden');landing.classList.remove('hidden');render()};
 document.querySelectorAll('[data-progress-subject]').forEach(btn=>btn.onclick=()=>{const k=btn.dataset.progressSubject;const target=document.getElementById('parent'+k.charAt(0).toUpperCase()+k.slice(1)+'Detail');if(target)target.classList.toggle('hidden')});
 const opener=document.getElementById('openSubject');
-if(opener)opener.addEventListener('click',()=>{const url=opener.getAttribute('href')||'';if(url.includes('math/'))remember('Математика → список тем');else if(url)remember('Открыт предмет → '+url.split('/')[0])});
+if(opener)opener.addEventListener('click',()=>{const url=opener.getAttribute('href')||'';if(!url.includes('math/')&&url)remember('Открыт предмет → '+url.split('/')[0])});
 const frame=document.getElementById('mathModuleFrame'),screen=document.getElementById('mathModuleScreen');
 if(frame&&screen)frame.addEventListener('load',()=>{
  if(screen.classList.contains('hidden'))return;
  try{
   const p=frame.contentWindow.location.pathname||'', match=p.match(/\/math\/lessons\/(\d+)\//);
   if(match)remember('Математика → урок '+Number(match[1]));
-  else if(p.endsWith('/math/index.html'))remember('Математика → список тем');
  }catch{}
 });
 window.addEventListener('pageshow',render);
