@@ -7,7 +7,7 @@ function totalStars(){
   var m=safe('liga-znaniy-course-v2')||{}, g=m.goals||{};
   [5,5,7,5,5].forEach(function(max,i){total+=Math.min(max,n(g[i]))});
   total+=Math.min(4,Object.values(m.rayFirstGoals||{}).filter(Boolean).length);
-  total+=Math.min(13,n(localStorage.getItem('liga_math_topic6_goals')!==null?localStorage.getItem('liga_math_topic6_goals'):localStorage.getItem('liga_math_prime_goals')));
+  total+=Math.min(13,Math.max(n(localStorage.getItem('liga_math_topic6_goals')),n(localStorage.getItem('liga_math_prime_goals'))));
   total+=Math.min(31,n(localStorage.getItem('primeLessonGoals')));
   var t8=safe('liga_math_topic8_earned_v1')||[],t9=safe('liga_math_topic9_earned_v1')||[];
   total+=Math.min(20,Array.isArray(t8)?new Set(t8.filter(x=>typeof x==='string'&&/^(?:q[0-2]|tree|col(?:360|840|1260|2310|3780|4620)|t[0-9])$/.test(x))).size:0);
