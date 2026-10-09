@@ -79,7 +79,7 @@ function remember(label){
 function legacyMath(){
   const d=read('liga-znaniy-course-v2')||{}, g=d.goals||{};
   const names=['Натуральные числа','Сравнение чисел','Признаки делимости','Многозначные числа и разряды','Натуральные числа на числовом луче'];
-  const legacy=Array.from({length:5},(_,i)=>cap(g[i],100));
+  const legacy=Array.from({length:5},(_,i)=>cap(g[i],[5,5,7,5,5][i]));
   const rays=Object.values(d.rayFirstGoals||{}).filter(Boolean).length;
   legacy[4]+=Math.min(4,rays);
   const completed=new Set();
