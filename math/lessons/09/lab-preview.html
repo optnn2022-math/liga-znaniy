@@ -14,7 +14,48 @@
 .chip.pair-new{animation:match-chip-pop .5s ease-out}
 @keyframes match-chip-pop{35%{transform:scale(1.18);box-shadow:0 0 0 5px #fff8,0 0 26px #8affc6}}
 #chipsA .chip.on{box-shadow:0 0 0 3px #ffe395,0 0 18px #ffca73}
-@media(prefers-reduced-motion:reduce){.match-connector.reveal,.chip.pair-new,.match-spark{animation:none!important}.match-connector.reveal{stroke-dashoffset:0}.match-spark{display:none}}button:focus-visible,input:focus-visible{outline:3px solid #ffe18d;outline-offset:3px}@media(max-width:520px){.pair,.reference{grid-template-columns:minmax(0,1fr)}.sticky-reference{position:static}.bar{flex-direction:column}.bar button{width:100%}.panel,header{padding:12px}.board{padding:12px}.line span{width:55px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important}}</style></head><body><main><header><button id="labReturn" type="button">← К началу урока №9</button><h1>⚽ Фабрика НОД и НОК</h1><p class="muted">Разложи числа на простые множители, найди общие пары и собери НОД и НОК.</p><div class="progress" id="progress">Этап 1 из 4 · Разложение</div></header>
+@media(prefers-reduced-motion:reduce){.match-connector.reveal,.chip.pair-new,.match-spark{animation:none!important}.match-connector.reveal{stroke-dashoffset:0}.match-spark{display:none}}button:focus-visible,input:focus-visible{outline:3px solid #ffe18d;outline-offset:3px}@media(max-width:520px){.pair,.reference{grid-template-columns:minmax(0,1fr)}.sticky-reference{position:static}.bar{flex-direction:column}.bar button{width:100%}.panel,header{padding:12px}.board{padding:12px}.line span{width:55px}}@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation-duration:.01ms!important;scroll-behavior:auto!important}}
+/* Этап 2: два вертикальных столбика множителей с местом для линий между ними. */
+#matchBoard{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  column-gap:clamp(38px,9vw,96px);
+  align-items:stretch;
+}
+#matchBoard .board{min-width:0;padding:10px 9px}
+#matchBoard .board h3{margin:0 0 8px;text-align:center}
+#matchBoard .chips{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-auto-rows:46px;
+  row-gap:10px;
+  justify-items:center;
+  align-items:stretch;
+  margin:12px 0 8px;
+  padding:0;
+}
+#matchBoard .chip{
+  width:min(100%,66px);
+  min-width:0;
+  min-height:44px;
+  padding:7px 4px;
+  text-align:center;
+  line-height:1.25;
+}
+#matchBoard #chipsA .chip{justify-self:end}
+#matchBoard #chipsB .chip{justify-self:start}
+@media(max-width:520px){
+  #matchBoard{grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:clamp(22px,7vw,42px)}
+  #matchBoard .board{padding:8px 5px}
+  #matchBoard .chips{grid-auto-rows:44px;row-gap:8px}
+  #matchBoard .chip{width:min(100%,54px);min-height:42px;padding:6px 2px}
+}
+@media(max-width:280px){
+  #matchBoard{column-gap:16px}
+  #matchBoard .board{padding:7px 3px}
+  #matchBoard .chip{font-size:.93rem}
+}
+</style></head><body><main><header><button id="labReturn" type="button">← К началу урока №9</button><h1>⚽ Фабрика НОД и НОК</h1><p class="muted">Разложи числа на простые множители, найди общие пары и собери НОД и НОК.</p><div class="progress" id="progress">Этап 1 из 4 · Разложение</div></header>
 <section class="panel" id="stage1"><h2>1. Разложи оба числа на простые множители</h2><p>Выбери простой делитель. Он появится справа в столбике, а слева — частное.</p><div class="pair"><div class="board"><h3>180</h3><div id="colA"></div><div class="primes" id="primeA"></div></div><div class="board"><h3>252</h3><div id="colB"></div><div class="primes" id="primeB"></div></div></div><p class="message" id="msg1"></p><div class="bar"><button id="reset">Начать разложения заново</button><button id="to2" class="action" disabled>Найти совпадения →</button></div></section>
 <section class="panel hidden" id="stage2"><h2>2. Соедини одинаковые множители</h2><p>Сначала выбери множитель числа 180, затем такой же множитель числа 252. Каждую карточку можно использовать только один раз. Правильные пары соединятся светящейся линией.</p><div class="pair match-board" id="matchBoard"><div class="board"><h3>180</h3><div id="chipsA" class="chips"></div></div><div class="board"><h3>252</h3><div id="chipsB" class="chips"></div></div><svg id="matchLines" class="match-lines" aria-hidden="true" focusable="false" preserveAspectRatio="none"></svg></div><p class="message" id="msg2" role="status" aria-live="polite"></p><div class="bar"><button id="back1">← Назад</button><button id="to3" class="action" disabled>Собрать НОД и НОК →</button></div></section>
 <section class="panel hidden" id="stage3"><div class="sticky-reference"><h3>📌 Твои разложения и найденные пары</h3><div class="reference"><div class="board"><h3>180</h3><div id="refColA"></div><div id="refFactorsA" class="factor-strip"></div></div><div class="board"><h3>252</h3><div id="refColB"></div><div id="refFactorsB" class="factor-strip"></div></div></div><p class="note">🟩 Зелёные множители — совпадающие пары. 🟧 Оранжевые — оставшиеся. Для НОД нужны общие, для НОК — общие один раз и оставшиеся.</p></div><h2>3. Собери множители для НОД и НОК</h2><p>Нажимай на простые множители в соответствующем банке или перетаскивай их в область НОД либо НОК. Нажми на добавленную карточку, чтобы убрать её.</p><div class="pair"><div class="area" id="nodArea"><h3>🔵 НОД</h3><div id="nodChosen" class="chips"></div></div><div class="area nok" id="nokArea"><h3>🟢 НОК</h3><div id="nokChosen" class="chips"></div></div></div><p class="muted">На телефоне просто нажимай на нужные множители в банке НОД или НОК. Каждый множитель можно выбрать несколько раз.</p><div class="pair"><div class="board"><h3>Банк НОД</h3><div class="chips" id="nodBank"></div></div><div class="board"><h3>Банк НОК</h3><div class="chips" id="nokBank"></div></div></div><p class="message" id="msg3"></p><div class="bar"><button id="back2">← Назад</button><button id="to4" class="action">Проверить сборку →</button></div></section>
