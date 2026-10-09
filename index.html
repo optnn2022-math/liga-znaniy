@@ -8,7 +8,7 @@
 .progress-launch{border:1px solid #8fe4ff;border-radius:12px;background:#0f477f;color:#fff;padding:10px 15px;min-height:45px;font-weight:850;cursor:pointer}.progress-launch:hover{background:#1a5b99}
 .progress-page{max-width:1120px}.progress-hero{display:flex;justify-content:space-between;align-items:center;gap:20px}.progress-ring{width:112px;height:112px;flex:0 0 112px;border-radius:50%;display:grid;place-content:center;text-align:center;background:#0c3a72;border:7px solid #ffad35;box-shadow:0 10px 28px #03152d66}.progress-ring strong{font-size:1.7rem}.progress-ring span{font-size:.78rem;color:#cfe8ff}.course-bar{height:16px;border-radius:999px;background:#061f42;border:1px solid #5689b7;overflow:hidden;margin:4px 0 22px}.course-bar>div{height:100%;width:0;background:linear-gradient(90deg,#ff9b25,#ffd35c);transition:width .35s}
 .progress-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat-card{background:#0d3b73;border:1px solid #6aa6d7;border-radius:16px;padding:16px;text-align:center;display:grid;gap:4px}.stat-card span{font-size:1.55rem}.stat-card strong{font-size:1.5rem}.stat-card small{color:#cce5f7}
-.progress-heading{margin:28px 0 12px}.subject-progress-list{display:grid;gap:9px}.subject-progress-row{width:100%;border:1px solid #6ca7d6;border-radius:14px;background:#0e3b72;color:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;text-align:left;font-weight:850;font-size:1rem}.subject-progress-row:not(.static){cursor:pointer}.subject-progress-row:not(.static):hover{background:#174d86}.subject-progress-row.static{opacity:.72}.subject-progress-detail{background:#082b5c;border:1px solid #4e83b2;border-radius:14px;padding:12px 16px;margin-top:-3px}.progress-detail-line{padding:10px 0;border-bottom:1px solid #4f7ca555;line-height:1.45}.progress-detail-line:last-child{border-bottom:0}.progress-detail-line strong{display:block;margin-bottom:3px}.parent-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}.parent-box{background:#0d3b73;border:1px solid #68a4d4;border-radius:16px;padding:17px}.parent-box h2{font-size:1.08rem;margin:0 0 10px}.parent-box.attention{border-color:#e2a354}.parent-message{line-height:1.55;color:#e8f5ff}.attention-item{padding:8px 0;border-bottom:1px solid #ffffff20}.attention-item:last-child{border-bottom:0}.parent-note{margin-top:18px}
+.progress-heading{margin:28px 0 12px}.subject-progress-list{display:grid;gap:9px}.subject-progress-row{width:100%;border:1px solid #6ca7d6;border-radius:14px;background:#0e3b72;color:#fff;padding:15px 17px;display:flex;justify-content:space-between;gap:16px;text-align:left;font-weight:850;font-size:1rem}.subject-progress-row:not(.static){cursor:pointer}.subject-progress-row:not(.static):hover{background:#174d86}.subject-progress-row.static{opacity:.72}.subject-progress-detail{background:#082b5c;border:1px solid #4e83b2;border-radius:14px;padding:12px 16px;margin-top:-3px}.progress-detail-line{padding:10px 0;border-bottom:1px solid #4f7ca555;line-height:1.45}.progress-detail-line:last-child{border-bottom:0}.progress-detail-line strong{display:block;margin-bottom:3px}.parent-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}.parent-box{background:#0d3b73;border:1px solid #68a4d4;border-radius:16px;padding:17px}.parent-box h2{font-size:1.08rem;margin:0 0 10px}.parent-box.attention{border-color:#e2a354}.parent-message{line-height:1.55;color:#e8f5ff}#parentLastActivity,#parentAttention{white-space:pre-line}.attention-item{padding:8px 0;border-bottom:1px solid #ffffff20}.attention-item:last-child{border-bottom:0}.parent-note{margin-top:18px}
 @media(max-width:720px){.progress-stats{grid-template-columns:1fr 1fr}.parent-grid{grid-template-columns:1fr}.progress-hero{align-items:flex-start}.progress-ring{width:92px;height:92px;flex-basis:92px}.subject-progress-row{font-size:.93rem}}
 </style></head><body><section class="screen" id="landing"><header class="top"><div class="brand">⚽ Лига знаний</div><div class="subject-tools"><button class="progress-launch" id="openProgress"  type="button">📊 Прогресс</button><div class="score" title="Общие звёзды за все предметы">⭐ <span data-points="">0</span> очков</div></div></header><h1 class="hero-title">Выбери предмет</h1><p class="subtitle">Один блок — одна тема — новый уровень</p><div class="landing-grid"><div class="subject-col"><button class="subject active" data-subject="math" id="subjectMath"><span>🔢</span><span>Математика<small>План курса · 78 тем</small></span></button><button class="subject" data-subject="russian" id="subjectRussian"><span>✏️</span><span>Русский язык<small>План курса · 159 тем</small></span></button><button class="subject" data-subject="literature"><span>📚</span><span>Литература<small>Скоро</small></span></button><button class="subject" data-subject="biology" id="subjectBiology"><span>🌱</span><span>Биология<small>План курса · 95 тем</small></span></button><button class="subject" data-subject="informatics"><span>💻</span><span>Информатика<small>Скоро</small></span></button><button class="subject" data-subject="art-work"><span>🎨</span><span>ИЗО / Труд<small>Скоро</small></span></button><button class="subject" data-subject="music"><span>🎵</span><span>Музыка<small>Скоро</small></span></button></div><img alt="Футболист приглашает выбрать предмет" class="player" decoding="async" fetchpriority="high" loading="eager" src="shared/assets/264a94d03685f9de.webp"/><div class="subject-col"><button class="subject" data-subject="history" id="subjectHistory"><span>🏛️</span><span>История<small>План курса: 34 темы</small></span></button><button class="subject" data-subject="geography"><span>🌍</span><span>География<small>Скоро</small></span></button><button class="subject" data-subject="english"><span>🇬🇧</span><span>Английский<small>Скоро</small></span></button><button class="subject" data-subject="chinese" id="subjectChinese"><span>🏮</span><span>Китайский язык<small>План курса · 56 тем</small></span></button><button class="subject" data-subject="social-civics"><span>🏛️</span><span>Обществознание / Граждановедение<small>Скоро</small></span></button><button class="subject" data-subject="pe"><span>🏃</span><span>Физкультура<small>Скоро</small></span></button><button class="subject" data-subject="safety"><span>🛡️</span><span>ОБЖ: Школа безопасности<small>Скоро</small></span></button></div></div><div class="bottom-banner"><div><strong id="subjectCommentTitle">Егор, выбирай первый учебный матч!</strong><p id="subjectCommentLead">Тренер будет рядом на каждом шаге.</p><strong id="subjectCommentName">Математика · первые три темы</strong><p id="subjectCommentText">Видео, задачи и тест по темам 1–3</p></div><a class="cta" id="openSubject" href="math/index.html" style="text-decoration:none;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation">Открыть блок →</a></div></section><script>(()=>{
 'use strict';
@@ -40,7 +40,7 @@ document.documentElement.dataset.ligaVersion='v8.2-clean-main';
 })();</script><section id="mathModuleScreen" class="hidden" style="position:fixed;inset:0;z-index:9999;background:#092b5b"><iframe id="mathModuleFrame" src="math/index.html" title="Математика" style="width:100%;height:100%;border:0;display:block;background:#092b5b" loading="eager"></iframe></section><script>(function(){var open=document.getElementById('openSubject'),landing=document.getElementById('landing'),screen=document.getElementById('mathModuleScreen'),frame=document.getElementById('mathModuleFrame');if(!open||!landing||!screen||!frame)return;open.addEventListener('click',function(e){var href=open.getAttribute('href')||'';if(!/math\/index\.html/.test(href))return;e.preventDefault();e.stopImmediatePropagation();landing.classList.add('hidden');screen.classList.remove('hidden');window.scrollTo(0,0)},true);window.addEventListener('message',function(e){if(!e.data||e.data.type!=='liga-znaniy:close-math')return;screen.classList.add('hidden');landing.classList.remove('hidden');if(window.LigaGlobalStars)window.LigaGlobalStars.sync();window.scrollTo(0,0)});frame.addEventListener('load',function(){try{var path=frame.contentWindow.location.pathname||'';if(!/\/math\//.test(path)){frame.src='about:blank';screen.classList.add('hidden');landing.classList.remove('hidden');if(window.LigaGlobalStars)window.LigaGlobalStars.sync();window.scrollTo(0,0)}}catch(e){}})})();</script><section id="progressScreen" class="screen hidden">
 <header class="top"><button class="textbtn" id="progressBack" type="button">← Главная</button><div class="brand">📊 Прогресс Егора</div><div class="score">⭐ <span data-points>0</span></div></header>
 <div class="page progress-page"><main class="panel">
-<div class="progress-hero"><div><div class="small">Отчёт для родителя</div><h1 class="page-title">Прогресс Егора</h1><p class="muted">Результаты берутся из уже сохранённых данных ⚽ и ⭐ на этом устройстве.</p></div><div class="progress-ring" id="parentProgressRing"><strong id="parentProgressPercent">0%</strong><span>курса</span></div></div>
+<div class="progress-hero"><div><div class="small">Отчёт для родителя</div><h1 class="page-title">Прогресс Егора</h1><p class="muted">Результаты берутся из уже сохранённых данных ⚽ и ⭐ на этом устройстве.</p></div><div class="progress-ring" id="parentProgressRing"><strong id="parentProgressPercent">0%</strong><span>доступных тем</span></div></div>
 <div class="course-bar"><div id="parentProgressBar"></div></div>
 <div class="progress-stats"><div class="stat-card"><span>⭐</span><strong id="parentStars">0</strong><small>накоплено</small></div><div class="stat-card"><span>⚽</span><strong id="parentGoals">0</strong><small>забито голов</small></div><div class="stat-card"><span>✅</span><strong id="parentLessons">0</strong><small>пройдено тем</small></div><div class="stat-card"><span>📝</span><strong id="parentTests">0</strong><small>пройдено тестов</small></div></div>
 <h2 class="progress-heading">По предметам</h2><div class="subject-progress-list">
@@ -51,14 +51,168 @@ document.documentElement.dataset.ligaVersion='v8.2-clean-main';
 <button class="subject-progress-row" data-progress-subject="chinese"><span>🏮 Китайский язык</span><span id="parentChineseSummary">0 тем · ⚽ 0</span></button><div class="subject-progress-detail hidden" id="parentChineseDetail"></div>
 <div class="subject-progress-row static"><span>🌍 География</span><span>0 тем · —</span></div></div>
 <div class="parent-grid"><section class="parent-box"><h2>🕒 Последняя активность</h2><div id="parentLastActivity" class="parent-message">Пока нет сохранённых прохождений.</div></section><section class="parent-box attention"><h2>🎯 Стоит повторить</h2><div id="parentAttention" class="parent-message">Пока недостаточно данных.</div></section></div>
-<p class="small parent-note">Прогресс собирается из результатов, сохранённых на этом устройстве.</p></main></div></section><script>(()=>{
+<p class="small parent-note">Прогресс и посещения сохраняются только в этом браузере. Без личного входа нельзя отличить посещение Егора от взрослого.</p></main></div></section><script>(()=>{
 'use strict';
-const safe=k=>{try{return JSON.parse(localStorage.getItem(k)||'null')}catch(e){return null}}, n=v=>Number(v)||0;
-function math(){const d=safe('liga-znaniy-course-v2')||{},g=d.goals||{};return{goals:Object.values(g).reduce((a,b)=>a+n(b),0),done:Object.keys(g).filter(k=>n(g[k])>0).length}}
-function russian(){const d=safe('liga_russian_lesson1_preview_v1')||{};return{goals:Object.values(d.goals||{}).filter(Boolean).length,done:d.completed?1:0}}
-function biology(){const d=safe('liga-znaniy-biology-progress-v2')||{};let goals=0,done=0;Object.values(d).forEach(r=>{if(r&&typeof r==='object'){goals+=n(r.goals);if(r.completed)done++}});return{goals,done}}
-function history(){const d=safe('liga-znaniy-history-progress-v1')||{};return{goals:n(d.goals1)+n(d.goals2)+n(d.goals3),done:(d.completed1?1:0)+(d.completed2?1:0)+(d.completed3?1:0)}}
-function chinese(){const a=safe('liga-znaniy-chinese-lesson1-v1')||{},b=safe('league-chinese-lesson2-prototype-v1')||{};const g1=Array.isArray(a.goals)?new Set(a.goals).size:0,g2=Array.isArray(b.earned)?new Set(b.earned).size:0;return{goals:g1+g2,done:(g1>=8?1:0)+(g2>=8?1:0)}}
-const defs={math:['Математика',math,'parentMathSummary','parentMathDetail'],history:['История',history,'parentHistorySummary','parentHistoryDetail'],russian:['Русский язык',russian,'parentRussianSummary','parentRussianDetail'],biology:['Биология',biology,'parentBiologySummary','parentBiologyDetail'],chinese:['Китайский язык',chinese,'parentChineseSummary','parentChineseDetail']};
-function render(){let goals=0,done=0;for(const [key,[name,fn,sumId,detId]] of Object.entries(defs)){const r=fn();goals+=r.goals;done+=r.done;const sum=document.getElementById(sumId);if(sum)sum.textContent=`${r.done} тем · ⚽ ${r.goals}`;const det=document.getElementById(detId);if(det)det.innerHTML=`<div class="progress-detail-line"><strong>${name}</strong>Пройдено тем: ${r.done}<br>Заработано голов: ⚽ ${r.goals}</div>`;}document.querySelectorAll('[data-points]').forEach(e=>e.textContent=goals);document.getElementById('parentStars').textContent=goals;document.getElementById('parentGoals').textContent=goals;document.getElementById('parentLessons').textContent=done;document.getElementById('parentTests').textContent='0';const pct=Math.min(100,Math.round(done/420*100));document.getElementById('parentProgressPercent').textContent=pct+'%';document.getElementById('parentProgressBar').style.width=pct+'%';document.getElementById('parentLastActivity').textContent=done?'Сохранённые результаты найдены. Общий прогресс обновлён.':'Пока нет сохранённых прохождений.';document.getElementById('parentAttention').textContent=done?'Откройте предмет ниже, чтобы посмотреть его текущий результат.':'Пока недостаточно данных.';}
-const landing=document.getElementById('landing'),progress=document.getElementById('progressScreen');document.getElementById('openProgress').onclick=()=>{render();landing.classList.add('hidden');progress.classList.remove('hidden')};document.getElementById('progressBack').onclick=()=>{progress.classList.add('hidden');landing.classList.remove('hidden');render()};document.querySelectorAll('[data-progress-subject]').forEach(btn=>btn.onclick=()=>{const d=document.getElementById('parent'+btn.dataset.progressSubject[0].toUpperCase()+btn.dataset.progressSubject.slice(1)+'Detail');if(d)d.classList.toggle('hidden')});window.addEventListener('pageshow',render);render();})();</script><script src="shared/js/global-stars-v818.js"></script></body></html>
+const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'null')}catch{return null}};
+const num=v=>{const x=Number(v);return Number.isFinite(x)&&x>0?x:0};
+const raw=k=>{try{return localStorage.getItem(k)}catch{return null}};
+const cap=(n,max)=>Math.min(max,Math.max(0,num(n)));
+const unique=a=>Array.isArray(a)?new Set(a.filter(x=>typeof x==='string')).size:0;
+const progressKey='liga-znaniy-visit-log-v1';
+const lessonKey='liga-znaniy-last-opened-v1';
+const sessionKey='liga-znaniy-visit-session-v1';
+const dateText=d=>{const t=new Date(d);return Number.isNaN(t.getTime())?'неизвестно':t.toLocaleString('ru-RU')};
+function initializeVisit(){
+  const d=read(progressKey)||{};
+  let seen=false;try{seen=sessionStorage.getItem(sessionKey)==='1'}catch{}
+  if(!seen){
+    const previous=Number.isFinite(Date.parse(d.current||''))?d.current:(Number.isFinite(Date.parse(d.previous||''))?d.previous:null);
+    const current=new Date().toISOString();
+    try{localStorage.setItem(progressKey,JSON.stringify({current,previous}))}catch{}
+    try{sessionStorage.setItem(sessionKey,'1')}catch{}
+  }
+}
+function remember(label){
+  if(!label)return;
+  try{localStorage.setItem(lessonKey,JSON.stringify({date:new Date().toISOString(),text:label}))}catch{}
+}
+function legacyMath(){
+  const d=read('liga-znaniy-course-v2')||{}, g=d.goals||{};
+  const names=['Натуральные числа','Многозначные числа и разряды','Натуральные числа на числовом луче','Порядок и сравнение чисел','Прочие темы 1–5'];
+  const legacy=Array.from({length:5},(_,i)=>cap(g[i],100));
+  const rays=Object.values(d.rayFirstGoals||{}).filter(Boolean).length;
+  legacy[4]+=Math.min(4,rays);
+  const completed=new Set();
+  const history=Array.isArray(d.history)?d.history:[];
+  history.forEach(row=>{if(row&&row.mode==='topic'&&typeof row.topic==='string')completed.add(row.topic)});
+  const explicit=history.filter(x=>x&&x.mode==='group').length>0;
+  const best=cap(d.groupBestV3,100);
+  const six=cap(Math.max(num(raw('liga_math_prime_goals')),num(raw('liga_math_topic6_goals'))),13);
+  const seven=cap(raw('primeLessonGoals'),31);
+  const eight=cap(unique(read('liga_math_topic8_earned_v1')),20);
+  const nine=cap(unique(read('liga_math_topic9_earned_v1')),17);
+  const rows=legacy.map((x,i)=>({label:'Тема '+(i+1),goals:x,done:completed.has(names[i])}));
+  const newRows=[
+    {label:'Урок 6',goals:six,done:raw('liga_math_prime_complete')==='1'},
+    {label:'Урок 7',goals:seven,done:raw('liga_math_lesson07_test_checked')==='1'},
+    {label:'Урок 8',goals:eight,done:raw('liga_math_topic8_goals')!==null},
+    {label:'Урок 9 · НОД и НОК',goals:nine,done:raw('liga_math_topic9_goals')!==null}
+  ];
+  // Completed legacy topic labels are taken from actual saved submissions, not merely nonzero scores.
+  const legacyDone=Math.min(5,completed.size);
+  const newDone=newRows.filter(r=>r.done).length;
+  const tests=completed.size+Number(explicit||best>0)+
+    Number(raw('liga_math_lesson07_test_checked')==='1')+
+    Number(raw('liga_math_topic8_goals')!==null)+Number(raw('liga_math_topic9_goals')!==null);
+  return {goals:legacy.reduce((a,b)=>a+b,0)+six+seven+eight+nine,
+    done:Math.min(9,legacyDone+newDone),tests,available:9,
+    rows:rows.concat(newRows),extra:explicit||best>0?'Итоговый тест по темам 1–5: '+best+' голов':''};
+}
+function historyProgress(){
+ const d=read('liga-znaniy-history-progress-v1')||{};
+ const rows=[1,2,3].map(i=>({label:'Тема '+i,goals:cap(d['goals'+i],7),done:!!d['completed'+i]}));
+ const test=!!(d.mini&&d.mini.historyBlockQuizV2);
+ return {goals:rows.reduce((a,r)=>a+r.goals,0)+cap(d.block1GoalsV2,16),
+  done:rows.filter(r=>r.done).length,available:3,tests:rows.filter(r=>r.done).length+Number(test),rows,
+  extra:test?'Тематический тест: завершён':''};
+}
+function russianProgress(){
+ const a=read('liga_russian_lesson1_preview_v1')||{}, b=read('liga-znaniy-russian-progress-v1')||{};
+ const g=Math.min(8,Math.max(Object.values(a.goals||{}).filter(Boolean).length,num(b.topic1Goals)));
+ const done=!!(a.completed||b.topic1Completed);
+ return {goals:g,done:Number(done),available:1,tests:0,rows:[{label:'Урок 1',goals:g,done}]};
+}
+function biologyProgress(){
+ const a=read('liga-znaniy-biology-progress-v1')||{}, b=read('liga-znaniy-biology-progress-v2')||{};
+ const nums=[1,2,3,11],limits=[7,8,26,14];
+ const rows=nums.map((i,j)=>{
+  const v=b['topic'+i]||b[i]||{},r=(v&&typeof v==='object')?v:{};
+  const goals=cap(Math.max(num(a['topic'+i+'Goals']),num(r.goals)),limits[j]);
+  const done=!!(a['topic'+i+'Completed']||r.completed);
+  return {label:'Тема '+i,goals,done};
+ });
+ return {goals:rows.reduce((s,r)=>s+r.goals,0),done:rows.filter(r=>r.done).length,available:4,tests:0,rows};
+}
+function chineseProgress(){
+ const a=read('liga-znaniy-chinese-lesson1-v1')||{}, b=read('league-chinese-lesson2-prototype-v1')||{}, p=read('liga-znaniy-chinese-progress-v1')||{};
+ const g1=cap(Math.max(unique(a.goals),num(p.topic1Goals)),8);
+ const g2=cap(Math.max(unique(b.earned),num(p.topic2Goals)),8);
+ const d1=!!(p.topic1Completed||a.completed||g1>=8);
+ const d2=!!(p.topic2Completed||b.completed||g2>=8);
+ return {goals:g1+g2,done:Number(d1)+Number(d2),available:2,tests:0,
+  rows:[{label:'Урок 1',goals:g1,done:d1},{label:'Урок 2',goals:g2,done:d2}]};
+}
+const subjects=[
+ ['Математика',legacyMath,'parentMathSummary','parentMathDetail'],
+ ['История',historyProgress,'parentHistorySummary','parentHistoryDetail'],
+ ['Русский язык',russianProgress,'parentRussianSummary','parentRussianDetail'],
+ ['Биология',biologyProgress,'parentBiologySummary','parentBiologyDetail'],
+ ['Китайский язык',chineseProgress,'parentChineseSummary','parentChineseDetail']
+];
+function latestSavedResult(){
+ const candidates=[];
+ const m=read('liga-znaniy-course-v2')||{};
+ if(Array.isArray(m.history))m.history.forEach(e=>{if(e&&e.date)candidates.push({date:e.date,text:'Математика → '+String(e.topic||'тест')})});
+ ['liga-znaniy-history-progress-v1','liga-znaniy-russian-progress-v1','liga-znaniy-biology-progress-v1','liga-znaniy-chinese-progress-v1'].forEach(key=>{
+  const d=read(key)||{},entry=d.lastActivity;
+  if(entry&&entry.date)candidates.push({date:entry.date,text:String(entry.text||'Результат сохранён')});
+ });
+ candidates.sort((a,b)=>Date.parse(b.date)-Date.parse(a.date));
+ return candidates.find(x=>Number.isFinite(Date.parse(x.date)))||null;
+}
+function render(){
+ let goals=0,done=0,tests=0,available=0;
+ subjects.forEach(([name,fn,sumId,detId])=>{
+  const r=fn();goals+=r.goals;done+=r.done;tests+=r.tests;available+=r.available;
+  const sum=document.getElementById(sumId);
+  if(sum)sum.textContent=r.done+' завершено из '+r.available+' · ⚽ '+r.goals;
+  const det=document.getElementById(detId);
+  if(det){
+   det.replaceChildren();
+   r.rows.forEach(x=>{
+    const line=document.createElement('div'),label=document.createElement('strong');
+    line.className='progress-detail-line';label.textContent=x.label;
+    const status=x.done?'✅ Завершён':x.goals>0?'⏳ В процессе':'▫️ Нет сохранённого завершения';
+    line.append(label,document.createTextNode(status+' · ⚽ '+x.goals));
+    det.append(line);
+   });
+   if(r.extra){const extra=document.createElement('div');extra.className='progress-detail-line';extra.textContent=r.extra;det.append(extra)}
+  }
+ });
+ const pct=available?Math.min(100,Math.round(done/available*100)):0;
+ document.getElementById('parentProgressPercent').textContent=pct+'%';
+ document.getElementById('parentProgressBar').style.width=pct+'%';
+ document.getElementById('parentGoals').textContent=goals;
+ document.getElementById('parentLessons').textContent=done+' / '+available;
+ document.getElementById('parentTests').textContent=tests;
+ const stars=window.LigaGlobalStars&&typeof window.LigaGlobalStars.get==='function'?window.LigaGlobalStars.get():goals;
+ document.getElementById('parentStars').textContent=stars;
+ const v=read(progressKey)||{},opened=read(lessonKey),result=latestSavedResult();
+ const lines=['Текущий вход на этом устройстве: '+(v.current?dateText(v.current):'не записан'),
+  'Предыдущее посещение: '+(v.previous?dateText(v.previous):'пока нет данных'),
+  'Последний открытый раздел: '+(opened&&opened.date?opened.text+' · '+dateText(opened.date):'пока не зафиксирован'),
+  'Последний сохранённый результат: '+(result?result.text+' · '+dateText(result.date):'пока нет данных')];
+ document.getElementById('parentLastActivity').textContent=lines.join('\n');
+ const incomplete=subjects.flatMap(([name,fn])=>fn().rows.filter(r=>r.goals>0&&!r.done).map(r=>name+' · '+r.label+' (⚽ '+r.goals+', не завершён)'));
+ document.getElementById('parentAttention').textContent=incomplete.length?incomplete.slice(0,8).join('\n'):'Нет незавершённых уроков с сохранёнными голами.';
+}
+initializeVisit();
+const landing=document.getElementById('landing'),progress=document.getElementById('progressScreen');
+document.getElementById('openProgress').onclick=()=>{render();landing.classList.add('hidden');progress.classList.remove('hidden')};
+document.getElementById('progressBack').onclick=()=>{progress.classList.add('hidden');landing.classList.remove('hidden');render()};
+document.querySelectorAll('[data-progress-subject]').forEach(btn=>btn.onclick=()=>{const k=btn.dataset.progressSubject;const target=document.getElementById('parent'+k.charAt(0).toUpperCase()+k.slice(1)+'Detail');if(target)target.classList.toggle('hidden')});
+const opener=document.getElementById('openSubject');
+if(opener)opener.addEventListener('click',()=>{const url=opener.getAttribute('href')||'';if(url.includes('math/'))remember('Математика → список тем');else if(url)remember('Открыт предмет → '+url.split('/')[0])});
+const frame=document.getElementById('mathModuleFrame'),screen=document.getElementById('mathModuleScreen');
+if(frame&&screen)frame.addEventListener('load',()=>{
+ if(screen.classList.contains('hidden'))return;
+ try{
+  const p=frame.contentWindow.location.pathname||'', match=p.match(/\/math\/lessons\/(\d+)\//);
+  if(match)remember('Математика → урок '+Number(match[1]));
+  else if(p.endsWith('/math/index.html'))remember('Математика → список тем');
+ }catch{}
+});
+window.addEventListener('pageshow',render);
+window.addEventListener('focus',()=>{if(!progress.classList.contains('hidden'))render()});
+render();
+})();</script><script src="shared/js/global-stars-v818.js"></script></body></html>
