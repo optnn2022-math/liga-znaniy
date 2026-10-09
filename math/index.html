@@ -2233,6 +2233,7 @@ const mathLiveLessons={1:0,2:3,3:4,4:1,5:2}; // Keep the original lesson indices
 function rayGoalCount(){return Object.values(data.rayFirstGoals||{}).filter(Boolean).length}
 function mathTopicGoalCount(i){const maximum=mathTopicGoalTotal(i),saved=Math.max(0,Number(data.goals[i])||0),rays=i===4?Math.min(4,rayGoalCount()):0;return Math.min(maximum,saved+rays)}
 function mathTopicGoalTotal(i){return lessons[i].questions.filter(x=>x.kind==='practice').length+(i===4?4:0)}
+function modularEarnedCount(key,allowed){try{const rows=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(rows)?new Set(rows.filter(k=>typeof k==='string'&&allowed.test(k))).size:0}catch{return 0}}
 function updateRayGoalStatus(){let el=document.getElementById('rayGoalStatus');if(el)el.textContent='⚽ '+rayGoalCount()+' / 4 за упражнения на луче'}
 function recordRayFirstGoal(id,correct){data.rayAttempts||={};data.rayFirstGoals||={};if(data.rayAttempts[id])return false;data.rayAttempts[id]=true;if(correct){data.rayFirstGoals[id]=true;goalFlash()}save();renderTopics();updateRayGoalStatus();return correct}
 function renderTopics(){
@@ -2256,7 +2257,7 @@ function renderTopics(){
       const rawGoals=localStorage.getItem('liga_math_topic6_goals');
       const savedGoals=Math.min(13,Math.max(0,Number(rawGoals!==null?rawGoals:localStorage.getItem('liga_math_prime_goals'))||0));
       status.textContent='⚽ '+savedGoals+' / 13';
-    }else if(number===7){const savedGoals=Math.min(31,Math.max(0,Number(localStorage.getItem('primeLessonGoals')||0)));status.textContent='⚽ '+savedGoals+' / 31';}else if(number===8){let earnedGoals=0;try{const saved=JSON.parse(localStorage.getItem('liga_math_topic8_earned_v1')||'[]');if(Array.isArray(saved))earnedGoals=new Set(saved.filter(k=>typeof k==='string')).size}catch{}status.textContent='⚽ '+Math.min(20,earnedGoals)+' / 20';}else if(number===9){let earnedGoals=0;try{const saved=JSON.parse(localStorage.getItem('liga_math_topic9_earned_v1')||'[]');if(Array.isArray(saved))earnedGoals=new Set(saved.filter(k=>typeof k==='string')).size}catch{}status.textContent='⚽ '+Math.min(17,earnedGoals)+' / 17';}else{
+    }else if(number===7){const savedGoals=Math.min(31,Math.max(0,Number(localStorage.getItem('primeLessonGoals')||0)));status.textContent='⚽ '+savedGoals+' / 31';}else if(number===8){const earnedGoals=modularEarnedCount('liga_math_topic8_earned_v1',/^(?:q[0-2]|tree|col(?:360|840|1260|2310|3780|4620)|t[0-9])$/);status.textContent='⚽ '+Math.min(20,earnedGoals)+' / 20';}else if(number===9){const earnedGoals=modularEarnedCount('liga_math_topic9_earned_v1',/^(?:i[0-5]|l0|t[0-9])$/);status.textContent='⚽ '+Math.min(17,earnedGoals)+' / 17';}else{
       status.textContent=liveIndex===undefined?'🔒':('⚽ '+mathTopicGoalCount(liveIndex)+' / '+mathTopicGoalTotal(liveIndex));
     }
     row.append(num,title,status);
@@ -2584,6 +2585,7 @@ function ligaMathFastTopicsBoot(){
   } catch(e) { document.documentElement.classList.remove('math-booting'); console.error('math fast topics boot', e); }
 }
 if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ligaMathFastTopicsBoot,{once:true});}else{ligaMathFastTopicsBoot();}
+window.addEventListener('pageshow',function(e){if(e.persisted&&typeof renderTopics==='function')renderTopics();});
 </script>
 <script src="../shared/js/global-stars-v818.js"></script>
 </body></html>
