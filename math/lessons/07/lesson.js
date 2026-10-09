@@ -2,6 +2,8 @@ const LESSON_GOAL_KEY='primeLessonGoals';
 let score=Math.min(31,Math.max(0,Number(localStorage.getItem(LESSON_GOAL_KEY)||0)||0));
 let savedKeys=[];try{const d=JSON.parse(localStorage.getItem('primeLessonEarnedKeys')||'[]');if(Array.isArray(d))savedKeys=d.filter(x=>typeof x==='string')}catch{}
 const earnedKeys=new Set(savedKeys);
+// Ранние версии сохраняли идентификатор по двум числам: восстанавливаем награду по левому числу.
+for(const key of savedKeys){const match=key.match(/^pair-(\d+)-(\d+)$/);if(!match)continue;const left=[8,14,16,21].find(x=>x===Number(match[1])||x===Number(match[2]));if(left)earnedKeys.add('pair-left-'+left)}
 function persistGoals(){localStorage.setItem(LESSON_GOAL_KEY,String(score));localStorage.setItem('primeLessonEarnedKeys',JSON.stringify([...earnedKeys]));}
 function showBigGoal(){const el=document.createElement('div');el.className='goal-pop lesson07-goal-visible';el.setAttribute('role','status');el.setAttribute('aria-live','assertive');el.innerHTML='<span class="lesson07-goal-word">ГОЛ!</span><span class="lesson07-goal-ball" aria-hidden="true">⚽</span>';document.body.appendChild(el);setTimeout(()=>el.remove(),1900)}
 function awardOnce(key){if(earnedKeys.has(key)||score>=31)return false;earnedKeys.add(key);score++;persistGoals();syncScore();showBigGoal();return true;}
@@ -110,7 +112,7 @@ document.addEventListener('DOMContentLoaded',()=>{
    if(gcd(a,c)===1){
     selected.classList.remove('selected');selected.classList.add('matched');b.classList.add('matched');
     done++;S.textContent='ГОЛ! Пара '+a+' и '+c+' — взаимно простая.';
-    if(typeof goalFxNew==='function')goalFxNew(); if(typeof addGoal==='function')addGoal('pair-'+[a,c].sort((x,y)=>x-y).join('-'));
+    if(typeof goalFxNew==='function')goalFxNew(); if(typeof addGoal==='function')addGoal('pair-left-'+(selected.dataset.side==='L'?a:c));
     selected=null;
     if(done===4) setTimeout(()=>S.textContent='Отлично! Все 4 пары собраны ⚽',650);
    }else{
