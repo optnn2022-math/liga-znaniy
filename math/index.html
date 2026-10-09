@@ -2309,13 +2309,12 @@ function openReport(){$('reportText').textContent=report();show('reportScreen')}
 function renderParentProgress(){
   const mathGoals=[0,1,2,3,4].map(i=>mathTopicGoalCount(i));
   const readNumber=k=>Math.max(0,Number(localStorage.getItem(k))||0);
-  const readEarned=k=>{try{const a=JSON.parse(localStorage.getItem(k)||'[]');return Array.isArray(a)?new Set(a.filter(x=>typeof x==='string')).size:0}catch{return 0}};
   const saved6=localStorage.getItem('liga_math_topic6_goals');
   const modularMathGoals=[
     Math.min(13,saved6===null?readNumber('liga_math_prime_goals'):readNumber('liga_math_topic6_goals')),
     Math.min(31,readNumber('primeLessonGoals')),
-    Math.min(20,readEarned('liga_math_topic8_earned_v1')),
-    Math.min(17,readEarned('liga_math_topic9_earned_v1'))
+    modularEarnedCount('liga_math_topic8_earned_v1',/^(?:q[0-2]|tree|col(?:360|840|1260|2310|3780|4620)|t[0-9])$/),
+    modularEarnedCount('liga_math_topic9_earned_v1',/^(?:i[0-5]|l0|t[0-9])$/)
   ];
   const modularMathDone=[
     localStorage.getItem('liga_math_topic6_complete')==='1'||(saved6===null&&localStorage.getItem('liga_math_prime_complete')==='1'),
