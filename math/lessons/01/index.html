@@ -2237,7 +2237,7 @@ const mathCatalog=[{"title":"Натуральные числа и нуль","hea
 const mathTests={"5":"Тест по темам 1–5","10":"Тест по темам 6–10","21":"Тест по темам 11–21","26":"Тест по темам 22–26","34":"Тест по темам 27–34","40":"Тест по темам 35–40","46":"Тест по темам 41–46","53":"Тест по темам 47–53","59":"Тест по темам 54–59","66":"Тест по темам 60–66","70":"Тест по темам 67–70 · находим часть","74":"Тест по темам 71–74 · находим целое","76":"Тест по темам 67–76 · дроби и проценты","78":"Итоговый тест по курсу математики 5 класса"};
 const mathLiveLessons={1:0,2:3,3:4,4:1,5:2}; // Keep the original lesson indices for saved progress.
 function rayGoalCount(){return Object.values(data.rayFirstGoals||{}).filter(Boolean).length}
-function mathTopicGoalCount(i){return Number(data.goals[i]||0)+(i===4?rayGoalCount():0)}
+function mathTopicGoalCount(i){const maximum=mathTopicGoalTotal(i),saved=Math.max(0,Number(data.goals[i])||0),rays=i===4?Math.min(4,rayGoalCount()):0;return Math.min(maximum,saved+rays)}
 function mathTopicGoalTotal(i){return lessons[i].questions.filter(x=>x.kind==='practice').length+(i===4?4:0)}
 function updateRayGoalStatus(){let el=document.getElementById('rayGoalStatus');if(el)el.textContent='⚽ '+rayGoalCount()+' / 4 за упражнения на луче'}
 function recordRayFirstGoal(id,correct){data.rayAttempts||={};data.rayFirstGoals||={};if(data.rayAttempts[id])return false;data.rayAttempts[id]=true;if(correct){data.rayFirstGoals[id]=true;goalFlash()}save();renderTopics();updateRayGoalStatus();return correct}
