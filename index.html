@@ -57,7 +57,7 @@ const read=k=>{try{return JSON.parse(localStorage.getItem(k)||'null')}catch{retu
 const num=v=>{const x=Number(v);return Number.isFinite(x)&&x>0?x:0};
 const raw=k=>{try{return localStorage.getItem(k)}catch{return null}};
 const cap=(n,max)=>Math.min(max,Math.max(0,num(n)));
-const unique=a=>Array.isArray(a)?new Set(a.filter(x=>typeof x==='string')).size:0;
+const unique=(a,allowed)=>Array.isArray(a)?new Set(a.filter(x=>typeof x==='string'&&(!allowed||allowed.test(x)))).size:0;
 const progressKey='liga-znaniy-visit-log-v1';
 const lessonKey='liga-znaniy-last-opened-v1';
 const sessionKey='liga-znaniy-visit-session-v1';
@@ -87,10 +87,10 @@ function legacyMath(){
   history.forEach(row=>{if(row&&row.mode==='topic'&&typeof row.topic==='string')completed.add(row.topic)});
   const explicit=history.filter(x=>x&&x.mode==='group').length>0;
   const best=cap(d.groupBestV3,100);
-  const six=cap(raw('liga_math_topic6_goals')!==null?raw('liga_math_topic6_goals'):raw('liga_math_prime_goals'),13);
+  const six=cap(Math.max(num(raw('liga_math_topic6_goals')),num(raw('liga_math_prime_goals'))),13);
   const seven=cap(raw('primeLessonGoals'),31);
-  const eight=cap(unique(read('liga_math_topic8_earned_v1')),20);
-  const nine=cap(unique(read('liga_math_topic9_earned_v1')),17);
+  const eight=cap(unique(read('liga_math_topic8_earned_v1'),/^(?:q[0-2]|tree|col(?:360|840|1260|2310|3780|4620)|t[0-9])$/),20);
+  const nine=cap(unique(read('liga_math_topic9_earned_v1'),/^(?:i[0-5]|l0|t[0-9])$/),17);
   const rows=legacy.map((x,i)=>({label:'Тема '+[1,4,5,2,3][i]+' · '+names[i],goals:x,done:completed.has(names[i])}));
   const newRows=[
     {label:'Урок 6',goals:six,done:raw('liga_math_topic6_complete')==='1'||(raw('liga_math_topic6_goals')===null&&raw('liga_math_prime_complete')==='1')},
