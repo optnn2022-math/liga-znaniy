@@ -91,21 +91,23 @@ function legacyMath(){
   const seven=cap(raw('primeLessonGoals'),31);
   const eight=cap(unique(read('liga_math_topic8_earned_v1'),/^(?:q[0-2]|tree|col(?:360|840|1260|2310|3780|4620)|t[0-9])$/),20);
   const nine=cap(unique(read('liga_math_topic9_earned_v1'),/^(?:i[0-5]|l0|t[0-9])$/),17);
+  const ten=cap(unique(read('liga_math_topic10_earned_v1'),/^(?:i[0-3]|p[0-5]|t[0-9])$/),20);
   const rows=legacy.map((x,i)=>({label:'Тема '+[1,4,5,2,3][i]+' · '+names[i],goals:x,done:completed.has(names[i])}));
   const newRows=[
     {label:'Урок 6',goals:six,done:raw('liga_math_topic6_complete')==='1'||(raw('liga_math_topic6_goals')===null&&raw('liga_math_prime_complete')==='1')},
     {label:'Урок 7',goals:seven,done:raw('liga_math_lesson07_test_checked')==='1'},
     {label:'Урок 8',goals:eight,done:raw('liga_math_topic8_goals')!==null},
-    {label:'Урок 9 · НОД и НОК',goals:nine,done:raw('liga_math_topic9_goals')!==null}
+    {label:'Урок 9 · НОД и НОК',goals:nine,done:raw('liga_math_topic9_goals')!==null},
+    {label:'Урок 10 · Текстовые задачи на НОД и НОК',goals:ten,done:raw('liga_math_topic10_complete')==='1'}
   ];
   // Completed legacy topic labels are taken from actual saved submissions, not merely nonzero scores.
   const legacyDone=names.filter(x=>completed.has(x)).length;
   const newDone=newRows.filter(r=>r.done).length;
   const tests=legacyDone+Number(explicit||best>0)+
     Number(raw('liga_math_topic6_complete')==='1')+Number(raw('liga_math_lesson07_test_checked')==='1')+
-    Number(raw('liga_math_topic8_goals')!==null)+Number(raw('liga_math_topic9_goals')!==null);
-  return {goals:legacy.reduce((a,b)=>a+b,0)+six+seven+eight+nine,
-    done:Math.min(9,legacyDone+newDone),tests,available:9,
+    Number(raw('liga_math_topic8_goals')!==null)+Number(raw('liga_math_topic9_goals')!==null)+Number(raw('liga_math_topic10_complete')==='1');
+  return {goals:legacy.reduce((a,b)=>a+b,0)+six+seven+eight+nine+ten,
+    done:Math.min(10,legacyDone+newDone),tests,available:10,
     rows:rows.concat(newRows),extra:explicit||best>0?'Итоговый тест по темам 1–5: '+best+' голов':''};
 }
 function historyProgress(){
