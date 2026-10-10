@@ -12,6 +12,8 @@ function totalStars(){
   var t8=safe('liga_math_topic8_earned_v1')||[],t9=safe('liga_math_topic9_earned_v1')||[];
   total+=Math.min(20,Array.isArray(t8)?new Set(t8.filter(x=>typeof x==='string'&&/^(?:q[0-2]|tree|col(?:360|840|1260|2310|3780|4620)|t[0-9])$/.test(x))).size:0);
   total+=Math.min(17,Array.isArray(t9)?new Set(t9.filter(x=>typeof x==='string'&&/^(?:i[0-5]|l0|t[0-9])$/.test(x))).size:0);
+  var t10=safe('liga_math_topic10_earned_v1')||[];
+  total+=Math.min(20,Array.isArray(t10)?new Set(t10.filter(x=>typeof x==='string'&&/^(?:i[0-3]|p[0-5]|t[0-9])$/.test(x))).size:0);
   var ra=safe('liga_russian_lesson1_preview_v1')||{}, rb=safe('liga-znaniy-russian-progress-v1')||{};
   var rga=Object.values(ra.goals||{}).filter(Boolean).length, rgb=n(rb.topic1Goals); total+=Math.max(rga,rgb);
   var v2=safe('liga-znaniy-biology-progress-v2')||{},v1=safe('liga-znaniy-biology-progress-v1')||{},seen={};
