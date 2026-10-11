@@ -1,0 +1,14 @@
+{
+  "id": "math-workshop-grade-5",
+  "version": 1,
+  "subject": "math",
+  "grade": 5,
+  "title": "Математическая мастерская — 5 класс",
+  "entry": "index.html",
+  "progressKey": "liga_math_workshop_v1",
+  "taskCount": 48,
+  "testQuestionCount": 16,
+  "maxGoals": 64,
+  "contentSource": "Авторские задания Лиги знаний",
+  "categories": ["training", "advanced", "olympiad", "lab"]
+}

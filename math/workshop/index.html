@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Математическая мастерская для 5 класса: задачи, исследования, подсказки и повторение ошибок в Лиге знаний.">
+  <title>Математическая мастерская — 5 класс · Лига знаний</title>
+  <link rel="stylesheet" href="workshop.css">
+  <script src="tasks.js" defer></script>
+  <script src="core.js" defer></script>
+  <script src="workshop.js" defer></script>
+  <script src="../../shared/js/global-stars-v818.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#workshopView">К содержимому</a>
+  <header class="topbar">
+    <a class="back-link" href="../index.html">← Темы математики</a>
+    <a class="brand" href="#home">⚽ Лига знаний</a>
+    <div class="scoreboard"><span>⚽ <b id="workshopGoals">0</b></span><span>⭐ <b data-points>0</b></span></div>
+  </header>
+  <div class="layout">
+    <main id="workshopView" tabindex="-1"><noscript>Для работы мастерской включите JavaScript в браузере. <a href="../index.html">Вернуться к математике</a></noscript></main>
+    <aside class="coach-side" aria-label="Тренер Чисел">
+      <img id="coachImage" src="../lessons/06/images/hero-welcome.webp" alt="Футболист — Тренер Чисел" width="320" height="450" decoding="async">
+      <div class="coach-note"><span class="eyebrow">ТРЕНЕР ЧИСЕЛ</span><p id="coachMessage">Егор, исследуем, рассуждаем и проверяем свои идеи!</p></div>
+      <a class="coach-report" href="#report">📊 Отчёт для родителя</a>
+    </aside>
+  </div>
+  <p id="storageNotice" class="storage-notice" role="status" hidden>Браузер не разрешает сохранять результаты. Они доступны до закрытия страницы.</p>
+  <div id="goalToast" class="goal-toast" role="status" aria-live="polite"></div>
+</body>
+</html>
