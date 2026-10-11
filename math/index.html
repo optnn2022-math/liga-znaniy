@@ -2274,11 +2274,16 @@ function renderTopics(){
       current.onclick=()=>startQuiz('group');list.append(current);
     }
     if(mathTests[number]&&number!==5){
-      const test=document.createElement('div');test.className='row locked math-locked';
+      const checkpoint=number===10;
+      const test=document.createElement(checkpoint?'button':'div');test.className=checkpoint?'row test':'row locked math-locked';
+      if(checkpoint)test.type='button';
       const icon=document.createElement('span');icon.className='num';icon.textContent='📝';
       const name=document.createElement('span');name.className='name';name.textContent=mathTests[number];
-      const badge=document.createElement('span');badge.className='goals';badge.textContent='🔒';
-      test.append(icon,name,badge);list.append(test);
+      const badge=document.createElement('span');badge.className='goals';
+      badge.textContent=checkpoint?'⚽ '+modularEarnedCount('liga_math_test_6_10_earned_v1',/^(?:[0-9]|1[0-9])$/)+' / 20':'🔒';
+      test.append(icon,name,badge);
+      if(checkpoint)test.onclick=()=>{window.location.href='tests/06-10/';};
+      list.append(test);
     }
   });updatePoints();
 }
