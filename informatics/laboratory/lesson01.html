@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Доведи футболиста до ворот — Лига знаний</title>
+<style>
+*{box-sizing:border-box}body{margin:0;color:#fff;font-family:system-ui,Arial,sans-serif;background:linear-gradient(140deg,#071b3d20,#123e7528),url("../../shared/assets-v7/67a145f6bf3e5227d442.webp") center/cover fixed,#092b5b}
+.wrap{max-width:1120px;margin:auto;padding:20px 15px 60px}.back{display:inline-block;background:#103b74;color:white;border:1px solid #8fc7f3;padding:11px 16px;border-radius:12px;text-decoration:none}
+h1{font-size:clamp(25px,4vw,39px);margin:17px 0 8px}.intro{display:flex;align-items:center;justify-content:space-between;gap:12px}.intro img{width:clamp(105px,21vw,210px);max-height:235px;object-fit:contain}
+.panel{background:#0a3066eb;border:1px solid #8ac3f0;border-radius:20px;padding:clamp(14px,3vw,24px);box-shadow:0 12px 30px #041a3d66}.top{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px}.pill{background:#f5b839;color:#1a2b46;padding:7px 12px;border-radius:999px;font-weight:900}
+.levels{display:flex;flex-wrap:wrap;gap:7px;margin:17px 0}.levels button{min-width:48px}.levels button.selected{background:#ffbd45;color:#14284a}
+.game{display:grid;grid-template-columns:minmax(0,1fr) minmax(245px,.75fr);gap:18px}.field{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;background:#0a572f;padding:8px;border:4px solid #f6f9e9;border-radius:14px;max-width:540px;margin:auto}.cell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:clamp(19px,3.3vw,35px);border:1px solid #ffffff35;border-radius:4px;background:#278d52}.cell.alt{background:#208049}.cell.obstacle{background:#a35442}.cell.active{outline:3px solid #ffe373;outline-offset:-3px}
+.controls{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}button{font:inherit;border:1px solid #aad7fa;border-radius:11px;background:#17538f;color:#fff;padding:10px 13px;font-weight:800;cursor:pointer}button:hover:not(:disabled){filter:brightness(1.16)}button:disabled{opacity:.45;cursor:not-allowed}.primary{background:linear-gradient(120deg,#ffb837,#f47721);border-color:#ffe18a;color:#1c2b40}.commands{display:flex;gap:6px;flex-wrap:wrap;min-height:56px;background:#082450b8;padding:10px;border-radius:12px}.cmd{padding:7px 9px;background:#28659a}.cmd.current{outline:3px solid #ffd95e}.hint{color:#d0e6f9;font-size:14px;line-height:1.5}.message{min-height:48px;line-height:1.5;margin:12px 0;color:#ffe6a0;font-weight:700}.award{font-weight:900;color:#ffd86a}.instructions{margin:18px 0 0;line-height:1.6}.instructions summary{cursor:pointer;font-weight:800}
+@media(max-width:730px){.game{grid-template-columns:1fr}.field{width:100%}.intro img{max-width:125px}.cell{font-size:clamp(20px,6vw,35px)}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style></head><body><div class="wrap"><a class="back" href="../index.html">← Лаборатория программирования</a>
+<div class="intro"><div><h1>⚽ Доведи футболиста до ворот</h1><p>Егор, составь алгоритм из команд и запусти свою первую программу!</p><div class="pill" id="total">⚽ Голы: 0 / 14</div></div><img src="../../shared/assets/file_000000002ea882109b9f033fe1bf985d.png" alt="Футболист с ноутбуком"></div>
+<div class="panel"><div class="top"><strong id="levelTitle"></strong><span class="pill" id="reward"></span></div><p id="goal" class="hint"></p><div class="levels" id="levels" aria-label="Выбор уровня"></div>
+<div class="game"><div><div class="field" id="field" aria-label="Игровое поле пять на пять"></div><p class="hint">⚽ Старт · 🥅 Ворота · 🚧 Препятствие · 👟 Футболист в движении</p></div>
+<div><strong>Редактор программы</strong><p class="hint">Добавляй команды. Нажми на команду в программе, чтобы выбрать её; кнопки ниже позволяют менять порядок.</p><div class="controls" id="arrows"><button data-dir="R">→</button><button data-dir="D">↓</button><button data-dir="L">←</button><button data-dir="U">↑</button></div>
+<div class="commands" id="commands" aria-label="Программа"></div><div class="controls"><button id="left" title="Переместить выбранную команду влево">⇤</button><button id="right" title="Переместить выбранную команду вправо">⇥</button><button id="remove">Удалить</button><button id="clear">Очистить</button></div>
+<div class="controls"><button class="primary" id="run">▶ Запустить</button><button id="step">⏭ По шагам</button><button id="reset">↻ Сначала</button></div><p class="message" id="message" role="status" aria-live="polite"></p><div class="award" id="progress"></div></div></div>
+<details class="instructions"><summary>Что такое алгоритм?</summary><p>Алгоритм — это понятная исполнителю последовательность команд для решения задачи. Порядок команд важен: сначала составь программу, затем запусти её и проверь результат. Если футболист столкнулся с препятствием, исправь ошибку и попробуй снова.</p></details></div></div>
+<script>
+(()=>{'use strict';
+const levels=[
+{title:'1. Прямая дорога',goal:'Сделай три шага вправо до ворот.',start:[0,0],end:[0,3],walls:[],points:1},
+{title:'2. Первый поворот',goal:'Дойди до ворот, используя поворот.',start:[0,0],end:[2,3],walls:[],points:2},
+{title:'3. Обойди защитника',goal:'Нельзя заходить на клетку с защитником.',start:[0,0],end:[0,4],walls:[[0,2],[1,2]],points:3},
+{title:'4. Исправь программу',goal:'В программе уже есть ошибка. Найди и исправь её.',start:[0,0],end:[2,2],walls:[[1,1]],points:3,preset:['R','D','R','D']},
+{title:'5. Финальное испытание',goal:'Построй свой маршрут к воротам, обходя все препятствия.',start:[0,0],end:[4,4],walls:[[0,2],[1,2],[2,2],[3,0],[3,1],[3,3]],points:5}
+];
+const key='liga-znaniy-informatics-lab1-completed-v1';let completed=[];try{const v=JSON.parse(localStorage.getItem(key)||'[]');if(Array.isArray(v))completed=v.filter(n=>Number.isInteger(n)&&n>=0&&n<5)}catch(e){}
+const el=id=>document.getElementById(id);let level=0,commands=[],selected=-1,position=[0,0],pc=0,playing=false,timer=null,failed=false;
+const glyph={R:'→',D:'↓',L:'←',U:'↑'},delta={R:[0,1],D:[1,0],L:[0,-1],U:[-1,0]};
+function save(){try{localStorage.setItem(key,JSON.stringify(completed))}catch(e){}}
+function status(s){el('message').textContent=s}
+function points(){const n=completed.reduce((a,i)=>a+levels[i].points,0);el('total').textContent='⚽ Голы: '+n+' / 14';el('progress').textContent='Пройдено уровней: '+completed.length+' / 5';}
+function paint(){const data=levels[level],f=el('field');f.replaceChildren();for(let y=0;y<5;y++)for(let x=0;x<5;x++){const c=document.createElement('div');c.className='cell'+((x+y)%2?' alt':'')+(data.walls.some(w=>w[0]===y&&w[1]===x)?' obstacle':'')+(position[0]===y&&position[1]===x?' active':'');c.textContent=position[0]===y&&position[1]===x?'👟':data.end[0]===y&&data.end[1]===x?'🥅':data.walls.some(w=>w[0]===y&&w[1]===x)?'🚧':data.start[0]===y&&data.start[1]===x?'⚽':'';f.appendChild(c)}}
+function paintCommands(){const box=el('commands');box.replaceChildren();commands.forEach((c,i)=>{const b=document.createElement('button');b.className='cmd'+(selected===i?' current':'');b.textContent=(i+1)+'. '+glyph[c];b.disabled=playing;b.onclick=()=>{selected=i;paintCommands()};box.appendChild(b)});if(!commands.length){const p=document.createElement('span');p.className='hint';p.textContent='Команд пока нет';box.appendChild(p)}}
+function stop(){if(timer!==null){clearInterval(timer);timer=null}playing=false}
+function resetRun(){stop();position=[...levels[level].start];pc=0;failed=false;paint();paintCommands()}
+function load(n){stop();level=n;commands=[...(levels[n].preset||[])];selected=-1;el('levelTitle').textContent=levels[n].title;el('goal').textContent=levels[n].goal;el('reward').textContent='+'+levels[n].points+' ⚽';resetRun();status('Составь алгоритм и нажми «Запустить».');const tabs=el('levels');tabs.replaceChildren();levels.forEach((l,i)=>{const b=document.createElement('button');b.className=i===level?'selected':'';b.textContent=(completed.includes(i)?'✓ ':'')+(i+1);b.title=l.title;b.onclick=()=>load(i);tabs.appendChild(b)});points()}
+function finish(){stop();if(!completed.includes(level)){completed.push(level);save();status('Гол! Отличная программа! +'+levels[level].points+' ⚽');}else status('Гол! Уровень уже пройден, повторные голы не начисляются.');points();loadTabs()}
+function loadTabs(){[...el('levels').children].forEach((b,i)=>{b.textContent=(completed.includes(i)?'✓ ':'')+(i+1)})}
+function next(){const c=commands[pc];if(!c){stop();status('Программа закончилась, но футболист ещё не дошёл до ворот. Добавь команды.');return}const d=delta[c],p=[position[0]+d[0],position[1]+d[1]],data=levels[level];if(p[0]<0||p[0]>4||p[1]<0||p[1]>4||data.walls.some(w=>w[0]===p[0]&&w[1]===p[1])){stop();failed=true;selected=pc;paintCommands();status('Ошибка в команде № '+(pc+1)+'. Здесь нельзя пройти. Исправь программу.');return}position=p;selected=pc;pc++;paint();paintCommands();if(p[0]===data.end[0]&&p[1]===data.end[1]){finish();return}if(pc>=commands.length){stop();status('Программа закончилась до ворот. Добавь команды.')}else status('Выполнена команда № '+pc+'. Продолжаем!')}
+el('arrows').onclick=e=>{const b=e.target.closest('[data-dir]');if(!b||playing)return;commands.push(b.dataset.dir);selected=commands.length-1;resetRun();status('Команда добавлена. Теперь можно запускать программу.')};
+el('left').onclick=()=>{if(playing||selected<1)return;[commands[selected-1],commands[selected]]=[commands[selected],commands[selected-1]];selected--;resetRun()};
+el('right').onclick=()=>{if(playing||selected<0||selected>=commands.length-1)return;[commands[selected],commands[selected+1]]=[commands[selected+1],commands[selected]];selected++;resetRun()};
+el('remove').onclick=()=>{if(playing||selected<0)return;commands.splice(selected,1);selected=Math.min(selected,commands.length-1);resetRun()};
+el('clear').onclick=()=>{if(playing)return;commands=[];selected=-1;resetRun();status('Программа очищена.')};
+el('reset').onclick=()=>{resetRun();status('Выполнение сброшено. Можно попробовать снова.')};
+el('step').onclick=()=>{if(playing)return;if(pc>=commands.length&&pc>0)resetRun();if(!commands.length){status('Сначала добавь команды.');return}next()};
+el('run').onclick=()=>{if(playing)return;if(!commands.length){status('Сначала добавь команды.');return}if(pc>=commands.length)resetRun();playing=true;timer=setInterval(()=>{if(playing)next()},550)};
+load(0);
+})();
+</script></body></html>
