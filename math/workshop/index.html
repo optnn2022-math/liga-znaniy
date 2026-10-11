@@ -5,11 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Математическая мастерская для 5 класса: задачи, исследования, подсказки и повторение ошибок в Лиге знаний.">
   <title>Математическая мастерская — 5 класс · Лига знаний</title>
-  <link rel="stylesheet" href="workshop.css">
-  <script src="tasks.js" defer></script>
-  <script src="core.js" defer></script>
-  <script src="workshop.js" defer></script>
-  <script src="../../shared/js/global-stars-v818.js" defer></script>
+  <style>
+    #workshopBoot{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;background:#0b3369;color:#fff;border:1px solid #73b5ea;border-radius:20px;padding:26px;line-height:1.6;max-width:900px;margin:12px auto}
+    #workshopBoot h1{font-size:clamp(1.6rem,4vw,2.5rem);line-height:1.2}
+    #workshopBoot button,#workshopBoot a{display:inline-block;margin:8px 8px 0 0;padding:11px 15px;border-radius:10px;font:inherit;font-weight:700}
+    #workshopBoot button{border:1px solid #ffdc8b;background:#ffc44e;color:#17365b;cursor:pointer}
+    #workshopBoot a{color:#fff;border:1px solid #91c7ef;text-decoration:none}
+  </style>
+  <script id="workshopBootScript">
+    (function () {
+      var ready = false, failed = false;
+      function showFailure() {
+        if (ready) return;
+        var message = document.getElementById('bootLoadingText');
+        if (message) message.textContent = 'Загрузка пока не завершилась. Нажми «Обновить страницу», чтобы попробовать ещё раз.';
+      }
+      var timer = setTimeout(showFailure, 12000);
+      window.LigaWorkshopBoot = {
+        ready: function () { ready = true; clearTimeout(timer); },
+        fail: function () { failed = true; showFailure(); },
+        reload: function () {
+          location.href = location.href.split('#')[0].split('?')[0] + '?v=' + Date.now() + location.hash;
+        }
+      };
+      window.addEventListener('error', function (event) {
+        if (!ready && (event.message || (event.target && event.target.tagName === 'SCRIPT'))) window.LigaWorkshopBoot.fail();
+      }, true);
+      document.addEventListener('DOMContentLoaded', function () { if (failed) showFailure(); });
+    })();
+  </script>
+  <link rel="stylesheet" href="workshop.css?v=20261012-2">
+  <script src="tasks.js?v=20261012-2" defer></script>
+  <script src="core.js?v=20261012-2" defer></script>
+  <script src="workshop.js?v=20261012-2" defer></script>
+  <script src="../../shared/js/global-stars-v818.js?v=20261012-2" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#workshopView">К содержимому</a>
@@ -19,7 +48,17 @@
     <div class="scoreboard"><span>⚽ <b id="workshopGoals">0</b></span><span>⭐ <b data-points>0</b></span></div>
   </header>
   <div class="layout">
-    <main id="workshopView" tabindex="-1"><noscript>Для работы мастерской включите JavaScript в браузере. <a href="../index.html">Вернуться к математике</a></noscript></main>
+    <main id="workshopView" tabindex="-1">
+      <section class="panel" id="workshopBoot">
+        <span class="eyebrow">ЛИГА ЗНАНИЙ · 5 КЛАСС</span>
+        <h1>Математическая мастерская</h1>
+        <p>Егор, здесь тебя ждут тренировки, необычные задачи и восемь лабораторий.</p>
+        <p id="bootLoadingText" role="status" aria-live="polite">Загружаем мастерскую…</p>
+        <button type="button" onclick="window.LigaWorkshopBoot.reload()">Обновить страницу</button>
+        <a href="../index.html">← К математике</a>
+        <noscript><style>#bootLoadingText{display:none}</style><p>Для работы заданий включите JavaScript в браузере или откройте ссылку в обычном браузере телефона.</p></noscript>
+      </section>
+    </main>
     <aside class="coach-side" aria-label="Тренер Чисел">
       <img id="coachImage" src="../lessons/06/images/hero-welcome.webp" alt="Футболист — Тренер Чисел" width="320" height="450" decoding="async">
       <div class="coach-note"><span class="eyebrow">ТРЕНЕР ЧИСЕЛ</span><p id="coachMessage">Егор, исследуем, рассуждаем и проверяем свои идеи!</p></div>

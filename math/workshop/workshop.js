@@ -1,6 +1,10 @@
 (function () {
   'use strict';
   const data = window.WorkshopData, core = window.WorkshopCore;
+  if (!data || !core) {
+    if (window.LigaWorkshopBoot) window.LigaWorkshopBoot.fail();
+    return;
+  }
   const view = document.getElementById('workshopView');
   const escape = value => String(value).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
   const $ = id => document.getElementById(id);
@@ -277,4 +281,5 @@
   window.addEventListener('storage',e=>{if(e.key===core.STORAGE_KEY && currentRoute!=='test')header();});
   setInterval(tick,15000);
   renderRoute();
+  if (window.LigaWorkshopBoot) window.LigaWorkshopBoot.ready();
 })();
