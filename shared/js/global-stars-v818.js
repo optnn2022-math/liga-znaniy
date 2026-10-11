@@ -24,6 +24,12 @@ function totalStars(){
   var ca=safe('liga-znaniy-chinese-lesson1-v1')||{},cb=safe('league-chinese-lesson2-prototype-v1')||{},cp=safe('liga-znaniy-chinese-progress-v1')||{};
   var cg1=Math.max(Array.isArray(ca.goals)?new Set(ca.goals).size:0,n(cp.topic1Goals));
   var cg2=Math.max(Array.isArray(cb.earned)?new Set(cb.earned).size:0,n(cp.topic2Goals)); total+=cg1+cg2;
+  // Independent workshop rewards; existing lesson keys and scoring stay intact.
+  var workshop=safe('liga_math_workshop_v1')||{};
+  if(workshop.version===1&&Array.isArray(workshop.earned)){
+    var allowed=/^(?:[ndgoemaf][1-6]|test:(?:n[24]|d[24]|g[23]|o[24]|e[24]|m[24]|a[24]|f[24]))$/;
+    total+=Math.min(64,new Set(workshop.earned.filter(function(id){return typeof id==='string'&&allowed.test(id)})).size);
+  }
   return total;
 }
 var busy=false;
