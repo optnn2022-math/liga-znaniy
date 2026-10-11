@@ -2234,6 +2234,7 @@ function rayGoalCount(){return Object.values(data.rayFirstGoals||{}).filter(Bool
 function mathTopicGoalCount(i){const maximum=mathTopicGoalTotal(i),saved=Math.max(0,Number(data.goals[i])||0),rays=i===4?Math.min(4,rayGoalCount()):0;return Math.min(maximum,saved+rays)}
 function mathTopicGoalTotal(i){return lessons[i].questions.filter(x=>x.kind==='practice').length+(i===4?4:0)}
 function modularEarnedCount(key,allowed){try{const rows=JSON.parse(localStorage.getItem(key)||'[]');return Array.isArray(rows)?new Set(rows.filter(k=>typeof k==='string'&&allowed.test(k))).size:0}catch{return 0}}
+function mathCheckpointGoals(){try{const a=JSON.parse(localStorage.getItem('liga_math_test_6_10_earned_v1')||'[]');return Array.isArray(a)?new Set(a.filter(n=>Number.isInteger(n)&&n>=0&&n<20)).size:0}catch{return 0}}
 function updateRayGoalStatus(){let el=document.getElementById('rayGoalStatus');if(el)el.textContent='⚽ '+rayGoalCount()+' / 4 за упражнения на луче'}
 function recordRayFirstGoal(id,correct){data.rayAttempts||={};data.rayFirstGoals||={};if(data.rayAttempts[id])return false;data.rayAttempts[id]=true;if(correct){data.rayFirstGoals[id]=true;goalFlash()}save();renderTopics();updateRayGoalStatus();return correct}
 function renderTopics(){
@@ -2280,7 +2281,7 @@ function renderTopics(){
       const icon=document.createElement('span');icon.className='num';icon.textContent='📝';
       const name=document.createElement('span');name.className='name';name.textContent=mathTests[number];
       const badge=document.createElement('span');badge.className='goals';
-      badge.textContent=checkpoint?'⚽ '+modularEarnedCount('liga_math_test_6_10_earned_v1',/^(?:[0-9]|1[0-9])$/)+' / 20':'🔒';
+      badge.textContent=checkpoint?'⚽ '+mathCheckpointGoals()+' / 20':'🔒';
       test.append(icon,name,badge);
       if(checkpoint)test.onclick=()=>{window.location.href='tests/06-10/';};
       list.append(test);
