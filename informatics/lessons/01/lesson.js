@@ -64,21 +64,51 @@ function renderStep(){
  $('prev').disabled=state.step===0;$('next').style.display=state.step===6?'none':'';
  save();updateScore();window.scrollTo({top:0,behavior:'smooth'});
 }
+let goalEffectsActive=0;
+function flashGoalCounter(){
+ const target=$('score');if(!target)return;
+ target.classList.remove('goal-score-flash');
+ if(typeof target.offsetWidth==='number')void target.offsetWidth;
+ target.classList.add('goal-score-flash');
+}
 function celebrateGoal(origin){
- const target=$('score');if(!target||typeof document==='undefined')return;
- target.classList.remove('goal-score-flash');void target.offsetWidth;target.classList.add('goal-score-flash');
- if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
- const from=origin&&origin.getBoundingClientRect?origin.getBoundingClientRect():target.getBoundingClientRect();
- const to=target.getBoundingClientRect();
- const startX=from.left+from.width/2-22,startY=from.top+from.height/2-22;
- const dx=to.left+to.width/2-22-startX,dy=to.top+to.height/2-22-startY;
- const ball=document.createElement('span');ball.className='goal-ball';ball.textContent='⚽';ball.setAttribute('aria-hidden','true');ball.style.left=startX+'px';ball.style.top=startY+'px';document.body.appendChild(ball);
- if(typeof ball.animate!=='function'){ball.remove();return;}
- const flight=ball.animate([{transform:'translate(0,0) scale(.8) rotate(0deg)',opacity:1},{offset:.55,transform:'translate('+dx*.55+'px,'+(dy*.55-95)+'px) scale(1.25) rotate(390deg)',opacity:1},{transform:'translate('+dx+'px,'+dy+'px) scale(.35) rotate(720deg)',opacity:0}],{duration:850,easing:'ease-in-out'});
- flight.onfinish=()=>ball.remove();flight.oncancel=()=>ball.remove();
- const pop=document.createElement('span');pop.className='goal-pop';pop.textContent='+1 ⚽';pop.setAttribute('aria-hidden','true');pop.style.left=(from.left+from.width/2)+'px';pop.style.top=(from.top-12)+'px';document.body.appendChild(pop);
- const rise=pop.animate([{transform:'translate(-50%,0)',opacity:0},{offset:.2,opacity:1},{transform:'translate(-50%,-55px)',opacity:0}],{duration:900,easing:'ease-out'});
- rise.onfinish=()=>pop.remove();rise.oncancel=()=>pop.remove();
+ // The visual reward is optional: never allow animation errors to interrupt scoring.
+ try{
+  const target=$('score');
+  if(!target)return;
+  const reduceMotion=typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduceMotion||typeof document.createElement!=='function'||typeof target.getBoundingClientRect!=='function'){
+   flashGoalCounter();return;
+  }
+  const from=origin&&typeof origin.getBoundingClientRect==='function'?origin.getBoundingClientRect():target.getBoundingClientRect();
+  const to=target.getBoundingClientRect();
+  if(![from.left,from.top,from.width,from.height,to.left,to.top,to.width,to.height].every(Number.isFinite)){
+   flashGoalCounter();return;
+  }
+  // Limit simultaneous particles on fast consecutive answers.
+  if(goalEffectsActive>=3){flashGoalCounter();return;}
+  const startX=from.left+from.width/2-22,startY=from.top+from.height/2-22;
+  const dx=to.left+to.width/2-22-startX,dy=to.top+to.height/2-22-startY;
+  const ball=document.createElement('span');
+  if(typeof ball.animate!=='function'){flashGoalCounter();return;}
+  ball.className='goal-ball';ball.textContent='⚽';ball.setAttribute('aria-hidden','true');
+  ball.style.left=startX+'px';ball.style.top=startY+'px';document.body.appendChild(ball);
+  goalEffectsActive++;
+  const flight=ball.animate([
+   {transform:'translate(0,0) scale(.8) rotate(0deg)',opacity:1},
+   {offset:.55,transform:'translate('+dx*.55+'px,'+(dy*.55-95)+'px) scale(1.25) rotate(390deg)',opacity:1},
+   {transform:'translate('+dx+'px,'+dy+'px) scale(.35) rotate(720deg)',opacity:0}
+  ],{duration:850,easing:'ease-in-out'});
+  let cleaned=false;
+  function cleanup(){if(cleaned)return;cleaned=true;ball.remove();goalEffectsActive=Math.max(0,goalEffectsActive-1);flashGoalCounter();}
+  flight.onfinish=cleanup;flight.oncancel=cleanup;
+  const pop=document.createElement('span');pop.className='goal-pop';pop.textContent='+1 ⚽';pop.setAttribute('aria-hidden','true');
+  pop.style.left=(from.left+from.width/2)+'px';pop.style.top=(from.top-12)+'px';document.body.appendChild(pop);
+  if(typeof pop.animate==='function'){
+   const rise=pop.animate([{transform:'translate(-50%,0)',opacity:0},{offset:.2,opacity:1},{transform:'translate(-50%,-55px)',opacity:0}],{duration:900,easing:'ease-out'});
+   rise.onfinish=()=>pop.remove();rise.oncancel=()=>pop.remove();
+  }else pop.remove();
+ }catch(e){flashGoalCounter();}
 }
 function record(id,value,origin){const result=answer(state,id,value);if(result.accepted){save();updateScore();finishCheck();if(result.awarded)celebrateGoal(origin);}return result;}
 function exercise(container,items,prefix,feedback){
