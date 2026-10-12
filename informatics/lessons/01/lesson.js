@@ -87,8 +87,8 @@ function celebrateGoal(origin){
   }
   // Limit simultaneous particles on fast consecutive answers.
   if(goalEffectsActive>=3){flashGoalCounter();return;}
-  const startX=from.left+from.width/2-22,startY=from.top+from.height/2-22;
-  const dx=to.left+to.width/2-22-startX,dy=to.top+to.height/2-22-startY;
+  const startX=from.left+from.width/2-34,startY=from.top+from.height/2-34;
+  const dx=to.left+to.width/2-34-startX,dy=to.top+to.height/2-34-startY;
   const ball=document.createElement('span');
   if(typeof ball.animate!=='function'){flashGoalCounter();return;}
   ball.className='goal-ball';ball.textContent='⚽';ball.setAttribute('aria-hidden','true');
@@ -98,14 +98,14 @@ function celebrateGoal(origin){
    {transform:'translate(0,0) scale(.8) rotate(0deg)',opacity:1},
    {offset:.55,transform:'translate('+dx*.55+'px,'+(dy*.55-95)+'px) scale(1.25) rotate(390deg)',opacity:1},
    {transform:'translate('+dx+'px,'+dy+'px) scale(.35) rotate(720deg)',opacity:0}
-  ],{duration:850,easing:'ease-in-out'});
+  ],{duration:1600,easing:'ease-in-out'});
   let cleaned=false;
   function cleanup(){if(cleaned)return;cleaned=true;ball.remove();goalEffectsActive=Math.max(0,goalEffectsActive-1);flashGoalCounter();}
   flight.onfinish=cleanup;flight.oncancel=cleanup;
   const pop=document.createElement('span');pop.className='goal-pop';pop.textContent='+1 ⚽';pop.setAttribute('aria-hidden','true');
   pop.style.left=(from.left+from.width/2)+'px';pop.style.top=(from.top-12)+'px';document.body.appendChild(pop);
   if(typeof pop.animate==='function'){
-   const rise=pop.animate([{transform:'translate(-50%,0)',opacity:0},{offset:.2,opacity:1},{transform:'translate(-50%,-55px)',opacity:0}],{duration:900,easing:'ease-out'});
+   const rise=pop.animate([{transform:'translate(-50%,0)',opacity:0},{offset:.2,opacity:1},{transform:'translate(-50%,-55px)',opacity:0}],{duration:1450,easing:'ease-out'});
    rise.onfinish=()=>pop.remove();rise.oncancel=()=>pop.remove();
   }else pop.remove();
  }catch(e){flashGoalCounter();}
