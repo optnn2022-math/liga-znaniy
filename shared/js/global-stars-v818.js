@@ -30,6 +30,13 @@ function totalStars(){
     var allowed=/^(?:[ndgoemaf][1-6]|test:(?:n[24]|d[24]|g[23]|o[24]|e[24]|m[24]|a[24]|f[24]))$/;
     total+=Math.min(64,new Set(workshop.earned.filter(function(id){return typeof id==='string'&&allowed.test(id)})).size);
   }
+  // First lesson of the main Informatics course.
+  var info=safe('liga_informatics_lesson01_v1')||{};
+  var infoAllowed=/^(?:s[0-4]|p[0-4]|safe[0-4]|work[0-4]|q[0-9])$/;
+  var infoEarned=Array.isArray(info.earned)?info.earned:[];
+  var infoDone=info.done&&typeof info.done==='object'?info.done:{};
+  var infoIds=infoEarned.concat(Object.keys(infoDone).filter(function(id){return infoDone[id]===1}));
+  total+=Math.min(30,new Set(infoIds.filter(function(id){return typeof id==='string'&&infoAllowed.test(id)})).size);
   return total;
 }
 var busy=false;

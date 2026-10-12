@@ -1,0 +1,12 @@
+{
+  "id": "informatics-main-01",
+  "subject": "informatics",
+  "grade": 5,
+  "number": 1,
+  "title": "Информация вокруг нас. Техника безопасности и организация рабочего места",
+  "entry": "index.html",
+  "progressKey": "liga_informatics_lesson01_v1",
+  "maxGoals": 30,
+  "practiceGoals": 20,
+  "testGoals": 10
+}
