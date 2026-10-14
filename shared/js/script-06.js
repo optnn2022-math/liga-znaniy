@@ -149,5 +149,16 @@
       const score = row2.querySelector('.goals');
       if (score) score.textContent = lesson1Goals >= 8 ? ('⚽ ' + Math.min(8, lesson2Goals) + ' / 8') : '🔒 8/8 в уроке 1';
     }
+    const lesson3 = JSON.parse(localStorage.getItem('liga-cn-lesson3') || '{}');
+    const keys3 = Object.keys(lesson3).filter(k => /^(?:[0-7])$/.test(k));
+    const correct3 = [0,1,1,2,1,0,1,0];
+    const goals3 = keys3.filter(k => lesson3[k] === correct3[Number(k)]).length;
+    const row3 = rowByNumber('03');
+    if (row3) {
+      const label = row3.querySelector('.goals');
+      if (label) label.textContent = '⚽ ' + goals3 + ' / 8';
+    }
+    const total = document.getElementById('chineseGoalTotal');
+    if (total) total.textContent = Math.min(8, lesson1Goals) + Math.min(8, lesson2Goals) + goals3 + ' / 24';
   } catch (_) {}
 })();
