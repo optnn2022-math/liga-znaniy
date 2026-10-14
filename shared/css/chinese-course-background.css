@@ -1,0 +1,5 @@
+/* Единый фон китайского курса. Точно повторяет фон главной страницы из shared/css/style-01.css. */
+html{min-height:100%}
+body{min-height:100vh;background:linear-gradient(180deg,#05245599,#082852c9),url('../assets-v7/67a145f6bf3e5227d442.webp') center/cover fixed!important;background-color:#092b5b!important}
+body::before{content:none!important;background:none!important}
+@media(max-width:700px){body{background-attachment:scroll!important;background-size:cover!important}}
