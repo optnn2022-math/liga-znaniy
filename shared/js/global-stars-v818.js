@@ -23,7 +23,7 @@ function totalStars(){
   var h=safe('liga-znaniy-history-progress-v1')||{}; total+=n(h.goals1)+n(h.goals2)+n(h.goals3)+n(h.block1GoalsV2);
   var ca=safe('liga-znaniy-chinese-lesson1-v1')||{},cb=safe('league-chinese-lesson2-prototype-v1')||{},cp=safe('liga-znaniy-chinese-progress-v1')||{};
   var cg1=Math.max(Array.isArray(ca.goals)?new Set(ca.goals).size:0,n(cp.topic1Goals));
-  var cg2=Math.max(Array.isArray(cb.earned)?new Set(cb.earned).size:0,n(cp.topic2Goals)); total+=cg1+cg2;
+  var cg2=Math.max(Array.isArray(cb.earned)?new Set(cb.earned).size:0,n(cp.topic2Goals)); var lc=safe("liga-cn-lesson3")||{},correct=[0,1,1,2,1,0,1,0];var cg3=correct.filter(function(v,i){return lc[i]===v}).length;total+=cg1+cg2+cg3;
   // Independent workshop rewards; existing lesson keys and scoring stay intact.
   var workshop=safe('liga_math_workshop_v1')||{};
   if(workshop.version===1&&Array.isArray(workshop.earned)){
