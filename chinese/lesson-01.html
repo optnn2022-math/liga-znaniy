@@ -295,7 +295,13 @@
     }
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
   </style>
-</head>
+<!-- Chinese course unified background v1 --><style>
+/* Единый фон курса китайского языка: тёмно-синий стадион, мягкий узор и подсветка */
+html{min-height:100%}
+body{min-height:100vh;background-color:#061f45!important;background-image:radial-gradient(circle at 12% 12%,rgba(255,198,74,.12),transparent 26rem),radial-gradient(circle at 88% 30%,rgba(219,46,46,.16),transparent 28rem),linear-gradient(155deg,#041936 0%,#092b5b 54%,#061f45 100%)!important;background-attachment:fixed!important}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.17;background-image:linear-gradient(30deg,transparent 47%,rgba(255,255,255,.10) 48%,rgba(255,255,255,.10) 52%,transparent 53%),linear-gradient(-30deg,transparent 47%,rgba(255,255,255,.08) 48%,rgba(255,255,255,.08) 52%,transparent 53%);background-size:90px 90px}
+body>*{position:relative;z-index:1}
+</style></head>
 <body><div id="v8DirectNav" style="position:fixed;z-index:99999;left:10px;top:10px;display:flex;gap:6px"><button onclick="location.href='index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">← Темы</button><button onclick="location.href='../index.html'" style="padding:8px 11px;border-radius:12px;border:1px solid #fff8;background:#07346ddd;color:white;font-weight:800">Предметы</button></div>
   <header class="topbar">
     <div class="brand-wrap">
