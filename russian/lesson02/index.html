@@ -1331,14 +1331,30 @@ style="width:100%;height:100%;min-height:310px;border:0;background:#000"></ifram
 
 </main></div>
 <script>
+const LESSON2_MAX_GOALS=11;
+const LESSON2_STORAGE_KEY='liga_russian_lesson2_goals_v1';
+const LESSON2_VALID_KEYS=new Set(['q0','q1','q2','q7','q8','q9','q10','sort','chain','dictionary-lab','dictionary-lab-clean']);
 let stage=0, score=0; const earned=new Set();
+let bestEarned=new Set();
+try {
+ const saved=JSON.parse(localStorage.getItem(LESSON2_STORAGE_KEY)||'[]');
+ if(Array.isArray(saved)) bestEarned=new Set(saved.filter(key=>LESSON2_VALID_KEYS.has(key)));
+} catch(e) {}
+function updateLesson2Score(){
+ document.getElementById('score').textContent=score+' / '+LESSON2_MAX_GOALS;
+}
 const stages=[...document.querySelectorAll('.stage')], steps=[...document.querySelectorAll('.step')];
 function show(n){
 const player=document.getElementById('rutubePlayer');
 if(stage===1 && n!==1 && player){const s=player.src;player.src='about:blank';setTimeout(()=>player.src=s,0);}
-stage=n;stages.forEach((x,i)=>x.classList.toggle('active',i===n));steps.forEach((x,i)=>x.classList.toggle('active',i===n));document.getElementById('stageLabel').textContent=`Этап ${n+1} из ${stages.length}`;document.getElementById('bar').style.width=((n+1)/stages.length*100)+'%'; if(n===7){document.getElementById('finalScore').textContent=score;document.getElementById('finalText').textContent=score>=10?'Отличная работа! Ты уверенно понял роль языка.':score>=7?'Хорошая работа! Основная идея понятна.':'Вернись к заданиям и попробуй заработать ещё несколько голов.';} window.scrollTo({top:0,behavior:'smooth'});}
+stage=n;stages.forEach((x,i)=>x.classList.toggle('active',i===n));steps.forEach((x,i)=>x.classList.toggle('active',i===n));document.getElementById('stageLabel').textContent=`Этап ${n+1} из ${stages.length}`;document.getElementById('bar').style.width=((n+1)/stages.length*100)+'%'; if(n===7){document.getElementById('finalScore').textContent=score+' / '+LESSON2_MAX_GOALS;document.getElementById('finalText').textContent=score>=LESSON2_MAX_GOALS?'Отличная работа! Ты уверенно понял роль языка.':score>=7?'Хорошая работа! Основная идея понятна.':'Вернись к заданиям и попробуй заработать ещё несколько голов.';} window.scrollTo({top:0,behavior:'smooth'});}
 document.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>show(+b.dataset.next)); steps.forEach(b=>b.onclick=()=>show(+b.dataset.go));
-function add(key){if(!earned.has(key)){earned.add(key);score++;document.getElementById('score').textContent=score;try{const old=JSON.parse(localStorage.getItem('liga_russian_lesson2_goals_v1')||'[]');const all=new Set(Array.isArray(old)?old:[]);all.add(key);localStorage.setItem('liga_russian_lesson2_goals_v1',JSON.stringify([...all]));}catch(e){}}}
+function add(key){
+ if(!LESSON2_VALID_KEYS.has(key)||earned.has(key))return;
+ earned.add(key);score=earned.size;updateLesson2Score();
+ bestEarned.add(key);
+ try{localStorage.setItem(LESSON2_STORAGE_KEY,JSON.stringify([...bestEarned]));}catch(e){}
+}
 document.querySelectorAll('.activity[data-id]').forEach(a=>{a.querySelectorAll('.choice').forEach(btn=>btn.onclick=()=>{if(a.classList.contains('done'))return;let ok=btn.dataset.correct==='1';btn.classList.add(ok?'good':'bad');let f=a.querySelector('.feedback');f.textContent=ok?'Верно! +1 гол ⚽':'Пока нет. Подумай ещё и выбери другой вариант.';f.className='feedback '+(ok?'ok':'no');if(ok){a.classList.add('done');a.querySelectorAll('.choice').forEach(x=>x.disabled=true);add(a.dataset.id);}})});
 let selected=null, dragged=null;
 document.querySelectorAll('#bank .chip').forEach(c=>{c.addEventListener('dragstart',()=>dragged=c);c.onclick=()=>{selected=c;document.querySelectorAll('#bank .chip,.zone .chip').forEach(x=>x.classList.remove('selected'));c.classList.add('selected')}})
@@ -1348,7 +1364,7 @@ document.getElementById('resetSort').onclick=()=>document.querySelectorAll('#sor
 let order=[];document.querySelectorAll('#chain .chip').forEach(c=>c.onclick=()=>{if(order.includes(c))return;order.push(c);c.classList.add('selected');c.style.order=order.length});
 document.getElementById('checkChain').onclick=()=>{let expected=['человек','мысль','язык','сообщение','другой человек'];let got=order.map(x=>x.textContent.trim());let ok=JSON.stringify(got)===JSON.stringify(expected);let f=document.getElementById('chainFeedback');f.textContent=ok?'Цепочка собрана! +1 гол ⚽':'Порядок пока неверный. Начни: человек → мысль → ...';f.className='feedback '+(ok?'ok':'no');if(ok)add('chain')};
 document.getElementById('resetChain').onclick=()=>{order=[];document.querySelectorAll('#chain .chip').forEach(c=>{c.classList.remove('selected');c.style.order=''})};
-document.getElementById('restart').onclick=()=>{score=0;earned.clear();document.getElementById('score').textContent='0';document.querySelectorAll('.activity').forEach(a=>{a.classList.remove('done');a.querySelectorAll('.choice').forEach(x=>{x.disabled=false;x.classList.remove('good','bad')});let f=a.querySelector('.feedback');if(f){f.textContent='';f.className='feedback'}});document.getElementById('resetSort')?.click();document.getElementById('resetChain')?.click();document.getElementById('labReset')?.click();show(0)};
+document.getElementById('restart').onclick=()=>{score=0;earned.clear();updateLesson2Score();labWon=false;lab5Won=false;document.getElementById('lab5Reset')?.click();document.querySelectorAll('.activity').forEach(a=>{a.classList.remove('done');a.querySelectorAll('.choice').forEach(x=>{x.disabled=false;x.classList.remove('good','bad')});let f=a.querySelector('.feedback');if(f){f.textContent='';f.className='feedback'}});document.getElementById('resetSort')?.click();document.getElementById('resetChain')?.click();document.getElementById('labReset')?.click();show(0)};
 
 // Return to the Russian-language topics page.
 // In the full site this resolves naturally from lessons/lesson-02/ to the subject index.
@@ -1447,6 +1463,7 @@ document.getElementById('lab5Reset')?.addEventListener('click',()=>{
 });
 
 
+updateLesson2Score();
 function fitPlanToItems(){
   const stage=document.querySelector('.lab5-stage');
   if(!stage || !stage.classList.contains('active')) return;
