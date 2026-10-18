@@ -20,7 +20,12 @@
 @media(prefers-reduced-motion:reduce){.falling-block{animation:none}.arcade-progress>div{transition:none}}
 
 </style>
-  <script>
+  
+</head>
+<body>
+  <div id="app"></div>
+  <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
+<script>
 /* Интерактивная мастерская v0.1. No external dependencies. */
 (() => {
 'use strict';
@@ -117,7 +122,9 @@ function validateArcade(d){
  return '';
 }
 function saveTask(){const d=parseDraftFromForm();const err=validateTask(d);if(err){state.draft=d;state.err=err;render();return}if(!d.id)d.id=id();const at=state.tasks.findIndex(t=>t.id===d.id);if(at<0)state.tasks.unshift(d);else state.tasks[at]=d;state.editId=null;state.draft=null;state.err='';persist();state.tab='library';state.filter='all';state.search='';render();toast('Задание сохранено. Можно запускать или включать в квест!')}
-function numericValue(raw){const s=String(raw||'').trim().replace(/\u2212/g,'-').replace(/,/g,'.').replace(/\s/g,'');if(!s)return null;const atom='[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)';const dec=new RegExp('^'+atom+'$');if(dec.test(s))return Number(s);let m=s.match(new RegExp('^('+atom+')/('+atom+')$'));if(m){let b=Number(m[2]);return b===0?null:Number(m[1])/b}return null}
+function numericValue(raw){const s=String(raw||'').trim().replace(/\u2212/g,'-').replace(/,/g,'.').replace(/\s/g,'');if(!s)return null;const atom='[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)';const dec=new RegExp('^'+atom+'
+</html>);if(dec.test(s))return Number(s);let m=s.match(new RegExp('^('+atom+')/('+atom+')
+</html>));if(m){let b=Number(m[2]);return b===0?null:Number(m[1])/b}return null}
 function evaluateInput(actual,expected){const a=numericValue(actual),b=numericValue(expected);if(a!==null&&b!==null){const correct=Number.isFinite(a)&&Number.isFinite(b)&&Math.abs(a-b)<=1e-9*Math.max(1,Math.abs(a),Math.abs(b));let diagnostic='Проверь вычисления и знак результата.';if(!correct&&Math.abs(a+b)<1e-9&&Math.abs(a-b)>1e-9)diagnostic='Похоже, потерялся знак «минус». Проверь знаки слагаемых.';else if(!correct&&b!==0&&Math.abs(a-1/b)<1e-9)diagnostic='Возможно, дробь оказалась перевёрнутой. Проверь числитель и знаменатель.';return {correct,diagnostic}}const canonical=s=>String(s||'').trim().replace(/\s+/g,' ').toLocaleLowerCase('ru');return {correct:canonical(actual)===canonical(expected),diagnostic:'Сравни ответ с условием и проверь запись.'}}
 
 function newStudentDraft(){return {title:'Моя математическая игра',grade:'5',topic:'Арифметика',game:'snake',items:[{prompt:'',answer:'',wrong:['','']},{prompt:'',answer:'',wrong:['','']}],hint:''}}
@@ -214,9 +221,5 @@ render();
 })();
 
 </script>
-</head>
-<body>
-  <div id="app"></div>
-  <div id="toast" role="status" aria-live="polite" class="toast" hidden></div>
 </body>
 </html>
