@@ -119,7 +119,7 @@ function advanced(topic,level){let a,b,c,ans,expression,hint,solution,kind='rati
 }
 
 // Случайные упражнения: по 3 группы чисел для сложения и вычитания.
-function freeSplit(topic){
+function freeSplit(topic,taskLevel=5){
  const subtract=topic==='subtract_parts',operation=subtract?'subtract':'add',group=rnd(0,2);
  let a,b;
  if(subtract){
@@ -138,10 +138,12 @@ function freeSplit(topic){
  const symbol=subtract?'−':'+';
  const solution=`Например: ${b} = ${parts.join(' + ')}. Поэтому ${a} ${symbol} ${b} = ${a} ${symbol} ${parts.join(' '+symbol+' ')} = ${subtract?a-b:a+b}. Это один из возможных удобных способов.`;
  const hint=subtract?`Разложи ${b} по разрядам или выдели часть, чтобы при вычитании из ${a} получить круглое число. Вычитай части по очереди.`:`Разложи ${b} по разрядам или выдели часть, чтобы при прибавлении к ${a} получить круглое число.`;
- return {topic,kind:'split',operation,level:5,base:a,target:b,parts,expression:`${a} ${symbol} ${b} = ${a} ${symbol} □ ${symbol} □`,answer:parts.join(' + '),hint,solution,key:`${topic}|split|${a}|${b}`};
+ return {topic,kind:'split',operation,level:taskLevel,base:a,target:b,parts,expression:`${a} ${symbol} ${b} = ${a} ${symbol} □ ${symbol} □`,answer:parts.join(' + '),hint,solution,key:`${topic}|split|${a}|${b}`};
 }
 function make(topic,level=1){
- if(Number(level)===5&&['decompose','subtract_parts'].includes(topic))return freeSplit(topic);
+ if(Number(level)===5&&['decompose','subtract_parts'].includes(topic))return freeSplit(topic,5);
+  // Профи: обе части второго слагаемого выбирает ученик.
+  if(Number(level)===4&&topic==='decompose')return freeSplit(topic,4);
  level=Math.max(1,Math.min(4,Number(level)||1));
  if(['divisibility','fractions','mixed','decimals'].includes(topic))return advanced(topic,level);
  let expression,answer,hint,solution,meta='';
