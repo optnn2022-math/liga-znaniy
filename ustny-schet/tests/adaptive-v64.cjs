@@ -29,11 +29,17 @@ assert.ok(app.includes('adaptive.chooseWithCycle('));
 assert.ok(plan.includes('adaptive.chooseWithCycle('));
 assert.ok(plan.includes("p.kind==='split'?'Например: 20 + 8'"));
 const html=fs.readFileSync('ustny-schet/v6-4.html','utf8');
+const engine=fs.readFileSync('ustny-schet/topics/engine.js','utf8');
+const lessons=fs.readFileSync('ustny-schet/topics/lessons.js','utf8');
 for(const name of ['topics','plan']){
  const m=html.match(new RegExp('<script type="text/plain" id="page-'+name+'">([^<]+)</script>'));
  assert.ok(m,'Offline page missing: '+name);
  const embedded=Buffer.from(m[1],'base64').toString('utf8');
  assert.ok(embedded.includes('function chooseWithCycle(options)'), 'Offline selector not synchronized: '+name);
+ assert.ok(embedded.includes(engine), 'Offline engine is outdated: '+name);
+ assert.ok(embedded.includes(lessons), 'Offline lessons are outdated: '+name);
+ assert.ok(embedded.includes(source), 'Offline adaptive selector is outdated: '+name);
+ assert.ok(embedded.includes(name==='topics'?app:plan), 'Offline game controller is outdated: '+name);
  assert.ok(embedded.includes('const selection=adaptive.chooseWithCycle('),'Offline game not synchronized: '+name);
  if(name==='plan')assert.ok(embedded.includes("p.kind==='split'?'Например: 20 + 8'"));
 }
