@@ -32,7 +32,15 @@ function mountTopics(){const root=$id('topicGroups');for(let i=0;i<groups.length
    const btn=document.createElement('button');btn.type='button';btn.className='topic';btn.dataset.topic=t.id;
    const emoji=document.createElement('span');emoji.className='topic-icon';emoji.textContent=t.icon;
    const copy=document.createElement('span'),title=document.createElement('strong'),sample=document.createElement('small');title.textContent=t.title;sample.innerHTML=latexMarkup(t.sample,t.id,true);
-   copy.append(title,sample);btn.append(emoji,copy);btn.addEventListener('click',()=>{selectedTopic=t.id;section.open=true;refreshSelection();$id('configPanel').scrollIntoView({behavior:'smooth',block:'nearest'});});grid.appendChild(btn);
+   copy.append(title,sample);btn.append(emoji,copy);btn.addEventListener('click',()=>{selectedTopic=t.id;if(level===5)level=1;section.open=true;refreshSelection();$id('configPanel').scrollIntoView({behavior:'smooth',block:'nearest'});});grid.appendChild(btn);
+  }
+  // Самостоятельный подбор — отдельная карточка в первом блоке, не под обычной темой.
+  if(i===0){
+   const manual=document.createElement('button');manual.type='button';manual.id='manualSummandsTopic';
+   manual.className='topic manual-topic';manual.setAttribute('aria-pressed','false');
+   manual.innerHTML='<span class="topic-icon" aria-hidden="true">🧩</span><span><strong>Подбери слагаемые сам</strong><small>Дополнительная тренировка · разложение на 2–3 части</small></span>';
+   manual.addEventListener('click',()=>{selectedTopic='decompose';level=5;selectedMode='learn';section.open=true;refreshSelection();$id('configPanel').scrollIntoView({behavior:'smooth',block:'nearest'});});
+   grid.appendChild(manual);
   }
   section.appendChild(grid);root.appendChild(section);
  }
@@ -45,9 +53,12 @@ function updateStats(){const ss=saved.sessions,total=ss.reduce((s,p)=>s+p.total,
 }
 function refreshSelection(){
  if(selectedTopic!=='decompose'&&level===5)level=4;
- $id('freeSplitMode').classList.remove('hidden');
+ const manualActive=selectedTopic==='decompose'&&level===5;
+ const manualCard=$id('manualSummandsTopic');
+ manualCard.classList.toggle('active',manualActive);
+ manualCard.setAttribute('aria-pressed',String(manualActive));
  document.querySelector('[data-level="5"]').classList.toggle('hidden',selectedTopic!=='decompose');
- document.querySelectorAll('[data-topic]').forEach(el=>{const active=el.dataset.topic===selectedTopic;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
+ document.querySelectorAll('[data-topic]').forEach(el=>{const active=el.dataset.topic===selectedTopic&&!manualActive;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  for(const [name,id] of [['allTopics','all'],['advancedTopics','all-advanced']]){$id(name).classList.toggle('active',selectedTopic===id);$id(name).setAttribute('aria-pressed',String(selectedTopic===id));}
  document.querySelectorAll('[data-mode]').forEach(el=>{const active=el.dataset.mode===selectedMode;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  document.querySelectorAll('[data-level]').forEach(el=>{const active=Number(el.dataset.level)===level;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
@@ -57,7 +68,13 @@ function refreshSelection(){
  text('summaryTitle',level===5&&selectedTopic==='decompose'?'🧩 Подбери слагаемые сам':byId[selectedTopic]?.title||'Смешанный тренажёр');
  text('summaryMethod',level===5&&selectedTopic==='decompose'?'Раздели второе число на 2–3 части. Все верные разложения принимаются, а удобство оценивается отдельно.':selectedMode==='sprint'?'На скорость, без подсказок':selectedMode==='learn'?'Сначала способ, затем самостоятельный счёт':'Повтори приём и закрепи навык');
  $id('previewGuide').classList.toggle('hidden',!window.LigaLessons.has(selectedTopic)||(selectedTopic==='decompose'&&level!==5));
- const t=byId[selectedTopic];if(t){text('previewTitle',t.icon+' '+t.title);showLatex('previewSample',t.sample,t.id,true);text('previewLabel',groups[t.group].title);text('previewExplanation',t.method);}
+ const t=byId[selectedTopic];
+ if(manualActive){
+  text('previewTitle','🧩 Подбери слагаемые сам');
+  text('previewSample','38 + 27 = 38 + □ + □');
+  text('previewLabel','Дополнительное задание · Блок 1');
+  text('previewExplanation','Разложи второе число на два или три удобных слагаемых. Введи свой способ и проверь сумму.');
+ }else if(t){text('previewTitle',t.icon+' '+t.title);showLatex('previewSample',t.sample,t.id,true);text('previewLabel',groups[t.group].title);text('previewExplanation',t.method);}
  else{text('previewTitle',selectedTopic==='all'?'🎲 Все 12 тем блока 1':'🎓 Все 4 темы блока 2');text('previewSample',selectedTopic==='all'?'8 = 5 + ?  ·  7 × 8 = ?':'354 делится на 3? · 1/4 + 2/4');text('previewLabel','Смешанная тренировка');text('previewExplanation','Примеры выбираются из соответствующего блока. Сначала лучше потренировать одну тему.');}
  const belongs=p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic;
  const err=saved.mistakes.filter(belongs).length;
@@ -105,7 +122,7 @@ function begin(){
 function launchGame(){if(selectedMode==='mistakes'&&!saved.mistakes.some(p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic))return;
  endTimers();const queue=selectedMode==='mistakes'?saved.mistakes.filter(p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic).slice(-20).reverse().map(p=>({...p})):[];
  game={mode:selectedMode,topic:selectedTopic,level,effectiveLevel:level,duration,queue,index:0,target:selectedMode==='learn'?10:selectedMode==='practice'?15:queue.length,correct:0,wrong:0,streak:0,bestStreak:0,consecutiveWrong:0,answered:false,current:null,start:Date.now(),questionStart:Date.now(),lastTime:0,history:[],prevKey:'',finished:false};
- text('gameTitle',selectedTopic==='all'?'Смешанная тренировка блока 1':selectedTopic==='all-advanced'?'Смешанная тренировка блока 2':byId[selectedTopic].title);
+ text('gameTitle',selectedTopic==='decompose'&&level===5?'🧩 Подбери слагаемые сам':selectedTopic==='all'?'Смешанная тренировка блока 1':selectedTopic==='all-advanced'?'Смешанная тренировка блока 2':byId[selectedTopic].title);
  text('gameMode', {learn:'📘 Изучаю приём',practice:'🎯 Закрепляю',sprint:'⚡ Считаю на скорость',mistakes:'🔁 Работа над ошибками'}[selectedMode]);
  show('play');nextQuestion();tick();timer=setInterval(tick,100);
 }
@@ -200,7 +217,6 @@ $id('stop').addEventListener('click',finish);
 $id('retry').addEventListener('click',begin);
 $id('back').addEventListener('click',()=>{endTimers();game=null;show('home');});
 $id('sessionPdfButton').addEventListener('click',exportPDF);
-$id('freeSplitMode').addEventListener('click',()=>{selectedTopic='decompose';level=5;selectedMode='learn';refreshSelection();$id('start').scrollIntoView({behavior:'smooth',block:'center'});});
 $id('splitThirdButton').addEventListener('click',()=>{$id('splitPart3').classList.remove('hidden');$id('splitPlus3').classList.remove('hidden');$id('splitThirdButton').classList.add('hidden');activeSplitInput=$id('splitPart3');});
 ['splitPart1','splitPart2','splitPart3'].forEach(id=>$id(id).addEventListener('focus',e=>activeSplitInput=e.target));
 $id('previewGuide').addEventListener('click',()=>openLesson(true));
