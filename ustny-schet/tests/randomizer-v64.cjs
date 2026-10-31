@@ -25,8 +25,8 @@ for(const {id} of T.topics)for(let level=1;level<=4;level++){
    assert.ok(p.parts.length===2||p.parts.length===3);
    assert.ok(p.parts.every(x=>Number.isSafeInteger(x)&&x>0));
    assert.equal(p.parts.reduce((sum,x)=>sum+x,0),p.target);
-   assert.equal(p.operation==='subtract'?p.base-p.target:p.base+p.target>=0,true);
-   assert.equal(T.check(p,'0 + 0').correct,false,'Запрещено неверное разложение');
+   assert.ok((p.operation==='subtract'?p.base-p.target:p.base+p.target)>=0);
+   assert.ok(!T.check(p,'0 + 0').correct,'Запрещено неверное разложение');
   }else if(p.kind==='yesno'){
    const opposite=p.answer==='да'?'нет':'да';
    assert.equal(T.check(p,opposite).correct,false,'Проверка признака делимости');
