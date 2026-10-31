@@ -7,7 +7,7 @@ const STORAGE='liga_math_sprint_v2';
 const defaults=()=>({sessions:[],mistakes:[]});
 function load(){try{const d=JSON.parse(localStorage.getItem(STORAGE));return d&&Array.isArray(d.sessions)&&Array.isArray(d.mistakes)?d:defaults();}catch(_){return defaults();}}
 let saved=load(),selectedTopic='composition',selectedMode='learn',level=1,duration=60,game=null,timer=null,autoNext=null;
-let lessonState={topic:null,variant:0,step:0,preview:false};let hintStep=0;let activePart='part1';
+let lessonState={topic:null,variant:0,step:0,preview:false};let hintStep=0;let activeSplitInput=null;
 function persist(){try{localStorage.setItem(STORAGE,JSON.stringify(saved));}catch(_){window.alert('Не удалось сохранить результат. Проверьте память браузера и сделайте резервную копию на странице статистики.');}}
 const $id=id=>$(id);
 function show(view){['home','play','results','lesson'].forEach(id=>$id(id).classList.toggle('hidden',id!==view));document.body.classList.toggle('playing',view==='play'||view==='lesson');window.scrollTo({top:0,behavior:'instant'});}
@@ -45,8 +45,8 @@ function updateStats(){const ss=saved.sessions,total=ss.reduce((s,p)=>s+p.total,
 }
 function refreshSelection(){
  if(selectedTopic!=='decompose'&&level===5)level=4;
- $id('freeLevel').classList.toggle('hidden',selectedTopic!=='decompose');
- $id('freeDecompPromo').classList.toggle('hidden',selectedTopic!=='decompose');
+ $id('freeSplitMode').classList.toggle('hidden',selectedTopic!=='decompose');
+ document.querySelector('[data-level="5"]').classList.toggle('hidden',selectedTopic!=='decompose');
  document.querySelectorAll('[data-topic]').forEach(el=>{const active=el.dataset.topic===selectedTopic;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  for(const [name,id] of [['allTopics','all'],['advancedTopics','all-advanced']]){$id(name).classList.toggle('active',selectedTopic===id);$id(name).setAttribute('aria-pressed',String(selectedTopic===id));}
  document.querySelectorAll('[data-mode]').forEach(el=>{const active=el.dataset.mode===selectedMode;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
@@ -54,16 +54,14 @@ function refreshSelection(){
  document.querySelectorAll('[data-duration]').forEach(el=>{const active=Number(el.dataset.duration)===duration;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  $id('sprintOptions').classList.toggle('hidden',selectedMode!=='sprint');
  document.querySelectorAll('[data-quick-mode]').forEach(el=>{const active=el.dataset.quickMode===selectedMode;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
- text('summaryTitle',byId[selectedTopic]?.title||'Смешанный тренажёр');
- if(selectedTopic==='decompose'&&level===5){text('summaryMethod','Разложи второе слагаемое самостоятельно. Проверим сумму и удобство приёма.');}
-
- text('summaryMethod',selectedMode==='sprint'?'На скорость, без подсказок':selectedMode==='learn'?'Сначала способ, затем самостоятельный счёт':'Повтори приём и закрепи навык');
- $id('previewGuide').classList.toggle('hidden',!window.LigaLessons.has(selectedTopic));
+ text('summaryTitle',level===5&&selectedTopic==='decompose'?'🧩 Сам выбираю удобные слагаемые':byId[selectedTopic]?.title||'Смешанный тренажёр');
+ text('summaryMethod',level===5&&selectedTopic==='decompose'?'Раздели второе число на 2–3 части. Все верные разложения принимаются, а удобство оценивается отдельно.':selectedMode==='sprint'?'На скорость, без подсказок':selectedMode==='learn'?'Сначала способ, затем самостоятельный счёт':'Повтори приём и закрепи навык');
+ $id('previewGuide').classList.toggle('hidden',!window.LigaLessons.has(selectedTopic)||(selectedTopic==='decompose'&&level!==5));
  const t=byId[selectedTopic];if(t){text('previewTitle',t.icon+' '+t.title);showLatex('previewSample',t.sample,t.id,true);text('previewLabel',groups[t.group].title);text('previewExplanation',t.method);}
  else{text('previewTitle',selectedTopic==='all'?'🎲 Все 12 тем блока 1':'🎓 Все 4 темы блока 2');text('previewSample',selectedTopic==='all'?'8 = 5 + ?  ·  7 × 8 = ?':'354 делится на 3? · 1/4 + 2/4');text('previewLabel','Смешанная тренировка');text('previewExplanation','Примеры выбираются из соответствующего блока. Сначала лучше потренировать одну тему.');}
  const belongs=p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic;
  const err=saved.mistakes.filter(belongs).length;
- text('startNote',selectedMode==='mistakes'?`На повторение для выбранной темы: ${err}. Верно решённые примеры удаляются из списка ошибок.`:
+ text('startNote',selectedTopic==='decompose'&&level===5?'Самостоятельное разложение: укажи 2 или 3 натуральных слагаемых. Проверяем сумму и рекомендуем рациональный способ.':selectedMode==='mistakes'?`На повторение для выбранной темы: ${err}. Верно решённые примеры удаляются из списка ошибок.`:
     selectedMode==='learn'?'Учебный режим: 10 заданий, подсказки и подробное объяснение после ответа.':
     selectedMode==='sprint'?`Спринт на ${duration} секунд: без подсказок и с автоматической сменой примеров.`:
     'Тренировка: 15 заданий без ограничения времени; можно попросить подсказку.');
@@ -102,7 +100,7 @@ function learnerHint(){if(!game||game.finished||game.mode==='sprint')return;cons
  else {text('hint','💡 Начни так: '+p.hint);hintStep=2;text('hintButton','Скрыть подсказку');}
  $id('hint').classList.remove('hidden');}
 function begin(){
- if(selectedMode==='learn'&&window.LigaLessons.has(selectedTopic)&&!window.LigaLessons.isSeen(window.LigaLessons.idFor(selectedTopic,level))){openLesson(false);return;}
+ if(selectedMode==='learn'&&window.LigaLessons.has(selectedTopic)&&(selectedTopic!=='decompose'||level===5)&&!window.LigaLessons.isSeen(window.LigaLessons.idFor(selectedTopic,level))){openLesson(false);return;}
  launchGame();}
 function launchGame(){if(selectedMode==='mistakes'&&!saved.mistakes.some(p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic))return;
  endTimers();const queue=selectedMode==='mistakes'?saved.mistakes.filter(p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic).slice(-20).reverse().map(p=>({...p})):[];
@@ -122,13 +120,17 @@ function nextQuestion(){if(!game||game.finished)return;
  if(game.mode!=='sprint'&&game.index>=game.target){finish();return;}
  let task=chooseTask();if(!task){finish();return;}
  game.current=task;game.prevKey=task.key;game.answered=false;game.questionStart=Date.now();
- text('questionLabel',byId[task.topic].title);showLatex('question',task.expression,task.topic,true);
+ text('questionLabel',task.kind==='split'?'СВОБОДНОЕ РАЗЛОЖЕНИЕ · СВОЙ СПОСОБ':byId[task.topic].title);showLatex('question',task.expression,task.topic,true);
+ const split=task.kind==='split';
+ $id('standardAnswer').classList.toggle('hidden',split);$id('splitAnswer').classList.toggle('hidden',!split);$id('answer').required=!split;
+ document.body.classList.toggle('split-input-mode',split);
+ if(split){$id('splitTaskText').textContent=`Разложи ${task.target} на два или три положительных слагаемых:`;
+ ['splitPart1','splitPart2','splitPart3'].forEach(id=>{$id(id).value='';$id(id).disabled=false;});
+ $id('splitPart3').classList.add('hidden');$id('splitPlus3').classList.add('hidden');
+ $id('splitThirdButton').classList.remove('hidden');$id('splitCheck').disabled=false;activeSplitInput=$id('splitPart1');}
+ else{activeSplitInput=null;}
  $id('question').classList.toggle('chain',task.topic==='chain'||task.expression.length>38);
- const free=task.kind==='decomposition';document.body.classList.toggle('decomp-mode',free);
- $id('decompAnswerFields').classList.toggle('hidden',!free);$id('standardAnswerFields').classList.toggle('hidden',free);
- $id('answer').required=!free;$id('answer').value='';$id('answer').disabled=free;$id('decompCheck').classList.remove('hidden');$id('check').classList.remove('hidden');$id('next').classList.add('hidden');
- if(free){text('decompTarget',task.target);for(const id of ['part1','part2','part3']){$id(id).value='';$id(id).disabled=false;}$id('part3').classList.add('hidden');$id('thirdPlus').classList.add('hidden');text('toggleThird','+ Третье слагаемое');activePart='part1';}
-
+ $id('answer').value='';$id('answer').disabled=false;$id('check').classList.remove('hidden');$id('next').classList.add('hidden');
  $id('numpad').classList.toggle('hidden',task.kind==='yesno');$id('yesno').classList.toggle('hidden',task.kind!=='yesno');
  $id('answer').placeholder=task.kind==='yesno'?'Да или нет':task.kind==='rational'?'1/2 или 2 1/3':'?';$id('answer').setAttribute('inputmode',task.kind==='rational'?'text':'numeric');
  $id('hint').classList.add('hidden');$id('hint').textContent='';hintStep=0;text('hintButton','💡 Как начать?');$id('feedback').textContent='';$id('feedback').className='feedback';
@@ -136,28 +138,28 @@ function nextQuestion(){if(!game||game.finished)return;
  text('counter',game.mode==='sprint'?`Пример ${game.index+1}`:`Пример ${game.index+1} из ${game.target}`);
  text('correct',game.correct);text('streak',game.streak);text('skill',`Уровень ${game.effectiveLevel}`);
  if(game.mode!=='sprint')$id('progressbar').style.width=(game.index/game.target*100)+'%';
- if(window.matchMedia('(min-width: 680px)').matches)$id(task.kind==='decomposition'?'part1':'answer').focus({preventScroll:true});
+ if(window.matchMedia('(min-width: 680px)').matches)(split?$id('splitPart1'):$id('answer')).focus({preventScroll:true});
 }
 function toggleHint(){if(!game||game.mode==='sprint'||game.answered)return;if(hintStep>=2){$id('hint').classList.add('hidden');hintStep=0;text('hintButton','💡 Как начать?');return;}learnerHint();}
 function addMistake(p){const m=saved.mistakes.find(x=>x.key===p.key);if(m){m.errors=(m.errors||1)+1;m.lastAt=new Date().toISOString();}else saved.mistakes.push({...p,errors:1,lastAt:new Date().toISOString()});saved.mistakes=saved.mistakes.slice(-100);persist();}
 function submit(){if(!game||game.finished||game.answered)return;if(game.mode==='sprint'&&elapsed()>=game.duration){finish();return;}
- const p=game.current,free=p.kind==='decomposition';
- const raw=free?[$id('part1').value,$id('part2').value,...(!$id('part3').classList.contains('hidden')?[$id('part3').value]:[])].join('|'):$id('answer').value.trim();
+ const p=game.current;
+ const raw=p.kind==='split'?['splitPart1','splitPart2',...(!$id('splitPart3').classList.contains('hidden')?['splitPart3']:[])].map(id=>$id(id).value.trim()).join(' + '):$id('answer').value.trim();
  const checked=window.MathTrainer.check(p,raw);
  if(!checked.valid){text('feedback',checked.message);$id('feedback').className='feedback wrong';return;}
  const value=checked.user,right=checked.correct,time=Math.round((Date.now()-game.questionStart)/10)/100;
- game.index++;game.answered=true;
- const detail=free?(checked.correct?`${checked.method} Пример: ${p.target} = ${checked.example}. ${p.base} + ${p.target} = ${p.base+p.target}.`:checked.method):p.solution;
- game.history.push({topic:p.topic,expression:p.expression,answer:free?`Например: ${p.answer}`:p.answer,user:value,correct:right,seconds:time,solution:detail,methodQuality:free?checked.quality:null});
- $id('answer').disabled=true;for(const id of ['part1','part2','part3'])$id(id).disabled=true;$id('check').classList.add('hidden');$id('decompCheck').classList.add('hidden');$id('hint').classList.add('hidden');
+ game.index++;game.answered=true;game.history.push({topic:p.topic,expression:p.expression,answer:p.answer,user:value,correct:right,seconds:time,solution:p.kind==='split'?`${checked.reason} ${p.solution}`:p.solution});
+ $id('answer').disabled=true;$id('check').classList.add('hidden');
+ if(p.kind==='split'){$id('splitCheck').disabled=true;['splitPart1','splitPart2','splitPart3'].forEach(id=>$id(id).disabled=true);}
+ $id('hint').classList.add('hidden');
  if(right){game.correct++;game.streak++;game.bestStreak=Math.max(game.bestStreak,game.streak);game.consecutiveWrong=0;
   if(game.mode==='mistakes'){saved.mistakes=saved.mistakes.filter(x=>x.key!==p.key);persist();}
-  showLatex('feedback',free?`✅ Разложение правильное! ${detail}`:game.mode==='sprint'?'✅ Верно!':`✅ Правильно! ${p.solution}`,p.topic);$id('feedback').className='feedback correct';
+  showLatex('feedback',p.kind==='split'?`✅ Верно! ${checked.reason} ${p.solution}`:game.mode==='sprint'?'✅ Верно!':`✅ Правильно! ${p.solution}`,p.topic);$id('feedback').className='feedback correct';
  }else{game.wrong++;game.streak=0;game.consecutiveWrong++;addMistake(p);
-  showLatex('feedback',free?`❌ ${detail}`:game.mode==='sprint'?`✗ Ответ: ${p.answer}`:`❌ Верный ответ: ${p.answer}. ${p.solution}`,p.topic);$id('feedback').className='feedback wrong';}
+  showLatex('feedback',p.kind==='split'?`❌ ${checked.reason} ${p.solution}`:game.mode==='sprint'?`✗ Ответ: ${p.answer}`:`❌ Верный ответ: ${p.answer}. ${p.solution}`,p.topic);$id('feedback').className='feedback wrong';}
  if(game.mode==='practice'&&game.current?.topic!=='fractions'){
-  if(game.streak>=4&&game.streak%4===0)game.effectiveLevel=Math.min(4,game.effectiveLevel+1);
-  if(game.consecutiveWrong>=2){game.effectiveLevel=Math.max(1,game.effectiveLevel-1);game.consecutiveWrong=0;}
+  if(game.streak>=4&&game.streak%4===0)game.effectiveLevel=Math.min(game.level===5?5:4,game.effectiveLevel+1);
+  if(game.consecutiveWrong>=2){game.effectiveLevel=Math.max(game.level===5?5:1,game.effectiveLevel-1);game.consecutiveWrong=0;}
  }
  text('correct',game.correct);text('streak',game.streak);
  if(game.mode==='sprint'){autoNext=setTimeout(()=>{autoNext=null;nextQuestion();},right?240:550);}
@@ -197,16 +199,16 @@ $id('stop').addEventListener('click',finish);
 $id('retry').addEventListener('click',begin);
 $id('back').addEventListener('click',()=>{endTimers();game=null;show('home');});
 $id('sessionPdfButton').addEventListener('click',exportPDF);
+$id('freeSplitMode').addEventListener('click',()=>{selectedTopic='decompose';level=5;selectedMode='learn';refreshSelection();$id('start').scrollIntoView({behavior:'smooth',block:'center'});});
+$id('splitThirdButton').addEventListener('click',()=>{$id('splitPart3').classList.remove('hidden');$id('splitPlus3').classList.remove('hidden');$id('splitThirdButton').classList.add('hidden');activeSplitInput=$id('splitPart3');});
+['splitPart1','splitPart2','splitPart3'].forEach(id=>$id(id).addEventListener('focus',e=>activeSplitInput=e.target));
 $id('previewGuide').addEventListener('click',()=>openLesson(true));
  $id('lessonNext').addEventListener('click',lessonNext);
  $id('lessonPrev').addEventListener('click',()=>{lessonState.step=Math.max(0,lessonState.step-1);renderLesson();});
  $id('lessonBack').addEventListener('click',()=>show('home'));
  document.querySelectorAll('[data-quick-mode]').forEach(el=>el.addEventListener('click',()=>{selectedMode=el.dataset.quickMode;refreshSelection();}));
-for(const id of ['part1','part2','part3'])$id(id).addEventListener('focus',()=>{activePart=id;});
-$id('toggleThird').addEventListener('click',()=>{const opening=$id('part3').classList.contains('hidden');$id('part3').classList.toggle('hidden',!opening);$id('thirdPlus').classList.toggle('hidden',!opening);text('toggleThird',opening?'− Убрать третье слагаемое':'+ Третье слагаемое');if(opening){activePart='part3';$id('part3').focus();}else{$id('part3').value='';activePart='part2';}});
-$id('freeDecompStart').addEventListener('click',()=>{selectedTopic='decompose';level=5;selectedMode='learn';refreshSelection();begin();});
 $id('numpad').addEventListener('click',event=>{const btn=event.target.closest('[data-key]');if(!btn||!game||game.finished||game.answered)return;
- const input=game.current.kind==='decomposition'?$id(activePart):$id('answer'),k=btn.dataset.key;if(k==='back')input.value=input.value.slice(0,-1);else if(k==='−'){input.value=input.value.startsWith('-')?input.value.slice(1):'-'+input.value;}else if(input.value.length<22)input.value+=k;
+ const input=game.current?.kind==='split'?(activeSplitInput||$id('splitPart1')):$id('answer'),k=btn.dataset.key;if(game.current?.kind==='split'&&!/^[0-9]$/.test(k)&&k!=='back')return;if(k==='back')input.value=input.value.slice(0,-1);else if(k==='−'){input.value=input.value.startsWith('-')?input.value.slice(1):'-'+input.value;}else if(input.value.length<22)input.value+=k;
  if(window.matchMedia('(min-width: 680px)').matches)input.focus({preventScroll:true});
 });
  $id('yesno').addEventListener('click',e=>{const btn=e.target.closest('[data-yn]');if(!btn||!game||game.answered)return;$id('answer').value=btn.dataset.yn;submit();});
