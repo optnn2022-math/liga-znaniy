@@ -13,9 +13,9 @@ Daemon will be stopped at the end of the build
 > Task :app:preBuild UP-TO-DATE
 > Task :app:preDebugBuild UP-TO-DATE
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
-> Task :app:javaPreCompileDebug
-> Task :app:checkDebugAarMetadata
 > Task :app:generateDebugResValues
+> Task :app:checkDebugAarMetadata
+> Task :app:javaPreCompileDebug
 > Task :app:mapDebugSourceSetPaths
 > Task :app:generateDebugResources
 > Task :app:packageDebugResources
@@ -27,20 +27,20 @@ Daemon will be stopped at the end of the build
 > Task :app:processDebugManifest
 > Task :app:mergeDebugShaders
 > Task :app:compileDebugShaders NO-SOURCE
-> Task :app:processDebugManifestForPackage
 > Task :app:generateDebugAssets UP-TO-DATE
 > Task :app:mergeDebugAssets
 > Task :app:desugarDebugFileDependencies
 > Task :app:processDebugJavaRes NO-SOURCE
-> Task :app:checkDebugDuplicateClasses
+> Task :app:processDebugManifestForPackage
 > Task :app:compressDebugAssets
-> Task :app:mergeExtDexDebug
+> Task :app:mergeDebugJavaResource
+> Task :app:checkDebugDuplicateClasses
 > Task :app:mergeDebugJniLibFolders
 > Task :app:mergeDebugNativeLibs NO-SOURCE
-> Task :app:mergeLibDexDebug
 > Task :app:stripDebugDebugSymbols NO-SOURCE
+> Task :app:mergeExtDexDebug
+> Task :app:mergeLibDexDebug
 > Task :app:processDebugResources
-> Task :app:mergeDebugJavaResource
 > Task :app:validateSigningDebug
 
 > Task :app:compileDebugJavaWithJavac
@@ -55,8 +55,8 @@ Note: Recompile with -Xlint:deprecation for details.
 > Task :app:packageDebug
 > Task :app:createDebugApkListingFileRedirect
 > Task :app:assembleDebug
-gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/gradle_build-1793435651604.json
+gradle/actions: Writing build results to /home/runner/work/_temp/.gradle-actions/build-results/gradle_build-1793440216159.json
 [Incubating] Problems report is available at: file:///home/runner/work/liga-znaniy/liga-znaniy/LigaZnaniyAndroid/build/reports/problems/problems-report.html
 
-BUILD SUCCESSFUL in 39s
+BUILD SUCCESSFUL in 41s
 32 actionable tasks: 32 executed
