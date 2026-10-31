@@ -8,7 +8,7 @@ const skillById=Object.fromEntries(skills.map(t=>[t.id,t]));
 const MIN_ANSWERS=8;
 const library=[
  {title:'Состав числа до 10',topics:['composition'],level:1,minutes:5,desc:'Разложение числа на две части'},
- {title:'Считаем десятками',topics:['tens'],level:1,minutes:5,desc:'Шаги по 10 и числовые последовательности'},
+ {title:'Считаем десятками',topics:['tens'],level:1,minutes:5,desc:'Складываем и вычитаем десятки, умножаем и делим на 10'},
  {title:'Дополняем до круглого',topics:['round'],level:1,minutes:6,desc:'Сколько осталось до десятка?'},
  {title:'Удобные слагаемые',topics:['decompose'],level:1,minutes:5,desc:'Разложи число на простые части'},
  {title:'Таблица умножения',topics:['multiply'],level:1,minutes:6,desc:'Первые табличные случаи'},

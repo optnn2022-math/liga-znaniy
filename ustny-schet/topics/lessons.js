@@ -1,6 +1,28 @@
 (function(){
 'use strict';
 const lessons={
+ tens:{title:'Счёт десятками — четыре действия',variants:[
+  {name:'Сложение и вычитание десятков',steps:[
+   ['Складываем круглые десятки','20 + 10 = 30','Два десятка плюс один десяток — три десятка.'],
+   ['Вычитаем круглые десятки','40 − 10 = 30','Четыре десятка минус один десяток — три десятка.'],
+   ['Проверяем себя','70 − 20 = 50','Десятки меняются, остальные разряды не затрагиваем.']
+  ]},
+  {name:'Десятки и число с единицами',steps:[
+   ['Прибавляем десятки','25 + 20 = 45','Пять единиц не изменились: 2 десятка + 2 десятка = 4 десятка.'],
+   ['Вычитаем десятки','45 − 10 = 35','Вычли один десяток. Цифра единиц по-прежнему 5.'],
+   ['Проверяем результат','35 + 10 = 45','Обратным действием убеждаемся, что посчитали верно.']
+  ]},
+  {name:'Умножение на 10 и 100',steps:[
+   ['Умножаем на 10','5 × 10 = 50','В натуральной записи при умножении на 10 добавляем справа один ноль.'],
+   ['Умножаем на 100','4 × 100 = 400','При умножении на 100 добавляем справа два нуля.'],
+   ['Число побольше','25 × 10 = 250','Десятки превращаются в сотни, единицы — в десятки.']
+  ]},
+  {name:'Деление на 10 и 100',steps:[
+   ['Делим круглое число на 10','240 ÷ 10 = 24','Если число заканчивается нулём, при делении на 10 убираем один ноль.'],
+   ['Делим круглое число на 100','2000 ÷ 100 = 20','Если число заканчивается двумя нулями, при делении на 100 убираем два нуля.'],
+   ['Проверяем умножением','20 × 100 = 2000','Обратное действие проверяет деление.']
+  ]}
+ ]},
  decompose:{title:'Как самому выбрать удобные слагаемые',variants:[
   {name:'Разложение по разрядам',steps:[
    ['Найдём удобные части','852 + 105','Здесь не обязательно дополнять 852 до круглого числа. Удобнее выделить сотню из 105.'],
@@ -72,8 +94,8 @@ const seenKey='liga_math_lessons_v54';
 function getSeen(){try{return JSON.parse(localStorage.getItem(seenKey))||{}}catch(_){return {}}}
 function isSeen(id){return !!getSeen()[id]}
 function markSeen(id){try{const a=getSeen();a[id]=Date.now();localStorage.setItem(seenKey,JSON.stringify(a));}catch(_){}}
-const idFor=(topic,level)=>topic==='decompose'?(level===5?'decompose-free':'decompose-simple'):topic==='subtract_parts'?(level===5?'subtract-free':'subtract-simple'):topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic;
-function defaultVariant(topic,level){return topic==='decompose'?(level===5?0:0):topic==='fractions'?(level>=2?1:0):0}
+const idFor=(topic,level)=>topic==='tens'?'tens-level-'+Math.max(1,Math.min(4,Number(level)||1)):topic==='decompose'?(level===5?'decompose-free':'decompose-simple'):topic==='subtract_parts'?(level===5?'subtract-free':'subtract-simple'):topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic;
+function defaultVariant(topic,level){return topic==='tens'?Math.max(0,Math.min(3,(Number(level)||1)-1)):topic==='decompose'?(level===5?0:0):topic==='fractions'?(level>=2?1:0):0}
 function formula(raw,topic){if(topic==='fractions'&&window.LigaLatex){return window.LigaLatex.formula(raw,topic)}return esc(raw)}
 window.LigaLessons={lessons,has:(id)=>!!lessons[id],isSeen,markSeen,idFor,defaultVariant,formula,esc};
 })();
