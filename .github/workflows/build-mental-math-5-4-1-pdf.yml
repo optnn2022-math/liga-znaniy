@@ -50,15 +50,10 @@ jobs:
         run: |
           cd LigaZnaniyAndroid
           gradle --no-daemon --stacktrace :app:assembleDebug
-      - name: Validate and publish APK
+      - name: Validate APK
         run: |
           install -Dm644 LigaZnaniyAndroid/app/build/outputs/apk/debug/app-debug.apk apk-build/Liga_Znaniy_Ustny_Schet_5_4_1_PDF.apk
           unzip -l apk-build/Liga_Znaniy_Ustny_Schet_5_4_1_PDF.apk | grep 'assets/session-pdf.js'
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add apk-build/Liga_Znaniy_Ustny_Schet_5_4_1_PDF.apk
-          git commit -m 'Publish Android v5.4.1 PDF-only reports APK'
-          git push origin HEAD:android-mental-math-v5-4-1-pdf-fix-20261031
       - uses: actions/upload-artifact@v4
         with:
           name: Liga-Znaniy-Ustny-Schet-5-4-1-PDF
