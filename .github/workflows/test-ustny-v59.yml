@@ -1,0 +1,42 @@
+name: Проверка HTML 5.9 — ввод на Android
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'ustny-schet/v5-9.html'
+      - 'ustny-schet/tests/smoke-v59.js'
+      - '.github/workflows/test-ustny-v59.yml'
+jobs:
+  test-browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inject automated UI check
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('ustny-schet/v5-9.html')
+          s=p.read_text(encoding='utf-8')
+          script=Path('ustny-schet/tests/smoke-v59.js').read_text(encoding='utf-8')
+          assert s.endswith('</body></html>')
+          p.with_name('v5-9-smoke.html').write_text(s.replace('</body></html>','<script>'+script+'</script></body></html>'),encoding='utf-8')
+          PY
+      - name: Run headless Chrome
+        run: |
+          CHROME="$(command -v google-chrome || command -v chromium)"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage --no-first-run --virtual-time-budget=30000 --dump-dom "file://$PWD/ustny-schet/v5-9-smoke.html#topics" > /tmp/liga-smoke.html 2>/tmp/liga-chrome.log
+      - name: Assert working controls and no visible code
+        run: |
+          python3 - <<'PY'
+          import html,json,re
+          src=open('/tmp/liga-smoke.html',encoding='utf-8').read()
+          m=re.search(r'<pre id="SMOKE_RESULT">([\s\S]*?)</pre>',src)
+          if not m:
+              print('Chrome output:',src[-2500:])
+              raise AssertionError('UI smoke script did not complete')
+          result=json.loads(html.unescape(m.group(1)))
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          assert result['pass'], 'Browser validation failed'
+          PY
