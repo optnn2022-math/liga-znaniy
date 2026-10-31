@@ -99,11 +99,13 @@ function latexMarkup(raw,topic,asFormula=false){
 }
 function showLatex(id,raw,topic,asFormula=false){document.getElementById(id).innerHTML=latexMarkup(raw,topic,asFormula);}
 
-function updateAnswerUI(p){$('yesno').classList.toggle('hidden',p.kind!=='yesno');$('answer').placeholder=p.kind==='yesno'?'Да или нет':p.kind==='rational'?'1/2, 2 1/3 или 0,5':'Ваш ответ';$('answer').setAttribute('inputmode',p.kind==='rational'?'text':'numeric');}
+function updateAnswerUI(p){$('yesno').classList.toggle('hidden',p.kind!=='yesno');$('answer').placeholder=p.kind==='yesno'?'Да или нет':p.kind==='rational'?'1/2, 2 1/3 или 0,5':p.kind==='split'?'Например: 20 + 8':'Ваш ответ';$('answer').setAttribute('inputmode',p.kind==='rational'||p.kind==='split'?'text':'numeric');}
 function chooseQuestion(){
  const data=storageTopics();adaptive.ensure(data);
- const p=adaptive.choose({topics:game.task.topics,level:game.effectiveLevel,create:window.MathTrainer.make,
-  used:game.usedKeys,review:data.review,mistakes:data.mistakes});
+ const selection=adaptive.chooseWithCycle({topics:game.task.topics,level:game.effectiveLevel,create:window.MathTrainer.make,
+  used:game.usedKeys,review:data.review,mistakes:data.mistakes,
+  cycle:true,lastKey:game.prevKey});
+ const p=selection.task;
  if(!p){game.exhausted=true;$('feedback').textContent='Разные задания уровня закончились. Сохраните занятие и выберите другой уровень.';$('answer').disabled=true;$('submit').disabled=true;$('next').classList.add('hidden');return;}
  game.current=p;game.prevKey=p.key;game.usedKeys.add(adaptive.key(p));game.questionStart=Date.now();
  $('questionTopic').textContent=skillById[p.topic].title;showLatex('question',p.expression,p.topic,true);
