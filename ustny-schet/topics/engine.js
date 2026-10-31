@@ -122,7 +122,13 @@ function advanced(topic,level){let a,b,c,ans,expression,hint,solution,kind='rati
 function freeSplit(topic,taskLevel=5){
  const subtract=topic==='subtract_parts',operation=subtract?'subtract':'add',group=rnd(0,2);
  let a,b;
- if(subtract){
+ // Уровни 1–4: самостоятельно разбей вычитаемое на части.
+ if(subtract&&taskLevel<5){
+  const max=[0,39,99,299,999][taskLevel];
+  const minA=taskLevel===1?20:taskLevel===4?200:50;
+  const minB=taskLevel===1?11:taskLevel===4?100:21;
+  a=rnd(minA,max);b=rnd(minB,a-1);
+ }else if(subtract){
   if(group===0){a=rnd(42,99);b=rnd(11,a-1);}
   else if(group===1){a=rnd(132,995);b=rnd(11,89);}
   else {a=rnd(222,995);b=rnd(101,a-1);}
@@ -141,7 +147,8 @@ function freeSplit(topic,taskLevel=5){
  return {topic,kind:'split',operation,level:taskLevel,base:a,target:b,parts,expression:`${a} ${symbol} ${b} = ${a} ${symbol} □ ${symbol} □`,answer:parts.join(' + '),hint,solution,key:`${topic}|split|${a}|${b}`};
 }
 function make(topic,level=1){
- if(Number(level)===5&&['decompose','subtract_parts'].includes(topic))return freeSplit(topic,5);
+ if(topic==='subtract_parts')return freeSplit(topic,Math.max(1,Math.min(5,Number(level)||1)));
+ if(Number(level)===5&&topic==='decompose')return freeSplit(topic,5);
   // Профи: обе части второго слагаемого выбирает ученик.
   if(Number(level)===4&&topic==='decompose')return freeSplit(topic,4);
  level=Math.max(1,Math.min(4,Number(level)||1));
@@ -206,15 +213,6 @@ function make(topic,level=1){
     solution=`${a} − ${b} = ${a} − ${b+off} + ${off} = ${answer}.`;
    }
    break;
-  }
-  case 'subtract_parts': {
-   const max=[0,39,99,299,999][level];a=rnd(level===1?20:level===4?200:50,max);b=rnd(level===1?11:level===4?100:21,Math.max(level===1?11:21,a-1));
-   if(b>a)b=a-1;
-   const chunks=[Math.floor(b/100)*100,Math.floor((b%100)/10)*10,b%10].filter(Boolean);
-   answer=a-b;expression=`${a} − ${b} = ?`;
-   hint=`Вычитай по частям: ${chunks.join(', затем ')}.`;
-   const partials=[a];for(const part of chunks)partials.push(partials.at(-1)-part);
-   solution=`${a} − ${b} = ${a} − ${chunks.join(' − ')}. По шагам: ${partials.join(' → ')}.`;break;
   }
   case 'round_ops': {
    const zeros=level<=2?10:level===3?100:10;

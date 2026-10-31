@@ -144,15 +144,16 @@ function nextQuestion(){if(!game||game.finished)return;
  if(game.mode!=='sprint'&&game.index>=game.target){finish();return;}
  let task=chooseTask();if(!task){finish();return;}
  game.current=task;game.prevKey=task.key;game.answered=false;game.questionStart=Date.now();
- text('questionLabel',task.kind==='split'?(task.operation==='subtract'?'ВЫЧИТАНИЕ ЧАСТЯМИ':'СЛОЖЕНИЕ ЧАСТЯМИ')+' · СВОЙ СПОСОБ':byId[task.topic].title);showLatex('question',task.expression,task.topic,true);
+ text('questionLabel',task.kind==='split'?(task.operation==='subtract'?'ВЫЧИТАНИЕ ЧАСТЯМИ':'СЛОЖЕНИЕ ЧАСТЯМИ')+(task.operation==='subtract'&&task.level<5?'':' · СВОЙ СПОСОБ'):byId[task.topic].title);showLatex('question',task.expression,task.topic,true);
  const split=task.kind==='split';
  $id('standardAnswer').classList.toggle('hidden',split);$id('splitAnswer').classList.toggle('hidden',!split);$id('answer').required=!split;
  document.body.classList.toggle('split-input-mode',split);
  if(split){
   const subtract=task.operation==='subtract',symbol=subtract?'−':'+';
-  $id('splitTaskText').textContent=`Разложи ${task.target} на две или три положительные части (их сумма должна равняться ${task.target}):`;
+  $id('splitTaskText').textContent=`Разложи ${subtract?'вычитаемое ':'число '}${task.target} на две или три положительные части (их сумма должна равняться ${task.target}):`;
   $id('splitSeparator2').textContent=symbol;$id('splitPlus3').textContent=symbol;
   $id('splitSignKey').textContent=symbol;$id('splitSignKey').setAttribute('aria-label',subtract?'Минус — перейти к следующей части':'Плюс — перейти к следующей части');
+  ['splitPart1','splitPart2','splitPart3'].forEach((id,i)=>$id(id).setAttribute('aria-label',(subtract?'Часть вычитаемого ':'Слагаемое ')+(i+1)));
  ['splitPart1','splitPart2','splitPart3','splitFinalAnswer'].forEach(id=>{$id(id).value='';$id(id).disabled=false;});
  $id('splitPart3').classList.add('hidden');$id('splitPlus3').classList.add('hidden');
  $id('splitThirdButton').classList.remove('hidden');$id('splitCheck').disabled=false;activeSplitInput=$id('splitPart1');}
