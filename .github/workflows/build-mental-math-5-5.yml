@@ -3,12 +3,12 @@ on:
   push:
     branches: [android-mental-math-v5-5-free-split-20261031]
     paths:
-      - 'apk-build/v55-hotfix.b64'
+      - 'apk-build/v55-updates.b64'
       - '.github/workflows/build-mental-math-5-5.yml'
   pull_request:
     branches: [main]
     paths:
-      - 'apk-build/v55-hotfix.b64'
+      - 'apk-build/v55-updates.b64'
       - '.github/workflows/build-mental-math-5-5.yml'
   workflow_dispatch:
 
@@ -38,10 +38,10 @@ jobs:
           unzip -q -o v54.zip -d LigaZnaniyAndroid
           base64 --decode apk-build/pdf-hotfix.b64 > pdf.zip
           unzip -q -o pdf.zip -d LigaZnaniyAndroid
-          base64 --decode apk-build/v55-hotfix.b64 > v55.zip
+          base64 --decode apk-build/v55-updates.b64 > v55.zip
           unzip -q -o v55.zip -d LigaZnaniyAndroid
-          grep -q 'function checkSplit' LigaZnaniyAndroid/app/src/main/assets/topics/engine.js
-          grep -q 'id="splitInputs"' LigaZnaniyAndroid/app/src/main/assets/topics/index.html
+          grep -q 'function freeSplit' LigaZnaniyAndroid/app/src/main/assets/topics/engine.js
+          grep -q 'id="splitAnswer"' LigaZnaniyAndroid/app/src/main/assets/topics/index.html
           test -s LigaZnaniyAndroid/app/src/main/assets/session-pdf.js
       - name: Install Android platform
         run: /usr/local/lib/android/sdk/cmdline-tools/latest/bin/sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
@@ -52,7 +52,7 @@ jobs:
       - name: Verify and collect
         run: |
           install -Dm644 LigaZnaniyAndroid/app/build/outputs/apk/debug/app-debug.apk dist/Liga_Znaniy_Ustny_Schet_v5_5_Android.apk
-          unzip -p dist/Liga_Znaniy_Ustny_Schet_v5_5_Android.apk assets/topics/engine.js | grep -q 'function checkSplit'
+          unzip -p dist/Liga_Znaniy_Ustny_Schet_v5_5_Android.apk assets/topics/engine.js | grep -q 'function freeSplit'
           unzip -l dist/Liga_Znaniy_Ustny_Schet_v5_5_Android.apk | grep -q 'assets/session-pdf.js'
       - uses: actions/upload-artifact@v4
         with:
