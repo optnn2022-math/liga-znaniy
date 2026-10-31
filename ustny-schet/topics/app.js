@@ -64,7 +64,7 @@ function refreshSelection(){
  for(const [id,active] of [['manualSummandsTopic',manualAddActive],['manualSubtractTopic',manualSubtractActive]]){
   $id(id).classList.toggle('active',active);$id(id).setAttribute('aria-pressed',String(active));
  }
- document.querySelector('[data-level="5"]').classList.toggle('hidden',!['decompose','subtract_parts'].includes(selectedTopic));
+ /* Дополнительные задания доступны только из отдельного блока тем. */
  document.querySelectorAll('[data-topic]').forEach(el=>{const active=el.dataset.topic===selectedTopic&&!manualActive;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  for(const [name,id] of [['allTopics','all'],['advancedTopics','all-advanced']]){$id(name).classList.toggle('active',selectedTopic===id);$id(name).setAttribute('aria-pressed',String(selectedTopic===id));}
  document.querySelectorAll('[data-mode]').forEach(el=>{const active=el.dataset.mode===selectedMode;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
@@ -73,15 +73,15 @@ function refreshSelection(){
  $id('sprintOptions').classList.toggle('hidden',selectedMode!=='sprint');
  document.querySelectorAll('[data-quick-mode]').forEach(el=>{const active=el.dataset.quickMode===selectedMode;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  text('summaryTitle',manualAddActive?'🧩 Подбери слагаемые сам':manualSubtractActive?'🧱 Вычитай частями сам':byId[selectedTopic]?.title||'Смешанный тренажёр');
- text('summaryMethod',manualActive?'Раздели второе число на 2–3 положительные части. Все верные разложения принимаются, а удобство оценивается отдельно.':selectedMode==='sprint'?'На скорость, без подсказок':selectedMode==='learn'?'Сначала способ, затем самостоятельный счёт':'Повтори приём и закрепи навык');
+ text('summaryMethod',manualActive?'Раздели второе число на 2–3 части и вычисли итоговый ответ. Все верные разложения принимаются.':selectedMode==='sprint'?'На скорость, без подсказок':selectedMode==='learn'?'Сначала способ, затем самостоятельный счёт':'Повтори приём и закрепи навык');
  $id('previewGuide').classList.toggle('hidden',!window.LigaLessons.has(selectedTopic)||(selectedTopic==='decompose'&&level!==5));
  const t=byId[selectedTopic];
  if(manualActive){
   text('previewTitle',manualSubtractActive?'🧱 Вычитай частями сам':'🧩 Подбери слагаемые сам');
   text('previewSample',manualSubtractActive?'83 − 27 = 83 − □ − □':'38 + 27 = 38 + □ + □');
   text('previewLabel','Дополнительное задание · Блок 1');
-  text('previewExplanation',manualSubtractActive?'Разложи вычитаемое на две или три положительные части, затем последовательно вычти их.':'Разложи второе число на два или три удобных слагаемых. Введи свой способ и проверь сумму.');
- }else if(t){text('previewTitle',t.icon+' '+t.title);showLatex('previewSample',t.sample,t.id,true);text('previewLabel',groups[t.group].title);text('previewExplanation',t.method);}
+  text('previewExplanation',manualSubtractActive?'Разложи вычитаемое на две или три положительные части, затем последовательно вычти их.':'Разложи второе число на два или три удобных слагаемых и вычисли итоговую сумму.');
+ }else if(t){text('previewTitle',t.icon+' '+t.title);text('previewLabel',groups[t.group].title);if(selectedTopic==='decompose'&&level===4){text('previewSample','38 + 27 = 38 + □ + □');text('previewExplanation','Профи: самостоятельно выбери обе части второго слагаемого и запиши итоговую сумму.');}else{showLatex('previewSample',t.sample,t.id,true);text('previewExplanation',t.method);}}
  else{text('previewTitle',selectedTopic==='all'?'🎲 Все 12 тем блока 1':'🎓 Все 4 темы блока 2');text('previewSample',selectedTopic==='all'?'8 = 5 + ?  ·  7 × 8 = ?':'354 делится на 3? · 1/4 + 2/4');text('previewLabel','Смешанная тренировка');text('previewExplanation','Примеры выбираются из соответствующего блока. Сначала лучше потренировать одну тему.');}
  const belongs=p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic;
  const err=saved.mistakes.filter(belongs).length;
@@ -144,7 +144,7 @@ function nextQuestion(){if(!game||game.finished)return;
  if(game.mode!=='sprint'&&game.index>=game.target){finish();return;}
  let task=chooseTask();if(!task){finish();return;}
  game.current=task;game.prevKey=task.key;game.answered=false;game.questionStart=Date.now();
- text('questionLabel',task.kind==='split'?'СВОБОДНОЕ РАЗЛОЖЕНИЕ · СВОЙ СПОСОБ':byId[task.topic].title);showLatex('question',task.expression,task.topic,true);
+ text('questionLabel',task.kind==='split'?(task.operation==='subtract'?'ВЫЧИТАНИЕ ЧАСТЯМИ':'СЛОЖЕНИЕ ЧАСТЯМИ')+' · СВОЙ СПОСОБ':byId[task.topic].title);showLatex('question',task.expression,task.topic,true);
  const split=task.kind==='split';
  $id('standardAnswer').classList.toggle('hidden',split);$id('splitAnswer').classList.toggle('hidden',!split);$id('answer').required=!split;
  document.body.classList.toggle('split-input-mode',split);
@@ -153,7 +153,7 @@ function nextQuestion(){if(!game||game.finished)return;
   $id('splitTaskText').textContent=`Разложи ${task.target} на две или три положительные части (их сумма должна равняться ${task.target}):`;
   $id('splitSeparator2').textContent=symbol;$id('splitPlus3').textContent=symbol;
   $id('splitSignKey').textContent=symbol;$id('splitSignKey').setAttribute('aria-label',subtract?'Минус — перейти к следующей части':'Плюс — перейти к следующей части');
- ['splitPart1','splitPart2','splitPart3'].forEach(id=>{$id(id).value='';$id(id).disabled=false;});
+ ['splitPart1','splitPart2','splitPart3','splitFinalAnswer'].forEach(id=>{$id(id).value='';$id(id).disabled=false;});
  $id('splitPart3').classList.add('hidden');$id('splitPlus3').classList.add('hidden');
  $id('splitThirdButton').classList.remove('hidden');$id('splitCheck').disabled=false;activeSplitInput=$id('splitPart1');}
  else{activeSplitInput=null;$id('splitSignKey').textContent='+';$id('splitSignKey').setAttribute('aria-label','Плюс');}
@@ -176,10 +176,20 @@ function submit(){if(!game||game.finished||game.answered)return;if(game.mode==='
  const raw=p.kind==='split'?['splitPart1','splitPart2',...(!$id('splitPart3').classList.contains('hidden')?['splitPart3']:[])].map(id=>$id(id).value.trim()).join(' + '):$id('answer').value.trim();
  const checked=window.MathTrainer.check(p,raw);
  if(!checked.valid){text('feedback',checked.message);$id('feedback').className='feedback wrong';return;}
- const value=checked.user,right=checked.correct,time=Math.round((Date.now()-game.questionStart)/10)/100;
- game.index++;game.answered=true;game.history.push({topic:p.topic,expression:p.expression,answer:p.answer,user:value,correct:right,seconds:time,solution:p.kind==='split'?`${checked.reason} ${p.solution}`:p.solution});
+ let right=checked.correct,value=checked.user;
+ if(p.kind==='split'){
+  const result=$id('splitFinalAnswer').value.trim();
+  if(!/^\d{1,9}$/.test(result)){text('feedback','Введи итоговый ответ целым неотрицательным числом.');$id('feedback').className='feedback wrong';return;}
+  const expected=p.operation==='subtract'?p.base-p.target:p.base+p.target;
+  const finalCorrect=Number(result)===expected;
+  right=right&&finalCorrect;
+  checked.reason+=' '+(finalCorrect?'Итоговый ответ верный.':`Итоговый ответ неверен. Правильно: ${p.base} ${p.operation==='subtract'?'−':'+'} ${p.target} = ${expected}.`);
+  value=`${checked.user}; ответ: ${result}`;
+ }
+ const time=Math.round((Date.now()-game.questionStart)/10)/100;
+ game.index++;game.answered=true;game.history.push({topic:p.topic,expression:p.expression,answer:p.kind==='split'?`${p.parts.join(' + ')}; ответ: ${p.operation==='subtract'?p.base-p.target:p.base+p.target}`:p.answer,user:value,correct:right,seconds:time,solution:p.kind==='split'?`${checked.reason} ${p.solution}`:p.solution});
  $id('answer').disabled=true;$id('check').classList.add('hidden');
- if(p.kind==='split'){$id('splitCheck').disabled=true;['splitPart1','splitPart2','splitPart3'].forEach(id=>$id(id).disabled=true);}
+ if(p.kind==='split'){$id('splitCheck').disabled=true;['splitPart1','splitPart2','splitPart3','splitFinalAnswer'].forEach(id=>$id(id).disabled=true);}
  $id('hint').classList.add('hidden');
  if(right){game.correct++;game.streak++;game.bestStreak=Math.max(game.bestStreak,game.streak);game.consecutiveWrong=0;
   if(game.mode==='mistakes'){saved.mistakes=saved.mistakes.filter(x=>x.key!==p.key);persist();}
@@ -229,7 +239,7 @@ $id('retry').addEventListener('click',begin);
 $id('back').addEventListener('click',()=>{endTimers();game=null;show('home');});
 $id('sessionPdfButton').addEventListener('click',exportPDF);
 $id('splitThirdButton').addEventListener('click',()=>{$id('splitPart3').classList.remove('hidden');$id('splitPlus3').classList.remove('hidden');$id('splitThirdButton').classList.add('hidden');activeSplitInput=$id('splitPart3');});
-['splitPart1','splitPart2','splitPart3'].forEach(id=>$id(id).addEventListener('focus',e=>activeSplitInput=e.target));
+['splitPart1','splitPart2','splitPart3','splitFinalAnswer'].forEach(id=>$id(id).addEventListener('focus',e=>activeSplitInput=e.target));
 $id('previewGuide').addEventListener('click',()=>openLesson(true));
  $id('lessonNext').addEventListener('click',lessonNext);
  $id('lessonPrev').addEventListener('click',()=>{lessonState.step=Math.max(0,lessonState.step-1);renderLesson();});
@@ -237,7 +247,7 @@ $id('previewGuide').addEventListener('click',()=>openLesson(true));
  document.querySelectorAll('[data-quick-mode]').forEach(el=>el.addEventListener('click',()=>{selectedMode=el.dataset.quickMode;refreshSelection();}));
 $id('numpad').addEventListener('click',event=>{const btn=event.target.closest('[data-key]');if(!btn||!game||game.finished||game.answered)return;
  const split=game.current?.kind==='split',input=split?(activeSplitInput||$id('splitPart1')):$id('answer'),k=btn.dataset.key;
- if(split&&k==='+'){
+ if(split&&k==='+'&&input.id!=='splitFinalAnswer'){
   if(input.id==='splitPart1')activeSplitInput=$id('splitPart2');
   else if(input.id==='splitPart2'){
    if($id('splitPart3').classList.contains('hidden'))$id('splitThirdButton').click();
