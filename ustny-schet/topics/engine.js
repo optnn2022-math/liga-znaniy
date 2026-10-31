@@ -1,11 +1,11 @@
-/* Учебный генератор: каждая задача имеет единственный проверяемый ответ. */
+/* Учебный генератор: арифметические ответы и несколько верных способов разложения. */
 (function(root){
 'use strict';
 const topics=[
  {id:'composition',group:0,title:'Состав числа до 10',icon:'🧩',sample:'8 = 5 + ?',method:'Представь число как две части. Чтобы найти недостающую часть, вычти известную из целого.'},
  {id:'tens',group:0,title:'Счёт десятками',icon:'🔟',sample:'27, 37, 47, ?',method:'При прибавлении или вычитании десятков единицы не меняются.'},
  {id:'round',group:0,title:'До круглого числа',icon:'🎯',sample:'68 + ? = 70',method:'Определи ближайший следующий десяток, сотню или тысячу и найди разницу.'},
- {id:'decompose',group:0,title:'Удобные слагаемые',icon:'🪄',sample:'38 + 27 = 38 + 2 + ?',method:'На уровнях 1–4 найди недостающее слагаемое. На уровне 5 ты сам выбираешь, как рационально разложить число: по разрядам или другим удобным способом.'},
+ {id:'decompose',group:0,title:'Удобные слагаемые',icon:'🪄',sample:'38 + 27 = 38 + 2 + ?',method:'Удобно по-разному: можно дополнить до круглого числа или выделить сотни, десятки и единицы. На уровне 5 ты сам выбираешь слагаемые.'},
  {id:'multiply',group:1,title:'Таблица умножения',icon:'✖️',sample:'7 × 8 = ?',method:'Свяжи умножение с одинаковыми слагаемыми и запоминай табличные случаи.'},
  {id:'divide',group:1,title:'Таблица деления',icon:'➗',sample:'56 ÷ 7 = ?',method:'Проверь частное умножением: какое число при умножении на 7 даёт 56?'},
  {id:'convenient',group:2,title:'Сложение и вычитание удобным способом',icon:'⚖️',sample:'39 + 26 = 40 + 25',method:'При сложении можно перенести единицу между слагаемыми. При вычитании округли вычитаемое и сделай поправку.'},
@@ -40,28 +40,25 @@ function parseRational(raw){
  m=s.match(/^(-?\d+)(?:\.(\d{1,6}))?$/);if(m){const places=(m[2]||'').length;return rat(Number(m[1])*(10**places)+(m[1].startsWith('-')?-1:1)*Number(m[2]||0),10**places);}
  return null;
 }
-// Проверка свободного разложения: математическое равенство всегда отделено от оценки удобства.
-// Десятичные дроби не нужны: на этом этапе используются только натуральные части.
-function placeChunks(n){return String(n).split('').map((v,i)=>Number(v)*10**(String(n).length-i-1)).filter(Boolean);}
-function decompositionCheck(task,raw){
- const pieces=String(raw??'').split(/[|+]/).map(x=>x.trim());
- if(pieces.length<2||pieces.length>3||pieces.some(x=>!/^\d{1,5}$/.test(x)||Number(x)<1))return {valid:false,message:'Введи два положительных слагаемых. Третье можно добавить при необходимости.'};
- const parts=pieces.map(Number),actual=parts.reduce((s,n)=>s+n,0),expected=task.target;
- if(actual!==expected)return {valid:true,user:parts.join(' + '),correct:false,method:'Проверь сумму выбранных частей: '+actual+' вместо '+expected+'.'};
- const sorted=parts.slice().sort((a,b)=>b-a),chunks=placeChunks(expected).sort((a,b)=>b-a);
- const placeWise=sorted.length===chunks.length&&sorted.every((v,i)=>v===chunks[i]);
- const allEasy=parts.every(n=>n%10===0||n<10);
- const roundTarget=parts.some(n=>[10,100,1000].some(p=>((task.base+n)%p===0)&&((task.base+n-1)%p!==0)));
- let quality,method;
- if(placeWise||(allEasy&&parts.length<=chunks.length)||(parts.length===2&&parts.some(n=>n%100===0))){quality='excellent';method='Отличный выбор! Удобно считать по разрядам: '+parts.join(' + ')+'.';}
- else if(parts.some(n=>n%100===0)|| (roundTarget&&parts.length===2)){
-  quality='good';method='Удобный вариант: получается круглое промежуточное число.';
- }else{quality='valid';method='Равенство правильное, но вычислять можно проще. Попробуй выделить сотни, десятки и единицы.';}
- const recommended=placeChunks(expected).join(' + ');
- return {valid:true,user:parts.join(' + '),correct:true,quality,method,example:recommended};
-}
 function check(task,raw){const s=String(raw??'').trim().toLowerCase();
- if(task.kind==='decomposition')return decompositionCheck(task,raw);
+ if(task.kind==='split'){
+  if(!/^\d+\s*\+\s*\d+(?:\s*\+\s*\d+)?$/.test(s))return {valid:false,message:'Введи два или три натуральных слагаемых, например 100 + 5.'};
+  const parts=s.split('+').map(t=>Number(t.trim()));
+  if(parts.some(n=>!Number.isSafeInteger(n)||n<=0))return {valid:false,message:'Каждая часть должна быть положительным целым числом.'};
+  const sum=parts.reduce((a,b)=>a+b,0),correct=sum===task.target;
+  const sorted=parts.slice().sort((a,b)=>a-b);
+  const ideal=task.parts.slice().sort((a,b)=>a-b);
+  const match=sorted.length===ideal.length&&sorted.every((v,i)=>v===ideal[i]);
+  const roundParts=parts.every(n=>{let q=n;while(q%10===0)q/=10;return q<10;});
+  const roundedFirst=parts.some(x=>[10,100,1000].some(m=>(task.base+x)%m===0));
+  const efficient=match||(roundParts&&parts.length<=task.parts.length)||roundedFirst;
+  const user=parts.join(' + ');
+  const reason=!correct?`Сумма выбранных частей равна ${sum}, а нужно ${task.target}.`:
+   efficient?match?'Отлично! Ты выделил удобные разрядные слагаемые.':roundedFirst?'Отлично! Одна из частей помогает получить круглое число.':'Отлично! Части удобно считать по разрядам.':
+   `Разложение математически верное. Есть и другой удобный способ: ${task.target} = ${task.parts.join(' + ')}.`;
+  return {valid:true,user,correct,efficient,reason,parts};
+ }
+
  if(task.kind==='yesno')return ['да','нет'].includes(s)?{valid:true,user:s,correct:s===task.answer}:{valid:false,message:'Выбери «Да» или «Нет».'};
  if(task.kind==='rational'){const x=parseRational(raw);if(!x)return {valid:false,message:'Введите число, десятичную или обыкновенную дробь (например, 1/2 или 2 1/3).'};const y=rat(task.expected.n,task.expected.d);return {valid:true,user:String(raw).trim(),correct:x.n*y.d===y.n*x.d};}
  const val=String(raw).trim().replace(/−/g,'-');if(!/^-?\d{1,9}$/.test(val))return {valid:false,message:'Введите целое число.'};return {valid:true,user:Number(val),correct:Number(val)===task.answer};
@@ -121,19 +118,17 @@ function advanced(topic,level){let a,b,c,ans,expression,hint,solution,kind='rati
  return {topic,kind,expression,answer:ans,expected,hint,solution,key:topic+'|'+expression,level};
 }
 
+function freeSplit(){
+ // Варьируем исходные числа: и разрядное разложение, и дополнение до круглого числа.
+ const examples=[[852,105],[397,28],[624,203],[468,125],[735,64],[999,101],[286,114],[413,85],[128,237],[749,106],[158,342],[952,108],[584,205],[267,133],[478,221],[902,57],[346,154]];
+ const [a,b]=pick(examples);
+ const place=b>=100?100:10,head=Math.floor(b/place)*place,rest=b-head;
+ const parts=rest>0 && rest%10!==0 && rest>=10?[head,Math.floor(rest/10)*10,rest%10].filter(Boolean):[head,rest].filter(Boolean);
+ const solution=`Например: ${b} = ${parts.join(' + ')}. Поэтому ${a} + ${b} = ${a} + ${parts.join(' + ')} = ${a+b}. Это один из возможных удобных способов.`;
+ return {topic:'decompose',kind:'split',level:5,base:a,target:b,parts,expression:`${a} + ${b} = ${a} + □ + □`,answer:parts.join(' + '),hint:`Разложи ${b} на сотни, десятки и единицы или выдели часть, чтобы получить круглое число при прибавлении к ${a}.`,solution,key:`decompose|split|${a}|${b}`};
+}
 function make(topic,level=1){
- if(topic==='decompose'&&level===5){
-  // Случаи, в которых разложение по разрядам часто проще искусственного дополнения до сотни.
-  const second=pick([24,35,48,65,105,125,135,205,240,307,325,408,512,607,725]);
-  const first=rnd(2,8)*100+rnd(1,9)*10+rnd(1,9);
-  const suggested=placeChunks(second).join(' + ');
-  return {topic,level,kind:'decomposition',base:first,target:second,
-   expression:`${first} + ${second}: разложи ${second} на удобные части`,
-   answer:suggested,hint:`Можно разложить ${second} на разрядные части. Выбирай свой способ: верных разложений несколько.`,
-   solution:`Например, ${second} = ${suggested}. Тогда ${first} + ${second} = ${first} + ${suggested} = ${first+second}. Другие разложения тоже принимаются, если сумма частей верна.`,
-   key:`decompose|free|${first}|${second}`};
- }
-
+ if(topic==='decompose'&&Number(level)===5)return freeSplit();
  level=Math.max(1,Math.min(4,Number(level)||1));
  if(['divisibility','fractions','mixed','decimals'].includes(topic))return advanced(topic,level);
  let expression,answer,hint,solution,meta='';
@@ -265,5 +260,5 @@ function make(topic,level=1){
  if(!Number.isInteger(answer)||answer<0)throw new Error('Некорректный ответ '+topic+' '+expression+': '+answer);
  return {topic,expression,answer,hint,solution,key:topic+'|'+expression,level};
 }
-root.MathTrainer={topics,groups,make,check,parseRational,decompositionCheck,placeChunks};
+root.MathTrainer={topics,groups,make,check,parseRational};
 })(typeof window!=='undefined'?window:globalThis);
