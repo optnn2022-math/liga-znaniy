@@ -50,11 +50,11 @@ function check(task,raw){const s=String(raw??'').trim().toLowerCase();
   const ideal=task.parts.slice().sort((a,b)=>a-b);
   const match=sorted.length===ideal.length&&sorted.every((v,i)=>v===ideal[i]);
   const roundParts=parts.every(n=>{let q=n;while(q%10===0)q/=10;return q<10;});
-  const roundedFirst=parts.some(x=>[10,100,1000].some(m=>(task.base+x)%m===0));
+  const roundedFirst=parts.some(x=>[10,100,1000].some(m=>(task.base+(task.operation==='subtract'?-x:x))%m===0));
   const efficient=match||(roundParts&&parts.length<=task.parts.length)||roundedFirst;
   const user=parts.join(' + ');
   const reason=!correct?`Сумма выбранных частей равна ${sum}, а нужно ${task.target}.`:
-   efficient?match?'Отлично! Ты выделил удобные разрядные слагаемые.':roundedFirst?'Отлично! Одна из частей помогает получить круглое число.':'Отлично! Части удобно считать по разрядам.':
+   efficient?match?'Отлично! Ты выделил удобные разрядные слагаемые.':roundedFirst?`Отлично! Одна из частей помогает ${task.operation==='subtract'?'получить круглое число при вычитании':'дополнить число до круглого'}.`:'Отлично! Части удобно считать по разрядам.':
    `Разложение математически верное. Есть и другой удобный способ: ${task.target} = ${task.parts.join(' + ')}.`;
   return {valid:true,user,correct,efficient,reason,parts};
  }
@@ -118,17 +118,30 @@ function advanced(topic,level){let a,b,c,ans,expression,hint,solution,kind='rati
  return {topic,kind,expression,answer:ans,expected,hint,solution,key:topic+'|'+expression,level};
 }
 
-function freeSplit(){
- // Варьируем исходные числа: и разрядное разложение, и дополнение до круглого числа.
- const examples=[[852,105],[397,28],[624,203],[468,125],[735,64],[999,101],[286,114],[413,85],[128,237],[749,106],[158,342],[952,108],[584,205],[267,133],[478,221],[902,57],[346,154]];
- const [a,b]=pick(examples);
+// Случайные упражнения: по 3 группы чисел для сложения и вычитания.
+function freeSplit(topic){
+ const subtract=topic==='subtract_parts',operation=subtract?'subtract':'add',group=rnd(0,2);
+ let a,b;
+ if(subtract){
+  if(group===0){a=rnd(42,99);b=rnd(11,a-1);}
+  else if(group===1){a=rnd(132,995);b=rnd(11,89);}
+  else {a=rnd(222,995);b=rnd(101,a-1);}
+ }else{
+  if(group===0){a=rnd(21,99);b=rnd(11,89);}
+  else if(group===1){a=rnd(112,995);b=rnd(11,89);}
+  else {a=rnd(112,995);b=rnd(101,375);}
+ }
  const place=b>=100?100:10,head=Math.floor(b/place)*place,rest=b-head;
- const parts=rest>0 && rest%10!==0 && rest>=10?[head,Math.floor(rest/10)*10,rest%10].filter(Boolean):[head,rest].filter(Boolean);
- const solution=`Например: ${b} = ${parts.join(' + ')}. Поэтому ${a} + ${b} = ${a} + ${parts.join(' + ')} = ${a+b}. Это один из возможных удобных способов.`;
- return {topic:'decompose',kind:'split',level:5,base:a,target:b,parts,expression:`${a} + ${b} = ${a} + □ + □`,answer:parts.join(' + '),hint:`Разложи ${b} на сотни, десятки и единицы или выдели часть, чтобы получить круглое число при прибавлении к ${a}.`,solution,key:`decompose|split|${a}|${b}`};
+ const parts=rest>=10&&rest%10!==0?[head,Math.floor(rest/10)*10,rest%10].filter(Boolean):[head,rest].filter(Boolean);
+ // Если число кратно 10/100, сохраняем две строго положительные части.
+ if(parts.length<2){parts.splice(0,parts.length,Math.floor(b/10)*10-10,b-(Math.floor(b/10)*10-10));}
+ const symbol=subtract?'−':'+';
+ const solution=`Например: ${b} = ${parts.join(' + ')}. Поэтому ${a} ${symbol} ${b} = ${a} ${symbol} ${parts.join(' '+symbol+' ')} = ${subtract?a-b:a+b}. Это один из возможных удобных способов.`;
+ const hint=subtract?`Разложи ${b} по разрядам или выдели часть, чтобы при вычитании из ${a} получить круглое число. Вычитай части по очереди.`:`Разложи ${b} по разрядам или выдели часть, чтобы при прибавлении к ${a} получить круглое число.`;
+ return {topic,kind:'split',operation,level:5,base:a,target:b,parts,expression:`${a} ${symbol} ${b} = ${a} ${symbol} □ ${symbol} □`,answer:parts.join(' + '),hint,solution,key:`${topic}|split|${a}|${b}`};
 }
 function make(topic,level=1){
- if(topic==='decompose'&&Number(level)===5)return freeSplit();
+ if(Number(level)===5&&['decompose','subtract_parts'].includes(topic))return freeSplit(topic);
  level=Math.max(1,Math.min(4,Number(level)||1));
  if(['divisibility','fractions','mixed','decimals'].includes(topic))return advanced(topic,level);
  let expression,answer,hint,solution,meta='';
