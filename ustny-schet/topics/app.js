@@ -132,6 +132,7 @@ function nextQuestion(){if(!game||game.finished)return;
  $id('question').classList.toggle('chain',task.topic==='chain'||task.expression.length>38);
  $id('answer').value='';$id('answer').disabled=false;$id('check').classList.remove('hidden');$id('next').classList.add('hidden');
  $id('numpad').classList.toggle('hidden',task.kind==='yesno');$id('yesno').classList.toggle('hidden',task.kind!=='yesno');
+ $id('answer').dataset.entryKind=task.kind==='rational'&&(task.topic==='fractions'||task.topic==='mixed')?task.topic:'';
  $id('answer').placeholder=task.kind==='yesno'?'Да или нет':task.kind==='rational'?'1/2 или 2 1/3':'?';$id('answer').setAttribute('inputmode',task.kind==='rational'?'text':'numeric');
  $id('hint').classList.add('hidden');$id('hint').textContent='';hintStep=0;text('hintButton','💡 Как начать?');$id('feedback').textContent='';$id('feedback').className='feedback';
  $id('helpNear').classList.toggle('hidden',game.mode==='sprint');
