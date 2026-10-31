@@ -2,6 +2,11 @@ name: Сборка Android APK — Устный счёт 6.4
 
 on:
   workflow_dispatch:
+  pull_request:
+    paths:
+      - 'ustny-schet/**'
+      - 'android-ustny-schet/**'
+      - '.github/workflows/build-ustny-apk.yml'
   push:
     branches: [main, ustny-schet-v6.4-qa]
     paths:
