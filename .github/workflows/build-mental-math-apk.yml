@@ -1,14 +1,16 @@
-name: Build mental math Android APK
+name: Build mental math Android APK PDF
 on:
   push:
     branches: [android-mental-math-v5-2-build-20261031]
     paths:
       - 'apk-build/*.b64'
+      - 'apk-build/overrides/**'
       - '.github/workflows/build-mental-math-apk.yml'
   pull_request:
     branches: [main]
     paths:
       - 'apk-build/*.b64'
+      - 'apk-build/overrides/**'
       - '.github/workflows/build-mental-math-apk.yml'
   workflow_dispatch:
 
@@ -40,6 +42,10 @@ jobs:
         run: |
           cat apk-build/part*.b64 | tr -d '\r\n\t ' | base64 --decode > source.zip
           unzip -q -o source.zip
+          cp apk-build/overrides/stats.js LigaZnaniyAndroid/app/src/main/assets/stats.js
+          cp apk-build/overrides/stats.html LigaZnaniyAndroid/app/src/main/assets/stats.html
+          cp apk-build/overrides/MainActivity.java LigaZnaniyAndroid/app/src/main/java/ru/ligaznaniy/math/MainActivity.java
+          cp apk-build/overrides/app.build.gradle LigaZnaniyAndroid/app/build.gradle
           test -f LigaZnaniyAndroid/app/src/main/assets/mathjax-svg.js
           test -f LigaZnaniyAndroid/app/src/main/assets/topics/engine.js
       - name: Install Android platform
@@ -54,19 +60,19 @@ jobs:
         run: |
           echo "result=${{ steps.gradle_build.outcome }}" > apk-build/build-status.txt
           if [ -f LigaZnaniyAndroid/app/build/outputs/apk/debug/app-debug.apk ]; then
-            cp LigaZnaniyAndroid/app/build/outputs/apk/debug/app-debug.apk apk-build/Liga_Znaniy_Ustny_Schet_5_2.apk
+            cp LigaZnaniyAndroid/app/build/outputs/apk/debug/app-debug.apk apk-build/Liga_Znaniy_Ustny_Schet_5_3_PDF.apk
           fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add apk-build/build-status.txt apk-build/build-log.txt apk-build/Liga_Znaniy_Ustny_Schet_5_2.apk 2>/dev/null || true
+          git add apk-build/build-status.txt apk-build/build-log.txt apk-build/Liga_Znaniy_Ustny_Schet_5_3_PDF.apk 2>/dev/null || true
           if ! git diff --cached --quiet; then
-            git commit -m 'Record result of Android APK build'
+            git commit -m 'Record Android PDF APK build'
             git push origin HEAD:android-mental-math-v5-2-build-20261031
           fi
       - name: Upload APK
         if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: Liga-Znaniy-Ustny-Schet-v5-2
-          path: apk-build/Liga_Znaniy_Ustny_Schet_5_2.apk
+          name: Liga-Znaniy-Ustny-Schet-v5-3-PDF
+          path: apk-build/Liga_Znaniy_Ustny_Schet_5_3_PDF.apk
           if-no-files-found: error
