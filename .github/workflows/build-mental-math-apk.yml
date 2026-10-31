@@ -5,6 +5,11 @@ on:
     paths:
       - 'apk-build/*.b64'
       - '.github/workflows/build-mental-math-apk.yml'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'apk-build/*.b64'
+      - '.github/workflows/build-mental-math-apk.yml'
   workflow_dispatch:
 
 concurrency:
@@ -51,7 +56,7 @@ jobs:
           git add apk-build/build-status.txt apk-build/build-log.txt apk-build/Liga_Znaniy_Ustny_Schet_5_2.apk 2>/dev/null || true
           if ! git diff --cached --quiet; then
             git commit -m 'Record result of Android APK build'
-            git push
+            git push origin HEAD:android-mental-math-v5-2-build-20261031
           fi
       - name: Upload APK
         if: success()
