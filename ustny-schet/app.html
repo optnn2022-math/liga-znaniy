@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b326a">
+<meta name="description" content="Устный счёт — приложение Лиги знаний для Android: тренировки, 16 математических тем, планы занятий и статистика. Скачать APK.">
+<title>Приложение «Устный счёт» · Лига знаний</title>
+<style>
+:root{font-family:Inter,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#f5fbff;background:#081c40;--line:#779dd05c;--muted:#cbdaf5;--gold:#ffce59}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;background:radial-gradient(ellipse at 88% 0,#254e9f 0,transparent 45%),radial-gradient(ellipse at 5% 75%,#087e9d55 0,transparent 40%),linear-gradient(150deg,#061a3b,#0b326a 60%,#132b63)}
+a{color:inherit;text-decoration:none}a:focus-visible{outline:3px solid #ffcf5e;outline-offset:4px}
+.shell{width:min(100% - 36px,1000px);margin:auto;padding:24px 0 60px}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:32px}
+.brand{font-size:19px;font-weight:900;letter-spacing:.02em}
+.back{border:1px solid #91bdf688;border-radius:13px;background:#144a86;color:#fff;padding:12px 17px;font-size:14px;font-weight:800;display:inline-flex;align-items:center;gap:7px}
+.back:hover{background:#2065a7}
+.hero{border:1px solid #83affb66;border-radius:30px;padding:clamp(22px,5vw,44px);background:linear-gradient(115deg,#163f86,#102e70 70%,#284ba0);box-shadow:0 25px 60px #020b2180;display:grid;grid-template-columns:1fr auto;gap:26px;align-items:center}
+.eyebrow{font-size:12px;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+h1{font-size:clamp(31px,6vw,55px);line-height:1.05;margin:14px 0 16px}
+.hero p{max-width:670px;color:#e1ecff;line-height:1.65;font-size:16px;margin:0}
+.hero-icon{font-size:clamp(60px,12vw,120px);filter:drop-shadow(0 10px 11px #020b2150)}
+.chips{display:flex;gap:9px;flex-wrap:wrap;margin-top:21px}
+.chip{padding:9px 12px;border:1px solid #aad1f77a;background:#ffffff19;border-radius:100px;font-size:13px;font-weight:800}
+.grid{display:grid;grid-template-columns:1.25fr .9fr;gap:18px;margin-top:22px}
+.panel{background:#fff;color:#1d305a;border-radius:24px;padding:clamp(22px,4vw,30px);box-shadow:0 14px 30px #020b2150}
+.panel h2{font-size:23px;margin:0 0 10px}
+.panel p{line-height:1.6;color:#435679;margin:10px 0 15px}
+.version{font-size:13px;font-weight:850;color:#24528b;text-transform:uppercase;letter-spacing:.04em}
+.buttons{display:grid;gap:10px;margin-top:18px}
+.download{display:flex;align-items:center;justify-content:center;text-align:center;gap:9px;min-height:58px;padding:14px 19px;background:linear-gradient(115deg,#f29a28,#ffd15e);color:#17294b;border-radius:15px;font-weight:900;font-size:17px;box-shadow:0 8px 17px #e5a43144}
+.download:hover{filter:brightness(1.035)}
+.secondary{display:flex;align-items:center;justify-content:center;text-align:center;min-height:49px;padding:11px 17px;background:#eaf1ff;color:#224c88;border:1px solid #bfd0ea;border-radius:13px;font-size:14px;font-weight:850}
+.secondary:hover{background:#dbe8ff}
+.panel .note{font-size:13px;color:#5a6780;margin:13px 0 0}
+.small{font-size:13px}
+.step{display:flex;gap:12px;align-items:flex-start;margin:15px 0;line-height:1.5;color:#3c4f71}
+.step strong{display:grid;place-items:center;flex:none;background:#e5efff;color:#205097;border-radius:50%;height:30px;width:30px}
+.tip{background:#fff5d9;color:#71531d;border-radius:15px;padding:13px 15px;font-size:13px;line-height:1.55;margin-top:20px}
+.section{margin:22px 0 0;background:#112f67;border:1px solid var(--line);border-radius:22px;padding:22px 25px}
+.section h2{margin:0 0 8px;font-size:20px}
+.section p{color:#d5e4fc;line-height:1.6;margin:0}
+.footer{color:#b4c9ee;font-size:12px;text-align:center;margin-top:27px;line-height:1.5}
+@media(max-width:740px){.hero{grid-template-columns:1fr}.hero-icon{display:none}.grid{grid-template-columns:1fr}.shell{width:min(100% - 24px,1000px)}.nav{margin-bottom:18px}.brand{font-size:16px}.back{font-size:13px}.hero{border-radius:22px}.panel{border-radius:20px}}
+</style>
+</head>
+<body>
+<main class="shell">
+<nav class="nav" aria-label="Навигация"><div class="brand">⚽ Лига знаний · Егор</div><a class="back" href="../index.html">← Вернуться к предметам</a></nav>
+<section class="hero">
+<div><div class="eyebrow">📱 Приложение для Android</div><h1>Устный счёт</h1><p>Тренируйся, осваивай удобные вычислительные приёмы и развивай скорость счёта. В приложении есть задания по 16 темам, тренировки, спринты, работа над ошибками, планы занятий и статистика.</p><div class="chips"><span class="chip">🧠 16 тем</span><span class="chip">⚡ Математический спринт</span><span class="chip">📶 Работа без интернета</span></div></div>
+<div class="hero-icon" aria-hidden="true">📱⚽</div>
+</section>
+<div class="grid">
+<section class="panel" aria-labelledby="download-title">
+<div class="version">Android · версия 6.4</div><h2 id="download-title">Скачать приложение</h2>
+<p>Установи приложение на телефон или планшет Android. Файл APK скачивается напрямую из официального раздела выпусков проекта в GitHub.</p>
+<div class="buttons">
+<a class="download" href="https://github.com/optnn2022-math/liga-znaniy/releases/download/ustny-schet-android-v6.4/Liga_Znaniy_Ustny_Schet_v6.4.apk" type="application/vnd.android.package-archive" aria-label="Скачать APK версии 6.4">⬇ Скачать APK · версия 6.4</a>
+<a class="secondary" href="https://github.com/optnn2022-math/liga-znaniy/releases/download/ustny-schet-android-v6.3/Liga_Znaniy_Ustny_Schet_v6.3.apk" type="application/vnd.android.package-archive">Стабильная версия 6.3 · скачать APK</a>
+<a class="secondary" href="./index.html">🌐 Открыть устный счёт онлайн</a>
+</div>
+<p class="note">6.4 — новая версия с доработками генерации; 6.3 сохранена как утверждённая стабильная версия. Устанавливается на Android 7 и выше. Для iPhone APK не подходит.</p>
+</section>
+<section class="panel" aria-labelledby="install-title">
+<h2 id="install-title">Как установить APK</h2>
+<div class="step"><strong>1</strong><span>Нажми кнопку скачивания и дождись сохранения файла APK.</span></div>
+<div class="step"><strong>2</strong><span>Открой скачанный файл в загрузках телефона.</span></div>
+<div class="step"><strong>3</strong><span>Если Android запросит разрешение на установку из этого источника, разреши её для используемого приложения.</span></div>
+<div class="step"><strong>4</strong><span>Подтверди установку и запусти «Устный счёт».</span></div>
+<div class="tip">ℹ️ Приложение распространяется как APK, вне Google Play. Устанавливай только из ссылки «Лиги знаний».</div>
+</section>
+</div>
+<section class="section"><h2>🎯 Учись и тренируйся</h2><p>Выбирай тему и сложность, решай примеры на сложение, вычитание, умножение, деление, делимость и дроби. Можно заниматься в собственном темпе, проходить короткие спринты и возвращаться к задачам с ошибками.</p></section>
+<footer class="footer">Лига знаний · учебная платформа. APK размещён в GitHub Releases проекта; дополнительная регистрация для скачивания не требуется.</footer>
+</main>
+</body>
+</html>
