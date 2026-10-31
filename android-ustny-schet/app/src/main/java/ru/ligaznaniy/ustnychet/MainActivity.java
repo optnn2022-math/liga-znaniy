@@ -42,7 +42,7 @@ public final class MainActivity extends Activity {
     private static final String APP_ORIGIN = "https://appassets.androidplatform.net";
     private static final String APP_URL = APP_ORIGIN + "/app/index.html";
     private static final String UPDATES = "https://optnn2022-math.github.io/liga-znaniy/ustny-schet/";
-    private static final int BUILT_IN_BUILD = 56;
+    private static final int BUILT_IN_BUILD = 59;
     private static final int REQUEST_OPEN_FILE = 101;
     private static final int REQUEST_SAVE_FILE = 102;
 
@@ -83,7 +83,8 @@ public final class MainActivity extends Activity {
                     String mime;
                     if ("/app/index.html".equals(path)) {
                         File updated = new File(getFilesDir(), "current-web-app.html");
-                        data = updated.isFile() && updated.length() > 100000
+                        int updateBuild = getSharedPreferences("web", MODE_PRIVATE).getInt("build", 0);
+                        data = updated.isFile() && updated.length() > 100000 && updateBuild > BUILT_IN_BUILD
                             ? new FileInputStream(updated) : getAssets().open("index.html");
                         mime = "text/html";
                     } else if (path != null && path.endsWith("/icon-192.png")) {
@@ -206,7 +207,7 @@ public final class MainActivity extends Activity {
     }
 
     private void checkForUpdates() {
-        int current = getSharedPreferences("web", MODE_PRIVATE).getInt("build", BUILT_IN_BUILD);
+        int current = Math.max(BUILT_IN_BUILD, getSharedPreferences("web", MODE_PRIVATE).getInt("build", 0));
         try {
             byte[] meta = fetch(UPDATES + "android-version.json", 20_000);
             JSONObject m = new JSONObject(new String(meta, StandardCharsets.UTF_8));
@@ -246,7 +247,7 @@ public final class MainActivity extends Activity {
         connection.setConnectTimeout(7500);
         connection.setReadTimeout(12000);
         connection.setInstanceFollowRedirects(false);
-        connection.setRequestProperty("User-Agent", "LigaZnaniy-MentalMath-Android/5.6");
+        connection.setRequestProperty("User-Agent", "LigaZnaniy-MentalMath-Android/5.9");
         try {
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) throw new Exception("HTTP");
             try (InputStream in = connection.getInputStream(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
