@@ -1,29 +1,35 @@
-/* Sync the self-contained Android HTML with the verified v6.4 sources. */
+/* Синхронизирует автономный v6-4.html с актуальными исходниками перед сборкой APK. */
 'use strict';
-const fs=require('node:fs');
-const path=require('node:path');
+const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'../..');
 const versionPath=path.join(root,'ustny-schet/v6-4.html');
+const engine='ustny-schet/topics/engine.js',lessons='ustny-schet/topics/lessons.js';
+const adaptive='ustny-schet/topics/adaptive.js';
 const definitions={
  topics:[
-  {file:'ustny-schet/topics/adaptive.js',marker:'root.LigaAdaptive='},
-  {file:'ustny-schet/topics/app.js',marker:'const {topics,groups,make}=window.MathTrainer;'}
+  {marker:'root.MathTrainer={topics,groups,make,check,parseRational};',files:[engine]},
+  {marker:'window.LigaLessons={lessons,has:',files:[lessons]},
+  {marker:'root.LigaAdaptive=',files:[adaptive,'ustny-schet/topics/app.js']}
  ],
  plan:[
-  {file:'ustny-schet/topics/adaptive.js',marker:'root.LigaAdaptive='},
-  {file:'ustny-schet/plan.js',marker:"const STORAGE='liga_math_daily_plan_v1'"}
+  {marker:'root.MathTrainer={topics,groups,make,check,parseRational};',files:[engine]},
+  {marker:'window.LigaLessons={lessons,has:',files:[lessons]},
+  {marker:'root.LigaAdaptive=',files:[adaptive,'ustny-schet/plan.js']}
  ]
 };
 function syncPage(decoded,entries){
- const hits=new Map(entries.map(e=>[e.file,0]));
+ const hits=new Map(entries.map(e=>[e.marker,0]));
  const updated=decoded.replace(/(<script\b[^>]*>)([\s\S]*?)(<\/script>)/gi,(full,open,body,close)=>{
-  const match=entries.find(e=>body.includes(e.marker));
-  if(!match)return full;
-  hits.set(match.file,hits.get(match.file)+1);
-  return open+'\n'+fs.readFileSync(path.join(root,match.file),'utf8')+'\n'+close;
+  const matches=entries.filter(e=>body.includes(e.marker));
+  if(matches.length===0)return full;
+  if(matches.length!==1)throw Error('Ambiguous inline script: '+matches.map(x=>x.marker).join(','));
+  const match=matches[0];
+  hits.set(match.marker,hits.get(match.marker)+1);
+  const source=match.files.map(file=>fs.readFileSync(path.join(root,file),'utf8')).join('\n\n');
+  return open+'\n'+source+'\n'+close;
  });
  for(const entry of entries){
-  if(hits.get(entry.file)!==1)throw Error('Embedded script not found exactly once: '+entry.file+' ('+hits.get(entry.file)+')');
+  if(hits.get(entry.marker)!==1)throw Error('Inline script not found exactly once: '+entry.marker);
  }
  return updated;
 }
