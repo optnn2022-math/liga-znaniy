@@ -13,6 +13,18 @@ const lessons={
    ['Получим ответ','397 + 3 + 25 = 425','Это другой правильный рациональный способ разложения.']
   ]}
  ]},
+ subtract_parts:{title:'Вычитай частями: выбираем удобный способ',variants:[
+  {name:'Разложение по разрядам',steps:[
+   ['Рассмотрим вычитание','83 − 27','Нужно вычесть 27. Его удобно разделить на десятки и единицы.'],
+   ['Разложим вычитаемое','27 = 20 + 7','При вычитании по частям из 83 по очереди вычтем 20 и 7.'],
+   ['Вычтем последовательно','83 − 20 − 7 = 56','Сначала 83 − 20 = 63, затем 63 − 7 = 56. Ответ: 56.']
+  ]},
+  {name:'Через круглое число',steps:[
+   ['Найдём близкий десяток','83 − 27','Если сначала вычесть 3, получим удобное круглое число 80.'],
+   ['Выберем другое разложение','27 = 3 + 24','Это тоже верное разложение 27 на две положительные части.'],
+   ['Вычтем по частям','83 − 3 − 24 = 56','Сначала получаем 80, потом 80 − 24 = 56. Другие верные разложения тоже принимаются.']
+  ]}
+ ]},
  convenient:{title:'Удобный счёт — округление с поправкой',variants:[
   {name:'Сложение',steps:[
    ['Смотрим на числа','48 + 27','Заметим, что 48 легко превратить в 50. До круглого числа не хватает 2.'],
@@ -60,7 +72,7 @@ const seenKey='liga_math_lessons_v54';
 function getSeen(){try{return JSON.parse(localStorage.getItem(seenKey))||{}}catch(_){return {}}}
 function isSeen(id){return !!getSeen()[id]}
 function markSeen(id){try{const a=getSeen();a[id]=Date.now();localStorage.setItem(seenKey,JSON.stringify(a));}catch(_){}}
-const idFor=(topic,level)=>topic==='decompose'?(level===5?'decompose-free':'decompose-simple'):topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic;
+const idFor=(topic,level)=>topic==='decompose'?(level===5?'decompose-free':'decompose-simple'):topic==='subtract_parts'?(level===5?'subtract-free':'subtract-simple'):topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic;
 function defaultVariant(topic,level){return topic==='decompose'?(level===5?0:0):topic==='fractions'?(level>=2?1:0):0}
 function formula(raw,topic){if(topic==='fractions'&&window.LigaLatex){return window.LigaLatex.formula(raw,topic)}return esc(raw)}
 window.LigaLessons={lessons,has:(id)=>!!lessons[id],isSeen,markSeen,idFor,defaultVariant,formula,esc};
