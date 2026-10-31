@@ -45,7 +45,7 @@ function updateStats(){const ss=saved.sessions,total=ss.reduce((s,p)=>s+p.total,
 }
 function refreshSelection(){
  if(selectedTopic!=='decompose'&&level===5)level=4;
- $id('freeSplitMode').classList.toggle('hidden',selectedTopic!=='decompose');
+ $id('freeSplitMode').classList.remove('hidden');
  document.querySelector('[data-level="5"]').classList.toggle('hidden',selectedTopic!=='decompose');
  document.querySelectorAll('[data-topic]').forEach(el=>{const active=el.dataset.topic===selectedTopic;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  for(const [name,id] of [['allTopics','all'],['advancedTopics','all-advanced']]){$id(name).classList.toggle('active',selectedTopic===id);$id(name).setAttribute('aria-pressed',String(selectedTopic===id));}
@@ -54,7 +54,7 @@ function refreshSelection(){
  document.querySelectorAll('[data-duration]').forEach(el=>{const active=Number(el.dataset.duration)===duration;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
  $id('sprintOptions').classList.toggle('hidden',selectedMode!=='sprint');
  document.querySelectorAll('[data-quick-mode]').forEach(el=>{const active=el.dataset.quickMode===selectedMode;el.classList.toggle('active',active);el.setAttribute('aria-pressed',String(active));});
- text('summaryTitle',level===5&&selectedTopic==='decompose'?'🧩 Сам выбираю удобные слагаемые':byId[selectedTopic]?.title||'Смешанный тренажёр');
+ text('summaryTitle',level===5&&selectedTopic==='decompose'?'🧩 Подбери слагаемые сам':byId[selectedTopic]?.title||'Смешанный тренажёр');
  text('summaryMethod',level===5&&selectedTopic==='decompose'?'Раздели второе число на 2–3 части. Все верные разложения принимаются, а удобство оценивается отдельно.':selectedMode==='sprint'?'На скорость, без подсказок':selectedMode==='learn'?'Сначала способ, затем самостоятельный счёт':'Повтори приём и закрепи навык');
  $id('previewGuide').classList.toggle('hidden',!window.LigaLessons.has(selectedTopic)||(selectedTopic==='decompose'&&level!==5));
  const t=byId[selectedTopic];if(t){text('previewTitle',t.icon+' '+t.title);showLatex('previewSample',t.sample,t.id,true);text('previewLabel',groups[t.group].title);text('previewExplanation',t.method);}
@@ -209,7 +209,17 @@ $id('previewGuide').addEventListener('click',()=>openLesson(true));
  $id('lessonBack').addEventListener('click',()=>show('home'));
  document.querySelectorAll('[data-quick-mode]').forEach(el=>el.addEventListener('click',()=>{selectedMode=el.dataset.quickMode;refreshSelection();}));
 $id('numpad').addEventListener('click',event=>{const btn=event.target.closest('[data-key]');if(!btn||!game||game.finished||game.answered)return;
- const input=game.current?.kind==='split'?(activeSplitInput||$id('splitPart1')):$id('answer'),k=btn.dataset.key;if(game.current?.kind==='split'&&!/^[0-9]$/.test(k)&&k!=='back')return;if(k==='back')input.value=input.value.slice(0,-1);else if(k==='−'){input.value=input.value.startsWith('-')?input.value.slice(1):'-'+input.value;}else if(input.value.length<22)input.value+=k;
+ const split=game.current?.kind==='split',input=split?(activeSplitInput||$id('splitPart1')):$id('answer'),k=btn.dataset.key;
+ if(split&&k==='+'){
+  if(input.id==='splitPart1')activeSplitInput=$id('splitPart2');
+  else if(input.id==='splitPart2'){
+   if($id('splitPart3').classList.contains('hidden'))$id('splitThirdButton').click();
+   activeSplitInput=$id('splitPart3');
+  }
+  if(window.matchMedia('(min-width: 680px)').matches)activeSplitInput.focus({preventScroll:true});
+  return;
+ }
+ if(split&&!/^[0-9]$/.test(k)&&k!=='back')return;if(k==='back')input.value=input.value.slice(0,-1);else if(k==='−'){input.value=input.value.startsWith('-')?input.value.slice(1):'-'+input.value;}else if(input.value.length<22)input.value+=k;
  if(window.matchMedia('(min-width: 680px)').matches)input.focus({preventScroll:true});
 });
  $id('yesno').addEventListener('click',e=>{const btn=e.target.closest('[data-yn]');if(!btn||!game||game.answered)return;$id('answer').value=btn.dataset.yn;submit();});
