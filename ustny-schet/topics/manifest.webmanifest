@@ -1,0 +1,16 @@
+{
+  "id":"./",
+  "name":"Математический спринт 2.0 — Лига знаний",
+  "short_name":"Матспринт 2",
+  "description":"12 учебных разделов устного счёта с подсказками, тренировкой ошибок и спринтами",
+  "lang":"ru",
+  "start_url":"./index.html",
+  "scope":"./",
+  "display":"standalone",
+  "background_color":"#f9faff",
+  "theme_color":"#5941d9",
+  "icons":[
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}
+  ]
+}

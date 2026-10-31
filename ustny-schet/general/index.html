@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#4426b6" />
+  <meta name="description" content="Математический спринт — тренажёр устного счёта Лиги знаний" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="manifest" href="../manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="./icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="./icons/icon-192.png" />
+  <title>Общий математический спринт | Лига знаний</title>
+  <style>
+    :root{font-family:Inter,"Segoe UI",Arial,sans-serif;color:#21234d;--purple:#6548e8;--blue:#3182ed;--mint:#13b891;--orange:#f8a228;--soft:#f4f6ff;--border:#e4e7fa;--shadow:0 18px 50px rgba(49,41,111,.10)}
+    *{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(ellipse 40% 35% at 0% 0%,#d8d9ff 0%,transparent 95%),radial-gradient(ellipse 32% 42% at 100% 100%,#d5f8f5 0%,transparent 90%),#f7f8ff}
+    button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ffbd52;outline-offset:3px}
+    .shell{max-width:1160px;margin:auto;padding:24px 22px 40px}.brand{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}.brand-name{display:flex;align-items:center;gap:13px}.brand-icon{display:grid;place-items:center;width:48px;height:48px;border-radius:17px;background:linear-gradient(135deg,#805eff,#3e36b9);color:white;font-size:25px;font-weight:900;box-shadow:0 8px 22px #5c4ac849}.brand-title{font-size:19px;line-height:1.2;font-weight:850}.brand-subtitle{color:#707696;font-size:13px;margin-top:3px}
+    .pill{border:1px solid #e0e2f8;background:white;padding:9px 14px;border-radius:100px;font-size:13px;font-weight:700;color:#565585}.hero{display:grid;grid-template-columns:1.25fr .75fr;gap:22px;margin:20px 0 24px}.intro{padding:32px 32px 28px;border-radius:28px;min-height:225px;color:white;background:linear-gradient(125deg,#4b37bc,#6c57e9 62%,#9380ff);position:relative;overflow:hidden}.intro:after{content:"÷  ×  +";position:absolute;right:-12px;top:-25px;color:#fff2;font-size:105px;font-weight:1000;transform:rotate(-20deg);pointer-events:none}.eyebrow{font-size:12px;text-transform:uppercase;letter-spacing:.17em;font-weight:800;color:#ece9ff}.intro h1{font-size:clamp(30px,4vw,51px);line-height:1.04;margin:12px 0 13px;max-width:550px;position:relative;z-index:1}.intro p{color:#eeebff;line-height:1.45;max-width:440px;margin:0;position:relative;z-index:1}.stat-card{background:#fff;border-radius:28px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--border)}.stat-card h2{font-size:17px;margin:0 0 20px}.stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.stat{background:#f5f5ff;border-radius:18px;padding:17px}.stat strong{font-size:27px;font-weight:850;display:block;color:#4d3cc8}.stat span{font-size:12px;color:#777a99}
+    .main-panel{background:white;border-radius:28px;padding:28px;box-shadow:var(--shadow);border:1px solid var(--border)}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap}.panel-head h2{font-size:22px;margin:0}.tiny{font-size:13px;color:#777c9d}.muted{color:#747894}.section-label{font-weight:800;font-size:14px;margin:23px 0 11px;display:block}.choices{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}.choice{border:2px solid var(--border);padding:17px 13px;background:#fff;border-radius:18px;text-align:left;transition:transform .1s,border-color .15s,background .15s}.choice:hover{transform:translateY(-2px)}.choice.active{border-color:#7054ee;background:#f2efff}.choice .emoji{font-size:26px;display:block;margin-bottom:7px}.choice strong{display:block;font-size:15px}.choice small{font-size:12px;color:#777b98;line-height:1.4;display:block;margin-top:4px}.level-row{display:flex;gap:8px;flex-wrap:wrap}.level{border:1px solid #e3e5f8;border-radius:14px;background:#fbfbff;padding:10px 17px;font-weight:700;color:#62658a}.level.active{background:#6350df;color:white;border-color:#6350df}.ops-row{display:flex;gap:12px;flex-wrap:wrap}.op-chip{display:inline-flex;align-items:center;gap:8px;padding:11px 15px;border-radius:14px;border:1px solid var(--border);background:#fbfbff;font-weight:800}.op-chip input{accent-color:#6350df;width:18px;height:18px}.config-row{display:grid;grid-template-columns:1fr 1fr;gap:24px}.primary,.secondary,.ghost{border:0;border-radius:16px;font-weight:800;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:14px 22px}.primary{background:linear-gradient(120deg,#6b50ed,#4938c2);color:white;box-shadow:0 7px 20px #6145db3d}.primary:hover{filter:brightness(1.05)}.secondary{background:#eaf4ff;color:#275dc4}.ghost{background:#f5f4ff;color:#6056ad}.action-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.note{margin-top:17px;padding:12px 15px;border-radius:14px;background:#f6faff;color:#657399;font-size:13px}
+    .play-header{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}.play-title{font-size:15px;color:#65698c;font-weight:800}.timer{font-weight:900;color:#5c45dc;font-size:26px;font-variant-numeric:tabular-nums}.timer.urgent{color:#e44565}.meter{height:10px;background:#eeeff9;border-radius:100px;overflow:hidden;margin:19px 0 9px}.meter-fill{background:linear-gradient(90deg,#25c7ba,#6356e5);height:100%;width:0%;transition:width .25s}.play-stats{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:#68708c;font-size:13px;font-weight:700}.play-stats b{color:#33347a}.question-card{margin:25px auto 17px;min-height:160px;border-radius:26px;background:linear-gradient(145deg,#f5f2ff,#edf7ff);display:flex;align-items:center;justify-content:center;flex-direction:column;padding:16px}.question-label{color:#8987aa;text-transform:uppercase;font-weight:850;letter-spacing:.1em;font-size:12px}.question{font-size:clamp(48px,7vw,78px);letter-spacing:.025em;font-weight:900;margin:11px 0 1px;color:#373276;text-align:center;font-variant-numeric:tabular-nums}.answer-row{display:flex;gap:10px;max-width:470px;margin:auto}.answer{flex:1;min-width:0;border:2px solid #e5e5f8;border-radius:17px;text-align:center;background:white;font-size:31px;font-weight:850;padding:12px;appearance:textfield}.answer::-webkit-outer-spin-button,.answer::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}.feedback{min-height:55px;text-align:center;padding:11px;font-weight:800;line-height:1.45}.feedback.good{color:#07876e}.feedback.bad{color:#d43b65}.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;max-width:342px;margin:6px auto 0}.key{background:#f6f7fe;border:1px solid #e4e7f6;color:#40426a;font-size:21px;font-weight:850;min-height:48px;border-radius:12px}.key:hover{background:#e9e7ff}.end-action{text-align:center;margin-top:20px}.game-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:21px}
+    .results{text-align:center;max-width:700px;margin:auto;padding:15px 0}.trophy{font-size:64px}.results h2{font-size:34px;margin:8px 0}.score-number{font-size:62px;color:#6247e3;font-weight:950;margin:10px 0}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0}.result-grid div{border-radius:18px;background:#f5f6ff;padding:18px 8px}.result-grid strong{display:block;font-size:24px}.result-grid span{color:#777b99;font-size:12px}.session-report{margin:20px auto;text-align:left;max-width:520px;padding:14px 18px;border-radius:16px;background:#f6f8ff;max-height:190px;overflow:auto}.session-report summary{cursor:pointer;font-weight:750}.session-report ul{padding-left:20px;margin:9px 0}.session-report li{margin:5px 0;font-size:13px}.correct-mark{color:#0d9370}.bad-mark{color:#d34365}
+    .hidden{display:none!important}.footer{text-align:center;margin-top:20px;color:#9699ad;font-size:12px}
+    @media(max-width:790px){.hero{grid-template-columns:1fr}.intro{min-height:188px}.config-row{grid-template-columns:1fr;gap:3px}}@media(max-width:520px){.shell{padding:13px 11px 23px}.brand{margin-bottom:13px}.brand-title{font-size:16px}.brand-icon{width:42px;height:42px;border-radius:14px}.brand .pill{display:none}.hero{gap:11px;margin:8px 0 12px}.intro{padding:24px;border-radius:23px;min-height:170px}.intro h1{font-size:32px}.stat-card{padding:18px;border-radius:23px}.stat-card h2{margin-bottom:12px}.stat{padding:12px}.stat strong{font-size:22px}.main-panel{padding:18px 15px;border-radius:23px}.choices{grid-template-columns:1fr;gap:8px}.choice{display:grid;grid-template-columns:33px 1fr;gap:2px 10px;padding:11px}.choice .emoji{grid-row:span 2;margin:0}.choice strong{align-self:end}.choice small{margin:0}.question-card{min-height:145px}.question{font-size:58px}.result-grid{gap:7px}.result-grid div{padding:14px 4px}.result-grid strong{font-size:20px}.results h2{font-size:27px}.action-row .primary,.action-row .secondary{width:100%}}
+    @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+    .unifiednav{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:16px}.unifiednav a{display:inline-flex;text-decoration:none;color:#443aa1;background:#fff;border:1px solid #e0e2fb;padding:10px 14px;border-radius:13px;font-size:13px;font-weight:800}.unifiednav a:hover{background:#f1efff}.stats-link{display:inline-block;margin-top:12px;text-decoration:none;border-radius:13px;background:#ede9ff;color:#4a3aad;padding:11px 16px;font-weight:800;font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="shell"><div style="display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px"><a href="../plan.html" style="background:#fff;border-radius:13px;border:1px solid #e6e5f4;color:#4f44ad;text-decoration:none;padding:10px 14px;font-weight:800;font-size:13px">🗓️ План на каждый день</a></div>
+<nav class="unifiednav"><a href="../index.html">⌂ Главная</a><a href="../topics/index.html">📚 По темам</a><a href="../stats.html">📈 Моя статистика</a></nav>
+    <header class="brand"><div class="brand-name"><div class="brand-icon" aria-hidden="true">∑</div><div><div class="brand-title">Лига знаний</div><div class="brand-subtitle">Интерактивные тренажёры</div></div></div><span class="pill">⚡ Считай быстро. Думай точно.</span></header>
+    <div id="homeView">
+      <div class="hero">
+        <section class="intro"><div class="eyebrow">Твой ежедневный математический вызов</div><h1>Математический<br />спринт</h1><p>Тренируй устный счёт, побеждай собственные рекорды и становись быстрее с каждым днём.</p></section>
+        <aside class="stat-card"><h2>📊 Мои достижения</h2><div class="stats-grid"><div class="stat"><strong id="homeSessions">0</strong><span>тренировок</span></div><div class="stat"><strong id="homeAccuracy">—</strong><span>точность</span></div><div class="stat"><strong id="homeRecord">0</strong><span>лучший счёт за минуту</span></div><div class="stat"><strong id="homeMistakes">0</strong><span>примеров на повторение</span></div></div><a class="stats-link" href="../stats.html">Вся история и динамика →</a></aside>
+      </div>
+      <main class="main-panel">
+        <div class="panel-head"><h2>Настрой свою тренировку</h2><span class="tiny">От простого к сложному</span></div>
+        <label class="section-label">1. Выбери режим</label>
+        <div class="choices" id="modeChoices">
+          <button class="choice active" data-mode="practice" type="button" aria-pressed="true"><span class="emoji">🎯</span><strong>Тренировка</strong><small>15 примеров в своём темпе</small></button>
+          <button class="choice" data-mode="sprint" type="button" aria-pressed="false"><span class="emoji">⚡</span><strong>Спринт</strong><small>Сколько успеешь за 60 секунд?</small></button>
+          <button class="choice" data-mode="mistakes" type="button" aria-pressed="false"><span class="emoji">🧠</span><strong>Работа над ошибками</strong><small>Повтори примеры, которые не получились</small></button>
+        </div>
+        <label class="section-label">2. Сложность примеров</label>
+        <div class="level-row" id="levelChoices">
+          <button class="level" data-level="1" type="button" aria-pressed="false">🌱 Старт</button><button class="level active" data-level="2" type="button" aria-pressed="true">⭐ База</button><button class="level" data-level="3" type="button" aria-pressed="false">🚀 Продвинутый</button><button class="level" data-level="4" type="button" aria-pressed="false">🏆 Мастер</button>
+        </div>
+        <div class="config-row"><div><label class="section-label">3. Какие действия тренируем?</label><div class="ops-row"><label class="op-chip"><input type="checkbox" value="+" checked /> +</label><label class="op-chip"><input type="checkbox" value="−" checked /> −</label><label class="op-chip"><input type="checkbox" value="×" checked /> ×</label><label class="op-chip"><input type="checkbox" value="÷" checked /> ÷</label></div></div><div><label class="section-label" for="adaptive"><input type="checkbox" id="adaptive" checked style="accent-color:#6350df;width:16px;height:16px;vertical-align:-2px;margin-right:5px" /> Адаптивная сложность</label><p class="tiny" style="margin:0">После серии верных ответов уровень повышается. При затруднениях задания становятся проще.</p></div></div>
+        <div class="action-row"><button class="primary" id="startBtn" type="button">Начать тренировку <span aria-hidden="true">→</span></button></div>
+        <div class="note" id="startNote">💡 Результаты сохраняются в этом браузере. Регистрация не нужна.</div>
+      </main>
+    </div>
+    <main id="gameView" class="main-panel hidden" aria-label="Тренировка устного счёта">
+      <div class="play-header"><span class="play-title" id="gameMode">🎯 Тренировка</span><span class="timer" id="timer" role="timer" aria-live="off">00:00</span></div>
+      <div class="meter"><div class="meter-fill" id="meter"></div></div>
+      <div class="play-stats"><span id="questionCount">Пример 1 из 15</span><span>✅ Верно: <b id="rightCount">0</b></span><span>🔥 Серия: <b id="streakCount">0</b></span><span>Уровень: <b id="currentLevel">2</b></span></div>
+      <div class="question-card"><div class="question-label">Вычисли в уме</div><div class="question" id="question">12 + 8 = ?</div></div>
+      <form id="answerForm" autocomplete="off"><div class="answer-row"><input id="answerInput" class="answer" type="text" inputmode="numeric" aria-label="Ответ" placeholder="?" autocomplete="off" maxlength="8" required /><button class="primary" id="checkBtn" type="submit">Проверить</button></div></form>
+      <div class="feedback" id="feedback" role="status" aria-live="polite"></div>
+      <div class="pad" id="numpad" aria-label="Числовая клавиатура">
+        <button class="key" type="button" data-key="1">1</button><button class="key" type="button" data-key="2">2</button><button class="key" type="button" data-key="3">3</button>
+        <button class="key" type="button" data-key="4">4</button><button class="key" type="button" data-key="5">5</button><button class="key" type="button" data-key="6">6</button>
+        <button class="key" type="button" data-key="7">7</button><button class="key" type="button" data-key="8">8</button><button class="key" type="button" data-key="9">9</button>
+        <button class="key" type="button" data-key="−">−</button><button class="key" type="button" data-key="0">0</button><button class="key" type="button" data-key="back" aria-label="Удалить последнюю цифру">⌫</button>
+      </div>
+      <div class="game-footer"><button class="ghost" id="stopBtn" type="button">← Завершить</button><button class="secondary hidden" id="nextBtn" type="button">Следующий пример →</button></div>
+    </main>
+    <main id="resultsView" class="main-panel hidden">
+      <div class="results"><div class="trophy">🏆</div><h2 id="resultTitle">Отличная работа!</h2><div class="muted">Твой результат</div><div class="score-number" id="scoreNumber">0%</div><div class="result-grid"><div><strong id="resultCorrect">0</strong><span>верных ответов</span></div><div><strong id="resultSolved">0</strong><span>решено примеров</span></div><div><strong id="resultTime">0:00</strong><span>время</span></div></div><div class="muted" id="resultMessage"></div>
+      <details class="session-report"><summary>Посмотреть ответы и ошибки</summary><ul id="answerHistory"></ul></details>
+      <div class="action-row" style="justify-content:center"><button class="primary" id="againBtn" type="button">Ещё одна тренировка</button><button class="secondary" id="downloadBtn" type="button">📄 Сохранить результаты PDF</button><a class="secondary" href="../stats.html" style="text-decoration:none">📄 Отчёт PDF</a></div></div>
+    </main>
+    <footer class="footer">© Лига знаний · Математический спринт · Версия 5.4.1</footer>
+  </div>
+<script src="../session-pdf.js"></script>
+<script>
+(() => {
+  'use strict';
+  const STORAGE_KEY='liga_math_sprint_v1';
+  const $=(id)=>document.getElementById(id);
+  const baseData=()=>({sessions:[],mistakes:[]});
+  function readData(){try { const raw=JSON.parse(localStorage.getItem(STORAGE_KEY)); return raw&&Array.isArray(raw.sessions)&&Array.isArray(raw.mistakes)?raw:baseData(); } catch(_){return baseData();}}
+  let data=readData();
+  function saveData(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(data));}catch(_){ window.alert('Не удалось сохранить результат: память браузера недоступна или заполнена. Сохраните резервную копию на странице статистики.'); }}
+  let selectedMode='practice',level=2;
+  let game=null, interval=null, transitionTimeout=null;
+  const randint=(lo,hi)=>Math.floor(Math.random()*(hi-lo+1))+lo;
+  const esc=(s)=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  function visible(view){['homeView','gameView','resultsView'].forEach(id=>$(id).classList.toggle('hidden',id!==view));window.scrollTo({top:0,behavior:'instant'});}
+  function updateHome(){const sessions=data.sessions;const total=sessions.reduce((n,s)=>n+s.solved,0), correct=sessions.reduce((n,s)=>n+s.correct,0);$('homeSessions').textContent=sessions.length;$('homeAccuracy').textContent=total?Math.round(correct/total*100)+'%':'—';$('homeRecord').textContent=sessions.filter(s=>s.mode==='sprint').reduce((n,s)=>Math.max(n,s.correct),0);$('homeMistakes').textContent=data.mistakes.length;}
+  const opLabels={'+':'+','−':'−','×':'×','÷':'÷'};
+  function problem(a,b,op){let answer=op==='+'?a+b:op==='−'?a-b:op==='×'?a*b:a/b;return {a,b,op,answer,expression:`${a} ${opLabels[op]} ${b}`,key:`${a}|${op}|${b}`};}
+  function makeProblem(lvl,ops){const op=ops[randint(0,ops.length-1)];let a,b;
+    if(op==='+'){const max=[0,20,100,500,1000][lvl];a=randint(lvl===1?1:10,max);b=randint(1,max);}
+    else if(op==='−'){const max=[0,20,100,500,1000][lvl];a=randint(lvl===1?1:10,max);b=randint(1,max);if(b>a)[a,b]=[b,a];}
+    else if(op==='×'){const [amin,amax,bmin,bmax]=[[0,0,0,0],[2,5,1,10],[2,9,2,10],[7,19,3,15],[11,25,6,20]][lvl];a=randint(amin,amax);b=randint(bmin,bmax);}
+    else {const [minD,maxD,minQ,maxQ]=[[0,0,0,0],[2,5,1,10],[2,9,2,10],[3,15,2,20],[5,25,3,40]][lvl];b=randint(minD,maxD);const q=randint(minQ,maxQ);a=b*q;}
+    return problem(a,b,op);
+  }
+  function chosenOperations(){return Array.from(document.querySelectorAll('.op-chip input:checked')).map(el=>el.value);}
+  function updateModeSelection(){ document.querySelectorAll('[data-mode]').forEach(el=>{const on=el.dataset.mode===selectedMode;el.classList.toggle('active',on);el.setAttribute('aria-pressed',String(on));});$('startNote').textContent=selectedMode==='mistakes'?'🧠 На повторение: '+data.mistakes.length+'. Примеры исчезают из списка после правильного ответа.':'💡 Результаты сохраняются в этом браузере. Регистрация не нужна.';$('startBtn').disabled=selectedMode==='mistakes'&&!data.mistakes.length; }
+  document.querySelectorAll('[data-mode]').forEach(btn=>btn.addEventListener('click',()=>{selectedMode=btn.dataset.mode;updateModeSelection();}));
+  document.querySelectorAll('[data-level]').forEach(btn=>btn.addEventListener('click',()=>{level=Number(btn.dataset.level);document.querySelectorAll('[data-level]').forEach(el=>{let on=Number(el.dataset.level)===level;el.classList.toggle('active',on);el.setAttribute('aria-pressed',String(on));});}));
+  function clearClocks(){if(interval){clearInterval(interval);interval=null;}if(transitionTimeout){clearTimeout(transitionTimeout);transitionTimeout=null;}}
+  function begin(){const ops=chosenOperations();if(!ops.length){$('startNote').textContent='⚠️ Выбери хотя бы одно арифметическое действие.';return;}
+    const queue=selectedMode==='mistakes'?data.mistakes.slice().reverse().slice(0,20).map(x=>problem(x.a,x.b,x.op)):[];
+    if(selectedMode==='mistakes'&&!queue.length){$('startNote').textContent='Сначала потренируйся: список ошибок пока пуст.';return;}
+    clearClocks();game={mode:selectedMode,level,adaptive: $('adaptive').checked, adaptiveLevel:level,ops,queue,index:0,correct:0,wrong:0,streak:0,bestStreak:0,consecutiveWrong:0,points:0,start:Date.now(),duration:0,current:null,answered:false,history:[],target:selectedMode==='practice'?15:queue.length,lastKey:null,finished:false};
+    $('gameMode').textContent=selectedMode==='sprint'?'⚡ Спринт · 60 секунд':selectedMode==='mistakes'?'🧠 Работа над ошибками':'🎯 Тренировка · 15 примеров';
+    visible('gameView');nextProblem();updateClock();interval=setInterval(updateClock,250);
+  }
+  function updateClock(){if(!game||game.finished)return;const elapsed=Math.floor((Date.now()-game.start)/1000);const sec=game.mode==='sprint'?Math.max(0,60-elapsed):elapsed;
+    $('timer').textContent=String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');$('timer').classList.toggle('urgent',game.mode==='sprint'&&sec<=10);
+    if(game.mode==='sprint'){$('meter').style.width=Math.max(0,(sec/60)*100)+'%';if(sec<=0)finish();}}
+  function nextProblem(){if(!game||game.finished)return;if(game.mode!=='sprint'&&game.index>=game.target){finish();return;}
+    let task;if(game.mode==='mistakes'){task=game.queue[game.index];}else{
+      let attempts=0;do{task=makeProblem(game.adaptiveLevel,game.ops);attempts++;}while(task.key===game.lastKey&&attempts<12);
+    }
+    game.lastKey=task.key;game.current=task;game.answered=false;game.questionStart=Date.now();
+    $('question').textContent=task.expression+' = ?';$('answerInput').value='';$('answerInput').disabled=false;$('checkBtn').classList.remove('hidden');$('nextBtn').classList.add('hidden');$('feedback').textContent='';$('feedback').className='feedback';$('currentLevel').textContent=game.adaptiveLevel;
+    $('questionCount').textContent=game.mode==='sprint'?'Пример '+(game.index+1):`Пример ${game.index+1} из ${game.target}`;
+    $('rightCount').textContent=game.correct;$('streakCount').textContent=game.streak;
+    if(game.mode!=='sprint')$('meter').style.width=(game.index/game.target*100)+'%';
+    if(window.matchMedia('(min-width: 700px)').matches)$('answerInput').focus({preventScroll:true});
+  }
+  function addMistake(p){const found=data.mistakes.find(m=>m.key===p.key);if(found){found.count=(found.count||1)+1;found.lastAt=new Date().toISOString();}else data.mistakes.push({...p,count:1,lastAt:new Date().toISOString()});data.mistakes=data.mistakes.slice(-80);saveData();}
+  function submitAnswer(){if(!game||game.finished||game.answered)return;if(game.mode==='sprint'&&Date.now()-game.start>=60000){finish();return;}const value=$('answerInput').value.trim().replace('−','-');if(!/^-?\d+$/.test(value)){$('feedback').textContent='Введи целое число.';$('feedback').className='feedback bad';return;}
+    const p=game.current;const candidate=Number(value);const right=candidate===p.answer;game.answered=true;game.index++;
+    game.history.push({expression:p.expression,answer:p.answer,user:candidate,correct:right,seconds:Math.round((Date.now()-game.questionStart)/10)/100,operation:p.op,level:game.adaptiveLevel});
+    $('answerInput').disabled=true;$('checkBtn').classList.add('hidden');
+    if(right){game.correct++;game.streak++;game.bestStreak=Math.max(game.bestStreak,game.streak);game.consecutiveWrong=0;game.points+=10+Math.min(game.streak,10)*2;$('feedback').textContent='✅ Верно! '+(game.streak>=3?'Серия '+game.streak+' 🔥':'Отлично!');$('feedback').className='feedback good';if(game.mode==='mistakes'){data.mistakes=data.mistakes.filter(m=>m.key!==p.key);saveData();}}
+    else{game.wrong++;game.streak=0;game.consecutiveWrong++;$('feedback').textContent=`❌ Верный ответ: ${p.answer}. Запомним и повторим!`;$('feedback').className='feedback bad';addMistake(p);}
+    if(game.adaptive&&game.mode!=='mistakes'){
+      if(game.streak>0&&game.streak%4===0)game.adaptiveLevel=Math.min(4,game.adaptiveLevel+1);
+      if(game.consecutiveWrong>=2){game.adaptiveLevel=Math.max(1,game.adaptiveLevel-1);game.consecutiveWrong=0;}
+    }
+    $('rightCount').textContent=game.correct;$('streakCount').textContent=game.streak;
+    if(game.mode==='sprint'){transitionTimeout=setTimeout(()=>{transitionTimeout=null;nextProblem();},right?450:1000);}
+    else{$('meter').style.width=(game.index/game.target*100)+'%';$('nextBtn').textContent=game.index>=game.target?'Посмотреть результат →':'Следующий пример →';$('nextBtn').classList.remove('hidden');$('nextBtn').focus({preventScroll:true});}
+  }
+  function formatDuration(n){return Math.floor(n/60)+':'+String(n%60).padStart(2,'0');}
+  function finish(){if(!game||game.finished)return;game.finished=true;clearClocks();game.duration=Math.min(game.mode==='sprint'?60:Number.MAX_SAFE_INTEGER,Math.floor((Date.now()-game.start)/1000));
+    const solved=game.history.length, pct=solved?Math.round(game.correct/solved*100):0;
+    if(solved>0)data.sessions.push({id:'general-'+Date.now()+'-'+Math.random().toString(36).slice(2,8),kind:'general',date:new Date().toISOString(),mode:game.mode,level:game.level,solved,correct:game.correct,wrong:game.wrong,seconds:game.duration,bestStreak:game.bestStreak,operations:game.ops,history:game.history});if(data.sessions.length>450)data.sessions=data.sessions.slice(-450);saveData();
+    $('resultTitle').textContent=solved===0?'Попробуем ещё раз!':pct===100?'Идеальный результат!':pct>=80?'Отличная работа!':pct>=60?'Хороший старт!':'Продолжай тренироваться!';
+    $('scoreNumber').textContent=pct+'%';$('resultCorrect').textContent=game.correct;$('resultSolved').textContent=solved;$('resultTime').textContent=formatDuration(game.duration);
+    $('resultMessage').textContent=game.mode==='sprint'?`Твой спринт: ${game.correct} верных ответов за минуту. Лучшая серия: ${game.bestStreak}.`:`Лучшая серия: ${game.bestStreak}. Примеров на повторение: ${data.mistakes.length}.`;
+    $('answerHistory').innerHTML=game.history.length?game.history.map(h=>`<li class="${h.correct?'correct-mark':'bad-mark'}">${esc(h.expression)} = ${h.answer} · твой ответ: ${h.user} ${h.correct?'✓':'✗'}</li>`).join(''):'<li>Пока нет ответов.</li>';
+    visible('resultsView');updateHome();updateModeSelection();
+  }
+  function downloadReport(){
+    if(!game||!game.finished)return;
+    const record=data.sessions[data.sessions.length-1];
+    if(!record)return;
+    window.LigaSessionPDF.open({...record,topicName:'Общий математический спринт'});
+  }
+  $('startBtn').addEventListener('click',begin);
+  $('answerForm').addEventListener('submit',e=>{e.preventDefault();submitAnswer();});
+  $('nextBtn').addEventListener('click',nextProblem);
+  $('stopBtn').addEventListener('click',finish);
+  $('againBtn').addEventListener('click',()=>{game=null;selectedMode='practice';updateModeSelection();visible('homeView');});
+  $('downloadBtn').addEventListener('click',downloadReport);
+  $('numpad').addEventListener('click',e=>{const btn=e.target.closest('[data-key]');if(!btn||!game||game.finished||game.answered)return;const key=btn.dataset.key,input=$('answerInput');if(key==='back')input.value=input.value.slice(0,-1);else if(key==='−'){if(input.value.startsWith('-'))input.value=input.value.slice(1);else input.value='-'+input.value;}else if(input.value.length<8)input.value+=key;if(window.matchMedia('(min-width: 700px)').matches)input.focus({preventScroll:true});});
+  document.addEventListener('keydown',e=>{if(e.key==='Enter'&&game&&!game.finished&&game.answered&&game.mode!=='sprint'&&!$('gameView').classList.contains('hidden')){e.preventDefault();nextProblem();}});
+
+  updateHome();updateModeSelection();
+})();
+</script>
+</body>
+</html>
