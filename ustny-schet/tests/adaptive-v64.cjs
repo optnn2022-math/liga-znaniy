@@ -29,5 +29,12 @@ assert.ok(app.includes('adaptive.chooseWithCycle('));
 assert.ok(plan.includes('adaptive.chooseWithCycle('));
 assert.ok(plan.includes("p.kind==='split'?'Например: 20 + 8'"));
 const html=fs.readFileSync('ustny-schet/v6-4.html','utf8');
-for(const name of ['topics','plan']){const m=html.match(new RegExp('<script type="text/plain" id="page-'+name+'">([^<]+)</script>'));assert.ok(m);assert.ok(Buffer.from(m[1],'base64').toString('utf8').includes('Лига знаний 6.4: индивидуальные задания'));}
+for(const name of ['topics','plan']){
+ const m=html.match(new RegExp('<script type="text/plain" id="page-'+name+'">([^<]+)</script>'));
+ assert.ok(m,'Offline page missing: '+name);
+ const embedded=Buffer.from(m[1],'base64').toString('utf8');
+ assert.ok(embedded.includes('function chooseWithCycle(options)'), 'Offline selector not synchronized: '+name);
+ assert.ok(embedded.includes('const selection=adaptive.chooseWithCycle('),'Offline game not synchronized: '+name);
+ if(name==='plan')assert.ok(embedded.includes("p.kind==='split'?'Например: 20 + 8'"));
+}
 assert.ok(html.includes('id="page-stats"')&&html.includes('id="page-general"'));console.log('Adaptive checks passed');
