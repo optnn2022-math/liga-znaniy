@@ -1,24 +1,18 @@
 (function(){
 'use strict';
 const lessons={
- decompose:{title:'Учимся выбирать удобное разложение',variants:[
-  {name:'Дополним до круглого (1–4)',steps:[
-   ['Находим ближайший десяток','38 + 27','Для 38 ближайшее круглое число — 40. Не хватает двух.'],
-   ['Разбиваем второе слагаемое','27 = 2 + 25','Переносим 2 к первому числу.'],
-   ['Считаем','38 + 27 = 40 + 25 = 65','Этот способ удобен, когда до круглого числа совсем немного.']
-  ]},
+ decompose:{title:'Как самому выбрать удобные слагаемые',variants:[
   {name:'Разложение по разрядам',steps:[
-   ['Замечаем круглую часть','852 + 105','105 удобно разбить на сотню и пять единиц. Необязательно дополнять 852 до следующей сотни.'],
-   ['Выбираем слагаемые','105 = 100 + 5','Две части дают исходное число. Это математически верное и удобное разложение.'],
-   ['Считаем по шагам','852 + 105 = 852 + 100 + 5 = 957','Программа проверит любое разложение по сумме и отдельно оценит удобство.']
+   ['Найдём удобные части','852 + 105','Здесь не обязательно дополнять 852 до круглого числа. Удобнее выделить сотню из 105.'],
+   ['Разложим второе слагаемое','105 = 100 + 5','Получили две простые части — 100 и 5.'],
+   ['Вычислим по частям','852 + 100 + 5 = 957','Ответ: 957. Свой способ может отличаться, главное — математическая верность и удобство.']
   ]},
-  {name:'Несколько верных способов',steps:[
-   ['Сравниваем варианты','105 = 100 + 5 = 50 + 55','Оба разложения верны: сумма частей равна 105.'],
-   ['Выбираем более простой','852 + 100 + 5','Сотня прибавляется сразу, затем остаётся 5. Это понятный разрядный приём.'],
-   ['Пробуем свой способ','Разложи 125 на две или три части','Например, 100 + 25 или 100 + 20 + 5. Оба варианта математически верны.']
+  {name:'Дополнение до круглого',steps:[
+   ['Посмотрим на первый член','397 + 28','Чтобы получить 400, к 397 нужно прибавить 3.'],
+   ['Выберем слагаемые','28 = 3 + 25','Удобно выделить 3, а потом прибавить оставшиеся 25.'],
+   ['Получим ответ','397 + 3 + 25 = 425','Это другой правильный рациональный способ разложения.']
   ]}
  ]},
-
  convenient:{title:'Удобный счёт — округление с поправкой',variants:[
   {name:'Сложение',steps:[
    ['Смотрим на числа','48 + 27','Заметим, что 48 легко превратить в 50. До круглого числа не хватает 2.'],
@@ -66,8 +60,8 @@ const seenKey='liga_math_lessons_v54';
 function getSeen(){try{return JSON.parse(localStorage.getItem(seenKey))||{}}catch(_){return {}}}
 function isSeen(id){return !!getSeen()[id]}
 function markSeen(id){try{const a=getSeen();a[id]=Date.now();localStorage.setItem(seenKey,JSON.stringify(a));}catch(_){}}
-const idFor=(topic,level)=>topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic==='decompose'&&level===5?'decompose-free':topic;
-function defaultVariant(topic,level){return topic==='fractions'?(level>=2?1:0):topic==='decompose'&&level===5?1:0}
+const idFor=(topic,level)=>topic==='decompose'?(level===5?'decompose-free':'decompose-simple'):topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic;
+function defaultVariant(topic,level){return topic==='decompose'?(level===5?0:0):topic==='fractions'?(level>=2?1:0):0}
 function formula(raw,topic){if(topic==='fractions'&&window.LigaLatex){return window.LigaLatex.formula(raw,topic)}return esc(raw)}
 window.LigaLessons={lessons,has:(id)=>!!lessons[id],isSeen,markSeen,idFor,defaultVariant,formula,esc};
 })();
