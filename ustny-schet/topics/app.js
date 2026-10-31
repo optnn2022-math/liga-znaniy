@@ -2,11 +2,13 @@
 'use strict';
 const {$}= { $: id=>document.getElementById(id) };
 const {topics,groups,make}=window.MathTrainer;
+const adaptive=window.LigaAdaptive;
 const byId=Object.fromEntries(topics.map(t=>[t.id,t]));
 const STORAGE='liga_math_sprint_v2';
 const defaults=()=>({sessions:[],mistakes:[]});
 function load(){try{const d=JSON.parse(localStorage.getItem(STORAGE));return d&&Array.isArray(d.sessions)&&Array.isArray(d.mistakes)?d:defaults();}catch(_){return defaults();}}
-let saved=load(),selectedTopic='composition',selectedMode='learn',level=1,duration=60,game=null,timer=null,autoNext=null;
+let saved=load();adaptive.ensure(saved);
+let selectedTopic='composition',selectedMode='learn',level=1,duration=60,game=null,timer=null,autoNext=null;
 let lessonState={topic:null,variant:0,step:0,preview:false};let hintStep=0;let activeSplitInput=null;
 function persist(){try{localStorage.setItem(STORAGE,JSON.stringify(saved));}catch(_){window.alert('Не удалось сохранить результат. Проверьте память браузера и сделайте резервную копию на странице статистики.');}}
 const $id=id=>$(id);
@@ -88,16 +90,17 @@ function refreshSelection(){
  text('startNote',manualActive?'Самостоятельное разложение: укажи 2 или 3 положительные части. Проверяем их сумму и рекомендуем рациональный способ.':selectedMode==='mistakes'?`На повторение для выбранной темы: ${err}. Верно решённые примеры удаляются из списка ошибок.`:
     selectedMode==='learn'?'Учебный режим: 10 заданий, подсказки и подробное объяснение после ответа.':
     selectedMode==='sprint'?`Спринт на ${duration} секунд: без подсказок и с автоматической сменой примеров.`:
-    'Тренировка: 15 заданий без ограничения времени; можно попросить подсказку.');
+    'До 15 разных заданий: сначала новые, с повторением ошибок. Сложность зависит от результата.');
  $id('start').disabled=selectedMode==='mistakes'&&err===0;
 }
 function endTimers(){if(timer){clearInterval(timer);timer=null;}if(autoNext){clearTimeout(autoNext);autoNext=null;}}
-function chooseTask(){if(game.mode==='mistakes')return game.queue[game.index]||null;
- let task,tries=0;do{
-  const pool=game.topic==='all'?topics.filter(t=>t.group<4):game.topic==='all-advanced'?topics.filter(t=>t.group===4):null;
-  const topic=pool?pool[Math.floor(Math.random()*pool.length)].id:game.topic;
-  task=make(topic,game.effectiveLevel);tries++;
- }while(task.key===game.prevKey&&tries<24);
+function chooseTask(){
+ if(game.mode==='mistakes')return game.queue[game.index]||null;
+ const topicsPool=game.topic==='all'?topics.filter(t=>t.group<4).map(t=>t.id):
+  game.topic==='all-advanced'?topics.filter(t=>t.group===4).map(t=>t.id):[game.topic];
+ const task=adaptive.choose({topics:topicsPool,level:game.effectiveLevel,create:make,
+  used:game.usedKeys,review:saved.review,mistakes:saved.mistakes});
+ if(!task)game.exhausted=true;
  return task;
 }
 function openLesson(preview){
@@ -128,7 +131,7 @@ function begin(){
  launchGame();}
 function launchGame(){if(selectedMode==='mistakes'&&!saved.mistakes.some(p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic))return;
  endTimers();const queue=selectedMode==='mistakes'?saved.mistakes.filter(p=>selectedTopic==='all'?byId[p.topic]?.group<4:selectedTopic==='all-advanced'?byId[p.topic]?.group===4:p.topic===selectedTopic).slice(-20).reverse().map(p=>({...p})):[];
- game={mode:selectedMode,topic:selectedTopic,level,effectiveLevel:level,duration,queue,index:0,target:selectedMode==='learn'?10:selectedMode==='practice'?15:queue.length,correct:0,wrong:0,streak:0,bestStreak:0,consecutiveWrong:0,answered:false,current:null,start:Date.now(),questionStart:Date.now(),lastTime:0,history:[],prevKey:'',finished:false};
+ game={mode:selectedMode,topic:selectedTopic,level,effectiveLevel:level,duration,queue,usedKeys:new Set(),exhausted:false,index:0,target:selectedMode==='learn'?10:selectedMode==='practice'?15:queue.length,correct:0,wrong:0,streak:0,bestStreak:0,consecutiveWrong:0,answered:false,current:null,start:Date.now(),questionStart:Date.now(),lastTime:0,history:[],prevKey:'',finished:false};
  text('gameTitle',selectedTopic==='decompose'&&level===5?'🧩 Подбери слагаемые сам':selectedTopic==='subtract_parts'&&level===5?'🧱 Вычитай частями сам':selectedTopic==='all'?'Смешанная тренировка блока 1':selectedTopic==='all-advanced'?'Смешанная тренировка блока 2':byId[selectedTopic].title);
  text('gameMode', {learn:'📘 Изучаю приём',practice:'🎯 Закрепляю',sprint:'⚡ Считаю на скорость',mistakes:'🔁 Работа над ошибками'}[selectedMode]);
  show('play');nextQuestion();tick();timer=setInterval(tick,100);
@@ -143,7 +146,7 @@ function tick(){if(!game||game.finished)return;
 function nextQuestion(){if(!game||game.finished)return;
  if(game.mode!=='sprint'&&game.index>=game.target){finish();return;}
  let task=chooseTask();if(!task){finish();return;}
- game.current=task;game.prevKey=task.key;game.answered=false;game.questionStart=Date.now();
+ game.current=task;game.prevKey=task.key;game.usedKeys.add(adaptive.key(task));game.answered=false;game.questionStart=Date.now();
  text('questionLabel',task.kind==='split'?(task.operation==='subtract'?'ВЫЧИТАНИЕ ЧАСТЯМИ':'СЛОЖЕНИЕ ЧАСТЯМИ')+(task.operation==='subtract'&&task.level<5?'':' · СВОЙ СПОСОБ'):byId[task.topic].title);showLatex('question',task.expression,task.topic,true);
  const split=task.kind==='split';
  $id('standardAnswer').classList.toggle('hidden',split);$id('splitAnswer').classList.toggle('hidden',!split);$id('answer').required=!split;
@@ -188,7 +191,7 @@ function submit(){if(!game||game.finished||game.answered)return;if(game.mode==='
   value=`${checked.user}; ответ: ${result}`;
  }
  const time=Math.round((Date.now()-game.questionStart)/10)/100;
- game.index++;game.answered=true;game.history.push({topic:p.topic,expression:p.expression,answer:p.kind==='split'?`${p.parts.join(' + ')}; ответ: ${p.operation==='subtract'?p.base-p.target:p.base+p.target}`:p.answer,user:value,correct:right,seconds:time,solution:p.kind==='split'?`${checked.reason} ${p.solution}`:p.solution});
+ game.index++;game.answered=true;adaptive.record(saved,p,right);persist();game.history.push({key:adaptive.key(p),topic:p.topic,expression:p.expression,answer:p.kind==='split'?`${p.parts.join(' + ')}; ответ: ${p.operation==='subtract'?p.base-p.target:p.base+p.target}`:p.answer,user:value,correct:right,seconds:time,solution:p.kind==='split'?`${checked.reason} ${p.solution}`:p.solution});
  $id('answer').disabled=true;$id('check').classList.add('hidden');
  if(p.kind==='split'){$id('splitCheck').disabled=true;['splitPart1','splitPart2','splitPart3','splitFinalAnswer'].forEach(id=>$id(id).disabled=true);}
  $id('hint').classList.add('hidden');
@@ -197,9 +200,9 @@ function submit(){if(!game||game.finished||game.answered)return;if(game.mode==='
   showLatex('feedback',p.kind==='split'?`✅ Верно! ${checked.reason} ${p.solution}`:game.mode==='sprint'?'✅ Верно!':`✅ Правильно! ${p.solution}`,p.topic);$id('feedback').className='feedback correct';
  }else{game.wrong++;game.streak=0;game.consecutiveWrong++;addMistake(p);
   showLatex('feedback',p.kind==='split'?`❌ ${checked.reason} ${p.solution}`:game.mode==='sprint'?`✗ Ответ: ${p.answer}`:`❌ Верный ответ: ${p.answer}. ${p.solution}`,p.topic);$id('feedback').className='feedback wrong';}
- if(game.mode==='practice'&&game.current?.topic!=='fractions'){
-  if(game.streak>=4&&game.streak%4===0)game.effectiveLevel=Math.min(game.level===5?5:4,game.effectiveLevel+1);
-  if(game.consecutiveWrong>=2){game.effectiveLevel=Math.max(game.level===5?5:1,game.effectiveLevel-1);game.consecutiveWrong=0;}
+ if(game.mode==='practice'){
+  const next=adaptive.adapt(game.level,game.effectiveLevel,right,game.streak,game.consecutiveWrong);
+  game.effectiveLevel=next.level;game.consecutiveWrong=next.errors;
  }
  text('correct',game.correct);text('streak',game.streak);
  if(game.mode==='sprint'){autoNext=setTimeout(()=>{autoNext=null;nextQuestion();},right?240:550);}
@@ -213,7 +216,7 @@ function finish(){if(!game||game.finished)return;game.finished=true;endTimers();
  text('resultTitle',total===0?'Начни с первого задания!':pct>=95?'Прекрасный результат!':pct>=80?'Очень хорошо!':pct>=60?'Продолжай тренироваться!':'Потренируем приём ещё раз');
  text('resultSubtitle',game.mode==='sprint'?`${game.correct} правильных ответов за ${game.duration} секунд · точность`:'Точность выполнения заданий');
  text('percent',pct+'%');text('resCorrect',game.correct);text('resTotal',total);text('resTime',fmt(seconds));text('resSpeed',avg===null?'—':avg.toFixed(1)+' с');
- text('resultAdvice',game.mode==='sprint'?`Темп: ${(game.correct*60/Math.max(seconds,1)).toFixed(1)} правильных ответов в минуту. Сначала точность, потом скорость.`:
+ text('resultAdvice',game.exhausted?'Все разные примеры этого уровня уже были предложены. Попробуй следующий уровень сложности.':game.mode==='sprint'?`Темп: ${(game.correct*60/Math.max(seconds,1)).toFixed(1)} правильных ответов в минуту. Сначала точность, потом скорость.`:
   pct>=90?'Приём освоен достаточно уверенно. Можно перейти к следующей теме или проверить скорость.':
   'Полезно открыть примеры с ошибками и повторить эту тему в режиме «Учусь».');
  $id('history').innerHTML=game.history.length?game.history.map(h=>`<li class="${h.correct?'ok':'bad'}">${esc(byId[h.topic]?.title||h.topic)}: ${latexMarkup(h.expression,h.topic,true)} — ${h.correct?'✓':'✗'} ваш ответ ${esc(h.user)}, верно ${latexMarkup(h.answer,h.topic)} (${h.seconds} с). ${latexMarkup(h.solution,h.topic)}</li>`).join(''):'<li>Пока нет ответов.</li>';

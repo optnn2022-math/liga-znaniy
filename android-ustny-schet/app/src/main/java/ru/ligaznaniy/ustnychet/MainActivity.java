@@ -42,7 +42,7 @@ public final class MainActivity extends Activity {
     private static final String APP_ORIGIN = "https://appassets.androidplatform.net";
     private static final String APP_URL = APP_ORIGIN + "/app/index.html";
     private static final String UPDATES = "https://optnn2022-math.github.io/liga-znaniy/ustny-schet/";
-    private static final int BUILT_IN_BUILD = 63;
+    private static final int BUILT_IN_BUILD = 64;
     private static final int REQUEST_OPEN_FILE = 101;
     private static final int REQUEST_SAVE_FILE = 102;
 
@@ -247,7 +247,7 @@ public final class MainActivity extends Activity {
         connection.setConnectTimeout(7500);
         connection.setReadTimeout(12000);
         connection.setInstanceFollowRedirects(false);
-        connection.setRequestProperty("User-Agent", "LigaZnaniy-MentalMath-Android/6.3");
+        connection.setRequestProperty("User-Agent", "LigaZnaniy-MentalMath-Android/6.4");
         try {
             if (connection.getResponseCode() != HttpURLConnection.HTTP_OK) throw new Exception("HTTP");
             try (InputStream in = connection.getInputStream(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {

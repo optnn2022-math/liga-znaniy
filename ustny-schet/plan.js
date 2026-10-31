@@ -1,6 +1,7 @@
 (()=>{
 'use strict';
 const STORAGE='liga_math_daily_plan_v1',TOPICS_STORAGE='liga_math_sprint_v2';
+const adaptive=window.LigaAdaptive;
 const $=id=>document.getElementById(id);
 const skills=window.MathTrainer.topics;
 const skillById=Object.fromEntries(skills.map(t=>[t.id,t]));
@@ -90,7 +91,7 @@ function reminders(showInPage=true){const p=active();if(!p||game)return;const {l
  if(showInPage){const el=$('alert');if(message&&state.settings.enabled){el.textContent='🔔 '+message;el.classList.remove('hidden');el.classList.remove('good');}else if(!el.classList.contains('good'))el.classList.add('hidden');}
  if(message&&key!==state.settings.lastNoticeKey&&state.settings.enabled){state.settings.lastNoticeKey=key;save();notifyUser(message,key);}
 }
-function persistDraft(){if(!game||!plan)return;plan.drafts[game.day]={day:game.day,activeSec:game.activeSec,history:game.history,current:game.current,prevKey:game.prevKey,answerLocked:$('submit').disabled,questionStart:Date.now()};save();}
+function persistDraft(){if(!game||!plan)return;plan.drafts[game.day]={day:game.day,activeSec:game.activeSec,history:game.history,current:game.current,prevKey:game.prevKey,effectiveLevel:game.effectiveLevel,streak:game.streak,consecutiveWrong:game.consecutiveWrong,answerLocked:$('submit').disabled,questionStart:Date.now()};save();}
 
 function latexMarkup(raw,topic,asFormula=false){
  try{return window.LigaLatex[asFormula?'formula':'inline'](String(raw),topic);}
@@ -99,7 +100,16 @@ function latexMarkup(raw,topic,asFormula=false){
 function showLatex(id,raw,topic,asFormula=false){document.getElementById(id).innerHTML=latexMarkup(raw,topic,asFormula);}
 
 function updateAnswerUI(p){$('yesno').classList.toggle('hidden',p.kind!=='yesno');$('answer').placeholder=p.kind==='yesno'?'Да или нет':p.kind==='rational'?'1/2, 2 1/3 или 0,5':'Ваш ответ';$('answer').setAttribute('inputmode',p.kind==='rational'?'text':'numeric');}
-function chooseQuestion(){let p,attempt=0;do{const sid=game.task.topics[Math.floor(Math.random()*game.task.topics.length)];p=window.MathTrainer.make(sid,game.task.level);attempt++;}while(p.key===game.prevKey&&attempt<20);game.current=p;game.prevKey=p.key;game.questionStart=Date.now();$('questionTopic').textContent=skillById[p.topic].title;showLatex('question',p.expression,p.topic,true);$('answer').value='';$('answer').disabled=false;$('submit').disabled=false;updateAnswerUI(p);$('hint').classList.add('hidden');$('feedback').textContent='';$('feedback').className='playstatus';$('next').classList.add('hidden');}
+function chooseQuestion(){
+ const data=storageTopics();adaptive.ensure(data);
+ const p=adaptive.choose({topics:game.task.topics,level:game.effectiveLevel,create:window.MathTrainer.make,
+  used:game.usedKeys,review:data.review,mistakes:data.mistakes});
+ if(!p){game.exhausted=true;$('feedback').textContent='Разные задания уровня закончились. Сохраните занятие и выберите другой уровень.';$('answer').disabled=true;$('submit').disabled=true;$('next').classList.add('hidden');return;}
+ game.current=p;game.prevKey=p.key;game.usedKeys.add(adaptive.key(p));game.questionStart=Date.now();
+ $('questionTopic').textContent=skillById[p.topic].title;showLatex('question',p.expression,p.topic,true);
+ $('answer').value='';$('answer').disabled=false;$('submit').disabled=false;updateAnswerUI(p);
+ $('hint').classList.add('hidden');$('feedback').textContent='';$('feedback').className='playstatus';$('next').classList.add('hidden');
+}
 function setTimerUI(){if(!game)return;const remain=Math.max(0,Math.ceil(game.task.minutes*60-game.activeSec));$('timeLeft').textContent=`${String(Math.floor(remain/60)).padStart(2,'0')}:${String(remain%60).padStart(2,'0')}`;$('timeFill').style.width=`${100*Math.min(1,game.activeSec/(game.task.minutes*60))}%`;$('solved').textContent=game.history.length;$('correct').textContent=game.history.filter(h=>h.correct).length;$('minimum').textContent=game.history.length<MIN_ANSWERS?`Для зачёта: ещё ${MIN_ANSWERS-game.history.length} ответов`:'Минимум ответов набран ✓';}
 function tick(){if(!game)return;const now=Date.now();const delta=Math.min(1,Math.max(0,(now-lastTick)/1000));lastTick=now;
  if(document.visibilityState!=='hidden')game.activeSec=Math.min(game.task.minutes*60,game.activeSec+delta);
@@ -109,18 +119,28 @@ function tick(){if(!game)return;const now=Date.now();const delta=Math.min(1,Math
  if(now-lastDraftSave>5000){persistDraft();lastDraftSave=now;}
 }
 function startDay(day){plan=active();if(!plan)return;const task=planDays(plan.type,plan.block||1)[day-1],date=dateAt(plan.start,day-1);if(!task||date>today()||plan.completed[day])return;
- const draft=plan.drafts?.[day];game={day,task,activeSec:Math.max(0,Number(draft?.activeSec)||0),history:Array.isArray(draft?.history)?draft.history:[],current:draft?.current||null,prevKey:draft?.prevKey||'',questionStart:Date.now()};
+ const draft=plan.drafts?.[day];game={day,task,activeSec:Math.max(0,Number(draft?.activeSec)||0),history:Array.isArray(draft?.history)?draft.history:[],current:draft?.current||null,prevKey:draft?.prevKey||'',questionStart:Date.now(),effectiveLevel:Number(draft?.effectiveLevel)||task.level,streak:Number(draft?.streak)||0,consecutiveWrong:Number(draft?.consecutiveWrong)||0,usedKeys:new Set((Array.isArray(draft?.history)?draft.history:[]).map(adaptive.key).filter(Boolean))};
  $('setup').classList.add('hidden');$('overview').classList.add('hidden');$('play').classList.remove('hidden');$('alert').classList.add('hidden');
  $('playSubtitle').textContent=`День ${day} · ${formatDate(date)} · ${task.minutes} мин`; $('playTitle').textContent=task.title;$('playDescription').textContent=task.desc;
  if(draft?.answerLocked)game.current=null;
- if(game.current){updateAnswerUI(game.current);$('questionTopic').textContent=skillById[game.current.topic]?.title||'Устный счёт';showLatex('question',game.current.expression,game.current.topic,true);$('answer').value='';$('feedback').textContent='Тренировка восстановлена, продолжайте с текущего примера.';$('next').classList.add('hidden');$('hint').classList.add('hidden');$('submit').disabled=false;$('answer').disabled=false;}
+ if(game.current){game.usedKeys.add(adaptive.key(game.current));updateAnswerUI(game.current);$('questionTopic').textContent=skillById[game.current.topic]?.title||'Устный счёт';showLatex('question',game.current.expression,game.current.topic,true);$('answer').value='';$('feedback').textContent='Тренировка восстановлена, продолжайте с текущего примера.';$('next').classList.add('hidden');$('hint').classList.add('hidden');$('submit').disabled=false;$('answer').disabled=false;}
  else chooseQuestion();
  setTimerUI();clearInterval(interval);lastTick=Date.now();lastDraftSave=0;interval=setInterval(tick,250);window.scrollTo(0,0);
  if(window.matchMedia('(min-width: 680px)').matches)$('answer').focus({preventScroll:true});
 }
 function submit(e){e.preventDefault();if(!game||!game.current||$('submit').disabled)return;const raw=$('answer').value.trim(),p=game.current,checked=window.MathTrainer.check(p,raw);if(!checked.valid){$('feedback').textContent=checked.message;return;}
  const value=checked.user,right=checked.correct;
- game.history.push({topic:p.topic,expression:p.expression,answer:p.answer,user:value,correct:right,seconds:Math.round((Date.now()-game.questionStart)/10)/100,solution:p.solution});
+ game.usedKeys.add(adaptive.key(p));game.history.push({key:adaptive.key(p),topic:p.topic,expression:p.expression,answer:p.answer,user:value,correct:right,seconds:Math.round((Date.now()-game.questionStart)/10)/100,solution:p.solution});
+ const data=storageTopics();adaptive.record(data,p,right);
+ if(!right){const m=data.mistakes.find(x=>x.key===p.key);
+  if(m){m.errors=(m.errors||1)+1;m.lastAt=new Date().toISOString();}
+  else data.mistakes.push({...p,errors:1,lastAt:new Date().toISOString()});
+  data.mistakes=data.mistakes.slice(-100);
+ }
+ try{localStorage.setItem(TOPICS_STORAGE,JSON.stringify(data));}catch(_){}
+ game.streak=right?game.streak+1:0;game.consecutiveWrong=right?0:game.consecutiveWrong+1;
+ const next=adaptive.adapt(game.task.level,game.effectiveLevel,right,game.streak,game.consecutiveWrong);
+ game.effectiveLevel=next.level;game.consecutiveWrong=next.errors;
  $('answer').disabled=true;$('submit').disabled=true;$('feedback').className='playstatus '+(right?'ok':'bad');showLatex('feedback',right?'✅ Верно! '+p.solution:`❌ Ответ: ${p.answer}. ${p.solution}`,p.topic);
  $('next').classList.remove('hidden');setTimerUI();persistDraft();
  if(game.activeSec>=game.task.minutes*60&&game.history.length>=MIN_ANSWERS){complete();return;}

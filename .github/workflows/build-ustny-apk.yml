@@ -1,4 +1,4 @@
-name: Сборка Android APK — Устный счёт 6.3
+name: Сборка Android APK — Устный счёт 6.4
 
 on:
   workflow_dispatch:
@@ -36,11 +36,18 @@ jobs:
       - name: Install API 35 and build tools
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
+      - name: Validate exercise selection
+        run: |
+          node --check ustny-schet/topics/adaptive.js
+          node --check ustny-schet/topics/app.js
+          node --check ustny-schet/plan.js
+          node ustny-schet/tests/adaptive-v64.cjs
+
       - name: Bundle offline HTML and app icons
         run: |
           mkdir -p android-ustny-schet/app/src/main/assets/icons
           mkdir -p android-ustny-schet/app/src/main/res/drawable
-          cp ustny-schet/v6-3.html android-ustny-schet/app/src/main/assets/index.html
+          cp ustny-schet/v6-4.html android-ustny-schet/app/src/main/assets/index.html
           cp ustny-schet/manifest.webmanifest android-ustny-schet/app/src/main/assets/manifest.webmanifest
           cp ustny-schet/icons/icon-192.png android-ustny-schet/app/src/main/assets/icons/icon-192.png
           cp ustny-schet/icons/icon-512.png android-ustny-schet/app/src/main/assets/icons/icon-512.png
@@ -53,14 +60,14 @@ jobs:
       - name: Prepare APK for installation
         run: |
           mkdir -p release-apk
-          cp android-ustny-schet/app/build/outputs/apk/debug/app-debug.apk release-apk/Liga_Znaniy_Ustny_Schet_v6.3.apk
+          cp android-ustny-schet/app/build/outputs/apk/debug/app-debug.apk release-apk/Liga_Znaniy_Ustny_Schet_v6.4.apk
           ls -lh release-apk/*.apk
           sha256sum release-apk/*.apk > release-apk/SHA256SUMS.txt
 
       - name: Attach APK to workflow
         uses: actions/upload-artifact@v4
         with:
-          name: Liga_Znaniy_Ustny_Schet_v6.3
+          name: Liga_Znaniy_Ustny_Schet_v6.4
           path: release-apk/*
           retention-days: 90
           if-no-files-found: error
@@ -69,10 +76,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG=ustny-schet-android-v6.3
-          APK=release-apk/Liga_Znaniy_Ustny_Schet_v6.3.apk
+          TAG=ustny-schet-android-v6.4
+          APK=release-apk/Liga_Znaniy_Ustny_Schet_v6.4.apk
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" "$APK" release-apk/SHA256SUMS.txt --clobber
           else
-            gh release create "$TAG" "$APK" release-apk/SHA256SUMS.txt --target "$GITHUB_SHA" --title "Лига знаний — Устный счёт 6.3 · Android" --notes "Установочный APK с автономной версией 6.3. Android 7+. Поддерживает PDF-отчёты, JSON резервные копии и обновление HTML через GitHub Pages. Сборка подписана тестовым ключом GitHub Actions, предназначена для установки напрямую, не для публикации в Google Play."
+            gh release create "$TAG" "$APK" release-apk/SHA256SUMS.txt --target "$GITHUB_SHA" --title "Лига знаний — Устный счёт 6.4 · Android" --notes "Установочный APK с автономной версией 6.4. Android 7+. Поддерживает PDF-отчёты, JSON резервные копии и обновление HTML через GitHub Pages. Сборка подписана тестовым ключом GitHub Actions, предназначена для установки напрямую, не для публикации в Google Play."
           fi
