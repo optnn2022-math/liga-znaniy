@@ -3,7 +3,7 @@ window.LigaLatex=(function(){
  const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
  // Исходные данные и ответы по-прежнему хранятся в обычной записи для проверки и статистики.
  function asTeX(s){
-  return String(s).replace(/(-?\d+\s+\d+\/\d+|-?\d+\/\d+|-?\d+,\d+)/g,segment=>{
+  return String(s).replace(/\(([^()]+)\)\s*\/\s*(\d+)/g,(_m,n,d)=>'\\frac{'+n+'}{'+d+'}').replace(/(-?\d+\s+\d+\/\d+|-?\d+\/\d+|-?\d+,\d+)/g,segment=>{
    let m=segment.match(/^(-?\d+)\s+(\d+)\/(\d+)$/);
    if(m)return m[1]+'\\,'+'\\frac{'+m[2]+'}{'+m[3]+'}';
    m=segment.match(/^(-?\d+)\/(\d+)$/);
@@ -29,7 +29,7 @@ window.LigaLatex=(function(){
  }
  function inline(raw,topic){
   if(!fracTopics.has(topic))return escapeHTML(raw);
-  const s=String(raw),regex=/(-?\d+\s+\d+\/\d+|-?\d+\/\d+|-?\d+,\d+)/g;
+  const s=String(raw),regex=/(\([^()]+\)\s*\/\s*\d+|-?\d+\s+\d+\/\d+|-?\d+\/\d+|-?\d+,\d+)/g;
   let html='',last=0,m;
   while((m=regex.exec(s))){
    html+=escapeHTML(s.slice(last,m.index));
