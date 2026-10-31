@@ -1,4 +1,4 @@
-name: Сборка Android APK — Устный счёт 5.7
+name: Сборка Android APK — Устный счёт 5.8
 
 on:
   workflow_dispatch:
@@ -40,7 +40,7 @@ jobs:
         run: |
           mkdir -p android-ustny-schet/app/src/main/assets/icons
           mkdir -p android-ustny-schet/app/src/main/res/drawable
-          cp ustny-schet/v5-7.html android-ustny-schet/app/src/main/assets/index.html
+          cp ustny-schet/v5-8.html android-ustny-schet/app/src/main/assets/index.html
           cp ustny-schet/manifest.webmanifest android-ustny-schet/app/src/main/assets/manifest.webmanifest
           cp ustny-schet/icons/icon-192.png android-ustny-schet/app/src/main/assets/icons/icon-192.png
           cp ustny-schet/icons/icon-512.png android-ustny-schet/app/src/main/assets/icons/icon-512.png
@@ -53,14 +53,14 @@ jobs:
       - name: Prepare APK for installation
         run: |
           mkdir -p release-apk
-          cp android-ustny-schet/app/build/outputs/apk/debug/app-debug.apk release-apk/Liga_Znaniy_Ustny_Schet_v5.7.apk
+          cp android-ustny-schet/app/build/outputs/apk/debug/app-debug.apk release-apk/Liga_Znaniy_Ustny_Schet_v5.8.apk
           ls -lh release-apk/*.apk
           sha256sum release-apk/*.apk > release-apk/SHA256SUMS.txt
 
       - name: Attach APK to workflow
         uses: actions/upload-artifact@v4
         with:
-          name: Liga_Znaniy_Ustny_Schet_v5.7
+          name: Liga_Znaniy_Ustny_Schet_v5.8
           path: release-apk/*
           retention-days: 90
           if-no-files-found: error
@@ -69,10 +69,10 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG=ustny-schet-android-v5.7
-          APK=release-apk/Liga_Znaniy_Ustny_Schet_v5.7.apk
+          TAG=ustny-schet-android-v5.8
+          APK=release-apk/Liga_Znaniy_Ustny_Schet_v5.8.apk
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" "$APK" release-apk/SHA256SUMS.txt --clobber
           else
-            gh release create "$TAG" "$APK" release-apk/SHA256SUMS.txt --target "$GITHUB_SHA" --title "Лига знаний — Устный счёт 5.7 · Android" --notes "Установочный APK с автономной версией 5.7. Android 7+. Поддерживает PDF-отчёты, JSON резервные копии и обновление HTML через GitHub Pages. Сборка подписана тестовым ключом GitHub Actions, предназначена для установки напрямую, не для публикации в Google Play."
+            gh release create "$TAG" "$APK" release-apk/SHA256SUMS.txt --target "$GITHUB_SHA" --title "Лига знаний — Устный счёт 5.8 · Android" --notes "Установочный APK с автономной версией 5.8. Android 7+. Поддерживает PDF-отчёты, JSON резервные копии и обновление HTML через GitHub Pages. Сборка подписана тестовым ключом GitHub Actions, предназначена для установки напрямую, не для публикации в Google Play."
           fi
