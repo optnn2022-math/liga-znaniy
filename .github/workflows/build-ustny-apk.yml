@@ -52,6 +52,7 @@ jobs:
           node --check ustny-schet/topics/app.js
           node --check ustny-schet/plan.js
           node ustny-schet/tests/adaptive-v64.cjs
+          node ustny-schet/tests/randomizer-v64.cjs
 
       - name: Bundle offline HTML and app icons
         run: |
