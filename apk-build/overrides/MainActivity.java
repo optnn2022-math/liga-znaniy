@@ -2,7 +2,7 @@ package ru.ligaznaniy.math;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.PrintManager;
+import android.print.PrintManager;
 import android.content.Context;
 import android.print.PrintAttributes;
 import android.print.PrintDocumentAdapter;
