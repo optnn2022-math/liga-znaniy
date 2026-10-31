@@ -3,7 +3,7 @@
 'use strict';
 const topics=[
  {id:'composition',group:0,title:'Состав числа до 10',icon:'🧩',sample:'8 = 5 + ?',method:'Представь число как две части. Чтобы найти недостающую часть, вычти известную из целого.'},
- {id:'tens',group:0,title:'Счёт десятками',icon:'🔟',sample:'27, 37, 47, ?',method:'При прибавлении или вычитании десятков единицы не меняются.'},
+ {id:'tens',group:0,title:'Счёт десятками',icon:'🔟',sample:'25 + 20 = ? · 240 ÷ 10 = ?',method:'Складывай и вычитай десятками (20 + 10, 45 − 10), умножай и дели на 10 и 100 (5 × 10, 2000 ÷ 100). В отдельных заданиях продолжай числовые последовательности.'},
  {id:'round',group:0,title:'До круглого числа',icon:'🎯',sample:'68 + ? = 70',method:'Определи ближайший следующий десяток, сотню или тысячу и найди разницу.'},
  {id:'decompose',group:0,title:'Удобные слагаемые',icon:'🪄',sample:'38 + 27 = 38 + 2 + ?',method:'Удобно по-разному: можно дополнить до круглого числа или выделить сотни, десятки и единицы. На уровне 5 ты сам выбираешь слагаемые.'},
  {id:'multiply',group:1,title:'Таблица умножения',icon:'✖️',sample:'7 × 8 = ?',method:'Свяжи умножение с одинаковыми слагаемыми и запоминай табличные случаи.'},
@@ -162,15 +162,47 @@ function make(topic,level=1){
    hint=`Из ${a} вычти известную часть.`;solution=`${a} − ${a-answer} = ${answer}.`;break;
   }
   case 'tens': {
-   const k=[0,10,40,90,250][level];
-   a=level===1?rnd(1,5)*10:rnd(1,k);b=10*rnd(1,level>=3?3:1);const direction=a-b>=0&&rnd(0,3)===0?-1:1;
-   expression=`${a}, ${a+direction*b}, ${a+2*direction*b}, ?`;
-   answer=a+3*direction*b;
-   // Для возрастающих серий значения всегда положительные; при убывании — проверяем нулевую границу.
-   if(answer<0){expression=`${a}, ${a+10}, ${a+20}, ?`;answer=a+30;b=10;}
-   hint='Посмотри, на сколько изменяется число при каждом шаге.';
-   solution=`Шаг последовательности: ${direction*b>0?'+':''}${answer-(a+2*direction*b)}. Следующее число: ${answer}.`;
-   if(expression.includes(`${a+20}`)&&answer===a+30)solution=`Шаг +10. Следующее число: ${answer}.`;
+   // Счёт десятками: арифметика (+, −, ×, ÷) и числовые последовательности.
+   // Уровень 1: круглые десятки и ×/÷ 10.
+   // Уровень 2: 25 + 20, 45 − 10, ×/÷ 10 и 100.
+   // Уровни 3–4: увеличение диапазона, действия с сотнями и большими числами.
+   const operation=pick(['+','−','×','÷','sequence']);
+   meta=operation;
+   if(operation==='sequence'){
+    a=level===1?10*rnd(2,8):rnd(20,level===2?160:level===3?650:3000);
+    b=10*rnd(1,level<=2?2:level===3?5:10);
+    const direction=a>=3*b&&rnd(0,3)===0?-1:1;
+    answer=a+3*direction*b;
+    expression=`${a}, ${a+direction*b}, ${a+2*direction*b}, ?`;
+    hint='Посмотри, на сколько десятков изменяется число на каждом шаге.';
+    solution=`Шаг: ${direction>0?'+':'−'}${b}. Следующее число: ${answer}.`;
+   }else if(operation==='+'||operation==='−'){
+    const unit=level>=3&&rnd(0,1)?100:10;
+    a=level===1?10*rnd(2,8):level===2?rnd(20,99):level===3?rnd(100,900):rnd(500,6000);
+    const maxUnits=level===1?3:level===2?4:level===3?9:35;
+    const available=operation==='−'?Math.max(1,Math.floor(a/unit)):maxUnits;
+    b=unit*rnd(1,Math.min(maxUnits,available));
+    // Все задания с вычитанием имеют неотрицательный целый ответ.
+    answer=operation==='+'?a+b:a-b;
+    expression=`${a} ${operation==='+'?'+':'−'} ${b} = ?`;
+    hint=unit===100?'Прибавляй или вычитай сотни. Десятки и единицы не изменятся.':'Прибавляй или вычитай десятки. Цифра единиц не изменится.';
+    solution=`${a} ${operation==='+'?'+':'−'} ${b} = ${answer}.`;
+   }else if(operation==='×'){
+    b=level===1?10:pick([10,100]);
+    a=level===1?rnd(2,9):level===2?rnd(2,12):level===3?rnd(2,30):rnd(10,90);
+    answer=a*b;
+    expression=`${a} × ${b} = ?`;
+    hint=`При умножении натурального числа на ${b} допиши ${b===10?'один ноль':'два нуля'} справа.`;
+    solution=`${a} × ${b} = ${answer}.`;
+   }else{
+    b=level===1?10:pick([10,100]);
+    const quotient=level===1?rnd(2,9):level===2?rnd(2,40):level===3?rnd(2,150):rnd(10,500);
+    a=quotient*b;
+    answer=quotient;
+    expression=`${a} ÷ ${b} = ?`;
+    hint=`При делении на ${b} отбрось ${b===10?'один ноль':'два нуля'} справа в делимом.`;
+    solution=`${a} ÷ ${b} = ${answer}; проверка: ${answer} × ${b} = ${a}.`;
+   }
    break;
   }
   case 'round': {
@@ -271,7 +303,7 @@ function make(topic,level=1){
   default:throw new Error('Неизвестная тема: '+topic);
  }
  if(!Number.isInteger(answer)||answer<0)throw new Error('Некорректный ответ '+topic+' '+expression+': '+answer);
- return {topic,expression,answer,hint,solution,key:topic+'|'+expression,level};
+ return {topic,expression,answer,hint,solution,key:topic+'|'+expression,level,...(topic==='tens'?{operation:meta}:{})};
 }
 root.MathTrainer={topics,groups,make,check,parseRational};
 })(typeof window!=='undefined'?window:globalThis);
