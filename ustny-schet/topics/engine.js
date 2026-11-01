@@ -262,13 +262,38 @@ function make(topic,level=1){
    break;
   }
   case 'multiply_round': {
-   // Отдельная тема: ×10/100/1000 и на круглые числа, но не обычная таблица.
-   const factors=[[10],[10,100,20,30,40],[10,100,1000,20,30,40,50,60,70,80,90],[10,100,1000,20,30,40,50,60,70,80,90,200,300,400,500,2000,3000]][level-1];
-   b=pick(factors);
-   a=rnd(2,level===1?9:level===2?15:level===3?35:99);
-   answer=a*b;expression=`${a} × ${b} = ?`;
-   hint=`Представь ${b} как ${b/(10**(String(b).length-1))} × ${10**(String(b).length-1)} и умножай по частям.`;
-   solution=`${a} × ${b} = ${answer}.`;
+   // 6.9: четыре методических уровня в отдельной теме умножения на круглые числа.
+   // 1: 5 × 10, 5 × 100, 13 × 10, 43 × 1000.
+   // 2: 50 × 20, 30 × 200 — оба множителя круглые (десятки).
+   // 3: 12 × 20, 45 × 500 — двузначное некруглое число на круглое.
+   // 4: 120 × 20 — трёхзначное круглое число на круглое.
+   if(level===1){
+    a=rnd(2,99);
+    b=pick([10,100,1000]);
+    hint=`Умножь натуральное число на ${b}: допиши справа ${String(b).length-1} нуля.`;
+    solution=`${a} × ${b} = ${answer=a*b}. Дописали ${String(b).length-1} нуля.`;
+   }else if(level===2){
+    a=10*rnd(2,9);
+    b=pick([20,30,40,50,60,70,80,90,100,200,300,400,500]);
+    answer=a*b;
+    hint=`Оба множителя круглые. Сначала ${a/10} × ${b/10}, затем результат умножь на 100.`;
+    solution=`${a} × ${b} = (${a/10} × ${b/10}) × 100 = ${answer}.`;
+   }else if(level===3){
+    a=rnd(11,99);
+    if(a%10===0)a+=1;
+    b=pick([20,30,40,50,60,70,80,90,100,200,300,400,500,600,700,800,900]);
+    answer=a*b;
+    const scale=b%100===0?100:10;
+    hint=`Вычисли ${a} × ${b/scale}, а затем умножь полученное число на ${scale}.`;
+    solution=`${a} × ${b} = (${a} × ${b/scale}) × ${scale} = ${answer}.`;
+   }else{
+    a=10*rnd(10,99);
+    b=pick([20,30,40,50,60,70,80,90,100,200,300,400,500,600,700,800,900,1000,2000]);
+    answer=a*b;
+    hint=`Сначала умножь ${a/10} на ${b/10}, затем результат на 100.`;
+    solution=`${a} × ${b} = (${a/10} × ${b/10}) × 100 = ${answer}.`;
+   }
+   expression=`${a} × ${b} = ?`;
    break;
   }
   case 'divide_round': {
@@ -354,7 +379,7 @@ function make(topic,level=1){
   default:throw new Error('Неизвестная тема: '+topic);
  }
  if(!Number.isInteger(answer)||answer<0)throw new Error('Некорректный ответ '+topic+' '+expression+': '+answer);
- return {topic,expression,answer,hint,solution,key:topic+'|'+expression,level,...(['tens','composition'].includes(topic)?{operation:meta}:{})};
+ return {topic,expression,answer,hint,solution,key:topic+'|'+expression,level,...(['tens','composition'].includes(topic)?{operation:meta}:{}),...(topic==='multiply_round'?{roundScheme:69}:{})};
 }
 root.MathTrainer={topics,groups,make,check,parseRational};
 })(typeof window!=='undefined'?window:globalThis);
