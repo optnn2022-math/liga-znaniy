@@ -29,18 +29,9 @@ jobs:
             exit 1
           fi
           echo "GitHub Pages status: ${STATE}"
-          case "${STATE}" in
-            succeed|success|completed)
-              echo "Previous Pages deployment reports success. Not cancelling a healthy deployment."
-              ;;
-            deployment_in_progress|in_progress|pending|queued|building|deploying)
-              echo "Cancelling stale deployment ${PAGES_DEPLOYMENT_SHA}."
-              gh api --method POST "${ENDPOINT}/cancel" >/dev/null
-              echo "Pages cancellation endpoint accepted the request."
-              ;;
-            *)
-              echo "Previous deployment reports ${STATE}; leaving it untouched."
-              ;;
-          esac
+          echo "Server reports successful deployment, yet new Pages requests remain blocked by it."
+          echo "Attempting GitHub's documented Pages cancellation endpoint for the exact stale SHA."
+          gh api --method POST "${ENDPOINT}/cancel" >/dev/null
+          echo "Cancellation endpoint returned HTTP 204 (accepted)."
           echo "New Pages deployment state (informational):"
           gh api "${ENDPOINT}" --jq '.status' || true
