@@ -2,7 +2,7 @@
 (function(root){
 'use strict';
 const topics=[
- {id:'composition',group:0,title:'Состав числа до 10',icon:'🧩',sample:'8 = 5 + ?',method:'Представь число как две части. Чтобы найти недостающую часть, вычти известную из целого.'},
+ {id:'composition',group:0,title:'Счёт в пределах 10',icon:'🧩',sample:'4 + 5 = ? · 5 − 3 = ?',method:'Начальный: сложение и вычитание до 10. Базовый: найди пропущенное число. Продвинутый: дополнение до 10. Профи: два последовательных действия.'},
  {id:'tens',group:0,title:'Счёт десятками',icon:'🔟',sample:'25 + 20 = ? · 240 ÷ 10 = ?',method:'Складывай и вычитай десятками (20 + 10, 45 − 10), умножай и дели на 10 и 100 (5 × 10, 2000 ÷ 100). В отдельных заданиях продолжай числовые последовательности.'},
  {id:'round',group:0,title:'До круглого числа',icon:'🎯',sample:'68 + ? = 70',method:'Определи ближайший следующий десяток, сотню или тысячу и найди разницу.'},
  {id:'decompose',group:0,title:'Удобные слагаемые',icon:'🪄',sample:'38 + 27 = 38 + 2 + ?',method:'Удобно по-разному: можно дополнить до круглого числа или выделить сотни, десятки и единицы. На уровне 5 ты сам выбираешь слагаемые.'},
@@ -157,9 +157,62 @@ function make(topic,level=1){
  let a,b,c,d;
  switch(topic){
   case 'composition': {
-   const hi=[0,5,7,10,10][level];a=rnd(2,hi);b=rnd(0,a);c=a-b;
-   if(rnd(0,1)) {expression=`${a} = ${b} + ?`;answer=c;} else {expression=`${a} = ? + ${c}`;answer=b;}
-   hint=`Из ${a} вычти известную часть.`;solution=`${a} − ${a-answer} = ${answer}.`;break;
+   // Уровень 1: простое сложение/вычитание, результат от 0 до 10.
+   // Уровень 2: пропущенное число в примерах с небольшими числами.
+   // Уровень 3: пропущенное число при дополнении и вычитании из 10.
+   // Уровень 4: цепочка из двух сложений или двух вычитаний в пределах 10.
+   const addition=rnd(0,1)===1;
+   if(level===1){
+    if(addition){
+     a=rnd(1,9);b=rnd(1,10-a);
+     answer=a+b;expression=`${a} + ${b} = ?`;
+     hint='Сложи два числа. В ответе должно быть не больше 10.';
+    }else{
+     a=rnd(2,10);b=rnd(1,a);
+     answer=a-b;expression=`${a} − ${b} = ?`;
+     hint='Отними второе число от первого.';
+    }
+    solution=`${expression.replace('?',String(answer))}`;
+   }else if(level===2){
+    if(addition){
+     a=rnd(3,7);b=rnd(1,a-1);answer=a-b;
+     expression=`${a} = ? + ${b}`;
+     hint=`Из ${a} вычти известное слагаемое ${b}.`;
+     solution=`${a} − ${b} = ${answer}. Значит, ${a} = ${answer} + ${b}.`;
+    }else{
+     a=rnd(3,8);c=rnd(1,a-1);answer=a-c;
+     expression=`${a} − ? = ${c}`;
+     hint=`Из ${a} вычти известную разность ${c}.`;
+     solution=`${a} − ${c} = ${answer}. Значит, ${a} − ${answer} = ${c}.`;
+    }
+   }else if(level===3){
+    a=10;
+    if(addition){
+     b=rnd(1,9);answer=10-b;
+     expression=`10 = ? + ${b}`;
+     hint=`Сколько нужно прибавить к ${b}, чтобы получилось 10?`;
+     solution=`10 − ${b} = ${answer}. Значит, 10 = ${answer} + ${b}.`;
+    }else{
+     c=rnd(1,9);answer=10-c;
+     expression=`10 − ? = ${c}`;
+     hint=`Из 10 вычти ${c}, чтобы найти вычитаемое.`;
+     solution=`10 − ${c} = ${answer}. Значит, 10 − ${answer} = ${c}.`;
+    }
+   }else{
+    if(addition){
+     a=rnd(1,7);b=rnd(1,9-a);c=rnd(1,10-a-b);
+     answer=a+b+c;expression=`${a} + ${b} + ${c} = ?`;
+     hint=`Сначала ${a} + ${b}, затем к полученному числу прибавь ${c}.`;
+     solution=`${a} + ${b} = ${a+b}; ${a+b} + ${c} = ${answer}.`;
+    }else{
+     a=rnd(3,10);b=rnd(1,a-1);c=rnd(1,a-b);
+     answer=a-b-c;expression=`${a} − ${b} − ${c} = ?`;
+     hint=`Сначала ${a} − ${b}, затем из результата вычти ${c}.`;
+     solution=`${a} − ${b} = ${a-b}; ${a-b} − ${c} = ${answer}.`;
+    }
+   }
+   meta=addition?'+':'−';
+   break;
   }
   case 'tens': {
    // Счёт десятками: арифметика (+, −, ×, ÷) и числовые последовательности.
@@ -303,7 +356,7 @@ function make(topic,level=1){
   default:throw new Error('Неизвестная тема: '+topic);
  }
  if(!Number.isInteger(answer)||answer<0)throw new Error('Некорректный ответ '+topic+' '+expression+': '+answer);
- return {topic,expression,answer,hint,solution,key:topic+'|'+expression,level,...(topic==='tens'?{operation:meta}:{})};
+ return {topic,expression,answer,hint,solution,key:topic+'|'+expression,level,...(['tens','composition'].includes(topic)?{operation:meta}:{})};
 }
 root.MathTrainer={topics,groups,make,check,parseRational};
 })(typeof window!=='undefined'?window:globalThis);

@@ -1,0 +1,103 @@
+name: Android APK и автономный сайт — Устный счёт 6.6
+
+on:
+  push:
+    branches: [main, ustny-schet-v6.6-within-ten]
+    paths:
+      - 'ustny-schet/topics/engine.js'
+      - 'ustny-schet/topics/lessons.js'
+      - 'ustny-schet/plan.js'
+      - 'ustny-schet/scripts/build-v66.cjs'
+      - 'ustny-schet/tests/tens-v65.cjs'
+      - 'ustny-schet/tests/composition-v66.cjs'
+      - 'ustny-schet/tests/offline-v66.cjs'
+      - '.github/workflows/build-ustny-v66.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  check-and-build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Generate self-contained HTML without modifying 6.4
+        run: |
+          node --check ustny-schet/topics/engine.js
+          node --check ustny-schet/topics/lessons.js
+          node --check ustny-schet/scripts/build-v66.cjs
+          node ustny-schet/scripts/build-v66.cjs
+      - name: Check tens operations and offline equivalence
+        run: |
+          node ustny-schet/tests/tens-v65.cjs
+          node ustny-schet/tests/composition-v66.cjs
+          node ustny-schet/tests/offline-v66.cjs
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Set up Gradle 8.11.1
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.11.1'
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+      - name: Install Android build tools
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
+      - name: Prepare Android 6.6
+        run: |
+          sed -i 's/versionCode 64/versionCode 66/; s/versionName '\''6.4'\''/versionName '\''6.6'\''/' android-ustny-schet/app/build.gradle
+          mkdir -p android-ustny-schet/app/src/main/assets/icons
+          mkdir -p android-ustny-schet/app/src/main/res/drawable
+          cp ustny-schet/v6-6.html android-ustny-schet/app/src/main/assets/index.html
+          cp ustny-schet/manifest.webmanifest android-ustny-schet/app/src/main/assets/manifest.webmanifest
+          cp ustny-schet/icons/icon-192.png android-ustny-schet/app/src/main/assets/icons/icon-192.png
+          cp ustny-schet/icons/icon-512.png android-ustny-schet/app/src/main/assets/icons/icon-512.png
+          cp ustny-schet/icons/icon-192.png android-ustny-schet/app/src/main/res/drawable/app_icon.png
+          test -s android-ustny-schet/app/src/main/assets/index.html
+      - name: Compile APK
+        run: gradle -p android-ustny-schet :app:assembleDebug --no-daemon --stacktrace
+      - name: Package APK
+        run: |
+          mkdir -p release-apk
+          cp android-ustny-schet/app/build/outputs/apk/debug/app-debug.apk release-apk/Liga_Znaniy_Ustny_Schet_v6.6.apk
+          sha256sum release-apk/*.apk > release-apk/SHA256SUMS.txt
+      - name: Upload APK build
+        uses: actions/upload-artifact@v4
+        with:
+          name: Liga_Znaniy_Ustny_Schet_v6.6
+          path: release-apk/*
+          retention-days: 90
+          if-no-files-found: error
+      - name: Upload standalone HTML
+        uses: actions/upload-artifact@v4
+        with:
+          name: Liga_Znaniy_Ustny_Schet_v6.6_HTML
+          path: ustny-schet/v6-6.html
+          retention-days: 90
+      - name: Publish APK as separate release
+        if: github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=ustny-schet-android-v6.6
+          APK=release-apk/Liga_Znaniy_Ustny_Schet_v6.6.apk
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$APK" release-apk/SHA256SUMS.txt --clobber
+          else
+            gh release create "$TAG" "$APK" release-apk/SHA256SUMS.txt --target "$GITHUB_SHA" --title "Лига знаний — Устный счёт 6.6 · Android" --notes "Счёт в пределах 10: четыре уровня (+, −, пропуски, двойные действия). Счёт десятками, 16 тем, статистика и автономная работа. 6.5 и более ранние версии сохранены."
+          fi
+      - name: Commit standalone 6.6 on main for GitHub Pages
+        if: github.ref == 'refs/heads/main'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ustny-schet/v6-6.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Публикация автономного устного счёта 6.6"
+            git push origin HEAD:main
+          fi
