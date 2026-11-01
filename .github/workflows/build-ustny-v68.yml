@@ -12,7 +12,7 @@ on:
       - 'ustny-schet/app.html'
       - 'ustny-schet/scripts/build-v68.cjs'
       - 'ustny-schet/tests/table-split-v68.cjs'
-      - 'ustny-schet/tests/composition-v66.cjs'
+      - 'ustny-schet/tests/composition-v68.cjs'
       - 'ustny-schet/tests/offline-v68.cjs'
       - '.github/workflows/build-ustny-v68.yml'
   workflow_dispatch:
@@ -36,7 +36,7 @@ jobs:
       - name: Check tens operations and offline equivalence
         run: |
           node ustny-schet/tests/table-split-v68.cjs
-          node ustny-schet/tests/composition-v66.cjs
+          node ustny-schet/tests/composition-v68.cjs
           node ustny-schet/tests/offline-v68.cjs
       - name: Set up Java 17
         uses: actions/setup-java@v4
