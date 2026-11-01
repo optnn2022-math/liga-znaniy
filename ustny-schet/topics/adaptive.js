@@ -41,7 +41,7 @@ function choose(options){
  const topics=Array.isArray(options.topics)?options.topics.filter(Boolean):[];
  if(!topics.length)return null;
  const used=options.used||new Set(),level=Number(options.level)||1,review=options.review||{};
- const wrong=(Array.isArray(options.mistakes)?options.mistakes:[]).filter(p=>p&&topics.includes(p.topic)&&key(p)&&!used.has(key(p))&&(p.level==null||Number(p.level)===level));
+ const wrong=(Array.isArray(options.mistakes)?options.mistakes:[]).filter(p=>p&&topics.includes(p.topic)&&key(p)&&!used.has(key(p))&&(p.level==null||Number(p.level)===level)&&(p.topic!=='multiply_round'||p.roundScheme===69));
  // В среднем 28% случаев отводится заданиям, в которых раньше были ошибки.
  if(wrong.length&&Math.random()<0.28){
   const weights=wrong.map(p=>Math.max(1,Math.min(6,Number(p.errors)||1)));
