@@ -2,7 +2,7 @@ name: Android APK и автономный сайт — Устный счёт 6.5
 
 on:
   push:
-    branches: [main, ustny-schet-v6.5-tens]
+    branches: [ustny-schet-v6.5-tens]
     paths:
       - 'ustny-schet/topics/engine.js'
       - 'ustny-schet/topics/lessons.js'
