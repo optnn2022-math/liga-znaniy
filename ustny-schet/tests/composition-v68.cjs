@@ -59,7 +59,7 @@ for(const level of [1,2,3,4]){
 }
 const lesson=fs.readFileSync('ustny-schet/topics/lessons.js','utf8');
 for(const s of ['4 + 5 = 9','5 − 3 = 2','4 = □ + 2','5 − □ = 3','10 = □ + 8','10 − □ = 7','7 + 1 + 2 = 10','10 − 1 − 2 = 7'])assert.ok(lesson.includes(s),'Урок: '+s);
-for(const s of ["composition-v66-level-","topic==='composition'?Math.max(0,Math.min(3"])assert.ok(lesson.includes(s),'Выбор урока: '+s);
+for(const s of ["composition-v66-level-","['tens','multiply_round','divide_round','composition'].includes(topic)?Math.max(0,Math.min(3"])assert.ok(lesson.includes(s),'Выбор урока: '+s);
 const app=fs.readFileSync('ustny-schet/topics/app.js','utf8');
 for(const s of ['4 = ? + 2','5 − ? = 3','10 = ? + 8','10 − ? = 7','7 + 1 + 2 = ?','10 − 1 − 2 = ?'])assert.ok(app.includes(s),'Превью: '+s);
 console.log('Composition 6.6 tests passed: 6000 tasks, 4 levels, answers, bounds, teaching examples.',JSON.stringify(statistics));
