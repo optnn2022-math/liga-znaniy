@@ -8,11 +8,11 @@ const skillById=Object.fromEntries(skills.map(t=>[t.id,t]));
 const MIN_ANSWERS=8;
 const library=[
  {title:'Счёт в пределах 10',topics:['composition'],level:1,minutes:5,desc:'Сложение и вычитание до 10'},
- {title:'Считаем десятками',topics:['tens'],level:1,minutes:5,desc:'Складываем и вычитаем десятки, умножаем и делим на 10'},
+ {title:'Считаем десятками',topics:['tens'],level:1,minutes:5,desc:'Только сложение и вычитание десятков'},
  {title:'Дополняем до круглого',topics:['round'],level:1,minutes:6,desc:'Сколько осталось до десятка?'},
  {title:'Удобные слагаемые',topics:['decompose'],level:1,minutes:5,desc:'Разложи число на простые части'},
- {title:'Таблица умножения',topics:['multiply'],level:1,minutes:6,desc:'Первые табличные случаи'},
- {title:'Таблица деления',topics:['divide'],level:1,minutes:5,desc:'Связь деления с умножением'},
+ {title:'Таблица умножения',topics:['multiply'],level:1,minutes:6,desc:'Таблица и умножение на 10, 100, 1000 по уровням'},
+ {title:'Таблица деления',topics:['divide'],level:1,minutes:5,desc:'Таблица и деление на 10, 100, 1000 по уровням'},
  {title:'Итог недели: основы',topics:['composition','tens','round','decompose','multiply','divide'],level:1,minutes:7,desc:'Повторяем освоенные приёмы'},
  {title:'Складываем удобно',topics:['convenient'],level:1,minutes:5,desc:'Округление с поправкой'},
  {title:'Вычитаем по частям',topics:['subtract_parts'],level:1,minutes:6,desc:'Разложение вычитаемого'},
