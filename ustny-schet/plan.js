@@ -7,7 +7,7 @@ const skills=window.MathTrainer.topics;
 const skillById=Object.fromEntries(skills.map(t=>[t.id,t]));
 const MIN_ANSWERS=8;
 const library=[
- {title:'Состав числа до 10',topics:['composition'],level:1,minutes:5,desc:'Разложение числа на две части'},
+ {title:'Счёт в пределах 10',topics:['composition'],level:1,minutes:5,desc:'Сложение и вычитание до 10'},
  {title:'Считаем десятками',topics:['tens'],level:1,minutes:5,desc:'Складываем и вычитаем десятки, умножаем и делим на 10'},
  {title:'Дополняем до круглого',topics:['round'],level:1,minutes:6,desc:'Сколько осталось до десятка?'},
  {title:'Удобные слагаемые',topics:['decompose'],level:1,minutes:5,desc:'Разложи число на простые части'},
@@ -21,7 +21,7 @@ const library=[
  {title:'Сложение до 100',topics:['hundreds'],level:2,minutes:6,desc:'Разрядные вычисления'},
  {title:'Цепочки действий',topics:['chain'],level:1,minutes:5,desc:'Держим промежуточный результат в уме'},
  {title:'Итог недели: приёмы',topics:['convenient','subtract_parts','round_ops','distributive','hundreds','chain'],level:1,minutes:7,desc:'Повторяем способы рационального счёта'},
- {title:'Состав числа и округление',topics:['composition','round','decompose'],level:2,minutes:5,desc:'Автоматизируем базовые навыки'},
+ {title:'Счёт в пределах 10 и округление',topics:['composition','round','decompose'],level:2,minutes:5,desc:'Находим пропущенные числа и закрепляем приёмы'},
  {title:'Умножение: больше случаев',topics:['multiply'],level:2,minutes:6,desc:'Закрепляем таблицу умножения'},
  {title:'Деление: больше случаев',topics:['divide'],level:2,minutes:6,desc:'Быстро находим частное'},
  {title:'Удобная сумма',topics:['convenient','decompose'],level:2,minutes:5,desc:'Находим выгодное разложение'},
