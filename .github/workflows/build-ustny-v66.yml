@@ -11,7 +11,7 @@ on:
       - 'ustny-schet/tests/tens-v65.cjs'
       - 'ustny-schet/tests/composition-v66.cjs'
       - 'ustny-schet/tests/offline-v66.cjs'
-      - '.github/workflows/build-ustny-v65.yml'
+      - '.github/workflows/build-ustny-v66.yml'
   workflow_dispatch:
 
 permissions:
