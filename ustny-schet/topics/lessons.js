@@ -1,6 +1,28 @@
 (function(){
 'use strict';
 const lessons={
+ composition:{title:'Счёт в пределах 10 — четыре уровня',variants:[
+  {name:'Начальный: действия до 10',steps:[
+   ['Складываем числа','4 + 5 = 9','Сначала представь 4 предмета, прибавь ещё 5. Получим 9.'],
+   ['Вычитаем числа','5 − 3 = 2','Убираем из пяти три. Остаются два.'],
+   ['Проверяем ответ','9 − 5 = 4','Вычитание помогает проверить сложение.']
+  ]},
+  {name:'Базовый: ищем пропуск',steps:[
+   ['Находим недостающее слагаемое','4 = □ + 2','Нужно найти, сколько прибавить к 2, чтобы получить 4.'],
+   ['Используем вычитание','4 − 2 = 2','Пропущенное слагаемое равно 2.'],
+   ['Находим пропущенное вычитаемое','5 − □ = 3','Вычитаемое равно 5 − 3 = 2.']
+  ]},
+  {name:'Продвинутый: состав десятки',steps:[
+   ['Дополняем число до 10','10 = □ + 8','Чтобы получить 10, нужно к 8 прибавить 2.'],
+   ['Находим неизвестное при вычитании','10 − □ = 7','Нужно отнять 3, потому что 10 − 7 = 3.'],
+   ['Проверяем дополнение','10 = 3 + 7','Три и семь вместе составляют десять.']
+  ]},
+  {name:'Профи: два действия',steps:[
+   ['Выполняем два сложения','7 + 1 + 2 = 10','Сначала 7 + 1 = 8, затем 8 + 2 = 10.'],
+   ['Выполняем два вычитания','10 − 1 − 2 = 7','Сначала 10 − 1 = 9, затем 9 − 2 = 7.'],
+   ['Запоминаем порядок','8 − 3 − 2 = 3','Считаем слева направо: 8 − 3 = 5, затем 5 − 2 = 3.']
+  ]}
+ ]},
  tens:{title:'Счёт десятками — четыре действия',variants:[
   {name:'Сложение и вычитание десятков',steps:[
    ['Складываем круглые десятки','20 + 10 = 30','Два десятка плюс один десяток — три десятка.'],
@@ -94,8 +116,8 @@ const seenKey='liga_math_lessons_v54';
 function getSeen(){try{return JSON.parse(localStorage.getItem(seenKey))||{}}catch(_){return {}}}
 function isSeen(id){return !!getSeen()[id]}
 function markSeen(id){try{const a=getSeen();a[id]=Date.now();localStorage.setItem(seenKey,JSON.stringify(a));}catch(_){}}
-const idFor=(topic,level)=>topic==='tens'?'tens-level-'+Math.max(1,Math.min(4,Number(level)||1)):topic==='decompose'?(level===5?'decompose-free':'decompose-simple'):topic==='subtract_parts'?(level===5?'subtract-free':'subtract-simple'):topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic;
-function defaultVariant(topic,level){return topic==='tens'?Math.max(0,Math.min(3,(Number(level)||1)-1)):topic==='decompose'?(level===5?0:0):topic==='fractions'?(level>=2?1:0):0}
+const idFor=(topic,level)=>topic==='composition'?'composition-v66-level-'+Math.max(1,Math.min(4,Number(level)||1)):topic==='tens'?'tens-level-'+Math.max(1,Math.min(4,Number(level)||1)):topic==='decompose'?(level===5?'decompose-free':'decompose-simple'):topic==='subtract_parts'?(level===5?'subtract-free':'subtract-simple'):topic==='fractions'?(level>=2?'fractions-different':'fractions-same'):topic;
+function defaultVariant(topic,level){return topic==='composition'?Math.max(0,Math.min(3,(Number(level)||1)-1)):topic==='tens'?Math.max(0,Math.min(3,(Number(level)||1)-1)):topic==='decompose'?(level===5?0:0):topic==='fractions'?(level>=2?1:0):0}
 function formula(raw,topic){if(topic==='fractions'&&window.LigaLatex){return window.LigaLatex.formula(raw,topic)}return esc(raw)}
 window.LigaLessons={lessons,has:(id)=>!!lessons[id],isSeen,markSeen,idFor,defaultVariant,formula,esc};
 })();
