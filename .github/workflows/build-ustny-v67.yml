@@ -10,7 +10,7 @@ on:
       - 'ustny-schet/topics/app.js'
       - 'ustny-schet/scripts/build-v67.cjs'
       - 'ustny-schet/tests/operations-v67.cjs'
-      - 'ustny-schet/tests/composition-v67.cjs'
+      - 'ustny-schet/tests/composition-v66.cjs'
       - 'ustny-schet/tests/offline-v67.cjs'
       - '.github/workflows/build-ustny-v67.yml'
   workflow_dispatch:
@@ -34,7 +34,7 @@ jobs:
       - name: Check tens operations and offline equivalence
         run: |
           node ustny-schet/tests/operations-v67.cjs
-          node ustny-schet/tests/composition-v67.cjs
+          node ustny-schet/tests/composition-v66.cjs
           node ustny-schet/tests/offline-v67.cjs
       - name: Set up Java 17
         uses: actions/setup-java@v4
@@ -51,7 +51,7 @@ jobs:
         run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
       - name: Prepare Android 6.7
         run: |
-          sed -i 's/versionCode 64/versionCode 66/; s/versionName '\''6.4'\''/versionName '\''6.7'\''/' android-ustny-schet/app/build.gradle
+          sed -i 's/versionCode 64/versionCode 67/; s/versionName '\''6.4'\''/versionName '\''6.7'\''/' android-ustny-schet/app/build.gradle
           mkdir -p android-ustny-schet/app/src/main/assets/icons
           mkdir -p android-ustny-schet/app/src/main/res/drawable
           cp ustny-schet/v6-7.html android-ustny-schet/app/src/main/assets/index.html
