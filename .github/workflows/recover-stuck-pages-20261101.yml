@@ -1,0 +1,46 @@
+name: Диагностика и восстановление GitHub Pages (1 ноября)
+
+on:
+  push:
+    branches: [fix-pages-stuck-20261101]
+    paths:
+      - '.github/workflows/recover-stuck-pages-20261101.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+
+jobs:
+  recover-stuck-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read GitHub Pages deployment state, cancel only if stuck
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PAGES_DEPLOYMENT_SHA: 9958e2f516de6c22b42ddf154b015aa304f0e964
+        run: |
+          set -euo pipefail
+          ENDPOINT="repos/${GITHUB_REPOSITORY}/pages/deployments/${PAGES_DEPLOYMENT_SHA}"
+          echo "Checking GitHub Pages deployment ${PAGES_DEPLOYMENT_SHA}"
+          if ! STATE=$(gh api "${ENDPOINT}" --jq '.status'); then
+            echo "::error::Could not read previous Pages deployment state; no cancellation attempted"
+            exit 1
+          fi
+          echo "GitHub Pages status: ${STATE}"
+          case "${STATE}" in
+            succeed|success|completed)
+              echo "Previous Pages deployment reports success. Not cancelling a healthy deployment."
+              ;;
+            deployment_in_progress|in_progress|pending|queued|building|deploying)
+              echo "Cancelling stale deployment ${PAGES_DEPLOYMENT_SHA}."
+              gh api --method POST "${ENDPOINT}/cancel" >/dev/null
+              echo "Pages cancellation endpoint accepted the request."
+              ;;
+            *)
+              echo "Previous deployment reports ${STATE}; leaving it untouched."
+              ;;
+          esac
+          echo "New Pages deployment state (informational):"
+          gh api "${ENDPOINT}" --jq '.status' || true
