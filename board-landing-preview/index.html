@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f6f9ff">
+  <meta name="description" content="Лига знаний — онлайн-доска для уроков математики. Геометрические построения, графики, объёмные фигуры, учебные материалы и совместная работа. Начните занятие в браузере.">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="canonical" href="https://optnn2022-math.github.io/liga-znaniy/board-landing-preview/">
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:site_name" content="Лига знаний">
+  <meta property="og:url" content="https://optnn2022-math.github.io/liga-znaniy/board-landing-preview/">
+  <meta property="og:title" content="Лига знаний — онлайн-доска для математики">
+  <meta property="og:description" content="Математика наглядно. Уроки удобно. Геометрия, графики и совместная работа — всё на одной доске.">
+  <meta property="og:image" content="https://optnn2022-math.github.io/liga-znaniy/board-landing-preview/share-card.png">
+  <meta property="og:image:secure_url" content="https://optnn2022-math.github.io/liga-znaniy/board-landing-preview/share-card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Лига знаний — математическая онлайн-доска с эмблемой Σ">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Лига знаний — онлайн-доска для математики">
+  <meta name="twitter:description" content="Объясняйте математику наглядно: графики, геометрия, PDF и совместная работа.">
+  <meta name="twitter:image" content="https://optnn2022-math.github.io/liga-znaniy/board-landing-preview/share-card.png">
+  <title>Онлайн-доска для математики — Лига знаний</title>
+  <style>
+    :root{--navy:#17264e;--ink:#1b2c53;--muted:#65718a;--brand:#1cabb7;--brand-dark:#098795;--gold:#f3be53;--bg:#f7faff;--line:#dfebf4;--white:#fff;--radius:22px;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth;scroll-padding-top:90px}
+    body{margin:0;min-width:320px;overflow-x:hidden}
+    a{color:inherit;text-decoration:none}
+    button{font:inherit;cursor:pointer}
+    img,svg{max-width:100%}
+    :focus-visible{outline:3px solid #f6b83e;outline-offset:4px}
+    .container{width:min(1180px,calc(100% - 44px));margin:0 auto}
+    .site-header{position:sticky;top:0;z-index:20;background:#ffffffed;backdrop-filter:blur(16px);border-bottom:1px solid #e3edf5}
+    .header-inner{height:80px;display:flex;align-items:center;gap:28px}
+    .brand{display:inline-flex;align-items:center;gap:12px;white-space:nowrap;font-weight:850;letter-spacing:-.7px;font-size:19px}
+    .brand-mark{height:43px;width:43px;display:grid;place-items:center;flex:none;border-radius:13px;background:linear-gradient(150deg,#2ac1bf,#2186c4);box-shadow:0 7px 16px #1697ba38}
+    .brand-mark svg{width:27px;height:27px}
+    .brand small{display:block;letter-spacing:.1px;font-size:11px;font-weight:650;color:#77849d;margin-top:1px}
+    .nav-links{display:flex;align-items:center;justify-content:center;gap:28px;margin-left:auto;font-size:14px;font-weight:700;color:#53617d}
+    .nav-links a:hover,.site-footer a:hover{color:var(--brand-dark)}
+    .header-actions{display:flex;align-items:center;gap:12px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:12px 21px;border-radius:14px;border:1px solid transparent;font-weight:780;font-size:14px;transition:transform .2s,background .2s,box-shadow .2s;white-space:nowrap}
+    .btn:hover{transform:translateY(-2px)}
+    .btn-primary{background:linear-gradient(115deg,#129eae,#207ec5);color:#fff;box-shadow:0 8px 21px #139eae35}
+    .btn-primary:hover{box-shadow:0 12px 26px #139eae55}
+    .btn-light{background:#fff;border-color:#d8e5f0;color:var(--ink)}
+    .btn-outline{background:transparent;border-color:#bdd7e7;color:#234267}
+    .btn-arrow{font-size:19px;line-height:1}
+    .mobile-toggle{display:none;width:46px;height:46px;background:#f0f6fb;border:1px solid #dce9f3;border-radius:12px;color:var(--ink);font-size:23px}
+    .hero{position:relative;isolation:isolate;overflow:hidden;padding:83px 0 85px;background:radial-gradient(ellipse at 82% 25%,#caedffb8,transparent 49%),radial-gradient(ellipse at 7% 30%,#fdf2dabe,transparent 39%),linear-gradient(#fafdff,#f5faff)}
+    .hero::after{content:"";position:absolute;width:570px;height:570px;border:1px solid #80c5e32b;border-radius:50%;right:-285px;top:-220px;z-index:-1}
+    .hero-grid{display:grid;grid-template-columns:minmax(0,.93fr) minmax(0,1.07fr);gap:34px;align-items:center}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;color:#117e91;font-size:13px;font-weight:820;background:#e5f9f9;border:1px solid #beece9;padding:9px 13px;border-radius:99px}
+    .eyebrow:before{content:"";width:7px;height:7px;background:#12b6a6;border-radius:50%;box-shadow:0 0 0 4px #beeeeb}
+    h1{font-size:clamp(39px,4.5vw,62px);line-height:1.09;letter-spacing:-2.5px;margin:24px 0}
+    h1 span{color:#189cae}
+    .hero-lead{font-size:18px;line-height:1.7;color:#61708a;max-width:505px;margin:0 0 28px}
+    .hero-buttons{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:27px}
+    .hero-trust{display:flex;flex-wrap:wrap;gap:14px 21px;font-size:13px;color:#60708b;font-weight:660}
+    .hero-trust span{display:inline-flex;align-items:center;gap:7px}
+    .check{width:18px;height:18px;display:inline-grid;place-items:center;border-radius:50%;background:#daf4ed;color:#087c70;font-weight:bold}
+    .math-note{font-size:14px;font-weight:850;color:#8698b6;letter-spacing:.03em;margin-top:40px;transform:rotate(-4deg);display:inline-block}
+    .demo-wrap{position:relative;padding:18px 0 22px 15px}
+    .demo-wrap::before{content:"";position:absolute;inset:65px 8px -4px 50px;z-index:-1;background:#b2e6ed88;filter:blur(43px);border-radius:50%}
+    .demo-shell{position:relative;background:#fff;padding:12px;border:1px solid #dfeaf5;border-radius:23px;box-shadow:0 30px 72px #274d8350;transform:rotate(1.3deg)}
+    .demo-topbar{height:43px;display:flex;align-items:center;gap:12px;padding:0 11px 10px;color:#62738a}
+    .window-dots{display:flex;gap:5px}
+    .window-dots i{width:9px;height:9px;background:#d9e6f0;border-radius:50%}
+    .window-dots i:first-child{background:#ffc4a5}.window-dots i:nth-child(2){background:#fce2a0}.window-dots i:last-child{background:#b9ead8}
+    .demo-title{font-weight:800;font-size:11px;letter-spacing:.04em;margin-left:6px}
+    .demo-status{margin-left:auto;font-size:10px;font-weight:750;background:#e8f7f3;color:#2f9c84;border-radius:20px;padding:6px 8px}
+    .demo-content{display:flex;gap:9px}
+    .demo-tools{width:40px;background:#eef5fa;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 5px}
+    .tool{width:29px;height:29px;display:grid;place-items:center;font-weight:900;color:#5a7690;font-size:16px;border-radius:9px}
+    .tool.selected{background:#189eaf;color:white;box-shadow:0 2px 7px #209fba44}
+    .demo-whiteboard{position:relative;border-radius:12px;background:#fff;overflow:hidden;flex:1;min-width:0;border:1px solid #e5eaf1}
+    .demo-whiteboard svg{display:block;width:100%;height:auto;aspect-ratio:660/443}
+    .demo-bottom{display:flex;align-items:center;justify-content:space-between;padding:10px 6px 2px;color:#8794a7;font-size:10px;font-weight:650}
+    .demo-bottom b{background:#e8f7fb;color:#168eaa;border-radius:7px;padding:4px 7px}
+    .mini-call{position:absolute;right:-12px;bottom:38px;background:#fff;border-radius:14px;padding:9px 12px;display:flex;align-items:center;gap:9px;box-shadow:0 12px 32px #1e407d38;border:1px solid #e1ecf3;transform:rotate(-1.3deg)}
+    .avatar{height:29px;width:29px;border-radius:50%;display:grid;place-items:center;color:#fff;background:linear-gradient(135deg,#5f8bda,#8065bd);font-size:12px;font-weight:800}
+    .mini-call strong{display:block;font-size:11px}.mini-call small{font-size:10px;color:#8090a5}
+    .floating-chip{position:absolute;left:-14px;top:65px;background:#fff;border-radius:12px;padding:10px 13px;box-shadow:0 12px 30px #18356527;border:1px solid #e1edf6;font-size:12px;font-weight:800;transform:rotate(-4deg)}
+    .floating-chip b{color:#159ca9}
+    .section{padding:88px 0}
+    .section-heading{text-align:center;max-width:760px;margin:0 auto 45px}
+    .kicker{font-size:12px;text-transform:uppercase;letter-spacing:.18em;color:#168ca1;font-weight:850;margin-bottom:13px}
+    h2{font-size:clamp(31px,3.1vw,43px);letter-spacing:-1.6px;line-height:1.17;margin:0 0 17px}
+    .section-heading p{font-size:16px;color:#64748c;line-height:1.65;margin:0}
+    .features-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .feature-card{background:#fff;border:1px solid #e1ebf3;border-radius:var(--radius);padding:29px 27px;box-shadow:0 9px 30px #2d4c7b0a;transition:transform .2s,box-shadow .2s}
+    .feature-card:hover{transform:translateY(-5px);box-shadow:0 18px 36px #2d4c7b18}
+    .feature-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:15px;margin-bottom:21px;color:#147e9b;background:#e7f7fc;font-size:27px}
+    .feature-card:nth-child(2) .feature-icon,.feature-card:nth-child(5) .feature-icon{color:#8059b5;background:#f2edff}
+    .feature-card:nth-child(3) .feature-icon,.feature-card:nth-child(6) .feature-icon{color:#aa7b23;background:#fff4d8}
+    h3{margin:0 0 12px;font-size:19px;letter-spacing:-.55px}
+    .feature-card p{margin:0;color:#718098;font-size:14px;line-height:1.73}
+    .steps-section{background:#edf7fb;padding:82px 0}
+    .steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}
+    .step{background:white;border-radius:20px;border:1px solid #dceef2;padding:29px}
+    .step-number{display:inline-grid;place-items:center;border-radius:12px;background:#dcf3f6;color:#0a8d9c;width:43px;height:43px;font-weight:900;margin-bottom:17px;font-size:17px}
+    .step p{color:#6b7890;line-height:1.65;font-size:14px;margin:0}
+    .showcase{display:grid;grid-template-columns:1fr 1fr;gap:45px;align-items:center}
+    .showcase-visual{background:linear-gradient(135deg,#e5f7fb,#f3f1ff);border:1px solid #dae7f4;border-radius:28px;min-height:340px;padding:29px;display:grid;place-items:center}
+    .showcase-board{background:#fff;box-shadow:0 19px 35px #2c578233;border:1px solid #e1eaf3;border-radius:18px;max-width:480px;width:100%;padding:17px;transform:rotate(-2deg)}
+    .showcase-board svg{display:block;width:100%}
+    .showcase-copy p{color:#687994;line-height:1.75;font-size:16px}
+    .showcase-points{display:grid;gap:12px;margin-top:25px}
+    .showcase-points div{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700}
+    .showcase-points i{height:23px;width:23px;display:grid;place-items:center;background:#e4f7ef;border-radius:50%;color:#118974;font-size:13px;font-style:normal}
+    .faq{max-width:790px;margin:auto;display:grid;gap:12px}
+    .faq details{background:#fff;border:1px solid #e0eaf4;border-radius:15px;padding:0 22px}
+    .faq summary{cursor:pointer;font-weight:750;padding:23px 5px;list-style:none;display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .faq summary::-webkit-details-marker{display:none}
+    .faq summary:after{content:"+";font-size:23px;color:#188e9e}
+    .faq details[open] summary:after{content:"−"}
+    .faq details p{margin:0 6px 21px;color:#6d7e95;font-size:14px;line-height:1.7}
+    .cta-section{padding:55px 0 75px}
+    .cta-panel{background:linear-gradient(120deg,#182951,#164d7c 75%,#176a8c);border-radius:30px;padding:52px 65px;color:#fff;display:flex;align-items:center;gap:30px;justify-content:space-between;overflow:hidden;position:relative}
+    .cta-panel:after{content:"∑";position:absolute;right:20%;top:-57px;color:#ffffff0b;font-size:260px;font-weight:900;pointer-events:none}
+    .cta-panel h2{margin:0 0 12px;color:white}
+    .cta-panel p{margin:0;color:#d2eaf4;font-size:15px;line-height:1.7}
+    .cta-panel .btn{position:relative;z-index:1;background:#fff;color:#0e6b8b;flex-shrink:0}
+    .site-footer{border-top:1px solid #dfebf5;background:#fff;padding:27px 0;color:#7c8b9d;font-size:13px}
+    .footer-inner{display:flex;justify-content:space-between;gap:20px;align-items:center}
+    .footer-inner a{font-weight:700}
+    @media(max-width:1000px){
+      .nav-links{gap:16px}
+      .header-actions .btn{padding:10px 13px}
+      .hero-grid{gap:20px}
+      h1{font-size:clamp(37px,4.1vw,52px)}
+      .mini-call{right:-4px}
+    }
+    @media(max-width:760px){
+      .container{width:min(100% - 32px,560px)}
+      .header-inner{height:70px}
+      .brand{font-size:17px}
+      .brand-mark{width:39px;height:39px}
+      .mobile-toggle{display:grid;place-items:center;margin-left:auto}
+      .header-actions{display:none}
+      .nav-links{display:none;position:absolute;left:0;right:0;top:70px;margin:0;align-items:stretch;background:#fff;box-shadow:0 18px 22px #16366118;border-bottom:1px solid #dfeaf2;padding:14px 22px 21px;flex-direction:column;gap:0}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:13px 0}
+      .hero{padding:54px 0 68px}
+      .hero-grid{grid-template-columns:1fr;gap:28px}
+      h1{font-size:clamp(37px,8.8vw,53px);letter-spacing:-1.8px}
+      .hero-lead{font-size:16px}
+      .math-note{display:none}
+      .demo-wrap{padding:6px 9px 8px}
+      .floating-chip{left:-5px;top:41px}
+      .mini-call{right:-9px;bottom:17px}
+      .section{padding:65px 0}
+      .features-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+      .steps{grid-template-columns:1fr;gap:13px}
+      .steps-section{padding:67px 0}
+      .showcase{grid-template-columns:1fr;gap:25px}
+      .showcase-visual{min-height:250px}
+      .cta-panel{padding:36px 29px;flex-direction:column;align-items:flex-start}
+      .footer-inner{flex-direction:column;align-items:flex-start}
+    }
+    @media(max-width:450px){
+      .hero-buttons{flex-direction:column;align-items:stretch}
+      .hero-buttons .btn{width:100%}
+      .demo-shell{padding:6px;border-radius:14px}
+      .demo-topbar{height:32px;padding:0 6px 6px}
+      .demo-title{font-size:9px}
+      .demo-tools{width:30px;padding:6px 3px;gap:2px}
+      .tool{width:25px;height:25px;font-size:13px}
+      .floating-chip{font-size:9px;padding:7px 9px;top:37px}
+      .mini-call{padding:5px 7px;gap:5px}
+      .avatar{height:22px;width:22px}
+      .mini-call strong{font-size:9px}.mini-call small{font-size:8px}
+      .features-grid{grid-template-columns:1fr}
+      .feature-card{padding:23px}
+      .showcase-visual{padding:15px;min-height:auto}
+      .cta-panel h2{font-size:30px}
+    }
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.feature-card{transition:none}}
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="Лига знаний — главная страница">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 64 64"><path fill="#fff" d="M15 12h35v12h-5l-2-5H27l14 13-15 14h17l2-6h5v12H14v-8l14-13-13-12z"/></svg></span>
+        <span>Лига знаний<small>Онлайн-доска для математики</small></span>
+      </a>
+      <nav class="nav-links" id="mainNav" aria-label="Основное меню">
+        <a href="#features">Возможности</a>
+        <a href="#how">Как начать</a>
+        <a href="#questions">Вопросы</a>
+        <a href="https://liga-znaniy-board-math-online-q97p.onreza.app/">Войти в доску</a>
+      </nav>
+      <div class="header-actions"><a class="btn btn-primary" href="https://liga-znaniy-board-math-online-q97p.onreza.app/">Открыть доску <span aria-hidden="true">↗</span></a></div>
+      <button class="mobile-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav" aria-label="Открыть меню" type="button">☰</button>
+    </div>
+  </header>
+  <main>
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Пространство для преподавателей математики</div>
+          <h1 id="heroTitle">Математика <span>наглядно.</span><br>Уроки удобно.</h1>
+          <p class="hero-lead">Онлайн-доска для тех, кто любит объяснять понятно. Геометрия, графики, формулы, учебные материалы и совместная работа с учеником — всё в одном пространстве.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="https://liga-znaniy-board-math-online-q97p.onreza.app/">Открыть доску <span class="btn-arrow" aria-hidden="true">↗</span></a>
+            <a class="btn btn-light" href="#features">Посмотреть возможности <span class="btn-arrow" aria-hidden="true">↓</span></a>
+          </div>
+          <div class="hero-trust" aria-label="Преимущества">
+            <span><i class="check" aria-hidden="true">✓</i> Без установки</span>
+            <span><i class="check" aria-hidden="true">✓</i> Работа по ссылке</span>
+            <span><i class="check" aria-hidden="true">✓</i> Для алгебры и геометрии</span>
+          </div>
+          <div class="math-note" aria-hidden="true">a² + b² = c² &nbsp; · &nbsp; ∫ f(x)dx &nbsp; · &nbsp; π</div>
+        </div>
+        <div class="demo-wrap">
+          <div class="floating-chip">✦ <b>Всё для математики</b> под рукой</div>
+          <div class="demo-shell" aria-label="Иллюстрация интерфейса математической онлайн-доски">
+            <div class="demo-topbar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="demo-title">ЛИГА ЗНАНИЙ / УРОК МАТЕМАТИКИ</span><span class="demo-status">● На уроке</span></div>
+            <div class="demo-content">
+              <div class="demo-tools" aria-hidden="true"><span class="tool selected">✎</span><span class="tool">△</span><span class="tool">ƒ</span><span class="tool">▱</span><span class="tool">◯</span><span class="tool">T</span></div>
+              <div class="demo-whiteboard">
+                <svg viewBox="0 0 660 443" role="img" aria-label="Пример доски: график параболы, треугольник с прямым углом и объёмная фигура">
+                  <defs>
+                    <pattern id="squareGrid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" stroke="#e8f1f8" stroke-width="1" fill="none"/></pattern>
+                  </defs>
+                  <rect width="660" height="443" fill="#fff"/>
+                  <rect width="660" height="443" fill="url(#squareGrid)"/>
+                  <text x="28" y="51" font-size="19" font-family="system-ui,sans-serif" font-weight="800" fill="#243c72">Графики и геометрия</text>
+                  <text x="28" y="81" font-size="15" font-family="system-ui,sans-serif" font-weight="700" fill="#219eac">y = x² − 4x + 3</text>
+                  <path d="M42 298H365M154 386V120" stroke="#6986a6" stroke-width="2.1" fill="none"/>
+                  <path d="M365 298l-9-5v10zM154 120l-5 9h10z" fill="#6986a6"/>
+                  <text x="353" y="317" fill="#6583a8" font-size="14">x</text><text x="167" y="135" fill="#6583a8" font-size="14">y</text>
+                  <path d="M63 127 Q155 423 251 298 Q300 234 359 140" stroke="#1ca5ae" stroke-width="5" fill="none" stroke-linecap="round"/>
+                  <circle cx="251" cy="298" r="5" fill="#f3ba52"/>
+                  <text x="257" y="286" font-size="15" fill="#2e5782">A</text>
+                  <path d="M405 320L574 320L492 179Z" stroke="#4966b0" fill="#e6eeff80" stroke-width="4" stroke-linejoin="round"/>
+                  <path d="M405 299h21v21" stroke="#ed9f4b" stroke-width="4" fill="none"/>
+                  <path d="M435 320A30 30 0 0 0 428 305" stroke="#ed9f4b" stroke-width="2" fill="none"/>
+                  <circle cx="405" cy="320" r="4" fill="#4966b0"/><circle cx="574" cy="320" r="4" fill="#4966b0"/><circle cx="492" cy="179" r="4" fill="#4966b0"/>
+                  <text x="392" y="337" font-size="15" fill="#2a4378">A</text>
+                  <text x="579" y="337" font-size="15" fill="#2a4378">B</text>
+                  <text x="490" y="167" font-size="15" fill="#2a4378">C</text>
+                  <text x="464" y="367" font-size="13" fill="#bd8b39">∠A = 90°</text>
+                  <g transform="translate(388 24)" stroke="#9f79bf" fill="#ddcff18c" stroke-width="3" stroke-linejoin="round">
+                    <path d="M0 52L72 9L152 29L80 73Z"/>
+                    <path d="M0 52V112L80 133V73M80 133L152 91V29" />
+                    <path d="M0 112L72 69L152 91M72 69V9" stroke-dasharray="5 6"/>
+                  </g>
+                  <rect x="23" y="400" width="188" height="29" rx="9" fill="#eff9f9"/>
+                  <text x="37" y="419" font-size="13" fill="#168d99" font-weight="700">Алгебра · Геометрия · 3D</text>
+                </svg>
+              </div>
+            </div>
+            <div class="demo-bottom"><span>Лист 1 из 3 &nbsp; · &nbsp; Клетка</span><span><b>100%</b> &nbsp; ＋</span></div>
+          </div>
+          <div class="mini-call" aria-hidden="true"><span class="avatar">У</span><span><strong>Ученик на занятии</strong><small>Совместная работа</small></span><span style="color:#14977b;font-size:16px">●</span></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="features">
+      <div class="container">
+        <div class="section-heading">
+          <div class="kicker">Возможности доски</div>
+          <h2>Все инструменты для математики в одном месте</h2>
+          <p>Больше внимания объяснению, меньше времени на переключение между сервисами.</p>
+        </div>
+        <div class="features-grid">
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">✎</div><h3>Пишите и объясняйте</h3><p>Рукописные решения, текст, маркер, линии, выделение и работа стилусом прямо на доске.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">△</div><h3>Геометрия и углы</h3><p>Треугольники, окружности, отрезки, измерения и обозначения для точных чертежей.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">ƒ</div><h3>Графики функций</h3><p>Координатные оси и графики: удобно обсуждать свойства функций и пересечения.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">⬡</div><h3>Объёмные фигуры</h3><p>Кубы, параллелепипеды и другие пространственные фигуры для задач по стереометрии.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">▤</div><h3>Учебные материалы</h3><p>Добавляйте изображения, условия задач и страницы PDF, чтобы решать вместе с учеником.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">♧</div><h3>Совместный урок</h3><p>Приглашайте ученика по ссылке, объясняйте на общей доске и управляйте доступом к работе.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="steps-section" id="how">
+      <div class="container">
+        <div class="section-heading"><div class="kicker">Начать просто</div><h2>От идеи до урока — три шага</h2><p>Без сложной подготовки и установки отдельной программы.</p></div>
+        <div class="steps">
+          <article class="step"><span class="step-number">01</span><h3>Откройте доску</h3><p>Перейдите в рабочее пространство и войдите в кабинет преподавателя.</p></article>
+          <article class="step"><span class="step-number">02</span><h3>Подготовьте материал</h3><p>Выберите нужную доску, добавьте задания, графики или геометрический чертёж.</p></article>
+          <article class="step"><span class="step-number">03</span><h3>Пригласите ученика</h3><p>Отправьте ссылку на занятие и работайте над задачами вместе в браузере.</p></article>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container showcase">
+        <div class="showcase-visual">
+          <div class="showcase-board">
+            <svg viewBox="0 0 470 280" role="img" aria-label="Пример геометрической задачи на доске: прямоугольный треугольник и формула теоремы Пифагора">
+              <defs><pattern id="gridMini" width="21" height="21" patternUnits="userSpaceOnUse"><path d="M21 0H0V21" fill="none" stroke="#e4eef8" stroke-width="1"/></pattern></defs>
+              <rect width="470" height="280" rx="9" fill="#fff"/>
+              <rect width="470" height="280" rx="9" fill="url(#gridMini)"/>
+              <text x="21" y="37" font-size="15" font-family="system-ui,sans-serif" font-weight="800" fill="#294672">Задача по геометрии</text>
+              <path d="M80 211L252 211L80 83Z" fill="#deefff7d" stroke="#326dba" stroke-width="4" stroke-linejoin="round"/>
+              <path d="M80 187h23v24" stroke="#e8a13f" fill="none" stroke-width="4"/>
+              <text x="67" y="231" font-size="15" fill="#183f78">A</text><text x="251" y="230" font-size="15" fill="#183f78">B</text><text x="66" y="73" font-size="15" fill="#183f78">C</text>
+              <text x="140" y="237" font-size="14" fill="#183f78">a</text><text x="56" y="150" font-size="14" fill="#183f78">b</text><text x="174" y="133" font-size="14" fill="#183f78">c</text>
+              <text x="294" y="122" font-size="24" font-family="system-ui,sans-serif" font-weight="800" fill="#1098a7">a² + b²</text>
+              <text x="319" y="156" font-size="24" font-family="system-ui,sans-serif" font-weight="800" fill="#1098a7">= c²</text>
+              <path d="M292 179h128" stroke="#f0b64d" stroke-width="3" stroke-linecap="round"/>
+            </svg>
+          </div>
+        </div>
+        <div class="showcase-copy"><div class="kicker">Создано с мыслью о преподавателе</div><h2>От дробей и уравнений до сложной геометрии</h2><p>«Лига знаний» объединяет привычную доску и специальные математические инструменты. Можно показать ход решения, построить фигуру или работать с заданием из учебника, не отвлекаясь на технические мелочи.</p>
+          <div class="showcase-points"><div><i>✓</i> Для школьной и высшей математики</div><div><i>✓</i> Подготовка к ОГЭ и ЕГЭ</div><div><i>✓</i> Индивидуальные и совместные занятия</div></div>
+        </div>
+      </div>
+    </section>
+    <section class="section" id="questions" style="padding-top:25px">
+      <div class="container"><div class="section-heading"><div class="kicker">Частые вопросы</div><h2>Всё понятно с первого урока</h2></div>
+        <div class="faq">
+          <details><summary>Нужно ли устанавливать программу?</summary><p>Нет. Доска открывается в современном браузере. Для удобной работы с математическими чертежами рекомендуется компьютер или планшет.</p></details>
+          <details><summary>Как пригласить ученика?</summary><p>Преподаватель открывает нужную доску и отправляет ученику ссылку-приглашение. Доступ к совместной работе регулируется в самой доске.</p></details>
+          <details><summary>Можно ли использовать материалы из учебника?</summary><p>Да. На доску можно добавить изображение задачи или работать со страницами PDF в предусмотренных инструментах.</p></details>
+        </div>
+      </div>
+    </section>
+    <section class="cta-section">
+      <div class="container"><div class="cta-panel"><div><h2>Ваш следующий урок начинается здесь</h2><p>Откройте доску «Лига знаний» и сосредоточьтесь на математике.</p></div><a class="btn" href="https://liga-znaniy-board-math-online-q97p.onreza.app/">Перейти к доске <span aria-hidden="true">↗</span></a></div></div>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container footer-inner"><span>© <span id="year">2026</span> Лига знаний · Онлайн-доска для математики</span><span><a href="https://liga-znaniy-board-math-online-q97p.onreza.app/">Вход в доску</a> &nbsp;·&nbsp; <a href="#features">Возможности</a></span></div></footer>
+  <script>
+    (() => {
+      const button = document.getElementById('menuToggle');
+      const nav = document.getElementById('mainNav');
+      button.addEventListener('click', () => {
+        const open = !nav.classList.contains('open');
+        nav.classList.toggle('open', open);
+        button.setAttribute('aria-expanded', String(open));
+        button.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+        button.textContent = open ? '×' : '☰';
+      });
+      nav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+        nav.classList.remove('open');
+        button.setAttribute('aria-expanded', 'false');
+        button.setAttribute('aria-label', 'Открыть меню');
+        button.textContent = '☰';
+      }));
+      document.getElementById('year').textContent = String(new Date().getFullYear());
+    })();
+  </script>
+</body>
+</html>
