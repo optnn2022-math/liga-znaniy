@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f6f9ff">
+  <meta name="theme-color" content="#092c67">
   <meta name="description" content="Лига знаний — онлайн-доска для уроков математики. Геометрические построения, графики, объёмные фигуры, учебные материалы и совместная работа. Начните занятие в браузере.">
   <meta name="robots" content="noindex,nofollow">
   <link rel="canonical" href="https://optnn2022-math.github.io/liga-znaniy/board-landing-preview/">
@@ -205,7 +205,163 @@
       .hero-approved .hero-banner-foot span:not(.btn-arrow){font-size:13px}
       .hero-approved .hero-banner-foot .btn{width:100%;min-height:49px}
     }
-    </style>
+    
+/* Лига знаний · Vivid landing v2. Responsive energetic visual system. */
+:root{--brand-navy:#10225b;--brand-blue:#1667db;--brand-cyan:#1ce5ea;--brand-gold:#ffc94b;--brand-purple:#8267fa;--brand-ink:#152653;--brand-soft:#eef9ff}
+body{background:#f5f9ff;color:#162754;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+.container{width:min(1190px,calc(100% - 36px))}
+.site-header{background:#ffffffed;border-bottom:2px solid #e6f1ff;box-shadow:0 5px 20px #092e7312}
+.header-inner{height:79px}
+.brand{font-size:20px;color:#102869}
+.brand .brand-mark{background:linear-gradient(140deg,#008fdc,#12d8de);box-shadow:0 7px 22px #07a6d947}
+.brand small{font-weight:700;color:#6a80a2;font-size:11px}
+.nav-links{font-size:14px;gap:24px}
+.nav-links a:hover{color:#087ba9}
+.btn{font-weight:850;border-radius:15px;box-shadow:none;transition:transform .18s,box-shadow .18s}
+.btn-primary{background:linear-gradient(115deg,#008dca,#0063b6);box-shadow:0 10px 20px #1477c238}
+.btn-primary:hover{box-shadow:0 15px 26px #1477c257}
+.hero.hero-vivid{padding:64px 0 58px;background:radial-gradient(ellipse at 10% 18%,#169ad257 0,transparent 38%),radial-gradient(ellipse at 95% 0%,#ffcf7940 0,transparent 38%),linear-gradient(135deg,#071c4a 0%,#113f82 58%,#0c699e 100%);overflow:hidden;position:relative}
+.hero.hero-vivid::before{content:"";position:absolute;right:-145px;top:100px;width:390px;height:390px;border:2px solid #fff2;border-radius:50%;pointer-events:none}
+.hero.hero-vivid::after{content:"Σ";position:absolute;left:-65px;bottom:-160px;z-index:-1;color:#ffffff0a;font-family:Georgia,serif;font-size:550px;line-height:1;transform:rotate(-14deg);pointer-events:none}
+.hero-vivid .container{position:relative;z-index:1}
+.hero-vivid .hero-mobile-heading{position:static;width:auto;height:auto;padding:0;margin:0 0 28px;overflow:visible;clip-path:none;white-space:normal;max-width:1040px}
+.hero-vivid .hero-mobile-heading .eyebrow{background:#33daed22;border:1px solid #52f0f250;color:#a9fbff;font-size:13px;letter-spacing:.045em;padding:11px 16px}
+.hero-vivid .hero-mobile-heading .eyebrow:before{background:#ffd34c;box-shadow:0 0 0 5px #faca3d27}
+.hero-vivid .hero-mobile-heading h1{font-size:clamp(39px,5vw,65px);letter-spacing:-2px;line-height:1.1;margin:21px 0 16px;font-weight:900;max-width:1040px;color:#fff}
+.hero-vivid .hero-mobile-heading h1 em{font-style:normal;color:#ffd252}
+.hero-vivid .hero-mobile-heading p{max-width:790px;font-size:clamp(16px,1.7vw,20px);line-height:1.6;color:#d3f2ff;margin:0}
+.hero-vivid .hero-banner{border:3px solid #ffffff9e;border-radius:30px;box-shadow:0 25px 54px #00143b85,0 0 0 8px #22d4ed20;transform:translateZ(0)}
+.hero-vivid .hero-banner img{display:block;width:100%;height:auto;aspect-ratio:1200/675;object-fit:cover}
+.hero-vivid .hero-banner-foot{background:#ffffff17;border:1px solid #ffffff46;backdrop-filter:blur(12px);border-radius:20px;padding:19px 22px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.hero-vivid .hero-banner-foot strong{font-size:clamp(19px,2vw,25px);color:#fff;line-height:1.2;letter-spacing:-.6px}
+.hero-vivid .hero-banner-foot span:not(.btn-arrow){font-size:15px;color:#d5edff;line-height:1.5;margin-top:7px}
+.hero-vivid .hero-banner-foot .btn{border:1px solid #fce18b;background:linear-gradient(125deg,#ffdc60,#ffa91e);color:#152659;min-height:59px;padding:13px 27px;box-shadow:0 12px 25px #ffb52f48;font-size:16px}
+.hero-vivid .hero-banner-foot .btn:hover{box-shadow:0 15px 28px #ffb52f75}
+.hero-vivid .hero-value-pills{display:flex;flex-wrap:wrap;gap:11px;margin-top:19px}
+.hero-vivid .hero-value-pills span{display:inline-flex;align-items:center;gap:8px;color:#e9f7ff;border:1px solid #b6f8ff62;border-radius:100px;background:#b6f8ff15;padding:10px 14px;font-size:13px;font-weight:750}
+.hero-vivid .hero-value-pills b{font-size:17px;color:#ffdc63}
+.section{padding:80px 0}
+.features-section{position:relative;isolation:isolate;background:radial-gradient(circle at 5% 30%,#d7f8ff 0,transparent 33%),radial-gradient(circle at 95% 90%,#fff2cf 0,transparent 29%),#f8fcff}
+.features-section::before{content:"π";position:absolute;left:0;top:22px;color:#1fbad911;font:900 260px Georgia,serif;z-index:-1}
+.features-section .section-heading{max-width:850px;margin-bottom:38px}
+.features-section .kicker{display:inline-flex;align-items:center;background:#e2f8fd;border:1px solid #b0eaf3;border-radius:99px;padding:10px 18px;color:#087fa0;font-size:12px;letter-spacing:.14em}
+.section-heading h2{font-weight:900;letter-spacing:-1.5px;font-size:clamp(29px,3.7vw,47px);line-height:1.12}
+.section-heading p{font-size:clamp(15px,1.5vw,18px);color:#62748c}
+.features-section .section-heading h2{color:#12326c}
+.features-grid{gap:20px}
+.feature-card{min-height:238px;overflow:hidden;position:relative;border-radius:24px;border:1px solid #b9e9ff;background:linear-gradient(155deg,#ffffff,#e2f8ff);padding:28px 26px;box-shadow:0 14px 30px #0e6cab14;transition:transform .2s,box-shadow .2s}
+.feature-card:before{content:"";position:absolute;right:-36px;top:-46px;width:136px;height:136px;border-radius:50%;background:#ffffff9c;pointer-events:none}
+.feature-card:after{content:"✦";position:absolute;right:24px;top:21px;color:#0faed82c;font-size:26px}
+.feature-card:nth-child(2){background:linear-gradient(155deg,#fff,#eee8ff);border-color:#d9cbff}
+.feature-card:nth-child(3){background:linear-gradient(155deg,#fff,#fff1d3);border-color:#ffdf99}
+.feature-card:nth-child(4){background:linear-gradient(155deg,#fff,#e5f2ff);border-color:#c7ddff}
+.feature-card:nth-child(5){background:linear-gradient(155deg,#fff,#ffe9ef);border-color:#ffd3df}
+.feature-card:nth-child(6){background:linear-gradient(155deg,#fff,#e7fbec);border-color:#bfecc9}
+.feature-card:hover{transform:translateY(-6px);box-shadow:0 20px 42px #0e6cab26}
+.feature-icon{position:relative;width:63px;height:63px;margin-bottom:19px;border-radius:19px;background:linear-gradient(135deg,#117acb,#16d6dc);color:#fff;font-size:32px;box-shadow:0 8px 20px #0c95c956;transform:rotate(-4deg)}
+.feature-card:nth-child(2) .feature-icon{background:linear-gradient(135deg,#7665d9,#b69bff);color:#fff;box-shadow:0 8px 20px #7d61d459}
+.feature-card:nth-child(3) .feature-icon{background:linear-gradient(135deg,#f1a21c,#ffd65b);color:#4f370b;box-shadow:0 8px 20px #ffba4340}
+.feature-card:nth-child(4) .feature-icon{background:linear-gradient(135deg,#215ad1,#50adff)}
+.feature-card:nth-child(5) .feature-icon{background:linear-gradient(135deg,#ed6e95,#ffb9c6);color:#fff}
+.feature-card:nth-child(6) .feature-icon{background:linear-gradient(135deg,#15a877,#72dbaf);color:#fff}
+.feature-card h3{font-size:21px;line-height:1.25;font-weight:850;color:#152e61}
+.feature-card p{font-size:15px;line-height:1.6;color:#526783}
+.steps-section{background:radial-gradient(ellipse at 15% 10%,#095ea150,transparent 46%),linear-gradient(140deg,#071b4c,#0b3770 60%,#0a7393);padding:86px 0;position:relative;overflow:hidden}
+.steps-section:before{content:"∑";font-size:370px;font-weight:900;color:#fff0;position:absolute;right:-10px;bottom:-210px;color:#ffffff08;pointer-events:none}
+.steps-section .section-heading .kicker{background:#10bcdc36;border:1px solid #4ed8ef5f;border-radius:99px;color:#89f9ff;padding:10px 19px;display:inline-block}
+.steps-section .section-heading h2{color:#fff}
+.steps-section .section-heading p{color:#c1dff4}
+.steps{position:relative;gap:20px}
+.step{position:relative;background:#fffffffb;border:1px solid #d6edff;border-radius:24px;padding:30px;box-shadow:0 15px 40px #001b4a4d;min-height:220px}
+.step-number{background:linear-gradient(145deg,#04bed7,#2771d0);box-shadow:0 7px 17px #119dcb57;color:#fff;border-radius:15px;width:55px;height:55px;font-size:21px;margin-bottom:23px}
+.step:nth-child(2) .step-number{background:linear-gradient(145deg,#816aff,#aa8bfa)}
+.step:nth-child(3) .step-number{background:linear-gradient(145deg,#f3b23c,#f8cd61);color:#443006}
+.step h3{color:#132c63;font-size:22px;font-weight:850}
+.step p{color:#586b84;font-size:15px;line-height:1.65}
+.showcase-section{background:linear-gradient(180deg,#f9fdff,#e8f7ff);padding:94px 0}
+.showcase{gap:60px}
+.showcase-visual{border:2px solid #b6e5f7;background:radial-gradient(circle at 18% 15%,#efffff,transparent 32%),linear-gradient(133deg,#bcefff,#bcd1ff 55%,#ffebc6);border-radius:34px;box-shadow:0 22px 49px #185ea925;min-height:370px}
+.showcase-board{transform:rotate(-2deg);border:2px solid #fff;box-shadow:0 20px 50px #1b4f9360}
+.showcase-copy .kicker{color:#0b91af}
+.showcase-copy h2{font-weight:900;color:#102c65;font-size:clamp(30px,3vw,43px)}
+.showcase-copy p{font-size:16px;color:#536b88}
+.showcase-points div{font-weight:800;color:#163968;font-size:16px}
+.showcase-points i{background:#c2f8e7;color:#057f67;width:29px;height:29px;font-size:16px}
+.faq-section{background:#fffaf2;padding-top:75px!important}
+.faq-section .section-heading .kicker{color:#d79015}
+.faq-section .section-heading h2{color:#182c60}
+.faq details{background:#fff;border:1px solid #fae7b9;border-radius:19px;box-shadow:0 7px 20px #c38b1712}
+.faq summary{font-size:17px;color:#173364}
+.faq summary:after{font-size:28px;color:#da9e29}
+.cta-section{background:#fffaf2;padding:22px 0 86px}
+.cta-panel{background:linear-gradient(120deg,#09246a,#0d569a 65%,#068f9e);border:2px solid #57c9ee;border-radius:32px;box-shadow:0 20px 44px #115d9936;padding:53px 60px}
+.cta-panel:after{font-size:260px;color:#ffffff12;right:10%;top:-55px}
+.cta-panel h2{font-size:clamp(31px,3vw,43px)}
+.cta-panel .btn{background:linear-gradient(130deg,#ffdf68,#ffb332);color:#172b60;min-height:58px;font-size:17px;border:0;box-shadow:0 10px 20px #ffbb3c49}
+.site-footer{background:#071d4a;color:#d3e7ff;border:0;padding:32px 0}
+.site-footer a{color:#fff}
+.site-footer a:hover{color:#ffdd6a}
+@media(max-width:1120px){
+ .container{width:calc(100% - 36px);max-width:900px}
+ .site-header .header-inner{height:72px}
+ .site-header .nav-links{display:none;position:absolute;top:72px;left:0;right:0;margin:0;background:#fff;padding:14px 24px 20px;box-shadow:0 20px 30px #10295c30;flex-direction:column;gap:0;align-items:stretch;z-index:30}
+ .site-header .nav-links.open{display:flex}
+ .site-header .nav-links a{padding:13px 0;font-size:17px;color:#163866}
+ .site-header .header-actions{display:none}
+ .site-header .mobile-toggle{display:grid;place-items:center;margin-left:auto;width:46px;height:46px;font-size:24px;background:#e9f8ff;color:#0e4c92;border-color:#c8eafd}
+ .features-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+ .steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+ .step{padding:22px;min-height:230px}
+ .step h3{font-size:19px}
+ .showcase{grid-template-columns:1fr 1fr;gap:27px}
+ .hero-vivid .hero-mobile-heading{display:block}
+}
+@media(max-width:760px){
+ .container{width:calc(100% - 32px)}
+ .hero.hero-vivid{padding:36px 0 47px}
+ .hero-vivid .hero-mobile-heading{margin:0 0 23px}
+ .hero-vivid .hero-mobile-heading h1{font-size:clamp(32px,8.6vw,48px);letter-spacing:-1.1px;margin:18px 0 12px}
+ .hero-vivid .hero-mobile-heading p{font-size:16px;line-height:1.55}
+ .hero-vivid .hero-mobile-heading .eyebrow{font-size:11px;padding:10px 13px}
+ .hero-vivid .hero-banner{border-radius:18px;border-width:2px;box-shadow:0 16px 29px #061b4c87,0 0 0 5px #22d4ed1c}
+ .hero-vivid .hero-banner-foot{padding:16px 17px;flex-direction:column;align-items:stretch;margin-top:16px;gap:14px;border-radius:17px}
+ .hero-vivid .hero-banner-foot strong{font-size:19px}
+ .hero-vivid .hero-banner-foot span:not(.btn-arrow){font-size:14px}
+ .hero-vivid .hero-banner-foot .btn{width:100%;min-height:53px}
+ .hero-vivid .hero-value-pills span{font-size:12px;padding:9px 11px}
+ .section{padding:58px 0}
+ .section-heading{margin-bottom:26px}
+ .section-heading h2{font-size:clamp(29px,6.8vw,38px)}
+ .features-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+ .feature-card{padding:22px 19px;min-height:220px}
+ .feature-card h3{font-size:18px}
+ .feature-card p{font-size:14px}
+ .feature-icon{width:54px;height:54px;font-size:28px;border-radius:16px}
+ .steps-section{padding:66px 0}
+ .steps{grid-template-columns:1fr;gap:15px}
+ .step{min-height:0;padding:24px}
+ .step-number{margin-bottom:16px}
+ .showcase{grid-template-columns:1fr;gap:30px}
+ .showcase-section{padding:67px 0}
+ .showcase-visual{min-height:240px}
+ .faq-section{padding-top:60px!important}
+ .cta-panel{padding:31px 24px}
+ .cta-panel .btn{width:100%;justify-content:center}
+ .footer-inner{flex-direction:column;align-items:flex-start;gap:12px}
+}
+@media(max-width:520px){
+ .brand{font-size:18px}
+ .brand small{font-size:10px}
+ .features-grid{grid-template-columns:1fr}
+ .feature-card{min-height:0;padding:24px}
+ .feature-card h3{font-size:20px}
+ .feature-card p{font-size:15px}
+ .hero-vivid .hero-mobile-heading h1{font-size:35px;line-height:1.12}
+ .hero-vivid .hero-value-pills{gap:8px}
+}
+@media(prefers-reduced-motion:reduce){.feature-card,.btn{transition:none}}
+
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -225,12 +381,12 @@
     </div>
   </header>
   <main>
-    <section class="hero hero-approved" aria-labelledby="heroTitle">
+    <section class="hero hero-approved hero-vivid" aria-labelledby="heroTitle">
       <div class="container">
         <div class="hero-mobile-heading">
           <span class="eyebrow">Для преподавателей математики</span>
-          <h1 id="heroTitle">Онлайн-доска для математики</h1>
-          <p>Графики, геометрия и совместные уроки — всё под рукой.</p>
+          <h1 id="heroTitle">Математика становится <em>наглядной</em></h1>
+          <p>От первого штриха до сложных построений. Инструменты для математики, совместный урок и любимые материалы — в одной доске.</p>
         </div>
         <div class="hero-banner" aria-label="Баннер математической онлайн-доски">
           <img src="./sigma-hero.avif" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async"
@@ -238,13 +394,14 @@
           <a class="hero-banner-action" href="https://ligaznaniy.online/" aria-label="Открыть математическую онлайн-доску Лига знаний"></a>
         </div>
         <div class="hero-banner-foot">
-          <div><strong>Математика наглядно. Уроки удобно.</strong>
+          <div><strong>Ваша идея. Ваша доска. Ваш яркий урок.</strong>
             <span>Пишите, стройте графики и занимайтесь с учениками в одном пространстве.</span></div>
           <a class="btn btn-primary" href="https://ligaznaniy.online/">Открыть доску <span class="btn-arrow" aria-hidden="true">↗</span></a>
         </div>
+        <div class="hero-value-pills" aria-label="Преимущества"><span><b>✓</b> Для преподавателей</span><span><b>✦</b> Построения и графики</span><span><b>∞</b> Совместные занятия</span></div>
       </div>
     </section>
-    <section class="section" id="features">
+    <section class="section features-section" id="features">
       <div class="container">
         <div class="section-heading">
           <div class="kicker">Возможности доски</div>
@@ -271,7 +428,7 @@
         </div>
       </div>
     </section>
-    <section class="section">
+    <section class="section showcase-section">
       <div class="container showcase">
         <div class="showcase-visual">
           <div class="showcase-board">
@@ -295,7 +452,7 @@
         </div>
       </div>
     </section>
-    <section class="section" id="questions" style="padding-top:25px">
+    <section class="section faq-section" id="questions">
       <div class="container"><div class="section-heading"><div class="kicker">Частые вопросы</div><h2>Всё понятно с первого урока</h2></div>
         <div class="faq">
           <details><summary>Нужно ли устанавливать программу?</summary><p>Нет. Доска открывается в современном браузере. Для удобной работы с математическими чертежами рекомендуется компьютер или планшет.</p></details>
