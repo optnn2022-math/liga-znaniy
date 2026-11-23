@@ -181,7 +181,31 @@
       .cta-panel h2{font-size:30px}
     }
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.feature-card{transition:none}}
-  </style>
+  
+    /* Approved Sigma 3D hero banner, isolated from the working whiteboard */
+    .hero.hero-approved{padding:38px 0 67px;background:radial-gradient(ellipse at 55% 20%,#dff5ff 0,transparent 70%),#f8fbff}
+    .hero-approved .hero-banner{position:relative;overflow:hidden;border-radius:24px;border:1px solid #d7e7f4;box-shadow:0 20px 60px #204a8440;background:linear-gradient(135deg,#edf8ff,#ffffff)}
+    .hero-approved .hero-banner img{display:block;width:100%;height:auto;aspect-ratio:1200/675;object-fit:contain}
+    .hero-approved .hero-banner-action{position:absolute;left:41%;top:79.5%;width:33.5%;height:16%;border-radius:24px;z-index:2;cursor:pointer}
+    .hero-approved .hero-banner-action:focus-visible{outline:4px solid #fff;outline-offset:-4px;box-shadow:0 0 0 7px #128eac}
+    .hero-approved .hero-mobile-heading{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+    .hero-approved .hero-banner-foot{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-top:18px;padding:10px 3px}
+    .hero-approved .hero-banner-foot strong{display:block;font-size:18px;color:#1d3c62;letter-spacing:-.35px}
+    .hero-approved .hero-banner-foot span:not(.btn-arrow){display:block;color:#63748b;font-size:14px;line-height:1.7;margin-top:3px}
+    .hero-approved .hero-banner-foot .btn{flex-shrink:0}
+    @media(max-width:760px){
+      .hero.hero-approved{padding:27px 0 39px}
+      .hero-approved .hero-mobile-heading{position:static;width:auto;height:auto;margin:0 0 17px;overflow:visible;clip-path:none;white-space:normal}
+      .hero-approved .hero-mobile-heading .eyebrow{font-size:11px}
+      .hero-approved .hero-mobile-heading h1{font-size:clamp(29px,7.2vw,41px);letter-spacing:-1.2px;margin:15px 0 10px;line-height:1.1}
+      .hero-approved .hero-mobile-heading p{color:#66768e;line-height:1.5;font-size:14px;margin:0}
+      .hero-approved .hero-banner{border-radius:15px;box-shadow:0 11px 28px #1c47772c}
+      .hero-approved .hero-banner-foot{flex-direction:column;align-items:stretch;gap:12px;margin-top:13px}
+      .hero-approved .hero-banner-foot strong{font-size:16px}
+      .hero-approved .hero-banner-foot span:not(.btn-arrow){font-size:13px}
+      .hero-approved .hero-banner-foot .btn{width:100%;min-height:49px}
+    }
+    </style>
 </head>
 <body>
   <header class="site-header">
@@ -201,65 +225,22 @@
     </div>
   </header>
   <main>
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="container hero-grid">
-        <div>
-          <div class="eyebrow">Пространство для преподавателей математики</div>
-          <h1 id="heroTitle">Математика <span>наглядно.</span><br>Уроки удобно.</h1>
-          <p class="hero-lead">Онлайн-доска для тех, кто любит объяснять понятно. Геометрия, графики, формулы, учебные материалы и совместная работа с учеником — всё в одном пространстве.</p>
-          <div class="hero-buttons">
-            <a class="btn btn-primary" href="https://liga-znaniy-board-math-online-q97p.onreza.app/">Открыть доску <span class="btn-arrow" aria-hidden="true">↗</span></a>
-            <a class="btn btn-light" href="#features">Посмотреть возможности <span class="btn-arrow" aria-hidden="true">↓</span></a>
-          </div>
-          <div class="hero-trust" aria-label="Преимущества">
-            <span><i class="check" aria-hidden="true">✓</i> Без установки</span>
-            <span><i class="check" aria-hidden="true">✓</i> Работа по ссылке</span>
-            <span><i class="check" aria-hidden="true">✓</i> Для алгебры и геометрии</span>
-          </div>
-          <div class="math-note" aria-hidden="true">a² + b² = c² &nbsp; · &nbsp; ∫ f(x)dx &nbsp; · &nbsp; π</div>
+    <section class="hero hero-approved" aria-labelledby="heroTitle">
+      <div class="container">
+        <div class="hero-mobile-heading">
+          <span class="eyebrow">Для преподавателей математики</span>
+          <h1 id="heroTitle">Онлайн-доска для математики</h1>
+          <p>Графики, геометрия и совместные уроки — всё под рукой.</p>
         </div>
-        <div class="demo-wrap">
-          <div class="floating-chip">✦ <b>Всё для математики</b> под рукой</div>
-          <div class="demo-shell" aria-label="Иллюстрация интерфейса математической онлайн-доски">
-            <div class="demo-topbar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="demo-title">ЛИГА ЗНАНИЙ / УРОК МАТЕМАТИКИ</span><span class="demo-status">● На уроке</span></div>
-            <div class="demo-content">
-              <div class="demo-tools" aria-hidden="true"><span class="tool selected">✎</span><span class="tool">△</span><span class="tool">ƒ</span><span class="tool">▱</span><span class="tool">◯</span><span class="tool">T</span></div>
-              <div class="demo-whiteboard">
-                <svg viewBox="0 0 660 443" role="img" aria-label="Пример доски: график параболы, треугольник с прямым углом и объёмная фигура">
-                  <defs>
-                    <pattern id="squareGrid" width="25" height="25" patternUnits="userSpaceOnUse"><path d="M25 0H0V25" stroke="#e8f1f8" stroke-width="1" fill="none"/></pattern>
-                  </defs>
-                  <rect width="660" height="443" fill="#fff"/>
-                  <rect width="660" height="443" fill="url(#squareGrid)"/>
-                  <text x="28" y="51" font-size="19" font-family="system-ui,sans-serif" font-weight="800" fill="#243c72">Графики и геометрия</text>
-                  <text x="28" y="81" font-size="15" font-family="system-ui,sans-serif" font-weight="700" fill="#219eac">y = x² − 4x + 3</text>
-                  <path d="M42 298H365M154 386V120" stroke="#6986a6" stroke-width="2.1" fill="none"/>
-                  <path d="M365 298l-9-5v10zM154 120l-5 9h10z" fill="#6986a6"/>
-                  <text x="353" y="317" fill="#6583a8" font-size="14">x</text><text x="167" y="135" fill="#6583a8" font-size="14">y</text>
-                  <path d="M63 127 Q155 423 251 298 Q300 234 359 140" stroke="#1ca5ae" stroke-width="5" fill="none" stroke-linecap="round"/>
-                  <circle cx="251" cy="298" r="5" fill="#f3ba52"/>
-                  <text x="257" y="286" font-size="15" fill="#2e5782">A</text>
-                  <path d="M405 320L574 320L492 179Z" stroke="#4966b0" fill="#e6eeff80" stroke-width="4" stroke-linejoin="round"/>
-                  <path d="M405 299h21v21" stroke="#ed9f4b" stroke-width="4" fill="none"/>
-                  <path d="M435 320A30 30 0 0 0 428 305" stroke="#ed9f4b" stroke-width="2" fill="none"/>
-                  <circle cx="405" cy="320" r="4" fill="#4966b0"/><circle cx="574" cy="320" r="4" fill="#4966b0"/><circle cx="492" cy="179" r="4" fill="#4966b0"/>
-                  <text x="392" y="337" font-size="15" fill="#2a4378">A</text>
-                  <text x="579" y="337" font-size="15" fill="#2a4378">B</text>
-                  <text x="490" y="167" font-size="15" fill="#2a4378">C</text>
-                  <text x="464" y="367" font-size="13" fill="#bd8b39">∠A = 90°</text>
-                  <g transform="translate(388 24)" stroke="#9f79bf" fill="#ddcff18c" stroke-width="3" stroke-linejoin="round">
-                    <path d="M0 52L72 9L152 29L80 73Z"/>
-                    <path d="M0 52V112L80 133V73M80 133L152 91V29" />
-                    <path d="M0 112L72 69L152 91M72 69V9" stroke-dasharray="5 6"/>
-                  </g>
-                  <rect x="23" y="400" width="188" height="29" rx="9" fill="#eff9f9"/>
-                  <text x="37" y="419" font-size="13" fill="#168d99" font-weight="700">Алгебра · Геометрия · 3D</text>
-                </svg>
-              </div>
-            </div>
-            <div class="demo-bottom"><span>Лист 1 из 3 &nbsp; · &nbsp; Клетка</span><span><b>100%</b> &nbsp; ＋</span></div>
-          </div>
-          <div class="mini-call" aria-hidden="true"><span class="avatar">У</span><span><strong>Ученик на занятии</strong><small>Совместная работа</small></span><span style="color:#14977b;font-size:16px">●</span></div>
+        <div class="hero-banner" aria-label="Баннер математической онлайн-доски">
+          <img src="./sigma-hero.avif" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async"
+               alt="Сигма — фирменный герой Лиги знаний — демонстрирует онлайн-доску с графиками, геометрией, видеосвязью и кнопкой «Открыть доску».">
+          <a class="hero-banner-action" href="https://liga-znaniy-board-math-online-q97p.onreza.app/" aria-label="Открыть математическую онлайн-доску Лига знаний"></a>
+        </div>
+        <div class="hero-banner-foot">
+          <div><strong>Математика наглядно. Уроки удобно.</strong>
+            <span>Пишите, стройте графики и занимайтесь с учениками в одном пространстве.</span></div>
+          <a class="btn btn-primary" href="https://liga-znaniy-board-math-online-q97p.onreza.app/">Открыть доску <span class="btn-arrow" aria-hidden="true">↗</span></a>
         </div>
       </div>
     </section>
