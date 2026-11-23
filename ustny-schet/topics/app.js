@@ -98,10 +98,11 @@ function chooseTask(){
  if(game.mode==='mistakes')return game.queue[game.index]||null;
  const topicsPool=game.topic==='all'?topics.filter(t=>t.group<4).map(t=>t.id):
   game.topic==='all-advanced'?topics.filter(t=>t.group===4).map(t=>t.id):[game.topic];
- const task=adaptive.choose({topics:topicsPool,level:game.effectiveLevel,create:make,
-  used:game.usedKeys,review:saved.review,mistakes:saved.mistakes});
- if(!task)game.exhausted=true;
- return task;
+ const selection=adaptive.chooseWithCycle({topics:topicsPool,level:game.effectiveLevel,create:make,
+  used:game.usedKeys,review:saved.review,mistakes:saved.mistakes,
+  cycle:game.mode==='sprint',lastKey:game.prevKey});
+ if(!selection.task)game.exhausted=true;
+ return selection.task;
 }
 function openLesson(preview){
  if(!window.LigaLessons.has(selectedTopic))return;

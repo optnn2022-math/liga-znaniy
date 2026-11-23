@@ -60,6 +60,17 @@ function choose(options){
  }
  return best;
 }
+// Для тренировок на время и ежедневного плана: сначала все разные задачи,
+// затем новый цикл без немедленного повтора последней задачи.
+function chooseWithCycle(options){
+ let task=choose(options);
+ if(task||!options.cycle)return {task,cycled:false};
+ const used=options.used||new Set();
+ used.clear();
+ if(options.lastKey)used.add(options.lastKey);
+ task=choose({...options,used});
+ return {task,cycled:true};
+}
 function adapt(chosen,current,right,streak,errors){
  const upper=Number(chosen)||1,now=Number(current)||upper;
  if(upper<=1||upper>=5)return {level:now,errors};
@@ -67,5 +78,5 @@ function adapt(chosen,current,right,streak,errors){
  if(right&&streak>0&&streak%3===0)return {level:Math.min(upper,now+1),errors};
  return {level:now,errors};
 }
-root.LigaAdaptive={key,ensure,record,choose,adapt};
+root.LigaAdaptive={key,ensure,record,choose,chooseWithCycle,adapt};
 })(typeof window!=='undefined'?window:globalThis);
