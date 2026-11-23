@@ -361,6 +361,62 @@ body{background:#f5f9ff;color:#162754;font-family:system-ui,-apple-system,"Segoe
 }
 @media(prefers-reduced-motion:reduce){.feature-card,.btn{transition:none}}
 
+
+/* Visible video and LaTeX capabilities. Pure content only; no artificial interactive controls. */
+.signature-section{padding:78px 0 91px;background:radial-gradient(ellipse at 6% 30%,#d8f7ff,transparent 42%),radial-gradient(ellipse at 98% 95%,#f8e2ff,transparent 45%),#eef8ff}
+.signature-heading{max-width:890px}
+.signature-heading .kicker{display:inline-flex;padding:10px 17px;border:1px solid #b5e9fc;border-radius:99px;background:#e6f9ff;letter-spacing:.13em}
+.signature-heading h2{font-size:clamp(30px,3.8vw,48px);color:#11336f}
+.signature-heading h2 span{color:#118eb8}
+.signature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.signature-card{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;gap:23px;padding:33px;border-radius:30px;min-height:510px;border:1px solid #abdbea;box-shadow:0 19px 46px #195e9a21}
+.signature-card-math{background:linear-gradient(145deg,#fff,#d9f8ff 75%,#cce7ff)}
+.signature-card-video{background:linear-gradient(135deg,#fff,#efebff 75%,#d7ddff);border-color:#cfc9f5}
+.signature-card::after{content:"";position:absolute;right:-55px;top:-74px;width:205px;height:205px;border:2px solid #ffffff9c;border-radius:50%;pointer-events:none}
+.signature-copy{position:relative;z-index:1}
+.signature-label{display:inline-flex;padding:9px 13px;border-radius:99px;background:#c6f2fc;color:#106c98;font-weight:850;font-size:12px;letter-spacing:.035em}
+.signature-card-video .signature-label{background:#e0d7ff;color:#5b46ad}
+.signature-copy h3{font-size:clamp(27px,2.8vw,35px);font-weight:900;letter-spacing:-.9px;margin:17px 0 10px;color:#102a65;line-height:1.12}
+.signature-copy p{font-size:16px;line-height:1.65;margin:0;color:#4f6383;max-width:510px}
+.signature-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+.signature-tags span{font-size:12px;font-weight:750;padding:7px 11px;border-radius:99px;border:1px solid #bee1f4;background:#ffffffad;color:#275a83}
+.signature-card-video .signature-tags span{border-color:#d7cafa;color:#63529c}
+.formula-preview,.video-preview{position:relative;z-index:1;border-radius:21px;box-shadow:0 15px 29px #0d4d8330;min-height:180px}
+.formula-preview{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:15px;background:#fff;border:2px solid #b6ebf3;padding:15px 16px 20px}
+.preview-caption{align-self:flex-start;color:#6c80a5;font-size:12px;font-weight:760}
+.formula-preview math{color:#133d95;font-size:clamp(26px,3vw,39px);line-height:1.35;max-width:100%}
+.formula-mini{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;color:#0d8fac;font-size:16px;font-weight:760}
+.formula-mini span{background:#e8faff;border-radius:10px;padding:5px 10px}
+.video-preview{background:linear-gradient(150deg,#162e78,#0d6199);border:2px solid #80caff;padding:15px;display:flex;flex-direction:column;gap:13px}
+.video-preview .preview-caption{color:#d0efff}
+.video-tiles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.video-tile{position:relative;background:linear-gradient(145deg,#d8f2ff,#b4d4fa);border-radius:13px;min-height:122px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;color:#1a3a69;font-size:12px;font-weight:800;padding:10px 4px}
+.video-tile:nth-child(2){background:linear-gradient(145deg,#f2eaff,#c5bcf5)}
+.video-avatar{height:66px;width:66px;border:4px solid #fff;box-shadow:0 4px 14px #1a569737;border-radius:50%;display:grid;place-items:center;font-size:31px;color:#fff}
+.video-teacher{background:linear-gradient(140deg,#0889d9,#12c7d7)}
+.video-student{background:linear-gradient(145deg,#956ee0,#cc86be)}
+.video-dot{position:absolute;right:10px;top:10px;width:9px;height:9px;border-radius:50%;background:#28c78e}
+.video-preview-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#e7fcff;font-size:12px;font-weight:750}
+.video-preview-footer span:first-child{color:#8effdb}
+.feature-card:nth-child(7){background:linear-gradient(155deg,#fff,#d7f5ff);border-color:#a8e7f5}
+.feature-card:nth-child(8){background:linear-gradient(155deg,#fff,#ece4ff);border-color:#d1bffd}
+.feature-card:nth-child(7) .feature-icon{background:linear-gradient(135deg,#00a6c3,#1685d4);color:#fff;box-shadow:0 8px 20px #148fca44}
+.feature-card:nth-child(8) .feature-icon{background:linear-gradient(135deg,#8062d5,#bd7de7);color:#fff;box-shadow:0 8px 20px #926bd444}
+@media(max-width:760px){
+ .signature-section{padding:59px 0 65px}
+ .signature-grid{grid-template-columns:1fr;gap:16px}
+ .signature-card{min-height:0;padding:25px 21px;border-radius:24px;gap:21px}
+ .signature-copy h3{font-size:29px}
+ .signature-copy p{font-size:15px}
+ .formula-preview math{font-size:32px}
+ .video-tiles{gap:9px}
+ .video-tile{min-height:117px}
+}
+@media(max-width:380px){
+ .formula-preview math{font-size:25px}
+ .video-avatar{height:54px;width:54px;font-size:26px}
+ .signature-tags span{font-size:11px}
+}
 </style>
 </head>
 <body>
@@ -386,7 +442,7 @@ body{background:#f5f9ff;color:#162754;font-family:system-ui,-apple-system,"Segoe
         <div class="hero-mobile-heading">
           <span class="eyebrow">Для преподавателей математики</span>
           <h1 id="heroTitle">Математика становится <em>наглядной</em></h1>
-          <p>От первого штриха до сложных построений. Инструменты для математики, совместный урок и любимые материалы — в одной доске.</p>
+          <p>От первого штриха до сложных построений. Графики, геометрия, математические формулы (LaTeX) и видеосвязь с учеником — в одной доске.</p>
         </div>
         <div class="hero-banner" aria-label="Баннер математической онлайн-доски">
           <img src="./sigma-hero.avif" width="1200" height="675" fetchpriority="high" loading="eager" decoding="async"
@@ -395,10 +451,51 @@ body{background:#f5f9ff;color:#162754;font-family:system-ui,-apple-system,"Segoe
         </div>
         <div class="hero-banner-foot">
           <div><strong>Ваша идея. Ваша доска. Ваш яркий урок.</strong>
-            <span>Пишите, стройте графики и занимайтесь с учениками в одном пространстве.</span></div>
+            <span>Пишите формулы, стройте графики и общайтесь с учениками по видеосвязи прямо во время урока.</span></div>
           <a class="btn btn-primary" href="https://ligaznaniy.online/">Открыть доску <span class="btn-arrow" aria-hidden="true">↗</span></a>
         </div>
-        <div class="hero-value-pills" aria-label="Преимущества"><span><b>✓</b> Для преподавателей</span><span><b>✦</b> Построения и графики</span><span><b>∞</b> Совместные занятия</span></div>
+        <div class="hero-value-pills" aria-label="Преимущества"><span><b>✓</b> Для преподавателей</span><span><b>✦</b> Построения и графики</span><span><b>∑</b> Формулы (LaTeX)</span><span><b>◉</b> Видеосвязь</span><span><b>∞</b> Совместная доска</span></div>
+      </div>
+    </section>
+
+    <section class="signature-section" id="lesson-tools" aria-labelledby="signatureTitle">
+      <div class="container">
+        <div class="section-heading signature-heading">
+          <div class="kicker">Всё для онлайн-урока</div>
+          <h2 id="signatureTitle">Видеосвязь и формулы — <span>в одной доске</span></h2>
+          <p>Объясняйте, показывайте решения и общайтесь с учеником, не переключаясь между разными сервисами.</p>
+        </div>
+        <div class="signature-grid">
+          <article class="signature-card signature-card-math">
+            <div class="signature-copy">
+              <span class="signature-label">∑ &nbsp; Математические инструменты</span>
+              <h3>Формулы и LaTeX</h3>
+              <p>Записывайте математические выражения: дроби, степени, корни, интегралы и другие формулы в удобном редакторе.</p>
+              <div class="signature-tags"><span>Дроби</span><span>Корни</span><span>Интегралы</span></div>
+            </div>
+            <div class="formula-preview" aria-label="Пример математической записи">
+              <span class="preview-caption">Пример оформления формулы</span>
+              <math xmlns="http://www.w3.org/1998/Math/MathML" display="block" aria-label="Интеграл от нуля до единицы икс в квадрате дэ икс равен одной трети"><msubsup><mo>∫</mo><mn>0</mn><mn>1</mn></msubsup><msup><mi>x</mi><mn>2</mn></msup><mspace width="0.15em"/><mi>d</mi><mi>x</mi><mo>=</mo><mfrac><mn>1</mn><mn>3</mn></mfrac></math>
+              <div class="formula-mini"><span>√x</span><span>a² + b² = c²</span><span>π</span></div>
+            </div>
+          </article>
+          <article class="signature-card signature-card-video">
+            <div class="signature-copy">
+              <span class="signature-label">◉ &nbsp; Общение в реальном времени</span>
+              <h3>Видеосвязь с учеником</h3>
+              <p>Проводите занятия, обсуждайте задачи и рисуйте на общей доске одновременно — без отдельного приложения для видеозвонков.</p>
+              <div class="signature-tags"><span>Преподаватель</span><span>Ученик</span><span>Общая доска</span></div>
+            </div>
+            <div class="video-preview" aria-label="Условная иллюстрация видеосвязи преподавателя и ученика">
+              <span class="preview-caption">Пример интерфейса</span>
+              <div class="video-tiles">
+                <div class="video-tile"><span class="video-avatar video-teacher">П</span><span>Преподаватель</span><i class="video-dot"></i></div>
+                <div class="video-tile"><span class="video-avatar video-student">У</span><span>Ученик</span><i class="video-dot"></i></div>
+              </div>
+              <div class="video-preview-footer"><span>● &nbsp; Совместный урок</span><span aria-hidden="true">▦ &nbsp; ◉ &nbsp; ✎</span></div>
+            </div>
+          </article>
+        </div>
       </div>
     </section>
     <section class="section features-section" id="features">
@@ -415,6 +512,8 @@ body{background:#f5f9ff;color:#162754;font-family:system-ui,-apple-system,"Segoe
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">⬡</div><h3>Объёмные фигуры</h3><p>Кубы, параллелепипеды и другие пространственные фигуры для задач по стереометрии.</p></article>
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">▤</div><h3>Учебные материалы</h3><p>Добавляйте изображения, условия задач и страницы PDF, чтобы решать вместе с учеником.</p></article>
           <article class="feature-card"><div class="feature-icon" aria-hidden="true">♧</div><h3>Совместный урок</h3><p>Приглашайте ученика по ссылке, объясняйте на общей доске и управляйте доступом к работе.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">∑</div><h3>Математические формулы</h3><p>Работайте с LaTeX: дробями, степенями, корнями, интегралами и другими математическими выражениями.</p></article>
+          <article class="feature-card"><div class="feature-icon" aria-hidden="true">◉</div><h3>Видеосвязь с учеником</h3><p>Обсуждайте решения во время урока и работайте с учеником на одной доске, не переключаясь между сервисами.</p></article>
         </div>
       </div>
     </section>
